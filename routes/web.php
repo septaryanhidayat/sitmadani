@@ -149,9 +149,32 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
 // === FRONTEND PUBLIC ROUTES ===
 
-// Beranda (Homepage)
+// Beranda (Homepage / Portal Yayasan)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/beranda', fn () => redirect()->route('home'));
+Route::get('/yayasan', [HomeController::class, 'yayasan'])->name('yayasan');
+
+// Direct Unit Shortcuts (/tk, /sd, /smp) & Multi-Unit Home
+Route::get('/tk', [HomeController::class, 'unit'])->defaults('unit', 'tk')->name('unit.tk');
+Route::get('/sd', [HomeController::class, 'unit'])->defaults('unit', 'sd')->name('unit.sd');
+Route::get('/smp', [HomeController::class, 'unit'])->defaults('unit', 'smp')->name('unit.smp');
+Route::get('/unit/{unit}', [HomeController::class, 'unit'])->where('unit', 'tk|sd|smp')->name('unit.home');
+
+// Unit Scoped Routes (/tk/..., /sd/..., /smp/...)
+Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
+    Route::get('/ppdb', [PpdbController::class, 'index'])->name('unit.ppdb');
+    Route::get('/spmb', [PpdbController::class, 'index']);
+    Route::get('/form-ppdb', [PpdbController::class, 'form'])->name('unit.ppdb.form');
+    Route::get('/form_ppdb', [PpdbController::class, 'form']);
+    Route::get('/dewan-guru', [DewanController::class, 'index'])->name('unit.dewan');
+    Route::get('/guru', [DewanController::class, 'index']);
+    Route::get('/fasilitas', [BidangController::class, 'index'])->name('unit.fasilitas');
+    Route::get('/sambutan-kepala-sekolah', [PageController::class, 'sambutan'])->name('unit.sambutan');
+    Route::get('/tentang-kami', [PageController::class, 'tentangKami'])->name('unit.tentang-kami');
+    Route::get('/visi-dan-misi', [PageController::class, 'visiMisi'])->name('unit.visi-misi');
+    Route::get('/struktur-organisasi', [PageController::class, 'struktur'])->name('unit.struktur');
+    Route::get('/page/{slug}', [PageController::class, 'showUnitPage'])->name('unit.page');
+});
 
 // Berita & Artikel
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
@@ -205,8 +228,8 @@ Route::get('/galeri-kegiatan', fn () => redirect()->route('galeri.index'));
 // SPMB & PPDB Online (Landing Page, Form Pendaftaran & Sukses)
 Route::get('/ppdb', [PpdbController::class, 'index'])->name('ppdb.index');
 Route::get('/spmb', fn () => redirect()->route('ppdb.index'));
-Route::get('/form_ppdb', [PpdbController::class, 'form'])->name('ppdb.form');
-Route::get('/form-ppdb', fn () => redirect()->route('ppdb.form'));
+Route::get('/form-ppdb', [PpdbController::class, 'form'])->name('ppdb.form');
+Route::get('/form_ppdb', [PpdbController::class, 'form']);
 Route::get('/ppdb/form', fn () => redirect()->route('ppdb.form'));
 Route::get('/formulir-spmb', fn () => redirect()->route('ppdb.form'));
 Route::get('/formulir_spmb', fn () => redirect()->route('ppdb.form'));

@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'SMPS IT Madani Kayuagung - Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia')
+@section('title', ($currentUnit['name'] ?? 'Sekolah Islam Terpadu Madani') . ' - ' . ($currentUnit['tagline'] ?? 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia'))
 
 @push('preload')
     <link rel="preload" as="image" href="{{ asset('/uploads/campus-sit-madani.webp') }}" type="image/webp" fetchpriority="high">
@@ -839,7 +839,7 @@
             @foreach($dewan as $index => $d)
             <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 text-center group hover:shadow-xl transition transform hover:-translate-y-1 reveal-fade-up delay-{{ $index + 1 }}">
                 <div class="aspect-[4/5] rounded-2xl overflow-hidden mb-3 bg-slate-100 border border-slate-100 relative">
-                    <img src="{{ $d->photo_url }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="240" height="300" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="240" height="300" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/dewan/avatar-default.svg'">
                 </div>
                 <h3 class="font-black text-sm text-gray-900 group-hover:text-indigo-600 transition">
                     {{ $d->name }}
@@ -856,7 +856,7 @@
             @foreach($dewan as $index => $d)
             <div class="bg-white rounded-2xl p-2.5 shadow-sm border border-gray-100 text-center reveal-fade-up delay-{{ $index + 1 }}">
                 <div class="aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-slate-100 border border-slate-100 relative">
-                    <img src="{{ $d->photo_url }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="180" height="225" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="180" height="225" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top" onerror="this.src='/uploads/dewan/avatar-default.svg'">
                 </div>
                 <h3 class="font-bold text-xs text-gray-900 leading-tight">
                     {{ $d->name }}

@@ -7,6 +7,7 @@ use App\Models\PpdbRegistration;
 use App\Models\PpdbTrack;
 use App\Models\Setting;
 use App\Services\PpdbFormService;
+use App\Services\SchoolUnitService;
 use App\Services\WebpService;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -23,8 +24,12 @@ class PpdbController extends Controller
     /**
      * Display the SPMB / PPDB Info Page.
      */
-    public function index()
+    public function index(?string $unit = null)
     {
+        $unitKey = $unit ?? request()->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
         $settings = [
             'status' => Setting::get('ppdb_status', '1'),
             'year' => Setting::get('ppdb_year', '2027/2028'),
@@ -72,14 +77,18 @@ class PpdbController extends Controller
             $tracks = collect();
         }
 
-        return view('frontend.ppdb.index', compact('settings', 'tracks'));
+        return view('frontend.ppdb.index', compact('settings', 'tracks', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
     /**
      * Display the PPDB Registration Form.
      */
-    public function form()
+    public function form(?string $unit = null)
     {
+        $unitKey = $unit ?? request()->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
         $rawWaves = Setting::get('ppdb_form_waves', "Gelombang 1 (Early Bird)\nGelombang 2 (Reguler)\nGelombang 3 (Prestasi)");
         $rawPrograms = Setting::get('ppdb_form_programs', "Boarding School (Asrama Siswa)\nFull Day School (Sekolah Terpadu)");
 
@@ -128,7 +137,7 @@ class PpdbController extends Controller
         $groupedFields = PpdbFormService::getActiveFieldsGrouped();
         $sections = PpdbFormService::getSections();
 
-        return view('frontend.ppdb.form', compact('formSettings', 'groupedFields', 'sections'));
+        return view('frontend.ppdb.form', compact('formSettings', 'groupedFields', 'sections', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
     /**
@@ -225,6 +234,14 @@ class PpdbController extends Controller
                     ];
                 }
             }
+        }
+
+        if ($request->filled('unit_school')) {
+            $extraFields['unit_school'] = [
+                'label' => 'Unit Sekolah Pilihan',
+                'value' => $request->input('unit_school'),
+                'type' => 'text',
+            ];
         }
 
         $academicYear = Setting::get('ppdb_year', '2027/2028');

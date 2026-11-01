@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Formulir Pendaftaran PPDB ' . ($formSettings['year'] ?? '2026/2027') . ' - SMPS IT Madani Kayuagung')
-@section('meta_description', 'Formulir Pendaftaran Peserta Didik Baru (PPDB Online) SMPS IT Madani Kayuagung Tahun Pelajaran ' . ($formSettings['year'] ?? '2026/2027') . '.')
+@section('title', 'Formulir Pendaftaran PPDB ' . ($formSettings['year'] ?? '2026/2027') . ' - Sekolah Islam Terpadu Madani')
+@section('meta_description', 'Formulir Pendaftaran Peserta Didik Baru (PPDB Online) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($formSettings['year'] ?? '2026/2027') . '.')
 
 @section('content')
 <div class="bg-gray-50 py-10 sm:py-14 font-['Poppins',sans-serif]">
@@ -57,7 +57,7 @@
                 <div class="space-y-1">
                     <h1 class="text-lg sm:text-xl md:text-2xl font-black text-indigo-600 tracking-tight leading-snug">
                         Formulir Pendaftaran Peserta Didik Baru<br>
-                        SMPS IT Madani Kayuagung
+                        Sekolah Islam Terpadu Madani Kayuagung
                     </h1>
                     <p class="text-xs text-slate-500 max-w-md mx-auto">
                         Isi formulir dengan data yang sah dan lengkap. Tanda bintang (<span class="text-red-500 font-bold">*</span>) wajib diisi.
@@ -114,6 +114,36 @@
             {{-- REGISTRATION FORM --}}
             <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs text-slate-700">
                 @csrf
+
+                {{-- PILIHAN UNIT SEKOLAH (TK, SD, SMP) --}}
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                    <label class="block text-xs font-bold text-slate-800">
+                        Pilihan Jenjang / Unit Sekolah SIT Madani <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <label class="cursor-pointer border p-3 rounded-xl flex items-center space-x-2.5 bg-white hover:border-amber-400 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-50/60 transition">
+                            <input type="radio" name="unit_school" value="TKS IT Madani" class="text-amber-500 focus:ring-amber-400" {{ (old('unit_school') === 'TKS IT Madani' || ($currentUnitKey === 'tk')) ? 'checked' : '' }} required>
+                            <div class="text-xs">
+                                <span class="font-bold text-slate-900 block">TKS IT Madani</span>
+                                <span class="text-[10px] text-slate-500">PAUD / TK Islam Terpadu</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer border p-3 rounded-xl flex items-center space-x-2.5 bg-white hover:border-emerald-400 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/60 transition">
+                            <input type="radio" name="unit_school" value="SDS IT Madani" class="text-emerald-600 focus:ring-emerald-500" {{ (old('unit_school') === 'SDS IT Madani' || ($currentUnitKey === 'sd')) ? 'checked' : '' }} required>
+                            <div class="text-xs">
+                                <span class="font-bold text-slate-900 block">SDS IT Madani</span>
+                                <span class="text-[10px] text-slate-500">SD Islam Terpadu (13 Rombel)</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer border p-3 rounded-xl flex items-center space-x-2.5 bg-white hover:border-blue-400 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50/60 transition">
+                            <input type="radio" name="unit_school" value="SMPS IT Madani" class="text-blue-600 focus:ring-blue-500" {{ (old('unit_school') === 'SMPS IT Madani' || ($currentUnitKey === 'smp' || empty($currentUnitKey))) ? 'checked' : '' }} required>
+                            <div class="text-xs">
+                                <span class="font-bold text-slate-900 block">SMPS IT Madani</span>
+                                <span class="text-[10px] text-slate-500">SMP &amp; Asrama Tahfidz</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
                 @php
                     $sectionIndex = 1;

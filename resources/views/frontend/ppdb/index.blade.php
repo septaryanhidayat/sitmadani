@@ -37,13 +37,40 @@
                 </div>
             </div>
 
+            {{-- Pilihan Unit Switcher --}}
+            @php
+                $ppdbUnit = $currentUnitKey ?? request()->query('unit', 'all');
+                $unitTitles = [
+                    'all' => ['title' => 'SPMB TERPADU SIT MADANI', 'sub' => 'TK • SD • SMP ISLAM TERPADU KAYUAGUNG'],
+                    'tk' => ['title' => 'SPMB TKS IT MADANI', 'sub' => 'PAUD / TK ISLAM TERPADU KAYUAGUNG (NPSN 69915461)'],
+                    'sd' => ['title' => 'SPMB SDS IT MADANI', 'sub' => 'SEKOLAH DASAR ISLAM TERPADU KAYUAGUNG (NPSN 69881529)'],
+                    'smp' => ['title' => 'SPMB SMPS IT MADANI', 'sub' => 'SMP IT & ASRAMA TAHFIDZ KAYUAGUNG (NPSN 70034917)'],
+                ];
+                $activePpdbInfo = $unitTitles[$ppdbUnit] ?? $unitTitles['all'];
+            @endphp
+
+            <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-1 pb-2">
+                <a href="{{ route('ppdb.index') }}" class="px-3 py-1.5 rounded-xl text-xs font-bold transition {{ $ppdbUnit === 'all' ? 'bg-indigo-600 text-white shadow ring-1 ring-amber-400' : 'bg-white/10 text-slate-200 hover:bg-white/20' }}">
+                    <i class="fa-solid fa-layer-group text-amber-400 mr-1"></i> Semua Unit
+                </a>
+                <a href="{{ route('unit.ppdb', 'tk') }}" class="px-3 py-1.5 rounded-xl text-xs font-bold transition {{ $ppdbUnit === 'tk' ? 'bg-amber-500 text-slate-950 font-black shadow ring-1 ring-amber-300' : 'bg-white/10 text-slate-200 hover:bg-white/20' }}">
+                    <i class="fa-solid fa-shapes text-amber-400 mr-1"></i> TKS IT Madani
+                </a>
+                <a href="{{ route('unit.ppdb', 'sd') }}" class="px-3 py-1.5 rounded-xl text-xs font-bold transition {{ $ppdbUnit === 'sd' ? 'bg-emerald-600 text-white font-black shadow ring-1 ring-emerald-300' : 'bg-white/10 text-slate-200 hover:bg-white/20' }}">
+                    <i class="fa-solid fa-book-open-reader text-emerald-400 mr-1"></i> SDS IT Madani
+                </a>
+                <a href="{{ route('unit.ppdb', 'smp') }}" class="px-3 py-1.5 rounded-xl text-xs font-bold transition {{ $ppdbUnit === 'smp' ? 'bg-blue-600 text-white font-black shadow ring-1 ring-blue-300' : 'bg-white/10 text-slate-200 hover:bg-white/20' }}">
+                    <i class="fa-solid fa-graduation-cap text-blue-400 mr-1"></i> SMPS IT Madani
+                </a>
+            </div>
+
             {{-- Title --}}
             <div class="space-y-1.5">
                 <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase leading-tight">
-                    SPMB SMPS IT MADANI
+                    {{ $activePpdbInfo['title'] }}
                 </h1>
                 <p class="text-base sm:text-xl font-bold text-amber-300 tracking-wide">
-                    KAYUAGUNG, OKI &bull; PPDB ONLINE
+                    {{ $activePpdbInfo['sub'] }}
                 </p>
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs sm:text-sm font-semibold text-indigo-200">
                     <span>Tahun Pelajaran {{ $settings['year'] ?? '2026/2027' }}</span>
