@@ -47,6 +47,17 @@
                 @error('role') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
             </div>
 
+            <div>
+                <label for="unit" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Unit Lembaga / Sekolah *</label>
+                <select name="unit" id="unit" required class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] transition">
+                    <option value="yayasan" {{ old('unit', $user->unit ?? 'yayasan') === 'yayasan' ? 'selected' : '' }}>Yayasan - Yayasan Agung Madani (Pusat / Seluruh Portal)</option>
+                    <option value="tk" {{ old('unit', $user->unit ?? '') === 'tk' ? 'selected' : '' }}>TKS IT Madani (PAUD / TK)</option>
+                    <option value="sd" {{ old('unit', $user->unit ?? '') === 'sd' ? 'selected' : '' }}>SDS IT Madani (Sekolah Dasar)</option>
+                    <option value="smp" {{ old('unit', $user->unit ?? '') === 'smp' ? 'selected' : '' }}>SMPS IT Madani (Sekolah Menengah Pertama)</option>
+                </select>
+                @error('unit') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+            </div>
+
             <div class="pt-6 border-t border-slate-100 flex items-center justify-end space-x-3">
                 <a href="{{ route('admin.users.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition">Batal</a>
                 <button type="submit" class="bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md transition flex items-center space-x-2 cursor-pointer">

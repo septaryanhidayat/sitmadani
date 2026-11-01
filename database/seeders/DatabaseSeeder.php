@@ -17,14 +17,43 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::updateOrCreate(
-            ['email' => 'admin@sitmadani.sch.id'],
+        $adminUsers = [
             [
-                'name' => 'Admin SMPS IT Madani Kayuagung',
-                'password' => bcrypt('SitMadani2026!'),
+                'email' => 'admin@sitmadani.sch.id',
+                'name' => 'Administrator Yayasan Agung Madani',
+                'password' => bcrypt('Madani2026!'),
+                'role' => 'super_admin',
+                'unit' => 'yayasan',
+            ],
+            [
+                'email' => 'admin_tk@sitmadani.sch.id',
+                'name' => 'Admin TKS IT Madani Kayuagung',
+                'password' => bcrypt('Madani2026!'),
                 'role' => 'admin',
-            ]
-        );
+                'unit' => 'tk',
+            ],
+            [
+                'email' => 'admin_sd@sitmadani.sch.id',
+                'name' => 'Admin SDS IT Madani Kayuagung',
+                'password' => bcrypt('Madani2026!'),
+                'role' => 'admin',
+                'unit' => 'sd',
+            ],
+            [
+                'email' => 'admin_smp@sitmadani.sch.id',
+                'name' => 'Admin SMPS IT Madani Kayuagung',
+                'password' => bcrypt('Madani2026!'),
+                'role' => 'admin',
+                'unit' => 'smp',
+            ],
+        ];
+
+        foreach ($adminUsers as $usr) {
+            User::updateOrCreate(
+                ['email' => $usr['email']],
+                $usr
+            );
+        }
 
         $this->call([
             SchoolDataSeeder::class,

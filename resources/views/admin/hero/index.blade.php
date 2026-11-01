@@ -14,7 +14,7 @@
             </div>
             <div>
                 <h2 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
-                    Pengaturan Banner Hero Slider Beranda
+                    Pengaturan Banner Hero Slider Beranda ({{ strtoupper($selectedUnit) }})
                 </h2>
                 <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">
                     Kelola gambar latar belakang, teks judul, subjudul, serta tulisan dan link tujuan tombol aksi pada rotasi banner utama di halaman beranda.
@@ -22,9 +22,42 @@
             </div>
         </div>
         <div class="flex items-center gap-2 shrink-0">
-            <a href="{{ route('home') }}" target="_blank" class="text-xs font-bold text-slate-700 hover:text-[#da251c] bg-slate-50 hover:bg-slate-100 border border-slate-200 px-4 py-2.5 rounded-xl transition flex items-center space-x-2 shadow-xs">
+            @php
+                $previewUrl = match($selectedUnit ?? 'yayasan') {
+                    'tk' => route('unit.tk'),
+                    'sd' => route('unit.sd'),
+                    'smp' => route('unit.smp'),
+                    default => route('home'),
+                };
+            @endphp
+            <a href="{{ $previewUrl }}" target="_blank" class="text-xs font-bold text-slate-700 hover:text-[#da251c] bg-slate-50 hover:bg-slate-100 border border-slate-200 px-4 py-2.5 rounded-xl transition flex items-center space-x-2 shadow-xs">
                 <i class="fa-solid fa-arrow-up-right-from-square text-xs text-[#da251c]"></i>
-                <span>Lihat di Beranda</span>
+                <span>Lihat di Website ({{ strtoupper($selectedUnit ?? 'YAYASAN') }})</span>
+            </a>
+        </div>
+    </div>
+
+    {{-- PILIH UNIT SEKOLAH / PORTAL YAYASAN --}}
+    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center space-x-2">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500">Pilih Portal / Unit:</span>
+        </div>
+        <div class="flex items-center gap-1.5 flex-wrap">
+            <a href="{{ route('admin.hero.index', ['unit' => 'yayasan']) }}" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 {{ ($selectedUnit ?? 'yayasan') === 'yayasan' ? 'bg-indigo-600 text-white shadow ring-2 ring-indigo-400' : 'bg-slate-100 hover:bg-slate-200 text-slate-700' }}">
+                <i class="fa-solid fa-landmark text-amber-400"></i>
+                <span>Yayasan (Portal Utama)</span>
+            </a>
+            <a href="{{ route('admin.hero.index', ['unit' => 'tk']) }}" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 {{ ($selectedUnit ?? '') === 'tk' ? 'bg-amber-500 text-slate-950 font-black shadow ring-2 ring-amber-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700' }}">
+                <i class="fa-solid fa-shapes"></i>
+                <span>TKS IT Madani</span>
+            </a>
+            <a href="{{ route('admin.hero.index', ['unit' => 'sd']) }}" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 {{ ($selectedUnit ?? '') === 'sd' ? 'bg-emerald-600 text-white shadow ring-2 ring-emerald-400' : 'bg-slate-100 hover:bg-slate-200 text-slate-700' }}">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span>SDS IT Madani</span>
+            </a>
+            <a href="{{ route('admin.hero.index', ['unit' => 'smp']) }}" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 {{ ($selectedUnit ?? '') === 'smp' ? 'bg-blue-600 text-white shadow ring-2 ring-blue-400' : 'bg-slate-100 hover:bg-slate-200 text-slate-700' }}">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>SMPS IT Madani</span>
             </a>
         </div>
     </div>
@@ -52,6 +85,7 @@
 
     <form action="{{ route('admin.hero.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
+        <input type="hidden" name="unit" value="{{ $selectedUnit ?? 'yayasan' }}">
 
         {{-- TAB NAVIGASI SLIDE --}}
         <div class="bg-white p-2 rounded-2xl shadow-xs border border-slate-200 flex flex-wrap sm:flex-nowrap gap-2">

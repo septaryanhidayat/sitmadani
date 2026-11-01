@@ -15,12 +15,20 @@ class PageController extends Controller
 {
     public function sambutan(Request $request, ?string $unit = null)
     {
-        $unitKey = $unit ?? $request->query('unit', 'smp');
+        $unitKey = $unit ?? $request->query('unit', ($request->is('yayasan*') ? 'yayasan' : 'smp'));
         $units = SchoolUnitService::getUnits();
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : 'smp';
         $currentUnit = SchoolUnitService::getUnit($currentUnitKey);
 
-        $page = Post::pages()->where('slug', 'sambutan-kepala-sekolah')->first();
+        $slug = match ($currentUnitKey) {
+            'yayasan' => 'sambutan-ketua-yayasan',
+            'tk' => 'sambutan-kepala-tks-it',
+            'sd' => 'sambutan-kepala-sds-it',
+            default => 'sambutan-kepala-sekolah',
+        };
+
+        $page = Post::pages()->where('slug', $slug)->first()
+            ?? Post::pages()->where('slug', 'sambutan-kepala-sekolah')->first();
 
         // Custom leader object depending on unit
         $kepsek = (object) [
@@ -34,12 +42,21 @@ class PageController extends Controller
 
     public function tentangKami(Request $request, ?string $unit = null)
     {
-        $unitKey = $unit ?? $request->query('unit', 'all');
+        $unitKey = $unit ?? $request->query('unit', ($request->is('yayasan*') ? 'yayasan' : 'all'));
         $units = SchoolUnitService::getUnits();
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : 'all';
         $currentUnit = ($currentUnitKey !== 'all') ? SchoolUnitService::getUnit($currentUnitKey) : null;
 
-        $page = Post::pages()->where('slug', 'tentang-kami')->first();
+        $slug = match ($currentUnitKey) {
+            'yayasan' => 'tentang-yayasan',
+            'tk' => 'tentang-tks-it',
+            'sd' => 'tentang-sds-it',
+            'smp' => 'tentang-kami',
+            default => 'tentang-kami',
+        };
+
+        $page = Post::pages()->where('slug', $slug)->first()
+            ?? Post::pages()->where('slug', 'tentang-kami')->first();
         $testimonials = Testimonial::all();
 
         return view('frontend.pages.tentang-kami', compact('page', 'testimonials', 'units', 'currentUnitKey', 'currentUnit'));
@@ -47,12 +64,21 @@ class PageController extends Controller
 
     public function visiMisi(Request $request, ?string $unit = null)
     {
-        $unitKey = $unit ?? $request->query('unit', 'all');
+        $unitKey = $unit ?? $request->query('unit', ($request->is('yayasan*') ? 'yayasan' : 'all'));
         $units = SchoolUnitService::getUnits();
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : 'all';
         $currentUnit = ($currentUnitKey !== 'all') ? SchoolUnitService::getUnit($currentUnitKey) : null;
 
-        $page = Post::pages()->where('slug', 'visi-dan-misi')->first();
+        $slug = match ($currentUnitKey) {
+            'yayasan' => 'visi-misi-yayasan',
+            'tk' => 'visi-misi-tks-it',
+            'sd' => 'visi-misi-sds-it',
+            'smp' => 'visi-dan-misi',
+            default => 'visi-dan-misi',
+        };
+
+        $page = Post::pages()->where('slug', $slug)->first()
+            ?? Post::pages()->where('slug', 'visi-dan-misi')->first();
         $latestPosts = Post::articles()->published()->latest('published_at')->take(5)->get();
         $latestAgendas = Agenda::where('status', '!=', 'draft')->orderBy('event_date', 'desc')->take(5)->get();
 
@@ -70,12 +96,21 @@ class PageController extends Controller
 
     public function struktur(Request $request, ?string $unit = null)
     {
-        $unitKey = $unit ?? $request->query('unit', 'all');
+        $unitKey = $unit ?? $request->query('unit', ($request->is('yayasan*') ? 'yayasan' : 'all'));
         $units = SchoolUnitService::getUnits();
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : 'all';
         $currentUnit = ($currentUnitKey !== 'all') ? SchoolUnitService::getUnit($currentUnitKey) : null;
 
-        $page = Post::pages()->where('slug', 'struktur-organisasi')->first();
+        $slug = match ($currentUnitKey) {
+            'yayasan' => 'struktur-yayasan',
+            'tk' => 'struktur-tks-it',
+            'sd' => 'struktur-sds-it',
+            'smp' => 'struktur-organisasi',
+            default => 'struktur-organisasi',
+        };
+
+        $page = Post::pages()->where('slug', $slug)->first()
+            ?? Post::pages()->where('slug', 'struktur-organisasi')->first();
         $bidangs = Bidang::orderBy('order', 'asc')->get();
         $dpcs = Dpc::orderBy('order', 'asc')->get();
         $dewan = AnggotaDewan::orderBy('order', 'asc')->get();

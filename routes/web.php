@@ -160,19 +160,34 @@ Route::get('/sd', [HomeController::class, 'unit'])->defaults('unit', 'sd')->name
 Route::get('/smp', [HomeController::class, 'unit'])->defaults('unit', 'smp')->name('unit.smp');
 Route::get('/unit/{unit}', [HomeController::class, 'unit'])->where('unit', 'tk|sd|smp')->name('unit.home');
 
+// Profil Yayasan Agung Madani (Khusus Yayasan)
+Route::prefix('yayasan')->group(function () {
+    Route::get('/sambutan', [PageController::class, 'sambutan'])->defaults('unit', 'yayasan')->name('page.sambutan.yayasan');
+    Route::get('/tentang-kami', [PageController::class, 'tentangKami'])->defaults('unit', 'yayasan')->name('page.tentang.yayasan');
+    Route::get('/visi-misi', [PageController::class, 'visiMisi'])->defaults('unit', 'yayasan')->name('page.visi-misi.yayasan');
+    Route::get('/struktur', [PageController::class, 'struktur'])->defaults('unit', 'yayasan')->name('page.struktur.yayasan');
+});
+Route::get('/sambutan-ketua-yayasan', [PageController::class, 'sambutan'])->defaults('unit', 'yayasan');
+Route::get('/visi-misi-yayasan', [PageController::class, 'visiMisi'])->defaults('unit', 'yayasan');
+Route::get('/profil-yayasan', [PageController::class, 'tentangKami'])->defaults('unit', 'yayasan');
+Route::get('/struktur-yayasan', [PageController::class, 'struktur'])->defaults('unit', 'yayasan');
+
 // Unit Scoped Routes (/tk/..., /sd/..., /smp/...)
 Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
     Route::get('/ppdb', [PpdbController::class, 'index'])->name('unit.ppdb');
     Route::get('/spmb', [PpdbController::class, 'index']);
-    Route::get('/form-ppdb', [PpdbController::class, 'form'])->name('unit.ppdb.form');
-    Route::get('/form_ppdb', [PpdbController::class, 'form']);
+    Route::get('/form_ppdb', [PpdbController::class, 'form'])->name('unit.ppdb.form');
+    Route::get('/form-ppdb', fn ($unit) => redirect()->route('unit.ppdb.form', $unit));
     Route::get('/dewan-guru', [DewanController::class, 'index'])->name('unit.dewan');
     Route::get('/guru', [DewanController::class, 'index']);
     Route::get('/fasilitas', [BidangController::class, 'index'])->name('unit.fasilitas');
     Route::get('/sambutan-kepala-sekolah', [PageController::class, 'sambutan'])->name('unit.sambutan');
+    Route::get('/sambutan', [PageController::class, 'sambutan']);
     Route::get('/tentang-kami', [PageController::class, 'tentangKami'])->name('unit.tentang-kami');
     Route::get('/visi-dan-misi', [PageController::class, 'visiMisi'])->name('unit.visi-misi');
+    Route::get('/visi-misi', [PageController::class, 'visiMisi']);
     Route::get('/struktur-organisasi', [PageController::class, 'struktur'])->name('unit.struktur');
+    Route::get('/struktur', [PageController::class, 'struktur']);
     Route::get('/page/{slug}', [PageController::class, 'showUnitPage'])->name('unit.page');
 });
 

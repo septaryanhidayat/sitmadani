@@ -47,12 +47,71 @@ class HomeController extends Controller
         $videos = Video::latest()->take(4)->get();
         $testimonials = Testimonial::where('status', 'publish')->take(3)->get();
 
-        // Sambutan Ketua Yayasan
+        // Hero Slides Yayasan (Dinamis dari Setting Admin)
+        $rawHero = Setting::get('hero_slides_yayasan');
+        $heroSlides = [];
+        if ($rawHero) {
+            $decoded = json_decode($rawHero, true);
+            if (is_array($decoded) && ! empty($decoded)) {
+                $heroSlides = array_values(array_filter($decoded, fn ($s) => ! empty($s['active'])));
+            }
+        }
+
+        if (empty($heroSlides)) {
+            $heroSlides = [
+                [
+                    'active' => true,
+                    'badge' => 'YAYASAN AGUNG MADANI KAYUAGUNG • KAB. OKI',
+                    'title' => 'Mewujudkan Generasi Robbani yang Cerdas, Mandiri & Berakhlak Mulia',
+                    'subtitle' => 'Pendidikan Islam Terpadu Satu Atap Berbasis Al-Qur\'an, As-Sunnah, Sains dan Teknologi Modern di Bawah Naungan JSIT Indonesia.',
+                    'image' => '/uploads/hero-slide-yayasan-1.webp',
+                    'btn_text' => 'Pilih Unit Sekolah',
+                    'btn_link' => '#unit-sekolah',
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Daftar SPMB Terpadu',
+                    'btn2_link' => route('ppdb.index'),
+                    'btn2_target' => '_self',
+                ],
+                [
+                    'active' => true,
+                    'badge' => 'TAHFIDZ QUR\'AN MUTQIN & ADAB NABAWI',
+                    'title' => 'Pembinaan Karakter & Hafalan Al-Qur\'an Berkesinambungan',
+                    'subtitle' => 'Mulai dari tahfidz cilik PAUD/TKS IT, target 2 juz mutqin di SDS IT, hingga program Asrama Tahfidz di SMPS IT Madani.',
+                    'image' => '/uploads/hero-slide-yayasan-2.webp',
+                    'btn_text' => 'Profil Singkat Yayasan',
+                    'btn_link' => route('page.tentang.yayasan'),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Struktur Yayasan',
+                    'btn2_link' => route('page.struktur.yayasan'),
+                    'btn2_target' => '_self',
+                ],
+                [
+                    'active' => true,
+                    'badge' => 'SAINS, TEKNOLOGI & BAHASA INTERNASIONAL',
+                    'title' => 'Integrasi Keunggulan Imtak dan Iptek Masa Depan',
+                    'subtitle' => 'Laboratorium komputer modern, pembekalan literasi digital, bimbingan olimpiade sains, serta pembiasaan Bahasa Arab dan Inggris.',
+                    'image' => '/uploads/hero-slide-yayasan-3.webp',
+                    'btn_text' => 'Kunjungi SMPS IT Madani',
+                    'btn_link' => route('unit.smp'),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Kunjungi SDS IT Madani',
+                    'btn2_link' => route('unit.sd'),
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
+        // Sambutan Ketua Yayasan (Dinamis dari Post jika ada)
+        $sambutanPost = Post::pages()->where('slug', 'sambutan-ketua-yayasan')->first();
         $sambutanYayasan = [
             'name' => 'Drs. H. Legianto, M.E.E.',
             'title' => 'Ketua Yayasan Agung Madani Kayuagung',
             'photo' => '/uploads/dewan/ust-legianto.webp',
-            'text' => 'Bismillahirrohmanirrohim. Alhamdulillahi Rabbil \'Alamin, puji dan syukur kami panjatkan ke hadirat Allah SWT. Yayasan Agung Madani Kayuagung hadir dengan komitmen kokoh menyelenggarakan pendidikan Islam terpadu satu atap yang berkesinambungan mulai dari TKS IT Madani, SDS IT Madani, hingga SMPS IT Madani. Kami memadukan nilai keluhuran Al-Qur\'an dan as-Sunnah dengan keunggulan sains, teknologi, dan bahasa global untuk melahirkan generasi robbani yang cerdas, mandiri, dan berakhlak karimah.',
+            'text' => $sambutanPost ? strip_tags($sambutanPost->content) : 'Bismillahirrohmanirrohim. Alhamdulillahi Rabbil \'Alamin, puji dan syukur kami panjatkan ke hadirat Allah SWT. Yayasan Agung Madani Kayuagung hadir dengan komitmen kokoh menyelenggarakan pendidikan Islam terpadu satu atap yang berkesinambungan mulai dari TKS IT Madani, SDS IT Madani, hingga SMPS IT Madani. Kami memadukan nilai keluhuran Al-Qur\'an dan as-Sunnah dengan keunggulan sains, teknologi, dan bahasa global untuk melahirkan generasi robbani yang cerdas, mandiri, dan berakhlak karimah.',
+            'content_html' => $sambutanPost ? $sambutanPost->content : null,
         ];
 
         return view('frontend.yayasan', compact(
@@ -65,7 +124,8 @@ class HomeController extends Controller
             'agendas',
             'videos',
             'testimonials',
-            'sambutanYayasan'
+            'sambutanYayasan',
+            'heroSlides'
         ));
     }
 
@@ -78,8 +138,8 @@ class HomeController extends Controller
     }
 
     /**
-     * Tampilan Website Masing-Masing Unit Sekolah (TK, SD, SMP).
-     * Dibuat SAMA PERSIS dengan layout & fitur web smpitishum, disesuaikan dengan data unit.
+     * Tampilan Website Masing-Masing Unit Sekolah (TK, SD, SMP SIT Madani).
+     * Disesuaikan dengan data dan identitas unit masing-masing.
      */
     public function unit(Request $request, string $unit)
     {

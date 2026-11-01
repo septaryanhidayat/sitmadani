@@ -7,67 +7,175 @@
 <main id="main-content" class="w-full overflow-hidden bg-slate-50">
 
     {{-- ========================================================
-         HERO SECTION: PORTAL UTAMA YAYASAN AGUNG MADANI
+         HERO SECTION: RESPONSIVE IMAGE SLIDER YAYASAN AGUNG MADANI
          ======================================================== --}}
-    <section class="relative bg-gradient-to-br from-[#0c1427] via-[#1e1b4b] to-[#172554] text-white py-16 sm:py-24 overflow-hidden border-b border-indigo-900/60 shadow-2xl" style="background: linear-gradient(135deg, #0c1427 0%, #1e1b4b 50%, #172554 100%) !important; color: #ffffff !important;">
-        {{-- Background Ornament & Islamic Geometric Pattern --}}
-        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:24px_24px]"></div>
-        <div class="absolute -top-32 -right-32 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <section class="relative w-full overflow-hidden bg-slate-950 text-white border-b border-indigo-900/60 shadow-2xl" 
+             x-data="{
+                 activeSlide: 0,
+                 slidesCount: {{ count($heroSlides ?? []) }},
+                 autoplayInterval: null,
+                 isPaused: false,
+                 init() {
+                     if (this.slidesCount > 1) {
+                         this.startAutoplay();
+                     }
+                 },
+                 startAutoplay() {
+                     this.stopAutoplay();
+                     this.autoplayInterval = setInterval(() => {
+                         if (!this.isPaused) {
+                             this.next();
+                         }
+                     }, 6000);
+                 },
+                 stopAutoplay() {
+                     if (this.autoplayInterval) {
+                         clearInterval(this.autoplayInterval);
+                         this.autoplayInterval = null;
+                     }
+                 },
+                 next() {
+                     this.activeSlide = (this.activeSlide + 1) % this.slidesCount;
+                 },
+                 prev() {
+                     this.activeSlide = (this.activeSlide - 1 + this.slidesCount) % this.slidesCount;
+                 },
+                 goTo(idx) {
+                     this.activeSlide = idx;
+                 }
+             }"
+             @mouseenter="isPaused = true" 
+             @mouseleave="isPaused = false"
+             style="min-height: 580px;">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
+        {{-- Slides Container --}}
+        <div class="relative w-full h-full min-h-[580px] sm:min-h-[620px] md:min-h-[660px] flex items-center">
+            @foreach($heroSlides ?? [] as $idx => $slide)
+            <div x-show="activeSlide === {{ $idx }}" 
+                 x-transition:enter="transition ease-out duration-700"
+                 x-transition:enter-start="opacity-0 scale-102"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-98"
+                 class="absolute inset-0 w-full h-full flex items-center justify-center"
+                 style="{{ $idx === 0 ? '' : 'display: none;' }}">
                 
-                {{-- Badge Yayasan --}}
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-inner text-amber-300 text-xs sm:text-sm font-bold uppercase tracking-wider animate-fadeIn" style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #fcd34d;">
-                    <i class="fa-solid fa-landmark text-amber-400"></i>
-                    <span>Yayasan Agung Madani Kayuagung • Kab. OKI</span>
-                </div>
+                {{-- Background Image with Fallback --}}
+                <img src="{{ $slide['image'] ?? '/uploads/hero-slide-yayasan-1.webp' }}" 
+                     alt="{{ $slide['title'] ?? 'Yayasan Agung Madani' }}" 
+                     class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transform scale-105"
+                     onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp';">
 
-                {{-- Headline --}}
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase drop-shadow-md" style="color: #ffffff !important;">
-                    Sekolah Islam Terpadu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-200" style="-webkit-background-clip: text; color: #fbbf24; text-shadow: 0 0 25px rgba(251,191,36,0.35);">Madani</span>
-                </h1>
+                {{-- Triple-Layer Gradient Overlays ensuring crisp contrast & zero white text collision --}}
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-indigo-950/85 to-blue-950/80" 
+                     style="background: linear-gradient(135deg, rgba(8, 13, 26, 0.94) 0%, rgba(24, 20, 60, 0.88) 50%, rgba(15, 23, 42, 0.84) 100%) !important;"></div>
+                <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40"></div>
 
-                <p class="text-sm sm:text-lg text-indigo-100 font-medium leading-relaxed" style="color: #e0e7ff !important;">
-                    Mewujudkan ekosistem pendidikan Islam terpadu satu atap yang membina generasi robbani berakhlak mulia, cerdas, berprestasi, dan mandiri berbekal Al-Qur'an, sains, dan teknologi.
-                </p>
+                {{-- Slide Foreground Content --}}
+                <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center space-y-4 sm:space-y-6">
+                    
+                    {{-- Badge --}}
+                    @if(!empty($slide['badge']))
+                    <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-inner text-amber-300 text-xs sm:text-sm font-bold uppercase tracking-wider" 
+                         style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #fcd34d;">
+                        <i class="fa-solid fa-landmark text-amber-400"></i>
+                        <span>{{ $slide['badge'] }}</span>
+                    </div>
+                    @endif
 
-                {{-- Action Buttons --}}
-                <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                    <a href="#unit-sekolah" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2" style="background: linear-gradient(to right, #fbbf24, #eab308); color: #020617;">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span>Pilih Unit Sekolah</span>
-                        <i class="fa-solid fa-arrow-down text-xs"></i>
-                    </a>
-                    <a href="#struktur-yayasan" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm tracking-wide transition flex items-center gap-2" style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #ffffff;">
-                        <i class="fa-solid fa-sitemap text-amber-300"></i>
-                        <span>Struktur Yayasan</span>
-                    </a>
-                </div>
+                    {{-- Title (Anti Cut-Off & Responsive Break-Words) --}}
+                    <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase drop-shadow-md break-words max-w-4xl mx-auto" 
+                        style="color: #ffffff !important;">
+                        {{ $slide['title'] ?? 'Yayasan Agung Madani' }}
+                    </h1>
 
-                {{-- Statistics Chips --}}
-                <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto text-center">
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
-                        <span class="block text-xl sm:text-2xl font-black text-amber-400" style="color: #fbbf24;">3 Unit</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">TK, SD & SMP</span>
+                    {{-- Subtitle --}}
+                    @if(!empty($slide['subtitle']))
+                    <p class="text-xs sm:text-base md:text-lg text-indigo-100 font-medium leading-relaxed max-w-3xl mx-auto break-words" 
+                       style="color: #e0e7ff !important;">
+                        {{ $slide['subtitle'] }}
+                    </p>
+                    @endif
+
+                    {{-- Action Buttons --}}
+                    <div class="pt-2 sm:pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                        @if(!empty($slide['btn_text']))
+                        <a href="{{ $slide['btn_link'] ?? '#unit-sekolah' }}" 
+                           target="{{ $slide['btn_target'] ?? '_self' }}"
+                           class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2" 
+                           style="background: linear-gradient(to right, #fbbf24, #eab308); color: #020617;">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>{{ $slide['btn_text'] }}</span>
+                            <i class="fa-solid fa-arrow-down text-xs"></i>
+                        </a>
+                        @endif
+
+                        @if(!empty($slide['btn2_active']) && !empty($slide['btn2_text']))
+                        <a href="{{ $slide['btn2_link'] ?? route('ppdb.index') }}" 
+                           target="{{ $slide['btn2_target'] ?? '_self' }}"
+                           class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-xs sm:text-sm tracking-wide transition flex items-center gap-2 backdrop-blur-md" 
+                           style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #ffffff;">
+                            <i class="fa-solid fa-graduation-cap text-amber-300"></i>
+                            <span>{{ $slide['btn2_text'] }}</span>
+                        </a>
+                        @endif
                     </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
-                        <span class="block text-xl sm:text-2xl font-black text-emerald-400" style="color: #34d399;">Terakreditasi</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">BAN-SM / PAUD</span>
+
+                    {{-- Statistics Chips (Satu Atap SIT Madani) --}}
+                    <div class="pt-4 sm:pt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-2xl mx-auto text-center">
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
+                            <span class="block text-lg sm:text-2xl font-black text-amber-400">3 Unit</span>
+                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">TK, SD & SMP</span>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
+                            <span class="block text-lg sm:text-2xl font-black text-emerald-400">Terakreditasi</span>
+                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">BAN-SM / PAUD</span>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
+                            <span class="block text-lg sm:text-2xl font-black text-cyan-400">JSIT</span>
+                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Jaringan Nasional</span>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
+                            <span class="block text-lg sm:text-2xl font-black text-amber-400">Tahfidz</span>
+                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Mutqin Bersanad</span>
+                        </div>
                     </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
-                        <span class="block text-xl sm:text-2xl font-black text-cyan-400" style="color: #22d3ee;">JSIT</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">Jaringan Nasional</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
-                        <span class="block text-xl sm:text-2xl font-black text-amber-400" style="color: #fbbf24;">Tahfidz</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">Mutqin Bersanad</span>
-                    </div>
+
                 </div>
 
             </div>
+            @endforeach
         </div>
+
+        {{-- Next / Prev Navigation Arrows (Desktop & Tablet) --}}
+        @if(count($heroSlides ?? []) > 1)
+        <button type="button" 
+                @click="prev()" 
+                aria-label="Slide Sebelumnya"
+                class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 text-white backdrop-blur-md flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110">
+            <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+        </button>
+        <button type="button" 
+                @click="next()" 
+                aria-label="Slide Selanjutnya"
+                class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 text-white backdrop-blur-md flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110">
+            <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+        </button>
+
+        {{-- Dot Indicators --}}
+        <div class="absolute bottom-4 sm:bottom-6 left-0 right-0 z-20 flex items-center justify-center gap-2">
+            @foreach($heroSlides ?? [] as $idx => $slide)
+            <button type="button" 
+                    @click="goTo({{ $idx }})" 
+                    aria-label="Pergi ke slide {{ $idx + 1 }}"
+                    class="h-2.5 rounded-full transition-all duration-300 cursor-pointer"
+                    :class="activeSlide === {{ $idx }} ? 'w-8 bg-amber-400 shadow-md ring-2 ring-amber-400/40' : 'w-2.5 bg-white/40 hover:bg-white/70'"></button>
+            @endforeach
+        </div>
+        @endif
+
     </section>
 
 

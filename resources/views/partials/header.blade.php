@@ -117,45 +117,111 @@
                 </a>
 
                 {{-- 2. Profil Dropdown --}}
-                <div class="relative group py-2" id="nav-dropdown-profil">
-                    <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*', '*fasilitas*', '*dpc*', '*dewan*', '*guru*', '*ekskul*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                        <span>Profil</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
-                    </button>
-                    {{-- Safe Hover Bridge Container --}}
-                    <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
-                        <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.sambutan', $activeUnit) : route('page.sambutan') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-user-tie w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sambutan Pimpinan
-                            </a>
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.tentang-kami', $activeUnit) : route('page.tentang-kami') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-school w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Profil Singkat
-                            </a>
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.visi-misi', $activeUnit) : route('page.visi-misi') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-compass w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Visi &amp; Misi
-                            </a>
-                            <a href="{{ route('page.sejarah') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-landmark w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sejarah
-                            </a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.dewan', $activeUnit) : route('dewan.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-chalkboard-user w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Dewan Guru &amp; GTK
-                            </a>
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.struktur', $activeUnit) : route('page.struktur') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-sitemap w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Struktur Organisasi
-                            </a>
-                            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.fasilitas', $activeUnit) : route('bidang.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-layer-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Fasilitas
-                            </a>
-                            <a href="{{ route('dpc.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-star-and-crescent w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Program Unggulan
-                            </a>
-                            <a href="{{ route('ekskul.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-people-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Ekstrakurikuler
-                            </a>
+                @if($activeUnit === 'yayasan')
+                    <div class="relative group py-2" id="nav-dropdown-profil">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Yayasan" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('yayasan*', '*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <span>Profil Yayasan</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-56 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('page.sambutan.yayasan') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-user-tie w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sambutan Ketua Yayasan
+                                </a>
+                                <a href="{{ route('page.tentang.yayasan') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-landmark w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Profil Singkat Yayasan
+                                </a>
+                                <a href="{{ route('page.visi-misi.yayasan') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-compass w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Visi &amp; Misi Yayasan
+                                </a>
+                                <a href="{{ route('page.struktur.yayasan') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-sitemap w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Struktur Organisasi Yayasan
+                                </a>
+                                <a href="{{ route('page.sejarah') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-timeline w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sejarah Perjalanan
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    {{-- Dropdown Unit Pendidikan SIT Madani --}}
+                    <div class="relative group py-2" id="nav-dropdown-unit">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Unit Sekolah" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('tk*', 'sd*', 'smp*', 'unit*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <i class="fa-solid fa-layer-group text-amber-400 text-xs mr-1.5"></i>
+                            <span>Unit Sekolah</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-60 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('unit.tk') }}" class="block px-3.5 py-2.5 text-xs font-bold text-gray-800 hover:bg-amber-50 hover:text-amber-800 transition flex items-center space-x-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-xs">
+                                        <i class="fa-solid fa-shapes"></i>
+                                    </span>
+                                    <div>
+                                        <span class="block text-xs font-bold">TKS IT Madani</span>
+                                        <span class="text-[10px] font-normal text-gray-500">PAUD / TK Islam Terpadu</span>
+                                    </div>
+                                </a>
+                                <a href="{{ route('unit.sd') }}" class="block px-3.5 py-2.5 text-xs font-bold text-gray-800 hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-xs">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                    </span>
+                                    <div>
+                                        <span class="block text-xs font-bold">SDS IT Madani</span>
+                                        <span class="text-[10px] font-normal text-gray-500">Sekolah Dasar Islam Terpadu</span>
+                                    </div>
+                                </a>
+                                <a href="{{ route('unit.smp') }}" class="block px-3.5 py-2.5 text-xs font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-800 transition flex items-center space-x-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-xs">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </span>
+                                    <div>
+                                        <span class="block text-xs font-bold">SMPS IT Madani</span>
+                                        <span class="text-[10px] font-normal text-gray-500">Sekolah Menengah Pertama IT</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="relative group py-2" id="nav-dropdown-profil">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Sekolah" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*', '*fasilitas*', '*dpc*', '*dewan*', '*guru*', '*ekskul*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <span>Profil Sekolah</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('unit.sambutan', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-user-tie w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sambutan Kepala Sekolah
+                                </a>
+                                <a href="{{ route('unit.tentang-kami', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-school w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Profil Singkat
+                                </a>
+                                <a href="{{ route('unit.visi-misi', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-compass w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Visi &amp; Misi
+                                </a>
+                                <a href="{{ route('unit.dewan', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-chalkboard-user w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Dewan Guru &amp; GTK
+                                </a>
+                                <a href="{{ route('unit.struktur', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-sitemap w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Struktur Organisasi
+                                </a>
+                                <a href="{{ route('unit.fasilitas', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-layer-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Fasilitas
+                                </a>
+                                @if($activeUnit === 'smp')
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <a href="{{ route('dpc.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-star-and-crescent w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Program Unggulan
+                                </a>
+                                <a href="{{ route('ekskul.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-people-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Ekstrakurikuler
+                                </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 {{-- 3. Kabar Dropdown --}}
                 <div class="relative group py-2" id="nav-dropdown-kabar">
@@ -302,20 +368,49 @@
         </a>
         
         {{-- Mobile Profil Submenu --}}
-        <div class="border-t border-gray-100 pt-2">
-            <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
-                <i class="fa-solid fa-school mr-2 text-amber-500"></i> Profil {{ $activeUnit !== 'yayasan' ? $curBrand['title'] : 'Yayasan' }}
+        @if($activeUnit === 'yayasan')
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-landmark mr-2 text-amber-500"></i> Profil Yayasan Agung Madani
+                </div>
+                <a href="{{ route('page.sambutan.yayasan') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sambutan Ketua Yayasan</a>
+                <a href="{{ route('page.tentang.yayasan') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Profil Singkat Yayasan</a>
+                <a href="{{ route('page.visi-misi.yayasan') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Visi &amp; Misi Yayasan</a>
+                <a href="{{ route('page.struktur.yayasan') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Struktur Organisasi Yayasan</a>
+                <a href="{{ route('page.sejarah') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sejarah Perjalanan</a>
             </div>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.sambutan', $activeUnit) : route('page.sambutan') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sambutan Pimpinan</a>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.tentang-kami', $activeUnit) : route('page.tentang-kami') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Profil Singkat</a>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.visi-misi', $activeUnit) : route('page.visi-misi') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Visi &amp; Misi</a>
-            <a href="{{ route('page.sejarah') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sejarah</a>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.dewan', $activeUnit) : route('dewan.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Dewan Guru &amp; GTK</a>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.struktur', $activeUnit) : route('page.struktur') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Struktur Organisasi</a>
-            <a href="{{ $activeUnit !== 'yayasan' ? route('unit.fasilitas', $activeUnit) : route('bidang.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Fasilitas</a>
-            <a href="{{ route('dpc.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Program Unggulan</a>
-            <a href="{{ route('ekskul.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Ekstrakurikuler</a>
-        </div>
+
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-layer-group mr-2 text-amber-500"></i> Unit Pendidikan SIT Madani
+                </div>
+                <a href="{{ route('unit.tk') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-amber-600 font-semibold flex items-center">
+                    <i class="fa-solid fa-shapes mr-2 text-amber-500 w-4"></i> TKS IT Madani (PAUD/TK)
+                </a>
+                <a href="{{ route('unit.sd') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-emerald-600 font-semibold flex items-center">
+                    <i class="fa-solid fa-book-open-reader mr-2 text-emerald-600 w-4"></i> SDS IT Madani (SD)
+                </a>
+                <a href="{{ route('unit.smp') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-blue-600 font-semibold flex items-center">
+                    <i class="fa-solid fa-graduation-cap mr-2 text-blue-600 w-4"></i> SMPS IT Madani (SMP)
+                </a>
+            </div>
+        @else
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-school mr-2 text-amber-500"></i> Profil {{ $curBrand['title'] }}
+                </div>
+                <a href="{{ route('unit.sambutan', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sambutan Kepala Sekolah</a>
+                <a href="{{ route('unit.tentang-kami', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Profil Singkat</a>
+                <a href="{{ route('unit.visi-misi', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Visi &amp; Misi</a>
+                <a href="{{ route('unit.dewan', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Dewan Guru &amp; GTK</a>
+                <a href="{{ route('unit.struktur', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Struktur Organisasi</a>
+                <a href="{{ route('unit.fasilitas', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Fasilitas</a>
+                @if($activeUnit === 'smp')
+                <a href="{{ route('dpc.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Program Unggulan</a>
+                <a href="{{ route('ekskul.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Ekstrakurikuler</a>
+                @endif
+            </div>
+        @endif
 
         {{-- Mobile Kabar Submenu --}}
         <div class="border-t border-gray-100 pt-2">

@@ -23,6 +23,7 @@
                     <tr>
                         <th class="py-3.5 px-4">Nama Pengguna</th>
                         <th class="py-3.5 px-4">Email</th>
+                        <th class="py-3.5 px-4">Unit Lembaga</th>
                         <th class="py-3.5 px-4">Peran (Role)</th>
                         <th class="py-3.5 px-4">Terdaftar</th>
                         <th class="py-3.5 px-4 text-center">Aksi</th>
@@ -46,6 +47,29 @@
                             </td>
                             <td class="py-4 px-4 text-slate-600 font-mono text-xs">
                                 {{ $user->email }}
+                            </td>
+                            <td class="py-4 px-4">
+                                @if($user->unit === 'tk')
+                                    <span class="bg-amber-100 text-amber-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center w-fit space-x-1">
+                                        <i class="fa-solid fa-shapes text-[10px]"></i>
+                                        <span>TKS IT Madani</span>
+                                    </span>
+                                @elseif($user->unit === 'sd')
+                                    <span class="bg-emerald-100 text-emerald-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center w-fit space-x-1">
+                                        <i class="fa-solid fa-book-open-reader text-[10px]"></i>
+                                        <span>SDS IT Madani</span>
+                                    </span>
+                                @elseif($user->unit === 'smp')
+                                    <span class="bg-blue-100 text-blue-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center w-fit space-x-1">
+                                        <i class="fa-solid fa-graduation-cap text-[10px]"></i>
+                                        <span>SMPS IT Madani</span>
+                                    </span>
+                                @else
+                                    <span class="bg-indigo-100 text-indigo-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center w-fit space-x-1">
+                                        <i class="fa-solid fa-landmark text-[10px]"></i>
+                                        <span>Yayasan Agung Madani</span>
+                                    </span>
+                                @endif
                             </td>
                             <td class="py-4 px-4">
                                 @if($user->role === 'super_admin')
@@ -80,7 +104,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-8 text-center text-xs text-slate-400">Belum ada pengguna terdaftar.</td>
+                            <td colspan="6" class="py-8 text-center text-xs text-slate-400">Belum ada pengguna terdaftar.</td>
                         </tr>
                     @endforelse
                 </tbody>

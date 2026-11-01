@@ -15,49 +15,106 @@ class AdminHeroController extends Controller
     /**
      * Default slides fallback
      */
-    protected function getDefaultSlides(): array
+    protected function getDefaultSlides(string $unit = 'yayasan'): array
     {
+        if ($unit === 'tk') {
+            return [
+                [
+                    'active' => true,
+                    'badge' => 'TKS IT MADANI KAYUAGUNG • TERAKREDITASI B',
+                    'title' => 'Membentuk Generasi Rabbani yang Kreatif, Cerdas, dan Mandiri',
+                    'subtitle' => 'Pendidikan Anak Usia Dini berbasis fitrah, adab islami, tahfidz juz 30 cilik, dan pembelajaran sentra bermakna.',
+                    'image' => '/uploads/hero-slide-yayasan-2.webp',
+                    'btn_text' => 'Profil TKS IT',
+                    'btn_link' => '/tk/tentang-kami',
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'SPMB TKS IT',
+                    'btn2_link' => '/tk/ppdb',
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
+        if ($unit === 'sd') {
+            return [
+                [
+                    'active' => true,
+                    'badge' => 'SDS IT MADANI KAYUAGUNG • TERAKREDITASI B',
+                    'title' => 'Membentuk Generasi Berprestasi, Sholeh, Inovatif & Mandiri',
+                    'subtitle' => 'Sekolah Dasar Islam Terpadu unggulan dengan target tahfidz 2 juz mutqin, kurikulum terpadu JSIT, dan pembinaan akhlak mulia.',
+                    'image' => '/uploads/hero-slide-yayasan-1.webp',
+                    'btn_text' => 'Profil SDS IT',
+                    'btn_link' => '/sd/tentang-kami',
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'SPMB SDS IT',
+                    'btn2_link' => '/sd/ppdb',
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
+        if ($unit === 'smp') {
+            return [
+                [
+                    'active' => true,
+                    'badge' => 'SMPS IT UNGGULAN KAYUAGUNG • TERAKREDITASI B',
+                    'title' => 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia',
+                    'subtitle' => 'Sekolah Menengah Pertama Islam Terpadu berakreditasi di Kayuagung, Kab. OKI dengan Program Asrama Tahfidz & Imtak Modern.',
+                    'image' => '/uploads/campus-smpit-madani.webp',
+                    'btn_text' => 'Sambutan Kepala Sekolah',
+                    'btn_link' => '/smp/sambutan-kepala-sekolah',
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Info SPMB SMPS IT',
+                    'btn2_link' => '/smp/ppdb',
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
         return [
             [
                 'active' => true,
-                'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
-                'title' => 'Selamat Datang di Website Resmi',
-                'subtitle' => 'SMPS IT Madani Kayuagung',
-                'image' => '/uploads/campus-sit-madani.webp',
-                'btn_text' => 'Sambutan Kepala Sekolah',
-                'btn_link' => '/sambutan-kepala-sekolah',
+                'badge' => 'YAYASAN AGUNG MADANI KAYUAGUNG • KAB. OKI',
+                'title' => 'Mewujudkan Generasi Robbani yang Cerdas, Mandiri & Berakhlak Mulia',
+                'subtitle' => 'Pendidikan Islam Terpadu Satu Atap Berbasis Al-Qur\'an, As-Sunnah, Sains dan Teknologi Modern di Bawah Naungan JSIT Indonesia.',
+                'image' => '/uploads/hero-slide-yayasan-1.webp',
+                'btn_text' => 'Pilih Unit Sekolah',
+                'btn_link' => '#unit-sekolah',
                 'btn_target' => '_self',
                 'btn2_active' => true,
-                'btn2_text' => 'Info SPMB',
+                'btn2_text' => 'Daftar SPMB Terpadu',
                 'btn2_link' => '/ppdb',
                 'btn2_target' => '_self',
             ],
             [
                 'active' => true,
-                'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
-                'title' => 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia',
-                'subtitle' => 'Sekolah Menengah Pertama Islam Terpadu berakreditasi di Kayuagung, Kab. OKI dengan Kurikulum Terpadu & Tahfidz Al-Qur\'an.',
-                'image' => '/uploads/activities-sit-madani.webp',
-                'btn_text' => 'Profil Singkat Sekolah',
-                'btn_link' => '/tentang-kami',
+                'badge' => 'TAHFIDZ QUR\'AN MUTQIN & ADAB NABAWI',
+                'title' => 'Pembinaan Karakter & Hafalan Al-Qur\'an Berkesinambungan',
+                'subtitle' => 'Mulai dari tahfidz cilik PAUD/TKS IT, target 2 juz mutqin di SDS IT, hingga program Asrama Tahfidz di SMPS IT Madani.',
+                'image' => '/uploads/hero-slide-yayasan-2.webp',
+                'btn_text' => 'Profil Singkat Yayasan',
+                'btn_link' => '/yayasan/tentang-kami',
                 'btn_target' => '_self',
                 'btn2_active' => true,
-                'btn2_text' => 'Info SPMB',
-                'btn2_link' => '/ppdb',
+                'btn2_text' => 'Struktur Yayasan',
+                'btn2_link' => '/yayasan/struktur',
                 'btn2_target' => '_self',
             ],
             [
                 'active' => true,
-                'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
-                'title' => 'SPMB Gelombang Exclusive TP Baru',
-                'subtitle' => 'Kuota Terbatas Hanya 24 Orang & Promo Cash Back 1 Juta Alumni SDIT Madani.',
-                'image' => '/uploads/tahfidz-sit-madani.webp',
-                'btn_text' => 'Daftar SPMB Online',
-                'btn_link' => '/ppdb',
+                'badge' => 'SAINS, TEKNOLOGI & BAHASA INTERNASIONAL',
+                'title' => 'Integrasi Keunggulan Imtak dan Iptek Masa Depan',
+                'subtitle' => 'Laboratorium komputer modern, pembekalan literasi digital, bimbingan olimpiade sains, serta pembiasaan Bahasa Arab dan Inggris.',
+                'image' => '/uploads/hero-slide-yayasan-3.webp',
+                'btn_text' => 'Kunjungi SMPS IT Madani',
+                'btn_link' => '/smp',
                 'btn_target' => '_self',
                 'btn2_active' => true,
-                'btn2_text' => 'Info SPMB',
-                'btn2_link' => '/ppdb',
+                'btn2_text' => 'Kunjungi SDS IT Madani',
+                'btn2_link' => '/sd',
                 'btn2_target' => '_self',
             ],
         ];
@@ -66,11 +123,22 @@ class AdminHeroController extends Controller
     /**
      * Display the Hero Slider configuration page.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $raw = Setting::get('hero_slides');
-        $slides = [];
+        $userUnit = auth()->user()->unit ?? 'yayasan';
+        $selectedUnit = $request->query('unit', (in_array($userUnit, ['tk', 'sd', 'smp']) ? $userUnit : 'yayasan'));
+        if (! in_array($selectedUnit, ['yayasan', 'tk', 'sd', 'smp'])) {
+            $selectedUnit = 'yayasan';
+        }
 
+        $settingKey = $selectedUnit === 'yayasan' ? 'hero_slides_yayasan' : 'hero_slides_'.$selectedUnit;
+        $raw = Setting::get($settingKey);
+
+        if (! $raw && $selectedUnit === 'smp') {
+            $raw = Setting::get('hero_slides');
+        }
+
+        $slides = [];
         if ($raw) {
             $decoded = json_decode($raw, true);
             if (is_array($decoded) && ! empty($decoded)) {
@@ -79,10 +147,10 @@ class AdminHeroController extends Controller
         }
 
         if (empty($slides)) {
-            $slides = $this->getDefaultSlides();
+            $slides = $this->getDefaultSlides($selectedUnit);
         }
 
-        return view('admin.hero.index', compact('slides'));
+        return view('admin.hero.index', compact('slides', 'selectedUnit'));
     }
 
     /**
@@ -90,7 +158,14 @@ class AdminHeroController extends Controller
      */
     public function update(Request $request)
     {
+        $hasUnitInput = $request->filled('unit');
+        $selectedUnit = $request->input('unit', 'smp');
+        if (! in_array($selectedUnit, ['yayasan', 'tk', 'sd', 'smp'])) {
+            $selectedUnit = 'smp';
+        }
+
         $request->validate([
+            'unit' => 'nullable|string|in:yayasan,tk,sd,smp',
             'slides' => 'required|array|min:1|max:6',
             'slides.*.title' => 'required|string|max:255',
             'slides.*.subtitle' => 'nullable|string|max:500',
@@ -141,22 +216,35 @@ class AdminHeroController extends Controller
             ];
         }
 
+        $settingKey = $selectedUnit === 'yayasan' ? 'hero_slides_yayasan' : 'hero_slides_'.$selectedUnit;
         Setting::set(
-            'hero_slides',
+            $settingKey,
             json_encode($cleanSlides, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             'hero'
         );
+
+        if ($selectedUnit === 'smp' || ! $hasUnitInput) {
+            Setting::set(
+                'hero_slides',
+                json_encode($cleanSlides, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                'hero'
+            );
+        }
 
         ActivityLog::create([
             'user_id' => auth()->id(),
             'user_name' => auth()->user()->name ?? 'Admin',
             'action' => 'hero_settings_update',
-            'description' => 'Memperbarui pengaturan Banner Hero Slider Beranda ('.count($cleanSlides).' slide dikonfigurasi)',
+            'description' => "Memperbarui pengaturan Banner Hero Slider untuk unit {$selectedUnit} (".count($cleanSlides).' slide dikonfigurasi)',
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
             'status' => 'info',
         ]);
 
-        return redirect()->route('admin.hero.index')->with('success', 'Banner Hero Slider berhasil diperbarui dan disimpan!');
+        $redirectUrl = $hasUnitInput
+            ? route('admin.hero.index', ['unit' => $selectedUnit])
+            : route('admin.hero.index');
+
+        return redirect($redirectUrl)->with('success', "Banner Hero Slider untuk unit {$selectedUnit} berhasil diperbarui dan disimpan!");
     }
 }

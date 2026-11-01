@@ -31,6 +31,7 @@ class AdminUserController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
             'role' => ['required', Rule::in(['super_admin', 'admin', 'editor', 'author'])],
+            'unit' => ['nullable', Rule::in(['yayasan', 'tk', 'sd', 'smp'])],
         ]);
 
         $user = User::create([
@@ -38,6 +39,7 @@ class AdminUserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
+            'unit' => $validated['unit'] ?? 'yayasan',
         ]);
 
         ActivityLog::create([
@@ -65,11 +67,13 @@ class AdminUserController extends Controller
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8',
             'role' => ['required', Rule::in(['super_admin', 'admin', 'editor', 'author'])],
+            'unit' => ['nullable', Rule::in(['yayasan', 'tk', 'sd', 'smp'])],
         ]);
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->role = $validated['role'];
+        $user->unit = $validated['unit'] ?? $user->unit ?? 'yayasan';
 
         if (! empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);

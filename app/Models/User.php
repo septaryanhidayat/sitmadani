@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'role', 'avatar'])]
+#[Fillable(['name', 'email', 'password', 'role', 'unit', 'avatar'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -45,14 +45,30 @@ class User extends Authenticatable
         return in_array($this->role, ['super_admin', 'admin', 'editor']);
     }
 
+    public function getUnitLabelAttribute(): string
+    {
+        return match ($this->unit) {
+            'tk' => 'TKS IT Madani',
+            'sd' => 'SDS IT Madani',
+            'smp' => 'SMPS IT Madani',
+            default => 'Yayasan Agung Madani',
+        };
+    }
+
     public function getRoleLabelAttribute(): string
     {
-        return match ($this->role) {
+        $base = match ($this->role) {
             'super_admin' => 'Super Administrator',
             'admin' => 'Administrator',
             'editor' => 'Editor Berita',
             'author' => 'Penulis / Kontributor',
             default => 'Administrator'
         };
+
+        if ($this->unit && $this->unit !== 'yayasan') {
+            return $base.' ('.$this->unit_label.')';
+        }
+
+        return $base;
     }
 }
