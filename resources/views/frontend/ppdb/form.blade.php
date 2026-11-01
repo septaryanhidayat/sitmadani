@@ -1,0 +1,213 @@
+@extends('layouts.frontend')
+
+@section('title', 'Formulir Pendaftaran PPDB ' . ($formSettings['year'] ?? '2026/2027') . ' - SMPS IT Madani Kayuagung')
+@section('meta_description', 'Formulir Pendaftaran Peserta Didik Baru (PPDB Online) SMPS IT Madani Kayuagung Tahun Pelajaran ' . ($formSettings['year'] ?? '2026/2027') . '.')
+
+@section('content')
+<div class="bg-gray-50 py-10 sm:py-14 font-['Poppins',sans-serif]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+        {{-- JIKA FORMULIR SEDANG DITUTUP SEMENTARA --}}
+        @if(($formSettings['status'] ?? '1') === '0')
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8 sm:p-12 text-center space-y-6">
+                <div class="w-24 h-24 mx-auto rounded-3xl bg-amber-50 text-amber-600 flex items-center justify-center text-4xl shadow-inner">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="space-y-2">
+                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                        Pemberitahuan SPMB
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                        Pendaftaran Online Ditutup Sementara
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed pt-2">
+                        {{ $formSettings['closed_message'] ?? 'Pendaftaran PPDB online saat ini sedang ditutup sementara atau kuota telah terpenuhi. Silakan hubungi panitia melalui WhatsApp untuk informasi gelombang berikutnya.' }}
+                    </p>
+                </div>
+
+                @php
+                    $cleanHotline = preg_replace('/[^0-9]/', '', (string) ($formSettings['hotline_phone'] ?? '085269908696'));
+                    if (str_starts_with($cleanHotline, '0')) {
+                        $cleanHotline = '62' . substr($cleanHotline, 1);
+                    }
+                @endphp
+                <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+                    <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia PPDB SMPS IT Madani, saya ingin menanyakan jadwal pendaftaran/kuota siswa baru.') }}" target="_blank" class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-3.5 rounded-2xl text-xs sm:text-sm font-black transition shadow-lg shadow-indigo-600/25">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Hubungi Panitia via WhatsApp</span>
+                    </a>
+                    <a href="{{ route('ppdb.index') }}" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-bold transition">
+                        <i class="fa-solid fa-circle-info text-sm"></i>
+                        <span>Lihat Informasi PPDB</span>
+                    </a>
+                </div>
+            </div>
+
+        @else
+
+        {{-- FORM CONTAINER CARD --}}
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-6 sm:p-10 space-y-8">
+            
+            {{-- HEADER LOGO & JUDUL --}}
+            <div class="text-center space-y-4">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto p-1 rounded-2xl flex items-center justify-center">
+                    <img src="/uploads/logo-madani-square.webp" alt="Logo SMPS IT Madani" class="h-full w-auto object-contain">
+                </div>
+
+                <div class="space-y-1">
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-black text-indigo-600 tracking-tight leading-snug">
+                        Formulir Pendaftaran Peserta Didik Baru<br>
+                        SMPS IT Madani Kayuagung
+                    </h1>
+                    <p class="text-xs text-slate-500 max-w-md mx-auto">
+                        Isi formulir dengan data yang sah dan lengkap. Tanda bintang (<span class="text-red-500 font-bold">*</span>) wajib diisi.
+                    </p>
+                </div>
+            </div>
+
+            {{-- KOTAK PENGUMUMAN / INFO ATAS FORM --}}
+            @if(!empty($formSettings['announcement']))
+                <div class="p-4 rounded-2xl bg-indigo-50/60 border border-indigo-200 text-emerald-900 text-xs flex items-start space-x-3 shadow-xs">
+                    <div class="w-7 h-7 rounded-xl bg-emerald-200 text-indigo-600 flex items-center justify-center font-bold flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-bullhorn text-xs"></i>
+                    </div>
+                    <div class="leading-relaxed">
+                        <strong class="block text-emerald-950 font-bold mb-0.5">Petunjuk &amp; Pengumuman Pendaftaran:</strong>
+                        <span>{{ $formSettings['announcement'] }}</span>
+                    </div>
+                </div>
+            @endif
+
+            {{-- ERROR SUMMARY IF ANY --}}
+            @if($errors->any())
+                <div class="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs space-y-1">
+                    <p class="font-bold flex items-center">
+                        <i class="fa-solid fa-circle-exclamation mr-1.5 text-red-500"></i>
+                        Mohon periksa kembali isian formulir:
+                    </p>
+                    <ul class="list-disc list-inside space-y-0.5">
+                        @foreach($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- NOTIFIKASI JALUR TERPILIH OTOMATIS --}}
+            @if(request('jalur') || request('track'))
+                <div class="p-3.5 sm:p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 flex items-center justify-between gap-3 shadow-xs">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <span class="font-black text-emerald-900 block text-xs sm:text-sm">Jalur Pilihan: {{ request('jalur') ?? request('track') }}</span>
+                            <span class="text-[11px] text-emerald-700">Jalur pendaftaran ini telah otomatis terpilih pada kolom formulir di bawah.</span>
+                        </div>
+                    </div>
+                    <a href="{{ route('ppdb.index') }}" class="text-[11px] font-bold text-emerald-800 underline hover:text-emerald-950 shrink-0">
+                        Ganti Jalur
+                    </a>
+                </div>
+            @endif
+
+            {{-- REGISTRATION FORM --}}
+            <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs text-slate-700">
+                @csrf
+
+                @php
+                    $sectionIndex = 1;
+                @endphp
+
+                @foreach($sections as $secKey => $secInfo)
+                    @if(!empty($groupedFields[$secKey]) && count($groupedFields[$secKey]) > 0)
+                        <div class="space-y-4 pt-4 border-t border-slate-100 first:border-t-0 first:pt-2">
+                            <div class="pb-2 border-b border-indigo-100 flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-100 text-indigo-600 font-bold text-xs flex items-center justify-center">
+                                    {{ $sectionIndex++ }}
+                                </span>
+                                <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="{{ $secInfo['icon'] ?? 'fa-solid fa-folder' }} text-indigo-600"></i>
+                                    <span>{{ $secInfo['name'] }}</span>
+                                </h2>
+                            </div>
+
+                            @if($secKey === 'pilihan')
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                                    @foreach($groupedFields[$secKey] as $f)
+                                        @include('frontend.ppdb.partials.form_field', ['field' => $f])
+                                    @endforeach
+                                </div>
+                            @elseif($secKey === 'berkas')
+                                <div class="space-y-4">
+                                    @foreach($groupedFields[$secKey] as $f)
+                                        @include('frontend.ppdb.partials.form_field', ['field' => $f])
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                    @foreach($groupedFields[$secKey] as $f)
+                                        @php
+                                            $isFullWidth = in_array($f['type'], ['textarea']) || in_array($f['key'], ['full_name', 'address', 'father_address', 'mother_address', 'achievements']);
+                                        @endphp
+                                        <div class="{{ $isFullWidth ? 'sm:col-span-2' : '' }}">
+                                            @include('frontend.ppdb.partials.form_field', ['field' => $f])
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+                @endforeach
+
+                {{-- SUBMIT BUTTON --}}
+                <div class="pt-8 pb-4 text-center">
+                    <button type="submit" id="ppdb-submit-btn" class="w-full sm:w-auto sm:min-w-[320px] max-w-full bg-gradient-to-r from-[#da251c] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991c1c] text-white font-black text-sm sm:text-lg px-6 sm:px-10 py-4 rounded-2xl shadow-xl shadow-red-500/30 hover:shadow-2xl transition-all transform hover:-translate-y-1 cursor-pointer uppercase tracking-wider inline-flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-paper-plane text-lg sm:text-xl"></i>
+                        <span id="ppdb-submit-label">Kirim Formulir Pendaftaran</span>
+                    </button>
+                    @if($formSettings['wa_confirm'])
+                        <p class="text-xs text-slate-600 font-semibold mt-3">
+                            <i class="fa-brands fa-whatsapp text-indigo-600 mr-1 text-sm"></i>
+                            Setelah formulir dikirim, seluruh data pendaftaran akan otomatis diteruskan ke WhatsApp Panitia PPDB.
+                        </p>
+                    @endif
+                </div>
+            </form>
+
+            {{-- FOOTER --}}
+            <div class="pt-8 text-center border-t border-slate-100">
+                <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2 text-center sm:text-left">
+                    <span>PPDB SMPS IT Madani Kayuagung</span>
+                    <span>Hak Cipta Dilindungi Undang-Undang</span>
+                </div>
+            </div>
+
+        </div>
+
+        @endif
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ppdbForm = document.querySelector('form[action="{{ route('ppdb.store') }}"]');
+        if (ppdbForm) {
+            ppdbForm.addEventListener('submit', function (e) {
+                const btn = document.getElementById('ppdb-submit-btn');
+                const label = document.getElementById('ppdb-submit-label');
+                if (btn && !btn.disabled) {
+                    setTimeout(() => {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-75', 'cursor-not-allowed');
+                        if (label) {
+                            label.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Sedang Mengirim Pendaftaran...';
+                        }
+                    }, 50);
+                }
+            });
+        }
+    });
+</script>
+@endsection

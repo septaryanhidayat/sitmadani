@@ -1,0 +1,417 @@
+<?php
+
+use App\Models\Agenda;
+use App\Models\AnggotaDewan;
+use App\Models\Bidang;
+use App\Models\Category;
+use App\Models\Download;
+use App\Models\Pengumuman;
+use App\Models\Post;
+use App\Models\Setting;
+use Illuminate\Support\Facades\View;
+
+test('home page renders all authentic school sections successfully', function () {
+    $response = $this->get('/');
+    $response->assertStatus(200);
+    $response->assertSee('Menu Utama');
+    $response->assertSee('Sambutan Kepala Sekolah');
+    $response->assertSee('Artikel &amp; Kabar Sekolah', false);
+    $response->assertSee('Prestasi Siswa');
+    $response->assertSee('Dewan Guru');
+    $response->assertSee('Galeri Video');
+    $response->assertSee('E-Library');
+    $response->assertSee('Daftar SPMB');
+    $response->assertSee('Pengunjung');
+});
+
+test('articles page renders successfully', function () {
+    $category = Category::firstOrCreate(['name' => 'Akademik'], ['slug' => 'akademik']);
+    $post = Post::create([
+        'title' => 'Uji Coba Prestasi Siswa Madani',
+        'slug' => 'uji-coba-prestasi-siswa-madani',
+        'content' => '<p>Konten artikel pengujian sekolah.</p>',
+        'status' => 'publish',
+        'type' => 'post',
+    ]);
+    $post->categories()->attach($category->id);
+
+    $response = $this->get('/artikel');
+    $response->assertStatus(200);
+    $response->assertSee('Uji Coba Prestasi Siswa Madani');
+
+    $detailResponse = $this->get('/artikel/uji-coba-prestasi-siswa-madani');
+    $detailResponse->assertStatus(200);
+    $detailResponse->assertSee('Konten artikel pengujian sekolah.');
+});
+
+test('static profil pages render successfully', function () {
+    Post::create([
+        'title' => 'Sambutan Kepala Sekolah',
+        'slug' => 'sambutan-kepala-sekolah',
+        'content' => 'Isi sambutan kepala sekolah',
+        'status' => 'publish',
+        'type' => 'page',
+    ]);
+    Post::create([
+        'title' => 'Tentang Kami',
+        'slug' => 'tentang-kami',
+        'content' => 'Profil sekolah kami',
+        'status' => 'publish',
+        'type' => 'page',
+    ]);
+    Post::create([
+        'title' => 'Visi dan Misi',
+        'slug' => 'visi-dan-misi',
+        'content' => 'Visi misi sekolah',
+        'status' => 'publish',
+        'type' => 'page',
+    ]);
+    Post::create([
+        'title' => 'Sejarah',
+        'slug' => 'sejarah',
+        'content' => 'Sejarah sekolah',
+        'status' => 'publish',
+        'type' => 'page',
+    ]);
+    Post::create([
+        'title' => 'Berita Terkini Madani',
+        'slug' => 'berita-terkini-madani',
+        'content' => 'Konten berita',
+        'status' => 'publish',
+        'type' => 'post',
+        'published_at' => now(),
+    ]);
+    Agenda::create([
+        'title' => 'Ujian Tasmi Al-Quran',
+        'slug' => 'ujian-tasmi-al-quran',
+        'event_date' => now()->addDays(2),
+        'status' => 'publish',
+    ]);
+
+    $this->get('/sambutan-kepala-sekolah')->assertStatus(200);
+    $this->get('/tentang-kami')->assertStatus(200);
+    $this->get('/visi-dan-misi')->assertStatus(200)->assertSee('Berita Terkini Madani')->assertSee('Ujian Tasmi Al-Quran');
+    $this->get('/sejarah')->assertStatus(200)->assertSee('Berita Terkini Madani')->assertSee('Ujian Tasmi Al-Quran');
+    $this->get('/struktur-organisasi')->assertStatus(200);
+});
+
+test('dewan, bidang, agenda, and pengumuman pages render successfully', function () {
+    AnggotaDewan::create([
+        'name' => 'Ustadz Ahmad Madani',
+        'slug' => 'ustadz-ahmad-madani',
+        'position' => 'Kepala Sekolah',
+    ]);
+
+    Bidang::create([
+        'name' => 'Laboratorium Biologi Modern',
+        'slug' => 'laboratorium-biologi-modern',
+        'description' => 'Sarana praktikum mikroskopis sains',
+    ]);
+
+    Agenda::create([
+        'title' => 'Olimpiade Sains Sekolah',
+        'slug' => 'olimpiade-sains-sekolah',
+        'status' => 'publish',
+    ]);
+
+    Pengumuman::create([
+        'title' => 'Pengumuman PPDB Gelombang 1',
+        'slug' => 'pengumuman-ppdb-gelombang-1',
+        'status' => 'publish',
+    ]);
+
+    $this->get('/dewan-guru')->assertStatus(200)->assertSee('Ustadz Ahmad Madani');
+    $this->get('/fasilitas')->assertStatus(200)->assertSee('Laboratorium Biologi Modern');
+    $this->get('/bidang/laboratorium-biologi-modern')->assertStatus(200);
+    $this->get('/agenda')->assertStatus(200)->assertSee('Olimpiade Sains Sekolah');
+    $this->get('/pengumuman')->assertStatus(200)->assertSee('Pengumuman PPDB Gelombang 1');
+});
+
+test('agenda and pengumuman pages display cards with photo banner and badges like program unggulan', function () {
+    Agenda::create([
+        'title' => 'Karnaval Akbar HUT Kayuagung',
+        'slug' => 'karnaval-akbar-hut-kayuagung',
+        'content' => 'Kegiatan parade siswa SMPS IT Madani di jalan protokol kota.',
+        'location' => 'Jalan Jendral Sudirman',
+        'event_date' => now()->addDays(5),
+        'status' => 'upcoming',
+        'featured_image' => '/uploads/agenda/karnaval-test.webp',
+    ]);
+
+    Pengumuman::create([
+        'title' => 'Hasil Seleksi SPMB Gelombang 1',
+        'slug' => 'hasil-seleksi-spmb-gelombang-1',
+        'content' => 'Pengumuman kelulusan santri baru tahun ajaran 2026/2027.',
+        'status' => 'publish',
+        'featured_image' => '/uploads/pengumuman/hasil-spmb-test.webp',
+    ]);
+
+    $agendaResponse = $this->get(route('agenda.index'));
+    $agendaResponse->assertOk()
+        ->assertSee('Karnaval Akbar HUT Kayuagung')
+        ->assertSee('/uploads/agenda/karnaval-test.webp')
+        ->assertSee('Akan Datang')
+        ->assertSee('Jalan Jendral Sudirman');
+
+    $pengumumanResponse = $this->get(route('pengumuman.index'));
+    $pengumumanResponse->assertOk()
+        ->assertSee('Hasil Seleksi SPMB Gelombang 1')
+        ->assertSee('/uploads/pengumuman/hasil-spmb-test.webp')
+        ->assertSee('Pengumuman');
+});
+
+test('feedback form submission works', function () {
+    $this->get('/hubungi')->assertStatus(200);
+
+    $response = $this->post('/hubungi', [
+        'nama' => 'Ahmad Calon Siswa',
+        'email' => 'ahmad@example.com',
+        'whatsapp' => '081234567890',
+        'saran_kritik' => 'Mohon informasi jadwal tes masuk SPMB SMPS IT Madani Kayuagung.',
+    ]);
+
+    $response->assertRedirect('/hubungi');
+    $response->assertSessionHas('success');
+
+    $this->assertDatabaseHas('feedbacks', [
+        'name' => 'Ahmad Calon Siswa',
+        'email' => 'ahmad@example.com',
+    ]);
+});
+
+test('download pages render successfully', function () {
+    Download::create([
+        'title' => 'Modul Panduan Siswa',
+        'category_type' => 'Akademik',
+        'file_path' => '/uploads/modul-panduan.pdf',
+        'file_type' => 'PDF',
+    ]);
+
+    $this->get('/download')->assertStatus(200)->assertSee('Modul Panduan Siswa');
+    $this->get('/e-book')->assertStatus(200);
+    $this->get('/hymne-mars')->assertStatus(200);
+    $this->get('/logo')->assertStatus(200);
+    $this->get('/donasi')->assertStatus(200);
+});
+
+test('footer has visitor counter with data-target and responsive mobile center alignment', function () {
+    $response = $this->get('/');
+    $response->assertStatus(200);
+    $response->assertSee('id="footer-visitor-counter"', false);
+    $response->assertSee('data-target=', false);
+    $response->assertSee('text-center md:text-left', false);
+});
+
+test('site settings update dynamically reflects across header, footer, and contact page', function () {
+    Setting::updateOrCreate(['key' => 'contact_phone'], ['value' => '0821-7788-9900', 'group' => 'general']);
+    Setting::updateOrCreate(['key' => 'contact_email'], ['value' => 'info@sitmadani.sch.id', 'group' => 'general']);
+    Setting::updateOrCreate(['key' => 'contact_address'], ['value' => 'Kampus Terpadu SMPS IT Madani Kayuagung', 'group' => 'general']);
+
+    // Re-share to simulate fresh request
+    $settings = Setting::all()->pluck('value', 'key')->toArray();
+    View::share('siteSettings', $settings);
+
+    $home = $this->get('/');
+    $home->assertSee('0821-7788-9900');
+    $home->assertSee('info@sitmadani.sch.id');
+    $home->assertSee('Kampus Terpadu SMPS IT Madani Kayuagung');
+
+    $contact = $this->get('/hubungi');
+    $contact->assertSee('0821-7788-9900');
+    $contact->assertSee('info@sitmadani.sch.id');
+    $contact->assertSee('Kampus Terpadu SMPS IT Madani Kayuagung');
+});
+
+test('sambutan page renders dynamic content from database', function () {
+    $page = Post::where('slug', 'sambutan-kepala-sekolah')->first();
+    if (! $page) {
+        $page = Post::create([
+            'title' => 'Sambutan Kepala Sekolah',
+            'slug' => 'sambutan-kepala-sekolah',
+            'content' => '<p>Uji coba pidato resmi dinamis kepala sekolah.</p>',
+            'status' => 'publish',
+            'type' => 'page',
+        ]);
+    } else {
+        $page->update(['content' => '<p>Uji coba pidato resmi dinamis kepala sekolah.</p>']);
+    }
+
+    $response = $this->get('/sambutan-kepala-sekolah');
+    $response->assertStatus(200);
+    $response->assertSee('Uji coba pidato resmi dinamis kepala sekolah.', false);
+});
+
+test('dewan guru page dynamically reflects updated name and photo from database', function () {
+    $dewan = AnggotaDewan::create([
+        'name' => 'Nama Guru Lama',
+        'slug' => 'nama-guru-lama',
+        'position' => 'Guru Biologi',
+        'fraction' => 'Sains',
+        'photo' => '/uploads/dewan/foto-lama.webp',
+        'order' => 1,
+    ]);
+
+    $res1 = $this->get('/dewan-guru');
+    $res1->assertStatus(200);
+    $res1->assertSee('Nama Guru Lama');
+    $res1->assertSee('/uploads/dewan/foto-lama.webp');
+
+    $dewan->update([
+        'name' => 'Ustadz Fulan Al-Hafidz, M.Ag',
+        'photo' => '/uploads/dewan/foto-terbaru.webp',
+        'fraction' => 'Tahfidz Mutqin',
+    ]);
+
+    $res2 = $this->get('/dewan-guru');
+    $res2->assertStatus(200);
+    $res2->assertSee('Ustadz Fulan Al-Hafidz, M.Ag');
+    $res2->assertSee('/uploads/dewan/foto-terbaru.webp');
+    $res2->assertDontSee('Nama Guru Lama');
+});
+
+test('home page renders dual-row gallery slider with madani photos', function () {
+    $response = $this->get('/');
+
+    $response->assertStatus(200);
+    $response->assertSee('Galeri');
+    $response->assertSee('Dokumentasi Pembiasaan Karakter, Praktikum &amp; Aktivitas Sekolah SMPS IT Madani', false);
+    $response->assertSee(route('galeri.index'));
+    $response->assertSee('Lihat Semua Dokumentasi');
+});
+
+test('mars jsit page renders authentic mars jsit lyrics and video', function () {
+    $response = $this->get(route('download.hymne-mars'));
+
+    $response->assertStatus(200);
+    $response->assertSee('MARS JSIT INDONESIA');
+    $response->assertSee('LIRIK MARS RESMI JSIT INDONESIA');
+    $response->assertSee('Dengan berbekal semangat kami melangkah', false);
+    $response->assertSee('Kami Jaringan Sekolah Islam Terpadu', false);
+    $response->assertSee('10 Karakter Siswa JSIT (Muwashofat)', false);
+});
+
+test('ppdb page renders redesigned layout with youtube video and bsi account', function () {
+    $response = $this->get(route('ppdb.index'));
+
+    $response->assertStatus(200);
+    $response->assertSee('IrPVG8CYjRc');
+    $response->assertSee('7011304251');
+    $response->assertSee('YL. Fatmawati');
+    $response->assertSee(route('ppdb.form'));
+});
+
+test('visi dan misi page dynamically reflects updated content from database', function () {
+    $page = Post::where('slug', 'visi-dan-misi')->first();
+    if (! $page) {
+        $page = Post::create([
+            'title' => 'Visi dan Misi SMPS IT Madani',
+            'slug' => 'visi-dan-misi',
+            'content' => '<p>Konten Visi Misi Awal</p>',
+            'status' => 'publish',
+            'type' => 'page',
+        ]);
+    }
+
+    $page->update([
+        'title' => 'Visi dan Misi Unggulan 2026',
+        'content' => '<p>Mencetak 1000 Hafidz Mutqin dan Ilmuwan Muslim Dunia.</p>',
+    ]);
+
+    $response = $this->get('/visi-dan-misi');
+    $response->assertStatus(200);
+    $response->assertSee('Visi dan Misi Unggulan 2026');
+    $response->assertSee('Mencetak 1000 Hafidz Mutqin dan Ilmuwan Muslim Dunia.', false);
+});
+
+test('tentang kami page dynamically reflects updated content from database', function () {
+    $page = Post::where('slug', 'tentang-kami')->first();
+    if (! $page) {
+        $page = Post::create([
+            'title' => 'Profil SMPS IT Madani',
+            'slug' => 'tentang-kami',
+            'content' => '<p>Profil Sekolah Awal</p>',
+            'status' => 'publish',
+            'type' => 'page',
+        ]);
+    }
+
+    $page->update([
+        'title' => 'Profil Lengkap SMPS IT Madani 2026',
+        'content' => '<p>Sekolah pelopor adab dan digitalisasi di Kayuagung.</p>',
+    ]);
+
+    $response = $this->get('/tentang-kami');
+    $response->assertStatus(200);
+    $response->assertSee('Profil Lengkap SMPS IT Madani 2026');
+    $response->assertSee('Sekolah pelopor adab dan digitalisasi di Kayuagung.', false);
+});
+
+test('privacy policy page renders dynamic content from database', function () {
+    $page = Post::where('slug', 'privacy-policy')->first();
+    if (! $page) {
+        $page = Post::create([
+            'title' => 'Kebijakan Privasi SMPS IT Madani Kayuagung',
+            'slug' => 'privacy-policy',
+            'content' => '<p>Komitmen kami menjaga kerahasiaan data siswa dan wali murid.</p>',
+            'status' => 'publish',
+            'type' => 'page',
+        ]);
+    }
+
+    $response = $this->get('/privacy-policy');
+    $response->assertStatus(200);
+    $response->assertSee('Kebijakan Privasi SMPS IT Madani Kayuagung');
+});
+
+test('prestasi created in admin displays on homepage and dedicated prestasi page', function () {
+    $category = Category::firstOrCreate(['slug' => 'prestasi-siswa'], ['name' => 'Prestasi Siswa']);
+
+    $prestasi = Post::create([
+        'title' => 'Arumi Juara 2 Tahfidz Kayuagung, Kab. OKI',
+        'slug' => 'arumi-juara-2-tahfidz-kota-kayuagung',
+        'content' => '<p>Selamat atas keberhasilan ananda Arumi meraih juara 2.</p>',
+        'excerpt' => 'Arumi juara 2 lomba tahfidz tingkat kota.',
+        'status' => 'publish',
+        'type' => 'prestasi',
+        'published_at' => now(),
+    ]);
+    $prestasi->categories()->attach($category->id);
+
+    // 1. Check Homepage
+    $homeResponse = $this->get('/');
+    $homeResponse->assertStatus(200);
+    $homeResponse->assertSee('Arumi Juara 2 Tahfidz Kayuagung, Kab. OKI');
+    $homeResponse->assertSee(route('prestasi.show', 'arumi-juara-2-tahfidz-kota-kayuagung'));
+    $homeResponse->assertSee(route('prestasi.index'));
+
+    // 2. Check /prestasi index page
+    $prestasiIndex = $this->get('/prestasi');
+    $prestasiIndex->assertStatus(200);
+    $prestasiIndex->assertSee('Arumi Juara 2 Tahfidz Kayuagung, Kab. OKI');
+    $prestasiIndex->assertSee('Prestasi Siswa');
+
+    // 3. Check Navbar has Prestasi Siswa
+    $homeResponse->assertSee('Prestasi Siswa');
+});
+
+test('prestasi detail page renders successfully and article route redirects to it', function () {
+    $prestasi = Post::create([
+        'title' => 'Azzam Juara 3 Tahfidz Festival 2026',
+        'slug' => 'azzam-juara-3-tahfidz-festival-2026',
+        'content' => '<p>Prestasi membanggakan Muhammad Azzam.</p>',
+        'excerpt' => 'Azzam juara 3 tahfidz.',
+        'status' => 'publish',
+        'type' => 'prestasi',
+        'published_at' => now(),
+    ]);
+
+    // Detail route
+    $detailResponse = $this->get('/prestasi/azzam-juara-3-tahfidz-festival-2026');
+    $detailResponse->assertStatus(200);
+    $detailResponse->assertSee('Azzam Juara 3 Tahfidz Festival 2026');
+    $detailResponse->assertSee('Prestasi membanggakan Muhammad Azzam.', false);
+
+    // Accessing via /artikel/{slug} should redirect 301 to /prestasi/{slug}
+    $artikelRedirect = $this->get('/artikel/azzam-juara-3-tahfidz-festival-2026');
+    $artikelRedirect->assertRedirect('/prestasi/azzam-juara-3-tahfidz-festival-2026');
+});

@@ -1,0 +1,281 @@
+<?php
+
+use App\Models\Agenda;
+use App\Models\Pengumuman;
+use App\Models\Post;
+use App\Models\PpdbTrack;
+use App\Models\Setting;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
+
+uses(RefreshDatabase::class);
+
+test('admin can create, update, and delete dynamic ppdb tracks', function () {
+    $admin = User::create([
+        'name' => 'Admin PPDB Track',
+        'email' => 'admin_track@madani.sch.id',
+        'password' => Hash::make('Password123!'),
+        'role' => 'admin',
+    ]);
+
+    // 1. Create a new track
+    $createResponse = $this->actingAs($admin)->post(route('admin.ppdb.tracks.store'), [
+        'name' => 'Jalur First Brive',
+        'percentage' => '10%',
+        'quota' => '10 Siswa',
+        'cashback_info' => 'Diskon 10% Formulir',
+        'description' => 'Jalur pendaftaran khusus Early Bird.',
+        'is_active' => '1',
+    ]);
+
+    $createResponse->assertRedirect(route('admin.ppdb.content', ['tab' => 'jalur']));
+    $createResponse->assertSessionHas('success');
+
+    $track = PpdbTrack::where('name', 'Jalur First Brive')->first();
+    expect($track)->not->toBeNull();
+    expect($track->percentage)->toBe('10%');
+    expect($track->is_active)->toBeTrue();
+
+    // 2. Update track
+    $updateResponse = $this->actingAs($admin)->put(route('admin.ppdb.tracks.update', $track), [
+        'name' => 'Jalur First Brive Updated',
+        'percentage' => '12%',
+        'quota' => '15 Siswa',
+        'cashback_info' => 'Diskon 12% Formulir',
+        'description' => 'Jalur khusus diperbarui.',
+        'is_active' => '1',
+    ]);
+
+    $updateResponse->assertRedirect(route('admin.ppdb.content', ['tab' => 'jalur']));
+    $track->refresh();
+    expect($track->name)->toBe('Jalur First Brive Updated');
+    expect($track->percentage)->toBe('12%');
+
+    // 3. Frontend PPDB index displays the track
+    $frontendResponse = $this->get(route('ppdb.index'));
+    $frontendResponse->assertStatus(200);
+    $frontendResponse->assertSee('Jalur First Brive Updated');
+    $frontendResponse->assertSee('12%');
+
+    // 4. Delete track
+    $deleteResponse = $this->actingAs($admin)->delete(route('admin.ppdb.tracks.destroy', $track));
+    $deleteResponse->assertRedirect(route('admin.ppdb.content', ['tab' => 'jalur']));
+    expect(PpdbTrack::find($track->id))->toBeNull();
+});
+
+test('admin can update agenda and pengumuman via PUT request', function () {
+    $admin = User::create([
+        'name' => 'Admin Agenda',
+        'email' => 'admin_agenda@madani.sch.id',
+        'password' => Hash::make('Password123!'),
+        'role' => 'admin',
+    ]);
+
+    // Create Agenda
+    $agenda = Agenda::create([
+        'title' => 'Agenda Original',
+        'slug' => 'agenda-original',
+        'location' => 'Kampus 1',
+        'event_date' => now()->addDays(7),
+        'status' => 'publish',
+    ]);
+
+    // Update Agenda
+    $updateAgendaResponse = $this->actingAs($admin)->put(route('admin.agenda.update', $agenda), [
+        'title' => 'Agenda Updated',
+        'location' => 'Aula Utama Madani',
+        'event_date' => now()->addDays(10)->format('Y-m-d\TH:i'),
+        'status' => 'publish',
+        'content' => 'Deskripsi agenda diperbarui.',
+    ]);
+
+    $updateAgendaResponse->assertRedirect(route('admin.agenda.index'));
+    $agenda->refresh();
+    expect($agenda->title)->toBe('Agenda Updated');
+    expect($agenda->location)->toBe('Aula Utama Madani');
+
+    // Create Pengumuman
+    $pengumuman = Pengumuman::create([
+        'title' => 'Pengumuman Original',
+        'slug' => 'pengumuman-original',
+        'content' => 'Isi pengumuman original.',
+        'status' => 'publish',
+    ]);
+
+    // Update Pengumuman
+    $updatePengumumanResponse = $this->actingAs($admin)->put(route('admin.pengumuman.update', $pengumuman), [
+        'title' => 'Pengumuman Updated',
+        'status' => 'publish',
+        'content' => 'Isi pengumuman diperbarui.',
+    ]);
+
+    $updatePengumumanResponse->assertRedirect(route('admin.agenda.index'));
+    $pengumuman->refresh();
+    expect($pengumuman->title)->toBe('Pengumuman Updated');
+    expect($pengumuman->content)->toBe('Isi pengumuman diperbarui.');
+});
+
+test('spmb banner is fully customizable and visible on homepage with custom text colors', function () {
+    Setting::set('spmb_banner_title', 'SPMB Tahun Ini Dibuka Lebar', 'spmb');
+    Setting::set('spmb_banner_card1_title', 'KUOTA SANGAT TERBATAS', 'spmb');
+    Setting::set('spmb_banner_card1_desc', 'Hanya 15 Siswa', 'spmb');
+    Setting::set('spmb_banner_card1_color', '#10b981', 'spmb');
+    Setting::set('spmb_banner_card2_title', 'CASH BACK 2 JUTA', 'spmb');
+    Setting::set('spmb_banner_card2_desc', 'Khusus Pendaftar Hari Ini', 'spmb');
+    Setting::set('spmb_banner_card2_color', '#ef4444', 'spmb');
+
+    $homeResponse = $this->get(route('home'));
+    $homeResponse->assertStatus(200);
+    $homeResponse->assertSee('SPMB Tahun Ini Dibuka Lebar');
+    $homeResponse->assertSee('KUOTA SANGAT TERBATAS');
+    $homeResponse->assertSee('Hanya 15 Siswa');
+    $homeResponse->assertSee('#10b981');
+    $homeResponse->assertSee('CASH BACK 2 JUTA');
+    $homeResponse->assertSee('Khusus Pendaftar Hari Ini');
+    $homeResponse->assertSee('#ef4444');
+});
+
+test('redesigned ppdb page renders cleanly with bsi account and parent-friendly layout', function () {
+    $response = $this->get(route('ppdb.index'));
+    $response->assertStatus(200);
+    $response->assertSee('SPMB SMPS IT MADANI');
+    $response->assertSee('Info Rekening');
+    $response->assertDontSee('Info Biaya & Rekening BSI');
+    $response->assertSee('7011304251');
+    $response->assertSee('YL. Fatmawati');
+    $response->assertSee('padding-top: 56.25%', false);
+    $response->assertSee('Alur Pendaftaran');
+    $response->assertSee('Syarat Pendaftaran');
+    $response->assertSee('Program Boarding');
+    $response->assertSee('Program Full Day School');
+});
+
+test('ppdb form automatically pre-selects chosen track from ppdb info page', function () {
+    $response = $this->get(route('ppdb.form', ['jalur' => 'Jalur Tahfidz']));
+    $response->assertStatus(200);
+    $response->assertSee('Jalur Pilihan: Jalur Tahfidz');
+    $response->assertSee('Jalur pendaftaran ini telah otomatis terpilih');
+    // Check that option matching Tahfidz has selected attribute
+    $response->assertSee('selected', false);
+});
+
+test('ekstrakurikuler is visible in navbar, homepage, index and show page', function () {
+    $user = User::create([
+        'name' => 'Admin User',
+        'email' => 'admin_test_ekskul@madani.sch.id',
+        'password' => Hash::make('Password123!'),
+        'role' => 'admin',
+    ]);
+
+    $ekskul = Post::create([
+        'title' => 'Pramuka SIT Terpadu',
+        'slug' => 'pramuka-sit-terpadu',
+        'type' => 'ekskul',
+        'content' => 'Kegiatan kepanduan berkarakter Islam.',
+        'status' => 'publish',
+        'author_id' => $user->id,
+    ]);
+
+    // 1. Visible in Navbar & Homepage
+    $homeResponse = $this->get(route('home'));
+    $homeResponse->assertStatus(200);
+    $homeResponse->assertSee('Ekstrakurikuler');
+    $homeResponse->assertSee(route('ekskul.index'));
+    $homeResponse->assertSee('Pramuka SIT Terpadu');
+
+    // 2. Index page
+    $indexResponse = $this->get(route('ekskul.index'));
+    $indexResponse->assertStatus(200);
+    $indexResponse->assertSee('Pramuka SIT Terpadu');
+
+    // 3. Show page
+    $showResponse = $this->get(route('ekskul.show', $ekskul->slug));
+    $showResponse->assertStatus(200);
+    $showResponse->assertSee('Pramuka SIT Terpadu');
+    $showResponse->assertSee('Kegiatan kepanduan berkarakter Islam.');
+});
+
+test('admin can upload photo and file when creating and updating agenda and pengumuman', function () {
+    $admin = User::create([
+        'name' => 'Admin Media Upload',
+        'email' => 'admin_media_upload@madani.sch.id',
+        'password' => Hash::make('Password123!'),
+        'role' => 'admin',
+    ]);
+
+    $dummyImage = UploadedFile::fake()->image('poster.jpg', 600, 400);
+    $dummyFile = UploadedFile::fake()->create('edaran.pdf', 100, 'application/pdf');
+
+    // 1. Create Agenda with photo and file
+    $response = $this->actingAs($admin)->post(route('admin.agenda.store'), [
+        'title' => 'Munaqosah Tahfidz Akbar',
+        'event_date' => now()->addDays(5)->format('Y-m-d'),
+        'location' => 'Aula Utama',
+        'status' => 'upcoming',
+        'featured_image' => $dummyImage,
+        'file_attachment' => $dummyFile,
+    ]);
+    $response->assertSessionHas('success');
+
+    $agenda = Agenda::where('title', 'Munaqosah Tahfidz Akbar')->first();
+    expect($agenda)->not->toBeNull();
+    expect($agenda->featured_image)->not->toBeNull();
+    expect($agenda->file_attachment)->not->toBeNull();
+
+    // 2. Update Agenda with replacement file
+    $newDummyFile = UploadedFile::fake()->create('jadwal_revisi.pdf', 120, 'application/pdf');
+    $updateResponse = $this->actingAs($admin)->put(route('admin.agenda.update', $agenda), [
+        'title' => 'Munaqosah Tahfidz Akbar Revisi',
+        'event_date' => now()->addDays(6)->format('Y-m-d'),
+        'location' => 'Masjid Kampus',
+        'status' => 'upcoming',
+        'file_attachment' => $newDummyFile,
+    ]);
+    $updateResponse->assertRedirect(route('admin.agenda.index'));
+    $agenda->refresh();
+    expect($agenda->title)->toBe('Munaqosah Tahfidz Akbar Revisi');
+    expect($agenda->location)->toBe('Masjid Kampus');
+
+    // 3. Create Pengumuman with photo and file
+    $dummyImage2 = UploadedFile::fake()->image('banner_ppdb.png', 800, 600);
+    $dummyFile2 = UploadedFile::fake()->create('panduan_ppdb.pdf', 150, 'application/pdf');
+
+    $pResponse = $this->actingAs($admin)->post(route('admin.pengumuman.store'), [
+        'title' => 'Pengumuman Kelulusan SPMB',
+        'content' => 'Rincian kelulusan siswa baru gelombang exclusive.',
+        'status' => 'publish',
+        'featured_image' => $dummyImage2,
+        'file_attachment' => $dummyFile2,
+    ]);
+    $pResponse->assertRedirect(route('admin.agenda.index'));
+
+    $pengumuman = Pengumuman::where('title', 'Pengumuman Kelulusan SPMB')->first();
+    expect($pengumuman)->not->toBeNull();
+    expect($pengumuman->featured_image)->not->toBeNull();
+    expect($pengumuman->file_attachment)->not->toBeNull();
+
+    // 4. Update Pengumuman
+    $newImage = UploadedFile::fake()->image('banner_baru.jpg', 800, 600);
+    $pUpdate = $this->actingAs($admin)->put(route('admin.pengumuman.update', $pengumuman), [
+        'title' => 'Pengumuman Kelulusan SPMB Final',
+        'content' => 'Pengumuman kelulusan final.',
+        'status' => 'publish',
+        'featured_image' => $newImage,
+    ]);
+    $pUpdate->assertRedirect(route('admin.agenda.index'));
+    $pengumuman->refresh();
+    expect($pengumuman->title)->toBe('Pengumuman Kelulusan SPMB Final');
+
+    // 5. Verify that agenda with status 'upcoming' appears on frontend /agenda and homepage
+    $this->get(route('agenda.index'))->assertOk()->assertSee('Munaqosah Tahfidz Akbar Revisi');
+    $this->get(route('home'))->assertOk()->assertSee('Munaqosah Tahfidz Akbar Revisi');
+
+    // Clean up test generated files
+    foreach ([$agenda->featured_image, $agenda->file_attachment, $pengumuman->featured_image, $pengumuman->file_attachment] as $f) {
+        if ($f && file_exists(public_path($f))) {
+            @unlink(public_path($f));
+        }
+    }
+});

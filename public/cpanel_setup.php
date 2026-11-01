@@ -1,0 +1,491 @@
+<?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+use Illuminate\Contracts\Console\Kernel;
+
+/**
+ * cPanel Setup, Maintenance & Diagnostic Helper for Laravel
+ * SMPS IT Madani Kayuagung
+ *
+ * Akses: cpanel_setup.php?token=SitMadani2026Setup&action=status
+ */
+
+// 1. Auto-detect Laravel repository root directory
+$possibleRoots = [
+    __DIR__.'/..',
+    dirname(__DIR__).'/repositories/sitmadani',
+    dirname(__DIR__).'/laravel_sitmadani',
+    dirname(__DIR__).'/sitmadani',
+    ($_SERVER['HOME'] ?? '').'/repositories/sitmadani',
+    ($_SERVER['HOME'] ?? '').'/laravel_sitmadani',
+    '/home/berandad/repositories/sitmadani',
+    '/home/berandad/laravel_sitmadani',
+    '/home/berandad/sitmadani',
+];
+
+$laravelRoot = null;
+foreach ($possibleRoots as $candidate) {
+    if ($candidate && file_exists($candidate.'/bootstrap/app.php')) {
+        $laravelRoot = realpath($candidate);
+        break;
+    }
+}
+if (! $laravelRoot) {
+    $laravelRoot = realpath(__DIR__.'/..');
+}
+
+// 2. Secret Token Authentication
+$secretToken = 'SitMadani2026Setup';
+
+// Parse .env directly if it exists to get custom token if defined
+$envFile = $laravelRoot.'/.env';
+$envVars = [];
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) {
+            continue;
+        }
+        if (str_contains($line, '=')) {
+            [$k, $v] = explode('=', $line, 2);
+            $envVars[trim($k)] = trim($v, " \t\n\r\0\x0B\"'");
+        }
+    }
+    if (! empty($envVars['CPANEL_SETUP_TOKEN'])) {
+        $secretToken = $envVars['CPANEL_SETUP_TOKEN'];
+    }
+}
+
+if (! isset($_GET['token']) || empty($_GET['token']) || ! hash_equals($secretToken, (string) $_GET['token'])) {
+    http_response_code(403);
+    echo '<!DOCTYPE html><html><body style="background:#0f172a;color:#ef4444;font-family:sans-serif;text-align:center;padding:50px;">';
+    echo '<h2>403 Forbidden: Token Akses Tidak Valid!</h2>';
+    echo '<p style="color:#94a3b8;">Gunakan URL: <code>cpanel_setup.php?token=SitMadani2026Setup&action=status</code></p>';
+    echo '</body></html>';
+    exit;
+}
+
+$action = $_GET['action'] ?? 'status';
+$results = [];
+$hasVendor = file_exists($laravelRoot.'/vendor/autoload.php');
+$hasEnv = file_exists($envFile);
+
+// Helper function to recursively create directories and chmod
+if (! function_exists('ensureDirWritable')) {
+    function ensureDirWritable($dir)
+    {
+        if (! is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+        @chmod($dir, 0775);
+    }
+}
+
+// Global Artisan Command Runner
+if (! function_exists('runArtisanCmd')) {
+    function runArtisanCmd($kernel, $command, $params = [])
+    {
+        ob_start();
+        try {
+            $kernel->call($command, $params);
+            $output = $kernel->output();
+        } catch (Throwable $e) {
+            $output = 'Error: '.$e->getMessage();
+        }
+        ob_end_clean();
+
+        return $output;
+    }
+}
+
+// Initialize Direct PDO Connection if DB credentials available
+$pdo = null;
+if ($hasEnv && ! empty($envVars['DB_DATABASE'])) {
+    $dbHost = $envVars['DB_HOST'] ?? '127.0.0.1';
+    $dbPort = $envVars['DB_PORT'] ?? '3306';
+    $dbName = $envVars['DB_DATABASE'];
+    $dbUser = $envVars['DB_USERNAME'] ?? 'root';
+    $dbPass = $envVars['DB_PASSWORD'] ?? '';
+    try {
+        $pdo = new PDO("mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset=utf8mb4", $dbUser, $dbPass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_TIMEOUT => 5,
+        ]);
+    } catch (Throwable $e) {
+        $pdo = null;
+    }
+}
+
+// 3. Actions Handling
+switch ($action) {
+    case 'create_env':
+        $exampleFile = $laravelRoot.'/.env.cpanel.example';
+        if (! file_exists($exampleFile)) {
+            $exampleFile = $laravelRoot.'/.env.production';
+        }
+        if (! file_exists($envFile)) {
+            if (file_exists($exampleFile)) {
+                if (@copy($exampleFile, $envFile)) {
+                    $results['Buat .env'] = 'SUKSES: File .env berhasil dibuat dari '.basename($exampleFile);
+                } else {
+                    $results['Buat .env'] = 'GAGAL: Gagal menyalin file. Cek izin folder '.$laravelRoot;
+                }
+            } else {
+                $results['Buat .env'] = 'GAGAL: File template .env.cpanel.example tidak ditemukan di '.$laravelRoot;
+            }
+        } else {
+            $results['Buat .env'] = 'INFO: File .env sudah ada di '.$envFile;
+        }
+        break;
+
+    case 'fix_storage':
+        $storageDirs = [
+            $laravelRoot.'/storage/app/public',
+            $laravelRoot.'/storage/framework/cache/data',
+            $laravelRoot.'/storage/framework/sessions',
+            $laravelRoot.'/storage/framework/views',
+            $laravelRoot.'/storage/logs',
+            $laravelRoot.'/bootstrap/cache',
+        ];
+        $fixed = 0;
+        foreach ($storageDirs as $d) {
+            ensureDirWritable($d);
+            $fixed++;
+        }
+        $results['Perbaiki Storage'] = "SUKSES: {$fixed} direktori storage dan cache telah dipastikan ada dan diatur izin 0775.";
+        break;
+
+    case 'extract_vendor':
+        $zipCandidates = [
+            $laravelRoot.'/vendor.zip',
+            __DIR__.'/vendor.zip',
+            dirname(__DIR__).'/vendor.zip',
+        ];
+        $foundZip = null;
+        foreach ($zipCandidates as $zc) {
+            if (file_exists($zc)) {
+                $foundZip = $zc;
+                break;
+            }
+        }
+        if ($foundZip && class_exists('ZipArchive')) {
+            $zip = new ZipArchive;
+            if ($zip->open($foundZip) === true) {
+                $zip->extractTo($laravelRoot);
+                $zip->close();
+                $results['Ekstrak vendor.zip'] = "SUKSES: Berhasil mengekstrak {$foundZip} ke folder {$laravelRoot}!";
+                $hasVendor = file_exists($laravelRoot.'/vendor/autoload.php');
+            } else {
+                $results['Ekstrak vendor.zip'] = "GAGAL: Tidak dapat membuka file ZIP {$foundZip}";
+            }
+        } else {
+            $results['Ekstrak vendor.zip'] = "File vendor.zip tidak ditemukan di {$laravelRoot}. Silakan upload file vendor.zip via cPanel File Manager.";
+        }
+        break;
+
+    case 'git_pull':
+    case 'git_reset':
+        $commands = [
+            'cd '.escapeshellarg($laravelRoot),
+            'git config core.filemode false',
+            'git fetch origin main',
+            'git reset --hard origin/main',
+            'git clean -fd',
+            'git status',
+        ];
+        $cmd = implode(' && ', $commands).' 2>&1';
+        $output = [];
+        @exec($cmd, $output, $returnCode);
+        $results['Git Pull & Sync'] = empty($output) ? 'Perintah dieksekusi' : implode("\n", $output);
+
+        // Pastikan izin folder public internal di dalam repositori adalah 0755
+        @chmod($laravelRoot.'/public', 0755);
+
+        // Jalankan clear cache jika vendor tersedia
+        if ($hasVendor) {
+            try {
+                require_once $laravelRoot.'/vendor/autoload.php';
+                $app = require_once $laravelRoot.'/bootstrap/app.php';
+                $kernel = $app->make(Kernel::class);
+                $results['optimize:clear'] = runArtisanCmd($kernel, 'optimize:clear');
+            } catch (Throwable $e) {
+                $results['optimize:clear'] = 'Info: '.$e->getMessage();
+            }
+        }
+        break;
+
+    case 'deploy_sync':
+    case 'storage_link':
+    case 'optimize':
+    case 'clear_cache':
+    case 'migrate':
+        // 1. If action is migrate: run direct SQL migration first as foolproof guarantee
+        if ($action === 'migrate' && $pdo) {
+            try {
+                $pdo->exec("CREATE TABLE IF NOT EXISTS `ppdb_tracks` (
+                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(255) NOT NULL,
+                  `slug` varchar(255) NOT NULL,
+                  `percentage` varchar(30) NOT NULL DEFAULT '0%',
+                  `quota` varchar(100) DEFAULT NULL,
+                  `cashback_info` varchar(255) DEFAULT NULL,
+                  `description` text DEFAULT NULL,
+                  `order` int(11) NOT NULL DEFAULT 0,
+                  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+                  `created_at` timestamp NULL DEFAULT NULL,
+                  `updated_at` timestamp NULL DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `ppdb_tracks_slug_unique` (`slug`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+
+                // Ensure all expected columns exist if table was created previously with older schema
+                $requiredCols = [
+                    'percentage' => "varchar(30) NOT NULL DEFAULT '0%'",
+                    'quota' => 'varchar(100) DEFAULT NULL',
+                    'cashback_info' => 'varchar(255) DEFAULT NULL',
+                    'description' => 'text DEFAULT NULL',
+                    'order' => 'int(11) NOT NULL DEFAULT 0',
+                    'is_active' => 'tinyint(1) NOT NULL DEFAULT 1',
+                ];
+                foreach ($requiredCols as $col => $def) {
+                    $c = $pdo->query("SHOW COLUMNS FROM `ppdb_tracks` LIKE '{$col}'")->fetchAll();
+                    if (empty($c)) {
+                        $pdo->exec("ALTER TABLE `ppdb_tracks` ADD COLUMN `{$col}` {$def}");
+                    }
+                }
+
+                $count = (int) $pdo->query('SELECT count(*) FROM `ppdb_tracks`')->fetchColumn();
+                if ($count === 0) {
+                    $pdo->exec("INSERT IGNORE INTO `ppdb_tracks` (`id`, `name`, `slug`, `percentage`, `quota`, `cashback_info`, `description`, `order`, `is_active`, `created_at`, `updated_at`) VALUES
+                    (1, 'Jalur First Brive', 'jalur-first-brive', '10%', '10 Siswa', 'Diskon Formulir 50% & Souvenir Eksklusif', 'Jalur pendaftaran gelombang perdana dengan diskon dan kuota khusus untuk pendaftar awal yang menyelesaikan registrasi pada periode pembukaan pertama.', 1, 1, NOW(), NOW()),
+                    (2, 'Jalur Mutasi Kerja', 'jalur-mutasi-kerja', '5%', '5 Siswa', 'Keringanan Khusus Mutasi Tugas', 'Jalur bagi calon siswa pindahan atau anak dari orang tua/wali yang mengalami mutasi tugas kedinasan/pekerjaan ke wilayah Kayuagung dan sekitarnya.', 2, 1, NOW(), NOW()),
+                    (3, 'Jalur Tahfidz Al-Qur\'an', 'jalur-tahfidz-al-quran', '5%', '10 Siswa', 'Cashback Rp. 750.000 s/d Rp. 1.000.000', 'Jalur khusus penghafal Al-Qur\'an:\\n- Tahfidz 4-5 Juz: Cashback Rp 750.000,-\\n- Tahfidz >5 Juz: Cashback Rp 1.000.000,-\\nWajib mengikuti tes sima\'an tahfidz bersama dewan musyrif Al-Qur\'an Madani.', 3, 1, NOW(), NOW()),
+                    (4, 'Jalur Alumni SIT Madani', 'jalur-alumni-sit-madani', '25%', '50 Siswa', 'Potongan Uang Pangkal Rp. 1.000.000,-', 'Keringanan istimewa bagi lulusan SD IT Madani 1 dan SD IT Madani 2 Kayuagung yang melanjutkan jenjang pendidikan ke SMPS IT Madani Kayuagung.', 4, 1, NOW(), NOW()),
+                    (5, 'Jalur Prestasi', 'jalur-prestasi', '30%', '30 Siswa', 'Bebas Tes Akademik & Keringanan Biaya', 'Keringanan biaya khusus bagi siswa berprestasi Akademik (Peringkat 1-3 Paralel) dan Non-Akademik (Juara 1-3 OSN, O2SN, FLS2N, MTQ/MHQ) minimal tingkat Kota/Kabupaten.', 5, 1, NOW(), NOW()),
+                    (6, 'Jalur Reguler / Mandiri', 'jalur-reguler-mandiri', '25%', 'Kuota Reguler', 'Biaya Standar SPMB Berjenjang', 'Jalur seleksi tes mandiri masuk SMP IT Madani melalui tahapan Tes Potensi Akademik (TPA), Tes Kemampuan Membaca Al-Qur\'an (Tahsin & Tajwid), dan Wawancara Komitmen Orang Tua & Siswa.', 6, 1, NOW(), NOW());");
+                }
+
+                // Update default neutral avatar for anggota dewan
+                $hasDewan = $pdo->query("SHOW TABLES LIKE 'anggota_dewans'")->rowCount() > 0;
+                if ($hasDewan) {
+                    $pdo->exec("UPDATE `anggota_dewans` SET `photo` = '/uploads/dewan/avatar-default.svg' WHERE `photo` LIKE '%avatar-ustadz%' OR `photo` LIKE '%avatar-ustadzah%' OR `photo` IS NULL OR `photo` = ''");
+                }
+
+                $hasMigrationsTable = $pdo->query("SHOW TABLES LIKE 'migrations'")->rowCount() > 0;
+                if ($hasMigrationsTable) {
+                    $maxBatch = (int) $pdo->query('SELECT MAX(`batch`) FROM `migrations`')->fetchColumn();
+                    $nextBatch = max(1, $maxBatch + 1);
+
+                    $migrationsToMark = [
+                        '2026_09_20_000001_create_ppdb_tracks_table',
+                        '2026_09_20_050000_update_anggota_dewan_default_avatar',
+                    ];
+
+                    foreach ($migrationsToMark as $mig) {
+                        $exists = $pdo->query("SELECT count(*) FROM `migrations` WHERE `migration` = '{$mig}'")->fetchColumn() > 0;
+                        if (! $exists) {
+                            $stmt = $pdo->prepare('INSERT INTO `migrations` (`migration`, `batch`) VALUES (?, ?)');
+                            $stmt->execute([$mig, $nextBatch]);
+                        }
+                    }
+                }
+
+                $results['Direct SQL Migration'] = "SUKSES: Tabel 'ppdb_tracks' disinkronkan dan avatar anggota dewan diperbarui ke avatar netral!";
+            } catch (Throwable $e) {
+                $results['Direct SQL Migration'] = 'Info SQL: '.$e->getMessage();
+            }
+        }
+
+        if (! $hasVendor) {
+            $results['Error'] = "Perintah Artisan membutuhkan folder 'vendor/' yang berisi autoloader Laravel. Silakan jalankan 'composer install' di Terminal cPanel terlebih dahulu.";
+            break;
+        }
+
+        try {
+            require_once $laravelRoot.'/vendor/autoload.php';
+            $app = require_once $laravelRoot.'/bootstrap/app.php';
+            $kernel = $app->make(Kernel::class);
+
+            if ($action === 'storage_link') {
+                $results['storage:link'] = runArtisanCmd($kernel, 'storage:link');
+            } elseif ($action === 'optimize') {
+                $results['config:cache'] = runArtisanCmd($kernel, 'config:cache');
+                $results['route:cache'] = runArtisanCmd($kernel, 'route:cache');
+                $results['view:cache'] = runArtisanCmd($kernel, 'view:cache');
+            } elseif ($action === 'clear_cache') {
+                $results['optimize:clear'] = runArtisanCmd($kernel, 'optimize:clear');
+            } elseif ($action === 'migrate') {
+                $results['migrate'] = runArtisanCmd($kernel, 'migrate', ['--force' => true]);
+            } elseif ($action === 'deploy_sync') {
+                // Ensure storage directories exist
+                $storageDirs = [
+                    $laravelRoot.'/storage/framework/cache/data',
+                    $laravelRoot.'/storage/framework/sessions',
+                    $laravelRoot.'/storage/framework/views',
+                    $laravelRoot.'/storage/logs',
+                    $laravelRoot.'/bootstrap/cache',
+                ];
+                foreach ($storageDirs as $d) {
+                    ensureDirWritable($d);
+                }
+
+                $currentDir = __DIR__;
+                $sourcePublic = $laravelRoot.'/public';
+                $synced = 0;
+
+                $targetDirs = array_unique([
+                    $currentDir,
+                ]);
+
+                foreach ($targetDirs as $targetDir) {
+                    if (is_dir($targetDir) && is_dir($sourcePublic)) {
+                        $iterator = new RecursiveIteratorIterator(
+                            new RecursiveDirectoryIterator($sourcePublic, RecursiveDirectoryIterator::SKIP_DOTS),
+                            RecursiveIteratorIterator::SELF_FIRST
+                        );
+                        foreach ($iterator as $item) {
+                            $subPath = $iterator->getSubPathName();
+                            $target = $targetDir.'/'.$subPath;
+                            if ($item->isDir()) {
+                                if (! is_dir($target)) {
+                                    @mkdir($target, 0755, true);
+                                }
+                            } else {
+                                if (! file_exists($target) || filemtime($item->getRealPath()) > filemtime($target)) {
+                                    @copy($item->getRealPath(), $target);
+                                    $synced++;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $results['Sinkronisasi Public Assets'] = "SUKSES: Sinkronisasi {$synced} file aset dari {$sourcePublic} ke {$currentDir}";
+                $results['storage:link'] = runArtisanCmd($kernel, 'storage:link');
+                $results['optimize:clear'] = runArtisanCmd($kernel, 'optimize:clear');
+                $results['migrate'] = runArtisanCmd($kernel, 'migrate', ['--force' => true]);
+            }
+        } catch (Throwable $e) {
+            $results['Artisan Error'] = 'Error saat mengeksekusi perintah Artisan: '.$e->getMessage();
+        }
+        break;
+
+    case 'status':
+    default:
+        $results['Host Permintaan'] = $_SERVER['HTTP_HOST'] ?? 'Tidak diketahui';
+        $results['Dokumen Root ($_SERVER[DOCUMENT_ROOT])'] = $_SERVER['DOCUMENT_ROOT'] ?? 'Tidak diketahui';
+        $results['Folder Aktif File (__DIR__)'] = __DIR__;
+        $results['Lokasi Root Laravel'] = $laravelRoot;
+
+        // Current Git Commit Info
+        $gitCommit = @shell_exec('cd '.escapeshellarg($laravelRoot).' && git log -1 --pretty=format:"%h - %s (%ci)" 2>&1');
+        $results['Commit Git Aktif'] = ! empty($gitCommit) ? trim($gitCommit) : 'Perintah git tidak tersedia / direktori git tidak terdeteksi';
+
+        $results['Versi PHP'] = PHP_VERSION.(version_compare(PHP_VERSION, '8.2.0', '>=') ? ' (OK)' : ' (TERLALU RENDAH - Butuh PHP 8.2+)');
+        $results['Status vendor/'] = $hasVendor ? 'TERSEDIA (Autoloader Siap)' : 'BELUM ADA (Perlu composer install atau upload vendor.zip)';
+        $results['Status file .env'] = $hasEnv ? 'TERSEDIA ('.$envFile.')' : 'BELUM ADA (Gunakan tombol Buat .env Otomatis)';
+
+        // Test Database connection using PDO directly from .env variables
+        if ($pdo) {
+            $dbName = $envVars['DB_DATABASE'];
+            try {
+                $stmt = $pdo->query("SELECT count(*) FROM information_schema.tables WHERE table_schema = '{$dbName}'");
+                $tableCount = $stmt->fetchColumn();
+
+                $trackTableExists = $pdo->query("SHOW TABLES LIKE 'ppdb_tracks'")->rowCount() > 0;
+                $trackStatus = $trackTableExists ? '✅ SUDAH ADA (Siap digunakan)' : '⚠️ BELUM ADA (Klik tombol Migrasi Database di bawah!)';
+
+                $results['Koneksi Database MySQL'] = "SUKSES TERHUBUNG ke database '{$dbName}' ({$tableCount} tabel terdeteksi)\nStatus Tabel ppdb_tracks: {$trackStatus}";
+            } catch (Throwable $e) {
+                $results['Koneksi Database MySQL'] = 'GAGAL: '.$e->getMessage();
+            }
+        } else {
+            $results['Koneksi Database MySQL'] = 'Menunggu konfigurasi .env yang benar';
+        }
+
+        // Storage writable check
+        $storageDir = $laravelRoot.'/storage';
+        $results['Folder Storage Writable'] = is_writable($storageDir) ? 'AKTIF (Bisa ditulisi)' : 'PERIKSA IZIN (Gunakan tombol Perbaiki Storage)';
+        $results['Dukungan GD WebP'] = function_exists('imagewebp') ? 'AKTIF (Siap konversi gambar WebP otomatis)' : 'NON-AKTIF';
+        break;
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cPanel Helper &amp; Diagnostik - SMPS IT Madani Kayuagung</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; padding: 2rem 1rem; color: #e2e8f0; margin: 0; }
+        .card { max-width: 800px; margin: 0 auto; background: #1e1b4b; border-radius: 16px; border: 1px solid #4338ca; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); padding: 2rem; }
+        h1 { font-size: 1.4rem; color: #fbbf24; margin-top: 0; margin-bottom: 1.5rem; border-bottom: 2px solid #4f46e5; padding-bottom: 0.5rem; }
+        .section-title { font-size: 0.95rem; font-weight: 700; color: #cbd5e1; margin-top: 1.5rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .nav-links a { background: #4f46e5; color: white; padding: 8px 14px; text-decoration: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600; display: inline-block; transition: background 0.2s; }
+        .nav-links a:hover { background: #4338ca; }
+        .nav-links a.green { background: #16a34a; }
+        .nav-links a.green:hover { background: #15803d; }
+        .nav-links a.blue { background: #2563eb; }
+        .nav-links a.blue:hover { background: #1d4ed8; }
+        .nav-links a.gray { background: #475569; }
+        .nav-links a.gray:hover { background: #334155; }
+        .result-box { background: #020617; border: 1px solid #334155; color: #38bdf8; padding: 1.25rem; border-radius: 8px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; line-height: 1.6; }
+        .result-box strong { color: #fbbf24; }
+        .warning { margin-top: 1.5rem; font-size: 0.85rem; color: #fca5a5; background: #450a0a; border: 1px solid #991b1b; padding: 1rem; border-radius: 6px; }
+        .terminal-box { background: #020617; border: 1px solid #1e3a8a; padding: 1rem; border-radius: 8px; margin-top: 1rem; font-size: 0.85rem; color: #93c5fd; }
+        .terminal-cmd { background: #0f172a; padding: 0.5rem; border-radius: 4px; color: #a5f3fc; font-family: monospace; margin: 0.5rem 0; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🛠️ Helper &amp; Diagnostik cPanel - SMPS IT Madani Kayuagung</h1>
+        
+        <div class="section-title">1. Diagnostik &amp; Persiapan Awal</div>
+        <div class="nav-links">
+            <a href="?token=<?= $secretToken ?>&amp;action=status" class="blue">🔍 Cek Status Sistem</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=git_pull" class="green">⬇️ Tarik Update Git (Pull)</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=git_reset" style="background:#dc2626;">🔄 Bersihkan Git &amp; Reset</a>
+            <?php if (! $hasEnv) { ?>
+                <a href="?token=<?= $secretToken ?>&amp;action=create_env" class="green">📝 Buat File .env Otomatis</a>
+            <?php } ?>
+            <a href="?token=<?= $secretToken ?>&amp;action=fix_storage" class="gray">📁 Perbaiki Izin Storage (0775)</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=extract_vendor" class="gray">📦 Ekstrak vendor.zip</a>
+        </div>
+
+        <div class="section-title">2. Tindakan Eksekusi Laravel (Artisan)</div>
+        <div class="nav-links">
+            <a href="?token=<?= $secretToken ?>&amp;action=deploy_sync" class="green">⚡ Sinkron &amp; Deploy Lengkap</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=storage_link">🔗 Buat Storage Link</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=optimize">🚀 Optimasi Cache (Produksi)</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=clear_cache" class="gray">🧹 Bersihkan Cache</a>
+            <a href="?token=<?= $secretToken ?>&amp;action=migrate" style="background:#ea580c;color:white;font-weight:bold;">🗄️ Migrasi Database (Buat Tabel)</a>
+        </div>
+
+        <div class="result-box">
+            <?php foreach ($results as $k => $v) { ?>
+                <strong>[<?= htmlspecialchars($k) ?>]</strong><br>
+                <?= nl2br(htmlspecialchars(trim($v))) ?><br><br>
+            <?php } ?>
+        </div>
+
+        <?php if (! $hasVendor) { ?>
+            <div class="terminal-box">
+                <strong>💡 Solusi Folder vendor/ yang Belum Ada:</strong><br>
+                Folder <code>vendor/</code> tidak ikut di-commit ke Git. Untuk memasangnya di server cPanel:<br>
+                1. Buka menu <strong>Terminal</strong> di cPanel Anda.<br>
+                2. Jalankan perintah berikut:
+                <div class="terminal-cmd">cd <?= htmlspecialchars($laravelRoot) ?> &amp;&amp; composer install --no-dev --optimize-autoloader</div>
+                <em>Alternatif tanpa terminal:</em> Zip folder <code>vendor</code> di komputer lokal Anda, upload <code>vendor.zip</code> ke folder <code><?= htmlspecialchars($laravelRoot) ?></code> melalui cPanel File Manager, lalu klik tombol <strong>Ekstrak vendor.zip</strong> di atas.
+            </div>
+        <?php } ?>
+
+        <div class="warning">
+            ⚠️ <strong>Keamanan:</strong> Setelah website Anda berjalan lancar di cPanel, hapus file <code>public/cpanel_setup.php</code> demi keamanan sistem produksi.
+        </div>
+    </div>
+</body>
+</html>

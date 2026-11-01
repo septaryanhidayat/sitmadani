@@ -1,0 +1,63 @@
+# ==============================================================================
+# SMPS IT MADANI KAYUAGUNG - ROOT .HTACCESS (CPANEL PRODUCTION)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. CPANEL / LITESPEED PHP 8.4 HANDLER
+# ------------------------------------------------------------------------------
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php84” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php84 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+# Disable directory indexing
+Options -Indexes -MultiViews
+
+# ------------------------------------------------------------------------------
+# 2. SECURITY & REDIRECTION RULES
+# ------------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # A. Prevent direct access to hidden files (.env, .git, etc.)
+    RewriteRule ^\.(.*)$ - [F,L]
+    RewriteRule ^\.env.*$ - [F,L]
+
+    # B. Block direct access to internal Laravel directories
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|scratch)(\/.*)?$ - [F,L,NC]
+
+    # C. Block sensitive configuration files and source scripts in root
+    RewriteRule ^(artisan|composer\.(json|lock)|package\.(json|lock)|phpunit\.xml|vite\.config\.js|boost\.json|\.cpanel\.yml)$ - [F,L,NC]
+    RewriteRule \.(sql|sqlite|sqlite3|log|key|md|bak|swp|sh|yaml|yml)$ - [F,L,NC]
+
+    # D. Universal www to non-www redirection
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # E. Enforce HTTPS across all pages
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # F. Redirect all incoming web traffic into the Laravel public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 3. HTTP DEFENSE-IN-DEPTH SECURITY HEADERS
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always unset X-Powered-By
+
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|css|js|webp|png|jpg|jpeg|svg|ico)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>

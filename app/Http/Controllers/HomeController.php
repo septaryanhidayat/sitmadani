@@ -1,0 +1,309 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Agenda;
+use App\Models\AnggotaDewan;
+use App\Models\Download;
+use App\Models\Pengumuman;
+use App\Models\Post;
+use App\Models\Setting;
+use App\Models\Testimonial;
+use App\Models\Video;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        // 1. Hero slides data - SMPS IT Madani Kayuagung (Dynamic from Setting)
+        $rawHeroSlides = Setting::get('hero_slides');
+        $heroSlides = [];
+
+        if ($rawHeroSlides) {
+            $decoded = json_decode($rawHeroSlides, true);
+            if (is_array($decoded) && ! empty($decoded)) {
+                $heroSlides = $decoded;
+            }
+        }
+
+        if (empty($heroSlides)) {
+            $heroSlides = [
+                [
+                    'active' => true,
+                    'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
+                    'title' => 'Selamat Datang di Website Resmi',
+                    'subtitle' => 'SMPS IT Madani Kayuagung',
+                    'image' => '/uploads/campus-sit-madani.webp',
+                    'btn_text' => 'Sambutan Kepala Sekolah',
+                    'btn_link' => route('page.sambutan', [], false),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Info SPMB',
+                    'btn2_link' => route('ppdb.index', [], false),
+                    'btn2_target' => '_self',
+                ],
+                [
+                    'active' => true,
+                    'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
+                    'title' => 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia',
+                    'subtitle' => 'Sekolah Menengah Pertama Islam Terpadu berakreditasi di Kayuagung, Kab. OKI dengan Kurikulum Terpadu & Tahfidz Al-Qur\'an.',
+                    'image' => '/uploads/activities-sit-madani.webp',
+                    'btn_text' => 'Profil Singkat Sekolah',
+                    'btn_link' => route('page.tentang-kami', [], false),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Info SPMB',
+                    'btn2_link' => route('ppdb.index', [], false),
+                    'btn2_target' => '_self',
+                ],
+                [
+                    'active' => true,
+                    'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
+                    'title' => 'SPMB Gelombang Exclusive TP Baru',
+                    'subtitle' => 'Kuota Terbatas Hanya 24 Orang & Promo Cash Back 1 Juta Alumni SDIT Madani.',
+                    'image' => '/uploads/tahfidz-sit-madani.webp',
+                    'btn_text' => 'Daftar SPMB Online',
+                    'btn_link' => route('ppdb.index', [], false),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Info SPMB',
+                    'btn2_link' => route('ppdb.index', [], false),
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
+        // Filter only active slides
+        $heroSlides = array_values(array_filter($heroSlides, function ($slide) {
+            return ! isset($slide['active']) || $slide['active'] === true || $slide['active'] === '1' || $slide['active'] === 1;
+        }));
+
+        if (empty($heroSlides)) {
+            $heroSlides = [
+                [
+                    'badge' => 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B',
+                    'title' => 'Selamat Datang di Website Resmi',
+                    'subtitle' => 'SMPS IT Madani Kayuagung',
+                    'image' => '/uploads/campus-sit-madani.webp',
+                    'btn_text' => 'Sambutan Kepala Sekolah',
+                    'btn_link' => route('page.sambutan', [], false),
+                    'btn_target' => '_self',
+                    'btn2_active' => true,
+                    'btn2_text' => 'Info SPMB',
+                    'btn2_link' => route('ppdb.index', [], false),
+                    'btn2_target' => '_self',
+                ],
+            ];
+        }
+
+        // 2. Sambutan Kepala Sekolah
+        $sambutan = Post::where('type', 'page')->where('slug', 'sambutan-kepala-sekolah')->first();
+
+        // 3. Ambil semua post publik untuk fallback
+        $allPosts = Post::posts()
+            ->published()
+            ->with(['categories'])
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(50)
+            ->get();
+
+        $featuredPost = $allPosts->first();
+        $sidePosts = $allPosts->slice(1, 4);
+
+        // 4. Program Unggulan & Ekstrakurikuler (Section 5 - 8 posts)
+        $senayanPosts = Post::posts()
+            ->published()
+            ->with(['categories'])
+            ->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->whereIn('slug', ['kesiswaan-ekskul', 'tahfidz-keislaman', 'akademik-riset']))
+                    ->orWhereHas('tags', fn ($t) => $t->whereIn('slug', ['ekskul', 'pramuka', 'tahfidz', 'robotika']));
+            })
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(8)
+            ->get();
+
+        if ($senayanPosts->count() < 8) {
+            $senayanPosts = $senayanPosts->merge($allPosts)->unique('id')->take(8);
+        }
+
+        // 5. Prestasi Siswa SMPS IT (Section 3 - hanya yang diinput di dashboard admin sebagai prestasi)
+        $fraksiPosts = Post::where('type', 'prestasi')
+            ->published()
+            ->with(['categories'])
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(8)
+            ->get();
+
+        // 6. Kabar Akademik & Kurikulum (Section 4 Kolom 1 - 6 posts)
+        $nasionalPosts = Post::posts()
+            ->published()
+            ->with(['categories'])
+            ->whereHas('categories', fn ($c) => $c->whereIn('slug', ['akademik-riset', 'prestasi-siswa']))
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(6)
+            ->get();
+
+        if ($nasionalPosts->count() < 4) {
+            $nasionalPosts = $allPosts->sortByDesc('published_at')->take(6);
+        }
+
+        // 7. Kegiatan Kesiswaan & Karakter (Section 4 Kolom 2 - 6 posts)
+        $daerahPosts = Post::posts()
+            ->published()
+            ->with(['categories'])
+            ->whereHas('categories', fn ($c) => $c->whereIn('slug', ['kesiswaan-ekskul', 'tahfidz-keislaman', 'kabar-kampus']))
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->take(6)
+            ->get();
+
+        if ($daerahPosts->count() < 4) {
+            $daerahPosts = $allPosts->sortByDesc('published_at')->slice(2, 6);
+        }
+
+        // 8. Dewan Guru & Tenaga Kependidikan (Section 6-9 - 4 pendidik)
+        $dewan = AnggotaDewan::orderBy('order', 'asc')->take(4)->get();
+
+        // 9. Video Profil & Kegiatan Sekolah (Section 10 - 6 videos)
+        $videos = Video::latest()->take(6)->get();
+
+        // 10. Pengumuman & Agenda (Section 12 - 4 items each)
+        $announcements = Pengumuman::where('status', 'publish')->latest()->take(4)->get();
+        $agendas = Agenda::where('status', '!=', 'draft')->orderBy('event_date', 'desc')->take(4)->get();
+
+        // 11. Galeri Foto Kegiatan Siswa & Sekolah
+        $dbGallery = Post::whereIn('type', ['gallery', 'attachment'])
+            ->where('status', 'publish')
+            ->whereNotNull('featured_image')
+            ->where('featured_image', '!=', '')
+            ->latest('created_at')
+            ->take(16)
+            ->get()
+            ->map(fn ($p) => ['url' => $p->featured_image, 'title' => $p->title])
+            ->toArray();
+
+        $fallbackRow1 = [
+            ['url' => '/uploads/campus-sit-madani.webp', 'title' => 'Gedung Sekolah SMPS IT Madani Kayuagung'],
+            ['url' => '/uploads/activities-sit-madani.webp', 'title' => 'Aktivitas Belajar & Karakter Siswa Terpadu'],
+            ['url' => '/uploads/madani/fasilitas_1274_Ruang-Lab-Komputer1.webp', 'title' => 'Laboratorium Komputer & Digital Siswa'],
+            ['url' => '/uploads/flyer-spmb-sit-madani.webp', 'title' => 'Class Meeting & SPMB Exclusive SIT Madani'],
+            ['url' => '/uploads/madani/fasilitas_1278_HALL-SIT-Madani_.webp', 'title' => 'Aula Pertemuan & Munaqosah Qur\'an SIT'],
+            ['url' => '/uploads/tahfidz-sit-madani.webp', 'title' => 'Halaqah Tahfidz & Tartil Qur\'an Siswa'],
+        ];
+
+        $fallbackRow2 = [
+            ['url' => '/uploads/madani/fasilitas_1275_R.-Lab-IPA.webp', 'title' => 'Laboratorium IPA & Eksperimen Sains Terpadu'],
+            ['url' => '/uploads/madani/post_3467_IMG-20241020-WA0004-scaled.webp', 'title' => 'Ibadah Yaumiyah & Pembiasaan Akhlakul Karimah'],
+            ['url' => '/uploads/campus-sit-madani.webp', 'title' => 'Gerbang Utama Sekolah SMPS IT Madani'],
+            ['url' => '/uploads/madani/post_3472_IMG-20241020-WA0003-scaled.webp', 'title' => 'Muhadharah & Pembinaan Da\'i Muda Siswa'],
+            ['url' => '/uploads/activities-sit-madani.webp', 'title' => 'Sarana Olahraga & Lapangan Sekolah Madani'],
+            ['url' => '/uploads/madani/post_3478_IMG-20241020-WA0008-scaled.webp', 'title' => 'Ukhuwah Islamiyah & Kebersamaan Siswa'],
+            ['url' => '/uploads/madani/prestasi_3513_IMG-20240928-WA0038.webp', 'title' => 'Apresiasi & Penganugerahan Prestasi Siswa'],
+            ['url' => '/uploads/tahfidz-sit-madani.webp', 'title' => 'Wisuda Tahfidz Qur\'an Siswa Madani'],
+        ];
+
+        if (! empty($dbGallery)) {
+            $half = (int) ceil(count($dbGallery) / 2);
+            $galleryRow1 = array_slice($dbGallery, 0, $half);
+            $galleryRow2 = array_slice($dbGallery, $half);
+        } else {
+            $galleryRow1 = $fallbackRow1;
+            $galleryRow2 = $fallbackRow2;
+        }
+
+        $galleryPhotos = array_merge($galleryRow1, $galleryRow2);
+
+        // 12. E-Library & Modul Pembelajaran Siswa (Section 15)
+        $ebookDownloads = Download::where('category_type', 'E-Book')->orderBy('id', 'asc')->get();
+
+        if ($ebookDownloads->isNotEmpty()) {
+            $ebooks = $ebookDownloads->map(function ($dl) {
+                return [
+                    'id' => $dl->id,
+                    'title' => $dl->title,
+                    'cover' => $dl->cover_image ?: '/uploads/covers/cover-tahfidz-mutqin.webp',
+                    'pdf' => route('download.file', $dl->id, false),
+                    'direct_file' => $dl->file_path,
+                ];
+            })->toArray();
+        } else {
+            $ebooks = [];
+        }
+
+        // 13. Testimonials (Section 16)
+        $testimonials = Testimonial::where('status', 'publish')->take(4)->get();
+
+        // 14. Visitor counter hits
+        $visitorHits = view()->shared('visitorHits') ?? '0';
+
+        // 15. Popup Banner Settings
+        $popupSettings = [
+            'active' => Setting::get('popup_active', '1'),
+            'image' => Setting::get('popup_image', '/uploads/flyer-spmb-sit-madani.webp'),
+            'title' => Setting::get('popup_title', 'SPMB Gelombang Exclusive SMPS IT Madani'),
+            'subtitle' => Setting::get('popup_subtitle', 'Kuota Hanya 24 Orang - Cash Back Rp 1.000.000,-'),
+            'link' => Setting::get('popup_link', '/ppdb'),
+            'target' => Setting::get('popup_target', '_self'),
+            'button_text' => Setting::get('popup_button_text', 'Daftar SPMB Sekarang'),
+        ];
+
+        // 16. SPMB Banner & Promo Highlight Settings
+        $spmbBanner = [
+            'badge' => Setting::get('spmb_banner_badge', 'PENERIMAAN SISWA BARU GELOMBANG EXCLUSIVE'),
+            'title' => Setting::get('spmb_banner_title', 'SPMB Gelombang Exclusive & Class Meeting Semester Genap'),
+            'year' => Setting::get('spmb_banner_year', Setting::get('ppdb_year', '2027-2028')),
+            'description' => Setting::get('spmb_banner_description', 'Bergabunglah bersama keluarga besar SMPS IT Madani Kayuagung. Memadukan kurikulum terpadu nasional dengan pembiasaan adab Qur\'ani, target hafalan 2 juz mutqin, serta penguasaan bahasa asing & teknologi.'),
+            'card1_title' => Setting::get('spmb_banner_card1_title', 'KUOTA TERBATAS'),
+            'card1_desc' => Setting::get('spmb_banner_card1_desc', 'Hanya 24 Siswa'),
+            'card1_color' => Setting::get('spmb_banner_card1_color', '#fde047'),
+            'card2_title' => Setting::get('spmb_banner_card2_title', 'CASH BACK 1 JUTA'),
+            'card2_desc' => Setting::get('spmb_banner_card2_desc', 'Alumni SDIT Madani 1 & 2'),
+            'card2_color' => Setting::get('spmb_banner_card2_color', '#fde047'),
+            'card3_title' => Setting::get('spmb_banner_card3_title', 'CLASS MEETING'),
+            'card3_desc' => Setting::get('spmb_banner_card3_desc', 'Mulai Rabu, 17 Juni'),
+            'card3_color' => Setting::get('spmb_banner_card3_color', '#fde047'),
+            'flyer_image' => Setting::get('spmb_banner_flyer_image', '/uploads/flyer-spmb-sit-madani.webp'),
+
+            'flyer_label' => Setting::get('spmb_banner_flyer_label', 'Pengumuman Resmi Sekolah'),
+            'btn_text' => Setting::get('spmb_banner_btn_text', 'Daftar SPMB Online'),
+            'btn_url' => Setting::get('spmb_banner_btn_url', '/ppdb'),
+            'contact_text' => Setting::get('spmb_banner_contact_text', 'Narahubung: 0858-3817-3417'),
+            'contact_phone' => Setting::get('spmb_banner_contact_phone', '0858-3817-3417'),
+        ];
+
+        // 17. Ekstrakurikuler & Club Minat Bakat Siswa
+        $ekskulPosts = Post::where('type', 'ekskul')
+            ->where('status', 'publish')
+            ->orderBy('id', 'asc')
+            ->take(6)
+            ->get();
+
+        return view('frontend.home', compact(
+            'heroSlides',
+            'sambutan',
+            'featuredPost',
+            'sidePosts',
+            'fraksiPosts',
+            'nasionalPosts',
+            'daerahPosts',
+            'senayanPosts',
+            'ekskulPosts',
+            'dewan',
+            'videos',
+            'announcements',
+            'agendas',
+            'galleryPhotos',
+            'galleryRow1',
+            'galleryRow2',
+            'ebooks',
+            'testimonials',
+            'visitorHits',
+            'popupSettings',
+            'spmbBanner'
+        ));
+    }
+}

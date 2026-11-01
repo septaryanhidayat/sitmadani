@@ -1,0 +1,95 @@
+@extends('layouts.frontend')
+
+@section('title', ($page?->meta_title ?: ($page?->title ?: 'Download Modul Belajar & E-Book Siswa')) . ' - ' . ($siteSettings['site_name'] ?? 'SMPS IT Madani Kayuagung'))
+@section('meta_description', $page?->meta_description ?: ($page?->excerpt ?: 'Kumpulan modul kurikulum, e-book materi tahfidz, panduan praktikum sains, dan buku digital gratis untuk siswa SMPS IT Madani Kayuagung.'))
+
+@section('content')
+{{-- HERO HEADER --}}
+<div class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-blue-950 border-b border-indigo-500/20 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-xs text-indigo-200 mb-3 flex items-center space-x-2">
+            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <span>/</span>
+            <a href="{{ route('download.index') }}" class="hover:text-white transition">Download</a>
+            <span>/</span>
+            <span class="text-amber-300 font-semibold">{{ $page?->title ?? 'Modul & E-Book' }}</span>
+        </nav>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">{{ $page?->title ?? 'E-Book & Modul Pembelajaran Digital' }}</h1>
+        <p class="text-sm text-indigo-100 mt-2 font-light max-w-2xl">
+            {{ $page?->excerpt ?: 'Buku panduan siswa, modul tahfidz mutqin, buku saku adab siswa, dan materi suplemen sains SMPS IT Madani Kayuagung.' }}
+        </p>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
+    
+    {{-- HEADER KONTEN --}}
+    <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">SUMBER BELAJAR DIGITAL RESMI</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
+            {{ $page?->title ?? 'Modul Pembelajaran & Literasi Siswa' }}
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">{{ $page?->excerpt ?: 'Silakan unduh modul resmi pegangan siswa dan guru untuk memperluas wawasan keislaman, sains terpadu, dan pembinaan karakter.' }}</p>
+        <div class="w-16 h-1 bg-indigo-600 mx-auto rounded-full mt-3"></div>
+    </div>
+
+    @if(!empty($page?->content) && strlen(trim(strip_tags($page?->content ?? ''))) > 10)
+    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 reveal-fade-up">
+        <div class="prose-content text-gray-700 text-sm sm:text-base leading-relaxed space-y-4">
+            {!! $page?->content !!}
+        </div>
+    </div>
+    @endif
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @forelse($ebooks as $idx => $eb)
+            <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl border border-gray-100 transition transform hover:-translate-y-1.5 flex flex-col justify-between reveal-fade-up delay-{{ $idx % 3 }}">
+                <div class="p-6 sm:p-8 space-y-5">
+                    {{-- COVER IMAGE --}}
+                    <div class="aspect-[3/4] w-full max-h-80 rounded-2xl overflow-hidden shadow-md bg-slate-100 flex items-center justify-center relative group border border-gray-100">
+                        <img src="{{ $eb->cover_image ?: '/uploads/covers/cover-tahfidz-mutqin.webp' }}" 
+                             alt="{{ $eb->title }}" 
+                             class="h-full w-full object-cover object-center group-hover:scale-105 transition duration-500"
+                             onerror="this.src='/uploads/covers/cover-tahfidz-mutqin.webp'">
+                        <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
+                            {{ $eb->category_type ?? 'E-Book Resmi' }}
+                        </span>
+                        @if($eb->file_size)
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm text-white text-[10px] font-medium px-2.5 py-0.5 rounded-lg">
+                                <i class="fa-regular fa-file-pdf mr-1 text-red-400"></i>{{ $eb->file_size }}
+                            </span>
+                        @endif
+                    </div>
+
+                    {{-- JUDUL & DESKRIPSI --}}
+                    <div>
+                        <h3 class="text-base sm:text-lg font-extrabold text-gray-900 leading-snug">
+                            {{ $eb->title }}
+                        </h3>
+                        <p class="text-xs text-gray-600 mt-2.5 line-clamp-3 leading-relaxed font-light">
+                            {{ $eb->description ?: 'Buku panduan dan modul pembelajaran resmi siswa SMPS IT Madani Kayuagung berstandar kurikulum JSIT Indonesia.' }}
+                        </p>
+                    </div>
+                </div>
+
+                {{-- FOOTER INFO & BUTTON DOWNLOAD --}}
+                <div class="p-6 pt-0 border-t border-gray-100 mt-2 space-y-3">
+                    <div class="flex items-center justify-between text-[11px] text-gray-400 pt-3">
+                        <span><i class="fa-solid fa-school mr-1 text-indigo-600"></i>SMPS IT Madani</span>
+                        <span><i class="fa-solid fa-download mr-1 text-amber-500"></i>{{ number_format($eb->download_count ?? 150) }} unduhan</span>
+                    </div>
+                    <a href="{{ route('download.file', $eb->id) }}" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-xs font-bold shadow-md transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
+                        <span>Download Modul (PDF)</span>
+                    </a>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full py-12 text-center text-gray-500">
+                <p>Belum ada e-book yang tersedia saat ini.</p>
+            </div>
+        @endforelse
+    </div>
+
+</div>
+@endsection

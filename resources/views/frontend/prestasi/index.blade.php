@@ -1,0 +1,80 @@
+@extends('layouts.frontend')
+
+@section('title', 'Prestasi Siswa & Guru - SMPS IT Madani Kayuagung')
+@section('meta_description', 'Raihan prestasi membanggakan siswa dan guru SMPS IT Madani Kayuagung di tingkat Kota, Provinsi, Nasional, hingga Internasional.')
+
+@section('content')
+{{-- HERO HEADER --}}
+<div class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-blue-950 border-b border-indigo-500/20 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-xs text-indigo-200 mb-3 flex items-center space-x-2">
+            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <span>/</span>
+            <span class="text-amber-300 font-semibold">Prestasi Sekolah</span>
+        </nav>
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-bold text-xl shadow-md">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Prestasi Siswa</h1>
+                <p class="text-sm text-indigo-100 mt-1 font-light">
+                    Bukti nyata kesungguhan pembinaan akademik, sains, tahfidz Qur'an, dan minat bakat di SMPS IT Madani.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {{-- PRESTASI GRID --}}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        @forelse($prestasi as $idx => $item)
+            <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group reveal-fade-up">
+                <a href="{{ route('prestasi.show', $item->slug) }}" class="block relative h-64 sm:h-72 overflow-hidden bg-slate-900/5 flex items-center justify-center p-2 group-hover:bg-slate-900/10 transition">
+                    {{-- Ambient background so there are no empty gaps --}}
+                    <img src="{{ $item->featured_image_url }}" alt="" class="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none" aria-hidden="true">
+                    {{-- Full uncropped image --}}
+                    <img src="{{ $item->featured_image_url }}" alt="{{ $item->title }}" class="relative max-h-full max-w-full w-auto h-auto object-contain rounded-xl shadow-xs group-hover:scale-102 transition duration-300" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                    <span class="absolute top-3 left-3 z-10 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md flex items-center space-x-1.5">
+                        <i class="fa-solid fa-award text-xs"></i>
+                        <span>Juara &amp; Prestasi</span>
+                    </span>
+                </a>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="text-[11px] text-gray-400 mb-2 flex items-center space-x-1.5">
+                            <i class="fa-regular fa-calendar text-indigo-600"></i>
+                            <span>{{ $item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y') }}</span>
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-lg group-hover:text-indigo-600 transition line-clamp-2 leading-snug">
+                            <a href="{{ route('prestasi.show', $item->slug) }}">
+                                {{ $item->title }}
+                            </a>
+                        </h3>
+                        <p class="text-xs sm:text-sm text-gray-600 line-clamp-3 mt-2 font-light leading-relaxed">
+                            {{ $item->excerpt ?: Str::limit(strip_tags($item->content), 120) }}
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-gray-50 flex items-center justify-between">
+                        <span class="text-xs font-semibold text-indigo-600 flex items-center space-x-1 group-hover:translate-x-1 transition">
+                            <span>Baca Selengkapnya</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-gray-100">
+                <i class="fa-solid fa-trophy text-4xl text-gray-300 mb-3 block"></i>
+                <p class="text-gray-500 font-medium">Belum ada data prestasi yang ditampilkan.</p>
+            </div>
+        @endforelse
+    </div>
+
+    {{-- PAGINATION --}}
+    <div class="mt-10">
+        {{ $prestasi->links() }}
+    </div>
+</div>
+@endsection

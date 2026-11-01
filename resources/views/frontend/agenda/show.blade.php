@@ -1,0 +1,102 @@
+@extends('layouts.frontend')
+
+@section('title', $agenda->title . ' - Agenda SMPS IT Madani Kayuagung')
+
+@section('content')
+<div class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-blue-950 border-b border-indigo-500/20 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-xs text-indigo-200 mb-3 flex items-center space-x-2">
+            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <span>/</span>
+            <a href="{{ route('agenda.index') }}" class="hover:text-white transition">Agenda</a>
+            <span>/</span>
+            <span class="text-amber-300 font-semibold">{{ $agenda->title }}</span>
+        </nav>
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">{{ $agenda->title }}</h1>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div class="lg:col-span-2 bg-white p-6 sm:p-10 rounded-3xl shadow-sm border border-gray-100 space-y-6">
+            <div class="flex flex-wrap items-center gap-4 p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100 text-xs text-gray-700">
+                <div class="flex items-center">
+                    <i class="fa-regular fa-calendar-days text-indigo-600 mr-2 text-base"></i>
+                    <span class="font-bold">{{ $agenda->event_date ? $agenda->event_date->translatedFormat('l, d F Y') : '-' }}</span>
+                </div>
+                <span>&bull;</span>
+                <div class="flex items-center">
+                    <i class="fa-solid fa-location-dot text-orange-500 mr-2 text-base"></i>
+                    <span>{{ $agenda->location ?: 'Sekolah SMPS IT Madani Kayuagung' }}</span>
+                </div>
+                <span>&bull;</span>
+                @php
+                    $statusLabel = match($agenda->status) {
+                        'upcoming' => 'Akan Datang',
+                        'ongoing' => 'Sedang Berlangsung',
+                        'completed' => 'Selesai',
+                        default => 'Aktif',
+                    };
+                    $statusBadge = match($agenda->status) {
+                        'upcoming' => 'bg-indigo-100 text-indigo-700',
+                        'ongoing' => 'bg-amber-100 text-amber-800',
+                        'completed' => 'bg-slate-100 text-slate-600',
+                        default => 'bg-emerald-100 text-emerald-800',
+                    };
+                @endphp
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold {{ $statusBadge }}">
+                    {{ $statusLabel }}
+                </span>
+            </div>
+
+            @if($agenda->featured_image)
+                <div class="rounded-2xl overflow-hidden shadow-md">
+                    <img src="{{ $agenda->featured_image_url }}" alt="{{ $agenda->title }}" class="w-full h-auto" onerror="this.onerror=null; this.src='/uploads/activities-sit-madani.webp'">
+                </div>
+            @endif
+
+            <div class="prose-content text-gray-700 text-sm sm:text-base leading-relaxed">
+                {!! $agenda->content !!}
+            </div>
+
+            @if($agenda->file_attachment)
+                <div class="p-4 bg-indigo-50/60 rounded-2xl border border-indigo-200 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-file-arrow-down text-2xl text-indigo-600"></i>
+                        <div>
+                            <span class="font-bold text-xs text-gray-800 block">Lampiran Dokumen Agenda</span>
+                            <span class="text-[11px] text-gray-500">Unduh dokumen berkas / jadwal agenda ini</span>
+                        </div>
+                    </div>
+                    <a href="{{ $agenda->file_attachment }}" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition">
+                        Unduh File
+                    </a>
+                </div>
+            @endif
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-sm text-gray-900 mb-4 uppercase tracking-wider pb-2 border-b border-gray-100">
+                    Agenda Lainnya
+                </h3>
+                <div class="space-y-3 text-xs">
+                    @foreach($otherAgendas as $oA)
+                        <a href="{{ route('agenda.show', $oA->slug) }}" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-indigo-50/60 transition border border-gray-50 group">
+                            <div class="w-14 h-14 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
+                                <img src="{{ $oA->featured_image_url }}" alt="{{ $oA->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/activities-sit-madani.webp'">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[10px] text-orange-600 font-bold block mb-1">
+                                    {{ $oA->event_date ? $oA->event_date->format('d M Y') : '' }}
+                                </span>
+                                <h4 class="font-bold text-gray-800 line-clamp-2 leading-snug group-hover:text-indigo-600 transition">{{ $oA->title }}</h4>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

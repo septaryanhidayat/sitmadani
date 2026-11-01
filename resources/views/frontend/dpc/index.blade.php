@@ -1,0 +1,84 @@
+@extends('layouts.frontend')
+
+@section('title', 'Program Unggulan Sekolah - SMPS IT Madani Kayuagung')
+@section('meta_description', 'Program unggulan SMPS IT Madani Kayuagung: Tahfidz Qur\'an Mutqin, Sains & Robotika, Islamic Boarding, Bilingual Camp, dan Sukses Masuk PTN.')
+
+@section('content')
+{{-- HERO HEADER --}}
+<div class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-blue-950 border-b border-indigo-500/20 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-xs text-indigo-200 mb-3 flex items-center space-x-2">
+            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <span>/</span>
+            <span>Akademik</span>
+            <span>/</span>
+            <span class="text-amber-300 font-semibold">Program Unggulan</span>
+        </nav>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Program Unggulan</h1>
+        <p class="text-sm text-indigo-100 mt-2 font-light max-w-2xl">
+            Kurikulum terintegrasi yang dirancang khusus untuk mengoptimalkan potensi ruhiyah, intelektual, dan kepemimpinan siswa.
+        </p>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
+    
+    <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">Karakter &amp; Keahlian Abad 21</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
+            Program Khusus Siswa Madani
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1 font-light">Mengasah kecakapan siswa menjadi pribadi cerdas, mandiri, dan berjiwa pelopor.</p>
+        <div class="w-16 h-1 bg-indigo-600 mx-auto rounded-full mt-3"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @forelse($dpcs as $idx => $dpc)
+            <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-md hover:shadow-2xl transition transform hover:-translate-y-1.5 flex flex-col justify-between group reveal-fade-up delay-{{ $idx % 3 }}">
+                <div>
+                    {{-- FOTO DOKUMENTASI PROGRAM --}}
+                    <div class="h-48 sm:h-52 w-full overflow-hidden bg-slate-100 relative">
+                        <img src="{{ $dpc->thumbnail_url }}" alt="{{ $dpc->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/tahfidz-sit-madani.webp'">
+                        <span class="absolute top-3.5 left-3.5 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wider">
+                            {{ $dpc->address ?: 'Program Unggulan' }}
+                        </span>
+                    </div>
+
+                    <div class="p-6 sm:p-7 space-y-3">
+                        <h3 class="text-lg sm:text-xl font-extrabold text-gray-900 group-hover:text-indigo-600 transition leading-snug">
+                            {{ $dpc->name }}
+                        </h3>
+
+                        @if($dpc->head_name)
+                            <div class="text-xs text-[#da251c] font-semibold flex items-center">
+                                <i class="fa-solid fa-user-check text-[10px] mr-1.5"></i>
+                                <span>{{ $dpc->head_name }}</span>
+                            </div>
+                        @endif
+
+                        @if($dpc->description)
+                            <p class="text-xs text-gray-500 line-clamp-3 leading-relaxed font-light">
+                                {{ strip_tags($dpc->description) }}
+                            </p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 pb-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
+                    <span class="inline-flex items-center space-x-1.5 text-xs font-bold text-indigo-600">
+                        <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                        <span>Unggulan Terpadu</span>
+                    </span>
+                    <span class="text-[11px] text-gray-400 font-medium">SMPS IT Madani</span>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full text-center py-16 text-gray-400 bg-white rounded-3xl border border-gray-100">
+                <i class="fa-solid fa-graduation-cap text-4xl text-gray-300 mb-3 block"></i>
+                <span>Data program unggulan sedang diperbarui.</span>
+            </div>
+        @endforelse
+    </div>
+
+</div>
+@endsection

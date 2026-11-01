@@ -1,0 +1,280 @@
+{
+    "gurus": [
+        {
+            "name": "Ribang Imam Satria, S.Pi., Gr.",
+            "slug": "ribang-imam-satria-spi-gr",
+            "position": "Kepala Sekolah",
+            "fraction": "Pimpinan Sekolah",
+            "photo": "/uploads/dewan/kepala-sekolah.webp",
+            "profile_summary": "Kepala SMPS IT Madani Kayuagung. Berkomitmen mewujudkan generasi Qur'ani yang mandiri, inovatif, visioner, dan berakhlak mulia berbekal ilmu pengetahuan dan teknologi.",
+            "education": "S1 Pemanfaatan Sumberdaya Perikanan / Sains, Gr (Pendidikan Profesi Guru)",
+            "order": 1
+        },
+        {
+            "name": "Drs. H. Legianto, M.E.E.",
+            "slug": "drs-h-legianto-mee",
+            "position": "Ketua Yayasan Agung Madani",
+            "fraction": "Pengurus Yayasan",
+            "photo": "/uploads/dewan/ust-legianto.webp",
+            "profile_summary": "Ketua Yayasan Agung Madani Kayuagung. Mengayomi dan mengarahkan pengembangan mutu pendidikan terpadu dari jenjang TK, SD, hingga SMP SIT Madani.",
+            "education": "S1 Pendidikan, S2 Master of Electrical Engineering",
+            "order": 2
+        },
+        {
+            "name": "Andi Kumaini, M.Pd.",
+            "slug": "andi-kumaini-mpd",
+            "position": "Ketua Komite & Kepala SDS IT Madani",
+            "fraction": "Komite & Pimpinan Unit",
+            "photo": "/uploads/dewan/ust-andi.webp",
+            "profile_summary": "Ketua Komite SMPS IT Madani sekaligus pimpinan SDS IT Madani Kayuagung. Menjembatani sinergi antara orang tua, sekolah, dan masyarakat.",
+            "education": "S1 Pendidikan, S2 Manajemen Pendidikan",
+            "order": 3
+        },
+        {
+            "name": "Wahyudi, S.Sos.I.",
+            "slug": "wahyudi-ssosi",
+            "position": "Direktur Pendidikan Yayasan",
+            "fraction": "Direktorat Yayasan",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Direktur Pendidikan Yayasan Agung Madani yang mengoordinasikan kurikulum dan mutu akademik seluruh unit sekolah SIT Madani.",
+            "education": "S1 Sosial Islam / Komunikasi Penyiaran Islam",
+            "order": 4
+        },
+        {
+            "name": "Helen Lestari, S.Pd., Gr.",
+            "slug": "helen-lestari-spd-gr",
+            "position": "Waka Kurikulum & Guru IPS",
+            "fraction": "Kurikulum & Akademik",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wakil Kepala Sekolah Bidang Kurikulum dan pengampu mata pelajaran IPS serta PKn. Mengintegrasikan Kurikulum Merdeka dengan kurikulum JSIT.",
+            "education": "S1 Pendidikan IPS, Gr (Pendidikan Profesi Guru)",
+            "order": 5
+        },
+        {
+            "name": "Yushamdalah, S.Pd.",
+            "slug": "yushamdalah-spd",
+            "position": "Waka Kesiswaan & Guru PAI",
+            "fraction": "Kesiswaan & Pembinaan",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wakil Kepala Sekolah Bidang Kesiswaan serta guru Pendidikan Agama Islam dan TTQ. Membina kedisiplinan dan karakter islami siswa.",
+            "education": "S1 Pendidikan Agama Islam",
+            "order": 6
+        },
+        {
+            "name": "Rudini, S.Pd., Gr.",
+            "slug": "rudini-spd-gr",
+            "position": "Waka Sarana Prasarana & Guru B. Arab",
+            "fraction": "Sarpras & Bahasa",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wakil Kepala Sekolah Bidang Sarana Prasarana serta pengampu mata pelajaran Bahasa Arab dan PAI di SMPS IT Madani.",
+            "education": "S1 Pendidikan Bahasa Arab, Gr (Pendidikan Profesi Guru)",
+            "order": 7
+        },
+        {
+            "name": "Reza Silvia, A.Md.P.",
+            "slug": "reza-silvia-amdp",
+            "position": "Bendahara Sekolah",
+            "fraction": "Keuangan & Administrasi",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Pengelola tata kelola keuangan, administrasi BOSP, serta layanan keuangan santri/siswa SMPS IT Madani.",
+            "education": "Diploma III Administrasi / Keuangan",
+            "order": 8
+        },
+        {
+            "name": "Reny Moulisa Ananda, S.E.",
+            "slug": "reny-moulisa-ananda-se",
+            "position": "TU & Operator Dapodik",
+            "fraction": "Tata Usaha & Dapodik",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Koordinator Tata Usaha dan Operator Data Pokok Pendidikan (Dapodik) SMPS IT Madani Kayuagung.",
+            "education": "S1 Ekonomi",
+            "order": 9
+        },
+        {
+            "name": "Eri Septiani, S.Ag.",
+            "slug": "eri-septiani-sag",
+            "position": "Guru TTQ & Informatika",
+            "fraction": "Tahfidz & Teknologi",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Pengampu Tahsin dan Tahfidz Al-Qur'an serta guru Informatika/TIK untuk penguatan literasi digital siswa.",
+            "education": "S1 Agama Islam",
+            "order": 10
+        },
+        {
+            "name": "Weni Agustin, S.Pd., Gr.",
+            "slug": "weni-agustin-spd-gr",
+            "position": "Wali Kelas VII & Guru B. Inggris",
+            "fraction": "Wali Kelas & Bahasa",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wali Kelas VII serta guru Bahasa Inggris dan Informatika. Membina kemampuan komunikasi global siswa.",
+            "education": "S1 Pendidikan Bahasa Inggris, Gr (Pendidikan Profesi Guru)",
+            "order": 11
+        },
+        {
+            "name": "Nur Rahmah, S.Pd., Gr.",
+            "slug": "nur-rahmah-spd-gr",
+            "position": "Wali Kelas VIII & Guru IPA / BK",
+            "fraction": "Wali Kelas & Sains",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wali Kelas VIII serta pengampu mata pelajaran IPA Sains dan Bimbingan Konseling.",
+            "education": "S1 Pendidikan IPA, Gr (Pendidikan Profesi Guru)",
+            "order": 12
+        },
+        {
+            "name": "Ayu Sukarni, S.Pd., Gr.",
+            "slug": "ayu-sukarni-spd-gr",
+            "position": "Wali Kelas IX & Guru Matematika",
+            "fraction": "Wali Kelas & Numerasi",
+            "photo": "/uploads/dewan/avatar-default.svg",
+            "profile_summary": "Wali Kelas IX serta pengampu mata pelajaran Matematika. Mengasah nalar berpikir kritis dan logika numerasi siswa.",
+            "education": "S1 Pendidikan Matematika, Gr (Pendidikan Profesi Guru)",
+            "order": 13
+        }
+    ],
+    "facilities": [
+        {
+            "name": "Asrama Tahfidz Putra & Putri",
+            "slug": "asrama-tahfidz-putra-dan-putri",
+            "description": "Fasilitas asrama tahfidz yang nyaman, bersih, berhawa sejuk dengan pengawasan dan bimbingan musyrif/musyrifah 24 jam untuk pembiasaan ibadah dan tahfidz mutqin.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-ruang-kelas.webp",
+            "icon": "fa-solid fa-hotel",
+            "order": 1
+        },
+        {
+            "name": "Ruang Kelas Modern & Multimedia",
+            "slug": "ruang-kelas-modern-dan-multimedia",
+            "description": "Ruang belajar representatif berfasilitas proyektor LCD dan audio visual, dirancang dengan konsep mindful and joyful learning.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-ruang-kelas.webp",
+            "icon": "fa-solid fa-chalkboard-user",
+            "order": 2
+        },
+        {
+            "name": "Laboratorium Komputer & Internet Cepat",
+            "slug": "laboratorium-komputer-dan-internet-cepat",
+            "description": "Laboratorium komputer dengan PC modern dan koneksi internet stabil untuk menunjang literasi digital, Asesmen Nasional, dan pembelajaran teknologi.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-lab-komputer.webp",
+            "icon": "fa-solid fa-desktop",
+            "order": 3
+        },
+        {
+            "name": "Perpustakaan & Pojok Literasi Qur'ani",
+            "slug": "perpustakaan-dan-pojok-literasi-qurani",
+            "description": "Koleksi buku referensi, kitab keislaman, sains, ensiklopedia, dan karya literasi anak untuk membudayakan gemar membaca.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-perpustakaan.webp",
+            "icon": "fa-solid fa-book-open-reader",
+            "order": 4
+        },
+        {
+            "name": "Lapangan Olahraga Multifungsi",
+            "slug": "lapangan-olahraga-multifungsi",
+            "description": "Sarana olahraga serbaguna untuk futsal, voli, basket, badminton, senam, upacara bendera, dan kepanduan Pramuka SIT.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-lapangan.webp",
+            "icon": "fa-solid fa-volleyball",
+            "order": 5
+        },
+        {
+            "name": "Taman Sekolah & Kebun Edukatif",
+            "slug": "taman-sekolah-dan-kebun-edukatif",
+            "description": "Ruang terbuka hijau asri sebagai wahana joyful learning berbasis proyek lingkungan hidup, melatih tanggung jawab dan cinta alam.",
+            "thumbnail": "/uploads/fasilitas/fasilitas-lapangan.webp",
+            "icon": "fa-solid fa-tree",
+            "order": 6
+        }
+    ],
+    "galleries": [
+        {
+            "url": "/uploads/logo-madani.webp",
+            "title": "Gedung Sekolah Terpadu SIT Madani Kayuagung"
+        },
+        {
+            "url": "/uploads/dewan/kepala-sekolah.webp",
+            "title": "Kepala Sekolah SMPS IT Madani Bersama Dewan Guru"
+        },
+        {
+            "url": "/uploads/dewan/ust-legianto.webp",
+            "title": "Ketua Yayasan Agung Madani Kayuagung"
+        },
+        {
+            "url": "/uploads/dewan/ust-andi.webp",
+            "title": "Ketua Komite dan Pimpinan Unit Pendidikan SIT Madani"
+        }
+    ],
+    "videos": [
+        {
+            "title": "Profil dan Visi Misi SMPS IT Madani Kayuagung",
+            "slug": "profil-dan-visi-misi-smps-it-madani-kayuagung",
+            "youtube_url": "https://www.youtube.com/watch?v=_ltiwpOmK1k",
+            "youtube_id": "_ltiwpOmK1k",
+            "description": "Mengenal lebih dekat profil resmi SMPS IT Madani Kayuagung: visi generasi Qur'ani, kurikulum terpadu, sarana pembelajaran, dan pembinaan karakter islami."
+        }
+    ],
+    "testimonials": [
+        {
+            "name": "H. Bambang Irawan, S.E.",
+            "profession": "Wali Murid SMPS IT Madani",
+            "content": "Alhamdulillah, semenjak bersekolah di SMPS IT Madani Kayuagung, perkembangan ibadah dan adab anak saya sangat luar biasa. Sholat 5 waktu mandiri, hafalan Al-Qur'an mutqin bertambah, dan anak merasa nyaman belajar.",
+            "photo": "/uploads/testimoni/wali-siswa-1.webp",
+            "status": "publish"
+        },
+        {
+            "name": "dr. Hj. Siti Fatimah, Sp.A",
+            "profession": "Wali Murid Kelas VII",
+            "content": "SMPS IT Madani menghadirkan perpaduan istimewa antara kurikulum akademik nasional dengan pembinaan adab dan Al-Qur'an. Guru-gurunya sangat membimbing dan penuh perhatian.",
+            "photo": "/uploads/testimoni/wali-siswa-2.webp",
+            "status": "publish"
+        }
+    ],
+    "downloads": [
+        {
+            "title": "Brosur Resmi SPMB SMPS IT Madani Kayuagung",
+            "description": "Informasi lengkap pendaftaran santri baru, jadwal seleksi, program tahfidz asrama, dan rincian pembiayaan pendidikan.",
+            "category_type": "Brosur",
+            "file_path": "/uploads/logo-madani-square.webp",
+            "cover_image": "/uploads/logo-madani-square.webp",
+            "file_type": "PDF",
+            "file_size": "850 KB",
+            "download_count": 520
+        }
+    ],
+    "articles": [
+        {
+            "title": "Visi dan Misi SMPS IT Madani Kayuagung: Melahirkan Generasi Qur'ani dan Inovatif",
+            "slug": "visi-dan-misi-smps-it-madani-kayuagung",
+            "content": "<p>SMPS IT Madani Kayuagung berkomitmen kuat menjadi lembaga pendidikan unggulan di Kabupaten Ogan Komering Ilir yang mengintegrasikan nilai-nilai Islam dengan keunggulan sains dan teknologi.</p><p>Dengan visi <em>'Terbentuknya Generasi Qur'ani, Mandiri, Inovatif, Visioner, dan Moderat Berbekal Ilmu Pengetahuan dan Teknologi'</em>, sekolah memfasilitasi setiap siswa untuk berkembang seimbang antara kecerdasan spiritual, intelektual, dan sosial.</p>",
+            "excerpt": "Komitmen SMPS IT Madani Kayuagung dalam mencetak generasi Qur'ani yang berakhlak mulia, cerdas sains, dan siap menghadapi tantangan masa depan.",
+            "featured_image": "/uploads/logo-madani.webp",
+            "category": "profil-sekolah",
+            "views_count": 890
+        },
+        {
+            "title": "Pembukaan Pendaftaran SPMB SMPS IT Madani Kayuagung Tahun Ajaran Baru",
+            "slug": "pembukaan-pendaftaran-spmb-smps-it-madani-kayuagung",
+            "content": "<p>Kabar gembira bagi masyarakat Kayuagung dan sekitarnya! SMPS IT Madani resmi membuka Sistem Penerimaan Murid Baru (SPMB) untuk tahun ajaran baru.</p><p>Tersedia program Asrama Tahfidz (Boarding School) dan Full Day School dengan fasilitas lengkap dan pembimbing berdedikasi. Pendaftaran dapat dilakukan langsung secara online melalui portal SPMB website resmi.</p>",
+            "excerpt": "Pendaftaran SPMB SMPS IT Madani Kayuagung telah dibuka. Dapatkan informasi lengkap jalur pendaftaran dan beasiswa prestasi.",
+            "featured_image": "/uploads/logo-madani.webp",
+            "category": "spmb",
+            "views_count": 1340
+        }
+    ],
+    "agendas": [
+        {
+            "title": "Sosialisasi & Orientasi Siswa Baru SIT Madani",
+            "slug": "sosialisasi-dan-orientasi-siswa-baru-sit-madani",
+            "event_date": "2026-07-15 08:00:00",
+            "location": "Kompleks Kampus SMPS IT Madani Kayuagung",
+            "content": "Agenda temu wali murid dan orientasi pembiasaan ibadah bagi peserta didik baru SMPS IT Madani Kayuagung.",
+            "status": "publish",
+            "featured_image": "/uploads/logo-madani.webp"
+        }
+    ],
+    "pengumumen": [
+        {
+            "title": "Informasi Resmi SPMB SIT Madani Kayuagung",
+            "slug": "informasi-resmi-spmb-sit-madani-kayuagung",
+            "content": "Pendaftaran SPMB SMPS IT Madani Kayuagung telah dibuka. Segera daftarkan putra-putri Anda melalui website resmi atau hubungi Hotline SPMB di 0858-3817-3417.",
+            "file_attachment": "/uploads/logo-madani-square.webp",
+            "status": "publish",
+            "featured_image": "/uploads/logo-madani.webp"
+        }
+    ]
+}
