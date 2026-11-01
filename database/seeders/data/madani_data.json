@@ -136,7 +136,7 @@
             "name": "Asrama Tahfidz Putra & Putri",
             "slug": "asrama-tahfidz-putra-dan-putri",
             "description": "Fasilitas asrama tahfidz yang nyaman, bersih, berhawa sejuk dengan pengawasan dan bimbingan musyrif/musyrifah 24 jam untuk pembiasaan ibadah dan tahfidz mutqin.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-ruang-kelas.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-13.webp",
             "icon": "fa-solid fa-hotel",
             "order": 1
         },
@@ -144,7 +144,7 @@
             "name": "Ruang Kelas Modern & Multimedia",
             "slug": "ruang-kelas-modern-dan-multimedia",
             "description": "Ruang belajar representatif berfasilitas proyektor LCD dan audio visual, dirancang dengan konsep mindful and joyful learning.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-ruang-kelas.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-14.webp",
             "icon": "fa-solid fa-chalkboard-user",
             "order": 2
         },
@@ -152,7 +152,7 @@
             "name": "Laboratorium Komputer & Internet Cepat",
             "slug": "laboratorium-komputer-dan-internet-cepat",
             "description": "Laboratorium komputer dengan PC modern dan koneksi internet stabil untuk menunjang literasi digital, Asesmen Nasional, dan pembelajaran teknologi.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-lab-komputer.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-15.webp",
             "icon": "fa-solid fa-desktop",
             "order": 3
         },
@@ -160,7 +160,7 @@
             "name": "Perpustakaan & Pojok Literasi Qur'ani",
             "slug": "perpustakaan-dan-pojok-literasi-qurani",
             "description": "Koleksi buku referensi, kitab keislaman, sains, ensiklopedia, dan karya literasi anak untuk membudayakan gemar membaca.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-perpustakaan.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-16.webp",
             "icon": "fa-solid fa-book-open-reader",
             "order": 4
         },
@@ -168,7 +168,7 @@
             "name": "Lapangan Olahraga Multifungsi",
             "slug": "lapangan-olahraga-multifungsi",
             "description": "Sarana olahraga serbaguna untuk futsal, voli, basket, badminton, senam, upacara bendera, dan kepanduan Pramuka SIT.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-lapangan.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-17.webp",
             "icon": "fa-solid fa-volleyball",
             "order": 5
         },
@@ -176,7 +176,7 @@
             "name": "Taman Sekolah & Kebun Edukatif",
             "slug": "taman-sekolah-dan-kebun-edukatif",
             "description": "Ruang terbuka hijau asri sebagai wahana joyful learning berbasis proyek lingkungan hidup, melatih tanggung jawab dan cinta alam.",
-            "thumbnail": "/uploads/fasilitas/fasilitas-lapangan.webp",
+            "thumbnail": "/uploads/madani/kegiatan-madani-18.webp",
             "icon": "fa-solid fa-tree",
             "order": 6
         }
@@ -242,7 +242,7 @@
             "slug": "visi-dan-misi-smps-it-madani-kayuagung",
             "content": "<p>SMPS IT Madani Kayuagung berkomitmen kuat menjadi lembaga pendidikan unggulan di Kabupaten Ogan Komering Ilir yang mengintegrasikan nilai-nilai Islam dengan keunggulan sains dan teknologi.</p><p>Dengan visi <em>'Terbentuknya Generasi Qur'ani, Mandiri, Inovatif, Visioner, dan Moderat Berbekal Ilmu Pengetahuan dan Teknologi'</em>, sekolah memfasilitasi setiap siswa untuk berkembang seimbang antara kecerdasan spiritual, intelektual, dan sosial.</p>",
             "excerpt": "Komitmen SMPS IT Madani Kayuagung dalam mencetak generasi Qur'ani yang berakhlak mulia, cerdas sains, dan siap menghadapi tantangan masa depan.",
-            "featured_image": "/uploads/logo-madani.webp",
+            "featured_image": "/uploads/madani/kegiatan-madani-01.webp",
             "category": "profil-sekolah",
             "views_count": 890
         },
@@ -251,7 +251,7 @@
             "slug": "pembukaan-pendaftaran-spmb-smps-it-madani-kayuagung",
             "content": "<p>Kabar gembira bagi masyarakat Kayuagung dan sekitarnya! SMPS IT Madani resmi membuka Sistem Penerimaan Murid Baru (SPMB) untuk tahun ajaran baru.</p><p>Tersedia program Asrama Tahfidz (Boarding School) dan Full Day School dengan fasilitas lengkap dan pembimbing berdedikasi. Pendaftaran dapat dilakukan langsung secara online melalui portal SPMB website resmi.</p>",
             "excerpt": "Pendaftaran SPMB SMPS IT Madani Kayuagung telah dibuka. Dapatkan informasi lengkap jalur pendaftaran dan beasiswa prestasi.",
-            "featured_image": "/uploads/logo-madani.webp",
+            "featured_image": "/uploads/madani/kegiatan-madani-02.webp",
             "category": "spmb",
             "views_count": 1340
         }
@@ -264,7 +264,7 @@
             "location": "Kompleks Kampus SMPS IT Madani Kayuagung",
             "content": "Agenda temu wali murid dan orientasi pembiasaan ibadah bagi peserta didik baru SMPS IT Madani Kayuagung.",
             "status": "publish",
-            "featured_image": "/uploads/logo-madani.webp"
+            "featured_image": "/uploads/madani/kegiatan-madani-23.webp"
         }
     ],
     "pengumumen": [
@@ -274,7 +274,7 @@
             "content": "Pendaftaran SPMB SMPS IT Madani Kayuagung telah dibuka. Segera daftarkan putra-putri Anda melalui website resmi atau hubungi Hotline SPMB di 0858-3817-3417.",
             "file_attachment": "/uploads/logo-madani-square.webp",
             "status": "publish",
-            "featured_image": "/uploads/logo-madani.webp"
+            "featured_image": "/uploads/madani/kegiatan-madani-19.webp"
         }
     ]
 }

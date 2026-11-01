@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Post;
+
 test('yayasan parent portal loads successfully with unit showcase cards and leadership', function () {
     $response = $this->get('/');
     $response->assertStatus(200);
@@ -73,4 +75,30 @@ test('unit specific subroutes load cleanly', function () {
     // Form alias redirect
     $this->get('/form-ppdb')->assertRedirect(route('ppdb.form'));
     $formResponse->assertSee('Pilihan Jenjang / Unit Sekolah', false);
+});
+
+test('yayasan portal displays formal pas foto ketua yayasan and authentic madani documentation', function () {
+    Post::create([
+        'title' => 'Kegiatan Santri SIT Madani',
+        'slug' => 'kegiatan-santri-sit-madani-test',
+        'type' => 'gallery',
+        'status' => 'publish',
+        'featured_image' => '/uploads/madani/kegiatan-madani-01.webp',
+        'content' => 'Dokumentasi kegiatan santri',
+    ]);
+
+    $response = $this->get('/');
+    $response->assertStatus(200);
+    $response->assertSee('/uploads/dewan/ust-legianto.webp', false);
+    $response->assertSee('Drs. H. Legianto, M.E.E.', false);
+
+    // Sambutan yayasan route
+    $sambutanResponse = $this->get('/yayasan/sambutan');
+    $sambutanResponse->assertStatus(200);
+    $sambutanResponse->assertSee('/uploads/dewan/ust-legianto.webp', false);
+
+    // Galeri displays authentic photos
+    $galeriResponse = $this->get('/galeri');
+    $galeriResponse->assertStatus(200);
+    $galeriResponse->assertSee('kegiatan-madani-01.webp', false);
 });

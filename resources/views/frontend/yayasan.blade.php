@@ -484,10 +484,10 @@
                 <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                    {{-- Foto Ketua Yayasan --}}
+                    {{-- Foto Ketua Yayasan (Format Pas Foto Formal) --}}
                     <div class="lg:col-span-4 flex flex-col items-center text-center">
-                        <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-3xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-slate-800">
-                            <img src="/uploads/dewan/ust-legianto.webp" alt="Drs. H. Legianto, M.E.E. - Ketua Yayasan Agung Madani" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
+                        <div class="relative w-48 h-60 sm:w-56 sm:h-72 rounded-3xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-slate-800">
+                            <img src="/uploads/dewan/ust-legianto.webp" alt="Drs. H. Legianto, M.E.E. - Ketua Yayasan Agung Madani" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                         </div>
                         <div class="mt-4">
                             <h3 class="text-base sm:text-lg font-black text-amber-300">Drs. H. Legianto, M.E.E.</h3>
