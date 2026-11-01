@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'SPMB / PPDB Online ' . ($settings['year'] ?? '2026/2027') . ' - SIT Madani Kayuagung')
-@section('meta_description', 'Penerimaan Peserta Didik Baru (PPDB/SPMB) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($settings['year'] ?? '2026/2027') . '. Informasi lengkap jalur pendaftaran, syarat berkas, alur, jadwal, biaya formulir, rekening resmi BSI, dan formulir pendaftaran online.')
+@section('title', 'SPMB Online TP ' . ($settings['year'] ?? '2026/2027') . ' - SIT Madani Kayuagung')
+@section('meta_description', 'Sistem Penerimaan Murid Baru (SPMB) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($settings['year'] ?? '2026/2027') . '. Informasi lengkap jalur pendaftaran, syarat berkas, alur, jadwal, biaya formulir, rekening resmi BSI, dan formulir pendaftaran online.')
 
 @section('content')
 @php
@@ -25,7 +25,7 @@
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-5xl mx-auto text-center space-y-4 relative z-10">
+        <div class="max-w-5xl mx-auto text-center space-y-4 relative z-10 reveal-fade-up">
             {{-- Logo & Accreditation Pill --}}
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 p-2 bg-white/95 rounded-2xl shadow-lg flex items-center justify-center border border-white/20">
@@ -114,7 +114,7 @@
     {{-- ========================================================
          2. QUICK INFO RIBBON (4 Poin Ringkas & Jelas untuk Orang Tua)
          ======================================================== --}}
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-5 sm:-mt-6 relative z-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-5 sm:-mt-6 relative z-20 reveal-fade-up delay-1">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
             {{-- Box 1: Biaya Formulir --}}
             <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-sm border border-slate-200/90 flex items-center gap-3">
@@ -317,7 +317,7 @@
                         <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
                             <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
                             <div class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                                <strong>Mengisi Formulir Online:</strong> Buka formulir PPDB pada website ini dan isi identitas calon siswa beserta orang tua/wali.
+                                <strong>Mengisi Formulir Online:</strong> Buka formulir SPMB pada website ini dan isi identitas calon siswa beserta orang tua/wali.
                             </div>
                         </div>
                         <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
@@ -418,7 +418,7 @@
                 <div class="space-y-3.5 relative z-10">
                     <div class="flex items-center justify-between gap-2">
                         <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                            Rekening Resmi PPDB
+                            Rekening Resmi SPMB
                         </span>
                         <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
                             <i class="fa-solid fa-building-columns"></i>
@@ -494,7 +494,7 @@
 
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                     <div>
-                        <span class="text-[10px] text-slate-400 font-bold block uppercase">Hotline PPDB</span>
+                        <span class="text-[10px] text-slate-400 font-bold block uppercase">Hotline SPMB</span>
                         <span class="text-xs font-black text-slate-800">{{ $settings['hotline_phone'] ?? '0858-3817-3417' }}</span>
                     </div>
                     <a href="https://wa.me/{{ $cleanHotline }}" target="_blank" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold rounded-xl transition inline-flex items-center gap-1.5">

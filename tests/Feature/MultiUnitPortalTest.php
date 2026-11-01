@@ -73,7 +73,7 @@ test('unit specific subroutes load cleanly', function () {
     $formResponse->assertSee('Formulir Pendaftaran', false);
 
     // Form alias redirect
-    $this->get('/form-ppdb')->assertRedirect(route('ppdb.form'));
+    $this->get('/form-ppdb')->assertRedirect(route('spmb.form'));
     $formResponse->assertSee('Pilihan Jenjang / Unit Sekolah', false);
 });
 

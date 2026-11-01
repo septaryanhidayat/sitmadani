@@ -60,7 +60,7 @@
                                     {{ $settings['og_title'] ?? 'SMPS IT Madani Kayuagung - Generasi Qur\'ani & Unggul Sains' }}
                                 </h4>
                                 <p id="ogPreviewDesc" class="text-[11px] text-gray-500 line-clamp-2 mt-1">
-                                    {{ $settings['og_description'] ?? 'Website Resmi SMPS IT Madani Kayuagung. Menyajikan informasi akademik, pembinaan karakter & tahfidz, kegiatan siswa, dan PPDB Online.' }}
+                                    {{ $settings['og_description'] ?? 'Website Resmi SMPS IT Madani Kayuagung. Menyajikan informasi akademik, pembinaan karakter & tahfidz, kegiatan siswa, dan SPMB Online.' }}
                                 </p>
                             </div>
                         </div>

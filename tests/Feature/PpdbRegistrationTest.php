@@ -148,7 +148,7 @@ test('admin can view and manage ppdb registrations', function () {
     // 4. Print registration proof
     $printResponse = $this->actingAs($admin)->get("/admin/ppdb/{$applicant->id}/print");
     $printResponse->assertStatus(200);
-    $printResponse->assertSee('Tanda Bukti Pendaftaran PPDB');
+    $printResponse->assertSee('Tanda Bukti Pendaftaran SPMB');
     $printResponse->assertSee('PPDB-2026-9999');
 
     // 5. Delete
@@ -296,31 +296,31 @@ test('registration number generation avoids duplicates when gaps or higher seque
     expect($nextNumber10)->toBe(sprintf('PPDB-%s-0010', $year));
 });
 
-test('public spmb url aliases redirect properly', function () {
-    $aliases = [
-        '/spmb',
+test('public spmb url aliases redirect or render properly', function () {
+    // Canonical SPMB endpoints return 200
+    $this->get('/spmb')->assertStatus(200);
+    $this->get('/spmb/form')->assertStatus(200);
+
+    // Direct form aliases returning 200
+    $this->get('/form_ppdb')->assertStatus(200);
+    $this->get('/form-spmb')->assertStatus(200);
+    $this->get('/form_spmb')->assertStatus(200);
+    $this->get('/formulir-spmb')->assertStatus(200);
+
+    // Redirect aliases redirecting to canonical spmb.form
+    $redirectAliases = [
         '/form-ppdb',
         '/ppdb/form',
-        '/formulir-spmb',
-        '/formulir_spmb',
-        '/form-spmb',
-        '/form_spmb',
         '/formulir',
         '/formulir-ppdb',
-        '/spmb/form',
         '/spmb/formulir',
         '/ppdb/formulir',
     ];
 
-    foreach ($aliases as $url) {
-        $res = $this->get($url);
-        if ($url === '/spmb') {
-            $res->assertRedirect(route('ppdb.index'));
-        } else {
-            $res->assertRedirect(route('ppdb.form'));
-        }
+    foreach ($redirectAliases as $url) {
+        $this->get($url)->assertRedirect(route('spmb.form'));
     }
 
-    $suksesRes = $this->get('/spmb/sukses');
-    $suksesRes->assertRedirect(route('ppdb.success'));
+    // Success page without session aborts 404
+    $this->get('/spmb/sukses')->assertStatus(404);
 });

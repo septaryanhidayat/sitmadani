@@ -164,7 +164,7 @@
 
     <div class="no-print">
         <div>
-            <strong>Laporan Rekapitulasi Data PPDB Online</strong> - Format Cetak / Simpan sebagai PDF (A4 Landscape)
+            <strong>Laporan Rekapitulasi Data SPMB Online</strong> - Format Cetak / Simpan sebagai PDF (A4 Landscape)
         </div>
         <div style="display: flex; gap: 8px;">
             <button onclick="window.print()" class="btn btn-primary">
@@ -270,7 +270,7 @@
         </div>
         <div class="sig-box">
             <p>Kayuagung, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
-            <p><strong>Ketua Panitia PPDB</strong></p>
+            <p><strong>Ketua Panitia SPMB</strong></p>
             <div class="sig-space"></div>
             <p><strong><u>Panitia SPMB Madani</u></strong></p>
             <p>SMPS IT Madani</p>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Konten & Jalur PPDB')
-@section('header_title', 'Konten & Jalur PPDB')
+@section('title', 'Konten & Jalur SPMB')
+@section('header_title', 'Konten & Jalur SPMB')
 
 @section('content')
 <div class="space-y-6" x-data="{ 
@@ -44,7 +44,7 @@
             </a>
             <button type="button" @click="currentTab = 'jalur'" :class="currentTab === 'jalur' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-route"></i>
-                <span>Jalur PPDB</span>
+                <span>Jalur SPMB</span>
                 <span class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] font-extrabold" :class="currentTab === 'jalur' ? 'bg-white/20 text-white' : 'bg-red-100 text-red-700'">{{ count($tracks) }}</span>
             </button>
             <button type="button" @click="currentTab = 'banner'" :class="currentTab === 'banner' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
@@ -83,7 +83,7 @@
                         <i class="fa-solid fa-route"></i>
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg">Manajemen Jalur Pendaftaran PPDB Dinamis</h3>
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg">Manajemen Jalur Pendaftaran SPMB Dinamis</h3>
                         <p class="text-xs text-slate-500 mt-0.5">Kelola kuota, persentase diskon/keringanan, cashback, dan deskripsi syarat untuk setiap jalur. Semua jalur dapat diedit atau ditambah.</p>
                     </div>
                 </div>
@@ -605,7 +605,7 @@
                         <i class="fa-brands fa-whatsapp"></i>
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-slate-900 text-base">6. Kontak WhatsApp Panitia PPDB</h3>
+                        <h3 class="font-extrabold text-slate-900 text-base">6. Kontak WhatsApp Panitia SPMB</h3>
                         <p class="text-xs text-slate-500">Nomor admin dan panitia yang menerima forwarding pendaftaran calon siswa.</p>
                     </div>
                 </div>
@@ -672,12 +672,12 @@
                                 <span>Pengaturan Jalur Pendaftaran Dikelola Terpusat</span>
                             </div>
                             <p class="text-xs text-slate-700 leading-relaxed font-medium">
-                                Seluruh jalur masuk (Prestasi, Tahfidz, Alumni, Reguler, dsb.) beserta kuota, cashback, dan persentase kini dikelola secara dinamis di tab <strong>Jalur PPDB</strong> pada menu di atas.
+                                Seluruh jalur masuk (Prestasi, Tahfidz, Alumni, Reguler, dsb.) beserta kuota, cashback, dan persentase kini dikelola secara dinamis di tab <strong>Jalur SPMB</strong> pada menu di atas.
                             </p>
                             <div class="pt-1">
                                 <button type="button" @click="currentTab = 'jalur'" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-xs transition cursor-pointer">
                                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    <span>Buka Manajemen Jalur PPDB</span>
+                                    <span>Buka Manajemen Jalur SPMB</span>
                                 </button>
                             </div>
                         </div>
@@ -759,7 +759,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Status Formulir PPDB Online</label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Status Formulir SPMB Online</label>
                         <select name="ppdb_form_status" class="w-full bg-slate-50 text-xs font-bold rounded-xl px-3.5 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                             <option value="1" {{ ($settings['form_status'] ?? '1') === '1' ? 'selected' : '' }}>🟢 BUKA PENDAFTARAN (Formulir Aktif Dapat Diisi)</option>
                             <option value="0" {{ ($settings['form_status'] ?? '1') === '0' ? 'selected' : '' }}>🔴 TUTUP PENDAFTARAN (Tampilkan Pemberitahuan Tutup)</option>
@@ -993,7 +993,7 @@
                                 Pilihan Jalur Masuk Cadangan <span class="text-indigo-700 font-bold">(1 baris = 1 opsi)</span>
                             </label>
                             <textarea name="ppdb_form_tracks" rows="5" class="w-full bg-white text-xs font-semibold rounded-xl p-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 leading-relaxed">{{ old('ppdb_form_tracks', $settings['form_tracks']) }}</textarea>
-                            <p class="text-[10px] text-slate-400 mt-1">Disinkronkan otomatis dari Tab Jalur PPDB Dinamis.</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Disinkronkan otomatis dari Tab Jalur SPMB Dinamis.</p>
                         </div>
 
                         <div>
@@ -1123,7 +1123,7 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </div>
                         <div>
-                            <h3 class="font-black text-slate-900 text-base">Edit Jalur Pendaftaran PPDB</h3>
+                            <h3 class="font-black text-slate-900 text-base">Edit Jalur Pendaftaran SPMB</h3>
                             <p class="text-xs text-slate-500">Perbarui nama, persentase alokasi, kuota, atau syarat jalur.</p>
                         </div>
                     </div>

@@ -29,7 +29,7 @@
                     <select name="category_type" id="category_type" required class="w-full bg-slate-50 text-xs font-semibold text-slate-900 rounded-xl px-4 py-3 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition cursor-pointer">
                         <option value="E-Book" {{ old('category_type') == 'E-Book' ? 'selected' : '' }}>E-Book &amp; Modul Digital</option>
                         <option value="Panduan & Kurikulum" {{ old('category_type') == 'Panduan & Kurikulum' ? 'selected' : '' }}>Panduan Akademik &amp; Kurikulum</option>
-                        <option value="Formulir & Brosur" {{ old('category_type') == 'Formulir & Brosur' ? 'selected' : '' }}>Formulir PPDB &amp; Brosur</option>
+                        <option value="Formulir & Brosur" {{ old('category_type') == 'Formulir & Brosur' ? 'selected' : '' }}>Formulir SPMB &amp; Brosur</option>
                         <option value="Logo Resmi" {{ old('category_type') == 'Logo Resmi' ? 'selected' : '' }}>Logo Resmi Sekolah</option>
                         <option value="Lainnya" {{ old('category_type') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                     </select>

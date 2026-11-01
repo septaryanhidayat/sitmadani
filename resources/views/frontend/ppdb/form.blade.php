@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Formulir Pendaftaran PPDB ' . ($formSettings['year'] ?? '2026/2027') . ' - Sekolah Islam Terpadu Madani')
-@section('meta_description', 'Formulir Pendaftaran Peserta Didik Baru (PPDB Online) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($formSettings['year'] ?? '2026/2027') . '.')
+@section('title', 'Formulir Pendaftaran SPMB ' . ($formSettings['year'] ?? '2026/2027') . ' - Sekolah Islam Terpadu Madani')
+@section('meta_description', 'Formulir Pendaftaran Peserta Didik Baru (SPMB Online) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($formSettings['year'] ?? '2026/2027') . '.')
 
 @section('content')
 <div class="bg-gray-50 py-10 sm:py-14 font-['Poppins',sans-serif]">
@@ -21,7 +21,7 @@
                         Pendaftaran Online Ditutup Sementara
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed pt-2">
-                        {{ $formSettings['closed_message'] ?? 'Pendaftaran PPDB online saat ini sedang ditutup sementara atau kuota telah terpenuhi. Silakan hubungi panitia melalui WhatsApp untuk informasi gelombang berikutnya.' }}
+                        {{ $formSettings['closed_message'] ?? 'Pendaftaran SPMB online saat ini sedang ditutup sementara atau kuota telah terpenuhi. Silakan hubungi panitia melalui WhatsApp untuk informasi gelombang berikutnya.' }}
                     </p>
                 </div>
 
@@ -32,13 +32,13 @@
                     }
                 @endphp
                 <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
-                    <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia PPDB SMPS IT Madani, saya ingin menanyakan jadwal pendaftaran/kuota siswa baru.') }}" target="_blank" class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-3.5 rounded-2xl text-xs sm:text-sm font-black transition shadow-lg shadow-indigo-600/25">
+                    <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia SPMB SMPS IT Madani, saya ingin menanyakan jadwal pendaftaran/kuota siswa baru.') }}" target="_blank" class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-3.5 rounded-2xl text-xs sm:text-sm font-black transition shadow-lg shadow-indigo-600/25">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
                         <span>Hubungi Panitia via WhatsApp</span>
                     </a>
                     <a href="{{ route('ppdb.index') }}" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-bold transition">
                         <i class="fa-solid fa-circle-info text-sm"></i>
-                        <span>Lihat Informasi PPDB</span>
+                        <span>Lihat Informasi SPMB</span>
                     </a>
                 </div>
             </div>
@@ -112,7 +112,7 @@
             @endif
 
             {{-- REGISTRATION FORM --}}
-            <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs text-slate-700">
+            <form action="{{ route('ppdb.store') }}" class="reveal-fade-up delay-1" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs text-slate-700">
                 @csrf
 
                 {{-- PILIHAN UNIT SEKOLAH (TK, SD, SMP) --}}
@@ -199,7 +199,7 @@
                     @if($formSettings['wa_confirm'])
                         <p class="text-xs text-slate-600 font-semibold mt-3">
                             <i class="fa-brands fa-whatsapp text-indigo-600 mr-1 text-sm"></i>
-                            Setelah formulir dikirim, seluruh data pendaftaran akan otomatis diteruskan ke WhatsApp Panitia PPDB.
+                            Setelah formulir dikirim, seluruh data pendaftaran akan otomatis diteruskan ke WhatsApp Panitia SPMB.
                         </p>
                     @endif
                 </div>
@@ -208,7 +208,7 @@
             {{-- FOOTER --}}
             <div class="pt-8 text-center border-t border-slate-100">
                 <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2 text-center sm:text-left">
-                    <span>PPDB SMPS IT Madani Kayuagung</span>
+                    <span>SPMB SIT Madani Kayuagung (TK • SD • SMP)</span>
                     <span>Hak Cipta Dilindungi Undang-Undang</span>
                 </div>
             </div>

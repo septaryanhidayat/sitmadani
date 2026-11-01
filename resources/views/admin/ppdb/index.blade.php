@@ -14,7 +14,7 @@
             </a>
             <a href="{{ route('admin.ppdb.content', ['tab' => 'jalur']) }}" class="px-3.5 py-2 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200/60 transition whitespace-nowrap flex items-center space-x-1.5">
                 <i class="fa-solid fa-route"></i>
-                <span>Jalur PPDB</span>
+                <span>Jalur SPMB</span>
             </a>
             <a href="{{ route('admin.ppdb.content', ['tab' => 'banner']) }}" class="px-3.5 py-2 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200/60 transition whitespace-nowrap flex items-center space-x-1.5">
                 <i class="fa-solid fa-bullhorn"></i>

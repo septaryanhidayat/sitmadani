@@ -219,7 +219,7 @@
 
                 {{-- SECTION 2: SPMB & PPDB ONLINE (PRIORITAS KHUSUS) --}}
                 <div class="space-y-0.5">
-                    <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-amber-400 uppercase block py-0.5">SPMB &amp; PPDB</span>
+                    <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-amber-400 uppercase block py-0.5">SPMB ONLINE</span>
                     <div class="sidebar-section-divider hidden"></div>
 
                     <a href="{{ route('admin.ppdb.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.index') || request()->routeIs('admin.ppdb.show') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pendaftar SPMB">
@@ -235,7 +235,7 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('admin.ppdb.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.content*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Konten & Jalur PPDB">
+                    <a href="{{ route('admin.ppdb.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.content*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Konten & Jalur SPMB">
                         <i class="fa-solid fa-sliders text-xs w-4 text-center text-indigo-400"></i>
                         <span class="sidebar-label">Konten &amp; Jalur</span>
                     </a>

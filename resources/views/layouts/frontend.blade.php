@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'SMPS IT Madani Kayuagung') . ' - ' . ($siteSettings['site_tagline'] ?? 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia'))</title>
-    <meta name="description" content="@yield('meta_description', $siteSettings['site_description'] ?? 'Official Website SMPS IT Madani Kayuagung (SIT Madani). Sekolah Menengah Pertama Islam Terpadu berakreditasi di Kayuagung, Kab. OKI.')">
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'Yayasan Agung Madani Kayuagung') . ' - ' . ($siteSettings['site_tagline'] ?? 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia'))</title>
+    <meta name="description" content="@yield('meta_description', $siteSettings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP). Pendidikan Islam Terpadu Satu Atap di Kayuagung, Kab. OKI.')">
     <meta name="keywords" content="@yield('meta_keywords', $siteSettings['meta_keywords'] ?? 'smps it madani kayuagung, smp it madani, smp islam terpadu kayuagung, jsit kayuagung, spmb smp it madani, tahfidz kayuagung')">
-    <meta name="author" content="SMPS IT Madani Kayuagung">
+    <meta name="author" content="Yayasan Agung Madani - SIT Madani Kayuagung">
     <meta name="robots" content="index, follow">
     @if(!empty($siteSettings['google_site_verification']))
     <meta name="google-site-verification" content="{{ $siteSettings['google_site_verification'] }}">
@@ -17,10 +17,10 @@
     {{-- Open Graph / Facebook / WhatsApp / Telegram --}}
     <meta property="og:locale" content="id_ID">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:site_name" content="{{ $siteSettings['site_name'] ?? 'SMPS IT Madani Kayuagung' }}">
+    <meta property="og:site_name" content="{{ $siteSettings['site_name'] ?? 'Yayasan Agung Madani Kayuagung' }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'SMPS IT Madani Kayuagung') . ' - Sekolah Menengah Pertama Islam Terpadu Kayuagung'))">
-    <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website SMPS IT Madani Kayuagung.'))">
+    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'Yayasan Agung Madani') . ' - Sekolah Islam Terpadu Madani Kayuagung'))">
+    <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung.'))">
     @php
         $ogImageUrl = View::hasSection('og_image') ? View::yieldContent('og_image') : asset($siteSettings['og_image'] ?? '/uploads/logo-madani-square.webp');
     @endphp
@@ -29,13 +29,13 @@
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
-    <meta property="og:image:alt" content="{{ $siteSettings['site_name'] ?? 'SMPS IT Madani Kayuagung' }}">
+    <meta property="og:image:alt" content="{{ $siteSettings['site_name'] ?? 'Yayasan Agung Madani Kayuagung' }}">
 
     {{-- Twitter / X Cards --}}
     <meta name="twitter:card" content="{{ $siteSettings['twitter_card'] ?? 'summary' }}">
     <meta name="twitter:site" content="@sitmadani">
-    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'SMPS IT Madani Kayuagung') . ' - Sekolah Menengah Pertama Islam Terpadu Kayuagung'))">
-    <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website SMPS IT Madani Kayuagung'))">
+    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'Yayasan Agung Madani') . ' - Sekolah Islam Terpadu Madani Kayuagung'))">
+    <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung'))">
     <meta name="twitter:image" content="{{ $ogImageUrl }}">
 
     {{-- Canonical URL --}}

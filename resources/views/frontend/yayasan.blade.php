@@ -125,7 +125,7 @@
 
                     {{-- Statistics Chips (Satu Atap SIT Madani - Dinamis & Responsif) --}}
                     @if(!empty($heroChips) && is_array($heroChips))
-                    <div class="pt-4 sm:pt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3.5 max-w-3xl mx-auto text-center">
+                    <div class="pt-4 sm:pt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3.5 max-w-3xl mx-auto text-center reveal-fade-up delay-2">
                         @foreach($heroChips as $chip)
                         <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md flex flex-col justify-center min-h-[72px] sm:min-h-[82px] shadow-sm">
                             <span class="block text-base sm:text-lg md:text-xl font-black tracking-tight leading-snug {{ $chip['color'] ?? 'text-emerald-400' }} break-normal whitespace-normal">
@@ -241,7 +241,7 @@
                     $card = $unitShowcaseCards[$unitKey] ?? [];
                     $t = $unitThemes[$unitKey] ?? $unitThemes['smp'];
                 @endphp
-                <div class="bg-white rounded-3xl border-2 {{ $t['border'] }} shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+                <div class="bg-white rounded-3xl border-2 {{ $t['border'] }} shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 reveal-fade-up delay-{{ $loop->iteration }}">
                     {{-- Card Header --}}
                     <div class="p-6 text-white relative" style="background: {{ $t['header_bg'] }}; color: #ffffff;">
                         <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
@@ -341,45 +341,48 @@
     {{-- ========================================================
          SECTION: SAMBUTAN KETUA YAYASAN AGUNG MADANI
          ======================================================== --}}
-    <section class="py-14 sm:py-20 bg-white border-y border-slate-200">
+    <section class="py-14 sm:py-20 bg-white border-y border-slate-200 reveal-fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-gradient-to-br from-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0c1427 100%) !important; color: #ffffff !important;">
                 <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                    {{-- Foto Ketua Yayasan (Format Pas Foto Formal) --}}
+                    {{-- Foto Ketua Yayasan (Format Pas Foto Formal Dinamis) --}}
                     <div class="lg:col-span-4 flex flex-col items-center text-center">
                         <div class="relative w-48 h-60 sm:w-56 sm:h-72 rounded-3xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-slate-800">
-                            <img src="/uploads/dewan/ust-legianto.webp" alt="Drs. H. Legianto, M.E.E. - Ketua Yayasan Agung Madani" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
+                            <img src="{{ $sambutanYayasan['photo'] ?? '/uploads/dewan/ust-legianto.webp' }}" 
+                                 alt="{{ $sambutanYayasan['name'] ?? 'Ketua Yayasan Agung Madani' }}" 
+                                 class="w-full h-full object-cover object-top" 
+                                 onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                         </div>
                         <div class="mt-4">
-                            <h3 class="text-base sm:text-lg font-black text-amber-300">Drs. H. Legianto, M.E.E.</h3>
-                            <span class="text-xs text-slate-300 font-semibold uppercase tracking-wider block">Ketua Yayasan Agung Madani Kayuagung</span>
+                            <h3 class="text-base sm:text-lg font-black text-amber-300">
+                                {{ $sambutanYayasan['name'] ?? 'Drs. H. Legianto, M.E.E.' }}
+                            </h3>
+                            <span class="text-xs text-slate-300 font-semibold uppercase tracking-wider block">
+                                {{ $sambutanYayasan['title'] ?? 'Ketua Yayasan Agung Madani Kayuagung' }}
+                            </span>
                         </div>
                     </div>
 
-                    {{-- Isi Sambutan --}}
+                    {{-- Isi Sambutan (Dinamis dari Halaman Admin) --}}
                     <div class="lg:col-span-8 space-y-4">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider">
                             <i class="fa-solid fa-quote-left"></i>
                             <span>Sambutan Pimpinan Lembaga</span>
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                            Mewujudkan Ekosistem Pendidikan Islam Terpadu Satu Atap di Kabupaten OKI
+                            {{ $sambutanYayasan['heading'] ?? 'Mewujudkan Ekosistem Pendidikan Islam Terpadu Satu Atap di Kabupaten OKI' }}
                         </h2>
                         <div class="text-sm sm:text-base text-slate-300 leading-relaxed space-y-3 font-normal">
-                            <p>
-                                <em>Bismillahirrohmanirrohim. Alhamdulillahi Rabbil 'Alamin.</em>
-                            </p>
-                            <p>
-                                Yayasan Agung Madani Kayuagung didirikan atas dasar komitmen tulus memajukan kualitas generasi masa depan bangsa di Kabupaten Ogan Komering Ilir. Kami meyakini bahwa pendidikan anak usia dini hingga remaja merupakan masa emas untuk meletakkan fondasi iman, takwa, adab Qur'ani, serta ketajaman nalar intelektual.
-                            </p>
-                            <p>
-                                Melalui 3 unit pendidikan di bawah naungan yayasan: <strong>TKS IT Madani, SDS IT Madani, dan SMPS IT Madani</strong>, kami membangun kesinambungan kurikulum terpadu khas JSIT Indonesia. Anak-anak dibimbing secara berjenjang dari pembiasaan ibadah dan tahfidz cilik, penguasaan hafalan 2 juz dan hadits di sekolah dasar, hingga pematangan tahfidz bersanad dan kepemimpinan di tingkat menengah pertama.
-                            </p>
-                        </div>
-                        <div class="pt-2">
-                            <span class="text-xs text-amber-400 font-bold block">Wassalamu'alaikum Warahmatullahi Wabarakatuh</span>
+                            @if(!empty($sambutanYayasan['content_html']))
+                                {!! $sambutanYayasan['content_html'] !!}
+                            @else
+                                <p><em>Bismillahirrohmanirrohim. Alhamdulillahi Rabbil 'Alamin.</em></p>
+                                <p>Yayasan Agung Madani Kayuagung didirikan atas dasar komitmen tulus memajukan kualitas generasi masa depan bangsa di Kabupaten Ogan Komering Ilir. Kami meyakini bahwa pendidikan anak usia dini hingga remaja merupakan masa emas untuk meletakkan fondasi iman, takwa, adab Qur'ani, serta ketajaman nalar intelektual.</p>
+                                <p>Melalui 3 unit pendidikan di bawah naungan yayasan: <strong>TKS IT Madani, SDS IT Madani, dan SMPS IT Madani</strong>, kami membangun kesinambungan kurikulum terpadu khas JSIT Indonesia. Anak-anak dibimbing secara berjenjang dari pembiasaan ibadah dan tahfidz cilik, penguasaan hafalan 2 juz dan hadits di sekolah dasar, hingga pematangan tahfidz bersanad dan kepemimpinan di tingkat menengah pertama.</p>
+                                <p class="text-xs text-amber-400 font-bold pt-1">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -394,7 +397,7 @@
     <section id="struktur-yayasan" class="py-14 sm:py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal-fade-up">
                 <span class="text-xs uppercase tracking-widest text-indigo-600 font-extrabold bg-indigo-50 border border-indigo-200 px-3.5 py-1 rounded-full mb-3 inline-block">
                     <i class="fa-solid fa-sitemap mr-1"></i> Bagan Kelembagaan
                 </span>
@@ -407,7 +410,7 @@
             </div>
 
             {{-- Organ Yayasan Grid --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 reveal-fade-up delay-1">
                 {{-- Pembina --}}
                 <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-md">
                     <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
@@ -472,7 +475,7 @@
             </div>
 
             {{-- Direktorat Yayasan --}}
-            <div class="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e40af 100%) !important; color: #ffffff !important;">
+            <div class="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl reveal-fade-up delay-2" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e40af 100%) !important; color: #ffffff !important;">
                 <div class="text-center mb-6">
                     <span class="text-xs uppercase font-extrabold tracking-widest text-amber-300 block mb-1">Manajemen Operasional</span>
                     <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight">Direktorat Yayasan Agung Madani</h3>
@@ -514,9 +517,9 @@
     {{-- ========================================================
          SECTION: SINERGI KURIKULUM 3 JENJANG
          ======================================================== --}}
-    <section class="py-14 sm:py-20 bg-white border-t border-slate-200">
+    <section class="py-14 sm:py-20 bg-white border-t border-slate-200 reveal-fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal-fade-up">
                 <span class="text-xs uppercase tracking-widest text-amber-600 font-extrabold bg-amber-50 border border-amber-200 px-3.5 py-1 rounded-full mb-3 inline-block">
                     <i class="fa-solid fa-award mr-1"></i> Standar Mutu Pendidikan
                 </span>
@@ -528,7 +531,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-fade-up delay-1">
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition">
                     <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-quran"></i>
@@ -577,7 +580,7 @@
          SECTION: KABAR & ARTIKEL TERBARU YAYASAN
          ======================================================== --}}
     @if(isset($latestPosts) && $latestPosts->isNotEmpty())
-    <section class="py-14 sm:py-20 bg-slate-50 border-t border-slate-200">
+    <section class="py-14 sm:py-20 bg-slate-50 border-t border-slate-200 reveal-fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
                 <div>
@@ -630,7 +633,7 @@
     {{-- ========================================================
          SECTION: CTA PENERIMAAN MURID BARU (SPMB TERPADU)
          ======================================================== --}}
-    <section class="py-14 sm:py-20 bg-gradient-to-br from-indigo-950 via-indigo-900 to-blue-950 text-white relative overflow-hidden" style="background: linear-gradient(135deg, #0c1427 0%, #1e1b4b 50%, #172554 100%) !important; color: #ffffff !important;">
+    <section class="py-14 sm:py-20 bg-gradient-to-br from-indigo-950 via-indigo-900 to-blue-950 text-white relative overflow-hidden reveal-fade-up" style="background: linear-gradient(135deg, #0c1427 0%, #1e1b4b 50%, #172554 100%) !important; color: #ffffff !important;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
             <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/20">
                 Penerimaan Santri Baru TP 2026/2027
@@ -643,15 +646,15 @@
             </p>
 
             <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
-                <a href="{{ route('unit.ppdb', 'tk') }}" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
+                <a href="{{ route('unit.spmb', 'tk') }}" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
                     <i class="fa-solid fa-shapes"></i>
                     <span>Daftar SPMB TKS IT</span>
                 </a>
-                <a href="{{ route('unit.ppdb', 'sd') }}" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
+                <a href="{{ route('unit.spmb', 'sd') }}" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
                     <i class="fa-solid fa-book-open"></i>
                     <span>Daftar SPMB SDS IT</span>
                 </a>
-                <a href="{{ route('unit.ppdb', 'smp') }}" class="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
+                <a href="{{ route('unit.spmb', 'smp') }}" class="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition flex items-center gap-2">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <span>Daftar SPMB SMPS IT</span>
                 </a>

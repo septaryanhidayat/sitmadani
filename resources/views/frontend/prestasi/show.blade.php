@@ -97,7 +97,7 @@
                     Daftarkan putra-putri Anda di SMPS IT Madani Kayuagung dan wujudkan potensi terbaiknya.
                 </p>
                 <a href="{{ route('ppdb.index') }}" class="inline-block w-full text-center bg-white text-indigo-600 font-bold py-2.5 px-4 rounded-xl text-xs hover:bg-indigo-50/60 transition shadow-md">
-                    Daftar PPDB Online Sekarang
+                    Daftar SPMB Online Sekarang
                 </a>
             </div>
         </div>

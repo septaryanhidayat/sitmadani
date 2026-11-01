@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bukti Pendaftaran PPDB - {{ $ppdb->registration_number }} - {{ $ppdb->full_name }}</title>
+    <title>Bukti Pendaftaran SPMB - {{ $ppdb->registration_number }} - {{ $ppdb->full_name }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -137,7 +137,7 @@
         </div>
 
         <div class="title-badge">
-            <span>Tanda Bukti Pendaftaran PPDB {{ $ppdb->academic_year ?? '2026/2027' }}</span>
+            <span>Tanda Bukti Pendaftaran SPMB {{ $ppdb->academic_year ?? '2026/2027' }}</span>
         </div>
 
         <div style="background: #fff8f8; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">

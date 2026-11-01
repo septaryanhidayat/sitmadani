@@ -106,12 +106,13 @@ class HomeController extends Controller
             ];
         }
 
-        // Sambutan Ketua Yayasan (Dinamis dari Post jika ada)
+        // Sambutan Ketua Yayasan (Dinamis dari Halaman Profil atau Setting)
         $sambutanPost = Post::pages()->where('slug', 'sambutan-ketua-yayasan')->first();
         $sambutanYayasan = [
-            'name' => 'Drs. H. Legianto, M.E.E.',
-            'title' => 'Ketua Yayasan Agung Madani Kayuagung',
-            'photo' => '/uploads/dewan/ust-legianto.webp',
+            'name' => Setting::get('yayasan_ketua_name', 'Drs. H. Legianto, M.E.E.'),
+            'title' => Setting::get('yayasan_ketua_title', 'Ketua Yayasan Agung Madani Kayuagung'),
+            'photo' => Setting::get('yayasan_ketua_photo', '/uploads/dewan/ust-legianto.webp'),
+            'heading' => $sambutanPost ? $sambutanPost->title : Setting::get('yayasan_sambutan_heading', 'Mewujudkan Ekosistem Pendidikan Islam Terpadu Satu Atap di Kabupaten OKI'),
             'text' => $sambutanPost ? strip_tags($sambutanPost->content) : 'Bismillahirrohmanirrohim. Alhamdulillahi Rabbil \'Alamin, puji dan syukur kami panjatkan ke hadirat Allah SWT. Yayasan Agung Madani Kayuagung hadir dengan komitmen kokoh menyelenggarakan pendidikan Islam terpadu satu atap yang berkesinambungan mulai dari TKS IT Madani, SDS IT Madani, hingga SMPS IT Madani. Kami memadukan nilai keluhuran Al-Qur\'an dan as-Sunnah dengan keunggulan sains, teknologi, dan bahasa global untuk melahirkan generasi robbani yang cerdas, mandiri, dan berakhlak karimah.',
             'content_html' => $sambutanPost ? $sambutanPost->content : null,
         ];

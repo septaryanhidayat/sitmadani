@@ -179,10 +179,12 @@ Route::get('/struktur-yayasan', [PageController::class, 'struktur'])->defaults('
 
 // Unit Scoped Routes (/tk/..., /sd/..., /smp/...)
 Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
+    Route::get('/spmb', [PpdbController::class, 'index'])->name('unit.spmb');
     Route::get('/ppdb', [PpdbController::class, 'index'])->name('unit.ppdb');
-    Route::get('/spmb', [PpdbController::class, 'index']);
+    Route::get('/form-spmb', [PpdbController::class, 'form'])->name('unit.spmb.form');
+    Route::get('/form_spmb', [PpdbController::class, 'form']);
     Route::get('/form_ppdb', [PpdbController::class, 'form'])->name('unit.ppdb.form');
-    Route::get('/form-ppdb', fn ($unit) => redirect()->route('unit.ppdb.form', $unit));
+    Route::get('/form-ppdb', fn ($unit) => redirect()->route('unit.spmb.form', $unit));
     Route::get('/dewan-guru', [DewanController::class, 'index'])->name('unit.dewan');
     Route::get('/guru', [DewanController::class, 'index']);
     Route::get('/fasilitas', [BidangController::class, 'index'])->name('unit.fasilitas');
@@ -246,26 +248,28 @@ Route::get('/galeri', [InformationController::class, 'galeri'])->name('galeri.in
 Route::get('/galeri-kegiatan', fn () => redirect()->route('galeri.index'));
 
 // SPMB & PPDB Online (Landing Page, Form Pendaftaran & Sukses)
+Route::get('/spmb', [PpdbController::class, 'index'])->name('spmb.index');
 Route::get('/ppdb', [PpdbController::class, 'index'])->name('ppdb.index');
-Route::get('/spmb', fn () => redirect()->route('ppdb.index'));
+Route::get('/spmb/form', [PpdbController::class, 'form'])->name('spmb.form');
+Route::get('/form-spmb', [PpdbController::class, 'form']);
+Route::get('/form_spmb', [PpdbController::class, 'form']);
+Route::get('/formulir-spmb', [PpdbController::class, 'form']);
 Route::get('/form_ppdb', [PpdbController::class, 'form'])->name('ppdb.form');
-Route::get('/form-ppdb', fn () => redirect()->route('ppdb.form'));
-Route::get('/ppdb/form', fn () => redirect()->route('ppdb.form'));
-Route::get('/formulir-spmb', fn () => redirect()->route('ppdb.form'));
-Route::get('/formulir_spmb', fn () => redirect()->route('ppdb.form'));
-Route::get('/form-spmb', fn () => redirect()->route('ppdb.form'));
-Route::get('/form_spmb', fn () => redirect()->route('ppdb.form'));
-Route::get('/formulir', fn () => redirect()->route('ppdb.form'));
-Route::get('/formulir-ppdb', fn () => redirect()->route('ppdb.form'));
-Route::get('/spmb/form', fn () => redirect()->route('ppdb.form'));
-Route::get('/spmb/formulir', fn () => redirect()->route('ppdb.form'));
-Route::get('/ppdb/formulir', fn () => redirect()->route('ppdb.form'));
+Route::get('/form-ppdb', fn () => redirect()->route('spmb.form'));
+Route::get('/ppdb/form', fn () => redirect()->route('spmb.form'));
+Route::get('/formulir', fn () => redirect()->route('spmb.form'));
+Route::get('/formulir-ppdb', fn () => redirect()->route('spmb.form'));
+Route::get('/spmb/formulir', fn () => redirect()->route('spmb.form'));
+Route::get('/ppdb/formulir', fn () => redirect()->route('spmb.form'));
+Route::post('/form_spmb', [PpdbController::class, 'store'])->middleware('throttle:15,1')->name('spmb.store');
+Route::post('/form-spmb', [PpdbController::class, 'store'])->middleware('throttle:15,1');
+Route::post('/spmb/form', [PpdbController::class, 'store'])->middleware('throttle:15,1');
 Route::post('/form_ppdb', [PpdbController::class, 'store'])->middleware('throttle:15,1')->name('ppdb.store');
 Route::post('/form-ppdb', [PpdbController::class, 'store'])->middleware('throttle:15,1');
 Route::post('/ppdb/form', [PpdbController::class, 'store'])->middleware('throttle:15,1');
 Route::post('/ppdb/formulir', [PpdbController::class, 'store'])->middleware('throttle:15,1');
+Route::get('/spmb/sukses', [PpdbController::class, 'success'])->name('spmb.success');
 Route::get('/ppdb/sukses', [PpdbController::class, 'success'])->name('ppdb.success');
-Route::get('/spmb/sukses', fn () => redirect()->route('ppdb.success'));
 
 // Download & Media
 Route::get('/download', [DownloadController::class, 'index'])->name('download.index');
