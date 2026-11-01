@@ -13,7 +13,11 @@ test('public can view spmb landing page and form', function () {
     $response = $this->get('/ppdb');
     $response->assertStatus(200);
     $response->assertSee('7011304251');
-    $response->assertSee('SPMB SMPS IT MADANI');
+    $response->assertSee('SPMB TERPADU SIT MADANI');
+
+    $smpResponse = $this->get('/smp/ppdb');
+    $smpResponse->assertStatus(200);
+    $smpResponse->assertSee('SPMB SMPS IT MADANI');
 
     $formResponse = $this->get('/form_ppdb');
     $formResponse->assertStatus(200);

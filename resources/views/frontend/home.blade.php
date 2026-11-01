@@ -37,7 +37,7 @@
                      class="w-full h-full object-cover object-center brightness-[0.82] sm:brightness-[0.78]"
                      width="1376"
                      height="768"
-                     onerror="this.src='/uploads/campus-sit-madani.webp'"
+                     onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'"
                      @if($index === 0)
                          fetchpriority="high"
                          loading="eager"
@@ -155,7 +155,7 @@
                aria-label="Menu {{ $qm->name }}">
                 <div class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl bg-indigo-50 text-indigo-700 flex items-center justify-center mx-auto mb-1.5 sm:mb-2 shadow-xs border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 transition-all duration-300">
                     @if(!empty($qm->is_image) && $qm->is_image)
-                        <img src="{{ $qm->icon }}" alt="Ikon {{ $qm->name }}" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 object-contain group-hover:scale-105 transition" onerror="this.src='/uploads/logo-madani-square.webp'">
+                        <img src="{{ $qm->icon }}" alt="Ikon {{ $qm->name }}" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 object-contain group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/logo-madani-square.webp'">
                     @else
                         <i class="{{ $qm->icon }} text-lg sm:text-xl md:text-2xl transition-colors duration-300" aria-hidden="true"></i>
                     @endif
@@ -276,7 +276,7 @@
                     <div class="relative group max-w-[260px] sm:max-w-xs md:max-w-sm w-full mx-auto">
                         <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 via-blue-400 to-indigo-500 rounded-2xl blur-xs opacity-75 group-hover:opacity-100 transition duration-500"></div>
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-slate-900 border-2 border-white/20 aspect-[3/4]">
-                            <img src="{{ $spmbBanner['flyer_image'] ?? '/uploads/flyer-spmb-sit-madani.webp' }}" alt="{{ $spmbBanner['title'] ?? 'Flyer SPMB Gelombang Exclusive' }}" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/flyer-spmb-sit-madani.png'">
+                            <img src="{{ $spmbBanner['flyer_image'] ?? '/uploads/flyer-spmb-sit-madani.webp' }}" alt="{{ $spmbBanner['title'] ?? 'Flyer SPMB Gelombang Exclusive' }}" width="600" height="800" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/flyer-spmb-sit-madani.png'">
                             <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-slate-950/85 backdrop-blur-md py-1.5 px-2.5 rounded-xl border border-white/10 text-center">
                                 <span class="text-[10px] sm:text-[11px] font-black text-amber-300 uppercase tracking-wider">
                                     <i class="fa-solid fa-bullhorn mr-1"></i> {{ $spmbBanner['flyer_label'] ?? 'Pengumuman Resmi Sekolah' }}
@@ -437,7 +437,7 @@
             <div class="lg:col-span-7 reveal-fade-up delay-1">
                 <article class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 h-full flex flex-col group">
                     <div class="relative h-60 sm:h-80 overflow-hidden bg-gray-100">
-                        <img src="{{ $featuredPost->featured_image_url }}" alt="{{ $featuredPost->title }}" width="600" height="320" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                        <img src="{{ $featuredPost->featured_image_url }}" alt="{{ $featuredPost->title }}" width="600" height="320" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                         @if($featuredPost->categories->isNotEmpty())
                         <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">
                             {{ $featuredPost->categories->first()->name }}
@@ -475,7 +475,7 @@
                 @foreach($sidePosts as $index => $sp)
                 <article class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-md transition flex items-center space-x-3 sm:space-x-4 group reveal-fade-up delay-{{ $index + 2 }}">
                     <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 relative">
-                        <img src="{{ $sp->featured_image_url }}" alt="{{ $sp->title }}" width="112" height="96" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/activities-sit-madani.webp'">
+                        <img src="{{ $sp->featured_image_url }}" alt="{{ $sp->title }}" width="112" height="96" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/activities-sit-madani.webp'">
                     </div>
                     <div class="flex-1 min-w-0 space-y-1">
                         <div class="text-[11px] text-gray-500 flex items-center space-x-2">
@@ -521,7 +521,7 @@
                         {{-- Ambient backdrop --}}
                         <img src="{{ $post->featured_image_url }}" alt="" class="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none" aria-hidden="true">
                         {{-- Uncropped foreground image --}}
-                        <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="280" height="240" loading="lazy" decoding="async" class="relative max-h-full max-w-full w-auto h-auto object-contain rounded-lg shadow-xs group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/activities-sit-madani.webp'">
+                        <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="280" height="240" loading="lazy" decoding="async" class="relative max-h-full max-w-full w-auto h-auto object-contain rounded-lg shadow-xs group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/activities-sit-madani.webp'">
                     </a>
                     <span class="absolute bottom-2.5 left-2.5 z-10 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md">
                         <i class="fa-solid fa-trophy text-amber-400 mr-1"></i> Prestasi
@@ -571,7 +571,7 @@
                         @foreach($nasionalPosts as $post)
                         <div class="flex items-start space-x-3 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 mt-0.5 relative">
-                                <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="64" height="64" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="64" height="64" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">
@@ -608,7 +608,7 @@
                         @foreach($daerahPosts as $post)
                         <div class="flex items-start space-x-3 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 mt-0.5 relative">
-                                <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="64" height="64" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='/uploads/tahfidz-sit-madani.webp'">
+                                <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="64" height="64" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/tahfidz-sit-madani.webp'">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">
@@ -655,7 +655,7 @@
             <article class="flex flex-col group reveal-fade-up delay-{{ ($index % 4) + 1 }}">
                 <div class="aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100 shadow-sm relative">
                     <a href="{{ route('artikel.show', $post->slug) }}" class="block w-full h-full" aria-label="Baca program: {{ $post->title }}">
-                        <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="280" height="175" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/tahfidz-sit-madani.webp'">
+                        <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" width="280" height="175" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/tahfidz-sit-madani.webp'">
                     </a>
                 </div>
                 <div class="pt-3 flex-1 flex flex-col justify-between">
@@ -732,7 +732,7 @@
                 <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group reveal-fade-up delay-{{ ($idx % 3) + 1 }}">
                     <div class="relative h-48 sm:h-52 overflow-hidden bg-gray-100">
                         <a href="{{ route('ekskul.show', $ekskul->slug) }}" class="block w-full h-full">
-                            <img src="{{ $thumb }}" alt="{{ $ekskul->title }}" width="400" height="260" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                            <img src="{{ $thumb }}" alt="{{ $ekskul->title }}" width="400" height="260" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                         </a>
                         <span class="absolute top-3 left-3 bg-indigo-900/80 backdrop-blur-xs text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md flex items-center space-x-1">
                             <i class="fa-solid fa-star text-amber-300 text-[10px]"></i>
@@ -839,7 +839,7 @@
             @foreach($dewan as $index => $d)
             <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 text-center group hover:shadow-xl transition transform hover:-translate-y-1 reveal-fade-up delay-{{ $index + 1 }}">
                 <div class="aspect-[4/5] rounded-2xl overflow-hidden mb-3 bg-slate-100 border border-slate-100 relative">
-                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="240" height="300" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="240" height="300" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                 </div>
                 <h3 class="font-black text-sm text-gray-900 group-hover:text-indigo-600 transition">
                     {{ $d->name }}
@@ -856,7 +856,7 @@
             @foreach($dewan as $index => $d)
             <div class="bg-white rounded-2xl p-2.5 shadow-sm border border-gray-100 text-center reveal-fade-up delay-{{ $index + 1 }}">
                 <div class="aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-slate-100 border border-slate-100 relative">
-                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="180" height="225" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                    <img src="{{ $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg') }}" alt="Foto {{ $d->name }} - {{ $d->position }}" width="180" height="225" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                 </div>
                 <h3 class="font-bold text-xs text-gray-900 leading-tight">
                     {{ $d->name }}
@@ -1083,7 +1083,7 @@
                         <template x-for="(item, idx) in items" :key="idx">
                             <div class="flex-shrink-0 px-1.5 sm:px-3" :style="'width: ' + (100 / perView) + '%'">
                                 <div class="relative h-64 sm:h-80 md:h-96 lg:h-[380px] rounded-3xl overflow-hidden shadow-2xl bg-neutral-900 border border-neutral-800/80 group">
-                                    <img :src="item.url" :alt="item.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                    <img :src="item.url" :alt="item.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-5">
                                         <span class="text-xs sm:text-sm font-bold text-white leading-snug drop-shadow-md" x-text="item.title"></span>
                                     </div>
@@ -1140,7 +1140,7 @@
                         <template x-for="(item, idx) in items" :key="idx">
                             <div class="flex-shrink-0 px-1.5 sm:px-2.5" :style="'width: ' + (100 / perView) + '%'">
                                 <div class="relative h-52 sm:h-64 md:h-72 lg:h-80 rounded-2xl overflow-hidden shadow-xl bg-neutral-900 border border-neutral-800/80 group">
-                                    <img :src="item.url" :alt="item.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src='/uploads/activities-sit-madani.webp'">
+                                    <img :src="item.url" :alt="item.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.onerror=null; this.src='/uploads/activities-sit-madani.webp'">
                                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                                         <span class="text-xs font-bold text-white leading-snug drop-shadow-md" x-text="item.title"></span>
                                     </div>
@@ -1259,7 +1259,7 @@
                         <template x-for="(eb, idx) in items" :key="idx">
                             <div class="flex-shrink-0 px-2.5 sm:px-3" :style="'width: ' + (100 / perView) + '%'">
                                 <a href="{{ route('download.ebook') }}" class="group block relative rounded-2xl overflow-hidden shadow-2xl bg-slate-900 border border-slate-800 transform hover:scale-104 transition duration-300 cursor-pointer aspect-[3/4] w-full" :aria-label="'Unduh modul: ' + eb.title">
-                                    <img :src="eb.cover" :alt="eb.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-106 transition duration-500" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                    <img :src="eb.cover" :alt="eb.title" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-106 transition duration-500" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center p-3 text-center" aria-hidden="true">
                                         <span class="text-xs font-bold text-white truncate max-w-full" x-text="eb.title"></span>
                                     </div>
@@ -1319,7 +1319,7 @@
                 </div>
                 <div class="pt-4 mt-4 border-t border-gray-200/60 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left space-y-2 sm:space-y-0 sm:space-x-3">
                     <div class="w-10 h-10 rounded-full overflow-hidden bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xs flex-shrink-0 mx-auto sm:mx-0">
-                        <img src="{{ $t->photo_url }}" alt="Foto {{ $t->name }}" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($t->name) }}&background=4338ca&color=fff'">
+                        <img src="{{ $t->photo_url }}" alt="Foto {{ $t->name }}" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name={{ urlencode($t->name) }}&background=4338ca&color=fff'">
                     </div>
                     <div class="min-w-0 w-full text-center sm:text-left">
                         <h3 class="font-bold text-xs text-gray-900 break-words leading-tight">{{ $t->name }}</h3>
@@ -1391,7 +1391,7 @@
         </button>
 
         <a href="{{ $popupSettings['link'] ?? '/ppdb' }}" target="{{ $popupSettings['target'] ?? '_self' }}" class="block overflow-hidden group">
-            <img src="{{ asset($popupSettings['image']) }}" alt="{{ $popupSettings['title'] ?? 'SPMB SMPS IT Madani' }}" class="w-full h-auto max-h-[75vh] object-contain group-hover:scale-102 transition duration-500" onerror="this.src='/uploads/flyer-spmb-sit-madani.webp'">
+            <img src="{{ asset($popupSettings['image']) }}" alt="{{ $popupSettings['title'] ?? 'SPMB SMPS IT Madani' }}" class="w-full h-auto max-h-[75vh] object-contain group-hover:scale-102 transition duration-500" onerror="this.onerror=null; this.src='/uploads/flyer-spmb-sit-madani.webp'">
         </a>
 
         <div class="p-3.5 sm:p-4 bg-gradient-to-r from-indigo-950 to-blue-950 text-white flex items-center justify-between gap-3">

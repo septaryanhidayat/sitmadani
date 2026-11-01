@@ -26,6 +26,14 @@
         
         {{-- KOLOM UTAMA (2/3) --}}
         <div class="lg:col-span-8 space-y-8">
+            @if($page && !empty($page->content))
+            <article class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 prose-content">
+                @if(!empty($page->title))
+                    <h2 class="text-xl sm:text-2xl font-black text-gray-900 mb-4">{{ $page->title }}</h2>
+                @endif
+                {!! $page->content !!}
+            </article>
+            @endif
 
             {{-- 1. VISI & MISI YAYASAN AGUNG MADANI --}}
             <article class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 space-y-6">
@@ -230,7 +238,7 @@
                     @forelse($latestPosts ?? [] as $lp)
                         <a href="{{ route('artikel.show', $lp->slug) }}" class="flex items-center space-x-3 group">
                             <div class="w-14 h-14 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                                <img src="{{ $lp->featured_image }}" alt="{{ $lp->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                <img src="{{ $lp->featured_image }}" alt="{{ $lp->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                             </div>
                             <div>
                                 <h4 class="text-xs font-bold text-gray-800 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">
@@ -243,6 +251,37 @@
                         </a>
                     @empty
                         <p class="text-xs text-gray-400 text-center py-4">Belum ada berita terbaru.</p>
+                    @endforelse
+                </div>
+            </div>
+
+            {{-- WIDGET AGENDA TERBARU --}}
+            <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-5">
+                    <h3 class="font-extrabold text-gray-900 text-sm">Agenda Sekolah</h3>
+                    <a href="{{ route('agenda.index') }}" class="text-xs font-bold text-indigo-600 hover:text-amber-500">
+                        Lihat Semua &rarr;
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    @forelse($latestAgendas ?? [] as $la)
+                        <a href="{{ route('agenda.show', $la->slug) }}" class="flex items-start space-x-3 group p-3 rounded-xl hover:bg-indigo-50/50 transition">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-indigo-600 flex flex-col items-center justify-center flex-shrink-0 font-bold text-xs">
+                                <span class="text-sm font-extrabold leading-none">{{ $la->event_date ? $la->event_date->format('d') : '01' }}</span>
+                                <span class="text-[9px] uppercase">{{ $la->event_date ? $la->event_date->translatedFormat('M') : 'SMP' }}</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-gray-800 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">
+                                    {{ $la->title }}
+                                </h4>
+                                <span class="text-[11px] text-gray-400 block mt-1">
+                                    <i class="fa-solid fa-location-dot mr-1 text-orange-400"></i> {{ $la->location ?: 'Sekolah SMPS IT Madani Kayuagung' }}
+                                </span>
+                            </div>
+                        </a>
+                    @empty
+                        <p class="text-xs text-gray-400 text-center py-4">Belum ada agenda terdekat.</p>
                     @endforelse
                 </div>
             </div>

@@ -87,8 +87,8 @@ test('admin can update hero slider text, image, and buttons successfully', funct
     $log = ActivityLog::where('action', 'hero_settings_update')->latest()->first();
     expect($log)->not->toBeNull();
 
-    // Verify homepage renders updated content
-    $homeResponse = $this->get('/');
+    // Verify unit homepage renders updated hero slider content
+    $homeResponse = $this->get('/smp');
     $homeResponse->assertStatus(200);
     $homeResponse->assertSee('Judul Kustom Banner Hero Slide 1');
     $homeResponse->assertSee('SMP IT Unggulan Terdepan');

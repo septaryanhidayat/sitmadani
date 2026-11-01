@@ -11,7 +11,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\View;
 
 test('home page renders all authentic school sections successfully', function () {
-    $response = $this->get('/');
+    $response = $this->get('/smp');
     $response->assertStatus(200);
     $response->assertSee('Menu Utama');
     $response->assertSee('Sambutan Kepala Sekolah');
@@ -270,7 +270,7 @@ test('dewan guru page dynamically reflects updated name and photo from database'
 });
 
 test('home page renders dual-row gallery slider with madani photos', function () {
-    $response = $this->get('/');
+    $response = $this->get('/smp');
 
     $response->assertStatus(200);
     $response->assertSee('Galeri');
@@ -377,8 +377,8 @@ test('prestasi created in admin displays on homepage and dedicated prestasi page
     ]);
     $prestasi->categories()->attach($category->id);
 
-    // 1. Check Homepage
-    $homeResponse = $this->get('/');
+    // 1. Check Unit Homepage (SMP)
+    $homeResponse = $this->get('/smp');
     $homeResponse->assertStatus(200);
     $homeResponse->assertSee('Arumi Juara 2 Tahfidz Kayuagung, Kab. OKI');
     $homeResponse->assertSee(route('prestasi.show', 'arumi-juara-2-tahfidz-kota-kayuagung'));

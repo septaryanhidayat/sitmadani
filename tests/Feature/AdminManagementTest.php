@@ -142,8 +142,8 @@ test('gallery displays uploaded photos on galeri page and home page', function (
         ->assertSee('Dokumentasi Wisuda Tahfidz Madani Terkini')
         ->assertSee('/uploads/galeri/test_tahfidz.webp');
 
-    // Check on homepage
-    $this->get('/')
+    // Check on unit homepage (SMP)
+    $this->get('/smp')
         ->assertStatus(200)
         ->assertSee('test_tahfidz.webp');
 });

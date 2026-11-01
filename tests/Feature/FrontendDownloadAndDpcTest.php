@@ -7,10 +7,10 @@ uses(RefreshDatabase::class);
 
 test('home page loads successfully', function () {
     $this->seed();
-    $response = $this->get('/');
+    $response = $this->get('/smp');
     $response->assertStatus(200);
     $response->assertSee('Sambutan Kepala Sekolah');
-    $response->assertSee('E-Library & Modul Siswa');
+    $response->assertSee('E-Library');
 });
 
 test('dpc page displays real subdistricts without lorem ipsum', function () {

@@ -61,7 +61,7 @@
                 @endphp
 
                 <div class="rounded-2xl overflow-hidden shadow-md bg-gray-100 max-h-[460px]">
-                    <img src="{{ $thumb }}" alt="{{ $item->title }}" class="w-full h-full object-cover" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                    <img src="{{ $thumb }}" alt="{{ $item->title }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                 </div>
 
                 @if($hasContent)
@@ -139,7 +139,7 @@
                     @forelse($otherEkskul as $oEks)
                         <a href="{{ route('ekskul.show', $oEks->slug) }}" class="flex items-center space-x-3 group p-2 rounded-xl hover:bg-indigo-50/60 transition">
                             <div class="w-14 h-14 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 shadow-sm">
-                                <img src="{{ $oEks->featured_image ?: '/uploads/campus-sit-madani.webp' }}" alt="{{ $oEks->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                <img src="{{ $oEks->featured_image ?: '/uploads/campus-sit-madani.webp' }}" alt="{{ $oEks->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs font-bold text-gray-900 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">

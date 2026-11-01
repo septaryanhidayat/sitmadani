@@ -30,7 +30,7 @@
         @forelse($alumni as $idx => $item)
             <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center group reveal-fade-up">
                 <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 bg-indigo-50/60 ring-4 ring-emerald-100 shadow-md group-hover:scale-105 transition">
-                    <img src="{{ $item->featured_image ?: '/uploads/logo-madani-square.webp' }}" alt="{{ $item->title }}" class="w-full h-full object-cover" onerror="this.src='/uploads/logo-madani-square.webp'">
+                    <img src="{{ $item->featured_image ?: '/uploads/logo-madani-square.webp' }}" alt="{{ $item->title }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='/uploads/logo-madani-square.webp'">
                 </div>
                 <h3 class="font-bold text-gray-900 text-sm sm:text-base group-hover:text-indigo-600 transition line-clamp-1">
                     {{ $item->title }}

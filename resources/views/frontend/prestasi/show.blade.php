@@ -40,7 +40,7 @@
             <div class="bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
                 @if($item->featured_image)
                     <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-50/80 p-2 sm:p-4 flex items-center justify-center">
-                        <img src="{{ $item->featured_image_url }}" alt="{{ $item->title }}" class="w-auto max-w-full max-h-[750px] object-contain rounded-xl mx-auto shadow-sm" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                        <img src="{{ $item->featured_image_url }}" alt="{{ $item->title }}" class="w-auto max-w-full max-h-[750px] object-contain rounded-xl mx-auto shadow-sm" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                     </div>
                 @endif
 
@@ -74,7 +74,7 @@
                     @forelse($related as $rel)
                         <a href="{{ route('prestasi.show', $rel->slug) }}" class="flex items-center space-x-3 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-sm flex items-center justify-center p-1">
-                                <img src="{{ $rel->featured_image_url }}" alt="{{ $rel->title }}" class="w-full h-full object-contain group-hover:scale-105 transition" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                <img src="{{ $rel->featured_image_url }}" alt="{{ $rel->title }}" class="w-full h-full object-contain group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs sm:text-sm font-semibold text-gray-800 group-hover:text-indigo-600 transition line-clamp-2 leading-snug">

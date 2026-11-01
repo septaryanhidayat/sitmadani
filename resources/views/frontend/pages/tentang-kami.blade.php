@@ -255,7 +255,7 @@
                     </div>
                     <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left space-y-2 sm:space-y-0 sm:space-x-3 pt-3 border-t border-gray-50">
                         <div class="w-10 h-10 rounded-full bg-green-100 text-indigo-600 font-bold flex items-center justify-center flex-shrink-0 overflow-hidden text-sm mx-auto sm:mx-0">
-                            <img src="{{ $testi->photo_url }}" alt="{{ $testi->name }}" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($testi->name) }}&background=0d6b38&color=fff'">
+                            <img src="{{ $testi->photo_url }}" alt="{{ $testi->name }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name={{ urlencode($testi->name) }}&background=0d6b38&color=fff'">
                         </div>
                         <div class="min-w-0">
                             <span class="block font-bold text-xs text-gray-900 text-center sm:text-left">{{ $testi->name }}</span>

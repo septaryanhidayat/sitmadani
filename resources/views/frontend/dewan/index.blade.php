@@ -67,7 +67,7 @@
             @foreach($unitGurus['yayasan'] as $p)
                 <div class="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl border border-gray-100 transition transform hover:-translate-y-1 flex space-x-4 items-center">
                     <div class="w-20 h-24 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 relative border-2 border-indigo-100 shadow-sm">
-                        <img src="{{ $p['photo'] }}" alt="{{ $p['name'] }}" class="w-full h-full object-cover object-top" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                        <img src="{{ $p['photo'] }}" alt="{{ $p['name'] }}" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                     </div>
                     <div class="space-y-1 min-w-0">
                         <span class="inline-block bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
@@ -104,7 +104,7 @@
             @foreach($unitGurus['tk'] as $g)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition transform hover:-translate-y-1 flex flex-col justify-between">
                     <div class="aspect-[4/5] w-full overflow-hidden bg-slate-100 relative group">
-                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                         <div class="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <span class="absolute bottom-3 left-3 text-[10px] font-extrabold text-slate-900 bg-amber-400 px-2.5 py-0.5 rounded-full shadow">
                             {{ $g['position'] }}
@@ -146,7 +146,7 @@
             @foreach($unitGurus['sd'] as $g)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition transform hover:-translate-y-1 flex flex-col justify-between">
                     <div class="aspect-[4/5] w-full overflow-hidden bg-slate-100 relative group">
-                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                         <div class="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <span class="absolute bottom-3 left-3 text-[10px] font-extrabold text-white bg-emerald-600 px-2.5 py-0.5 rounded-full shadow">
                             {{ $g['position'] }}
@@ -188,7 +188,7 @@
             @foreach($unitGurus['smp'] as $g)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition transform hover:-translate-y-1 flex flex-col justify-between">
                     <div class="aspect-[4/5] w-full overflow-hidden bg-slate-100 relative group">
-                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/dewan/avatar-default.svg'">
+                        <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                         <div class="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <span class="absolute bottom-3 left-3 text-[10px] font-extrabold text-white bg-blue-600 px-2.5 py-0.5 rounded-full shadow">
                             {{ $g['position'] }}

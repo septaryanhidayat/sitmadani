@@ -35,7 +35,7 @@
                     {{-- Ambient background so there are no empty gaps --}}
                     <img src="{{ $item->featured_image_url }}" alt="" class="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none" aria-hidden="true">
                     {{-- Full uncropped image --}}
-                    <img src="{{ $item->featured_image_url }}" alt="{{ $item->title }}" class="relative max-h-full max-w-full w-auto h-auto object-contain rounded-xl shadow-xs group-hover:scale-102 transition duration-300" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                    <img src="{{ $item->featured_image_url }}" alt="{{ $item->title }}" class="relative max-h-full max-w-full w-auto h-auto object-contain rounded-xl shadow-xs group-hover:scale-102 transition duration-300" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                     <span class="absolute top-3 left-3 z-10 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md flex items-center space-x-1.5">
                         <i class="fa-solid fa-award text-xs"></i>
                         <span>Juara &amp; Prestasi</span>

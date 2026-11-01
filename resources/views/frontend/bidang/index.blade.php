@@ -37,7 +37,7 @@
                 <div>
                     {{-- FOTO DOKUMENTASI FASILITAS SEKOLAH --}}
                     <div class="h-48 sm:h-52 w-full overflow-hidden bg-slate-100 relative">
-                        <img src="{{ $b->thumbnail_url }}" alt="{{ $b->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                        <img src="{{ $b->thumbnail_url }}" alt="{{ $b->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                         <span class="absolute top-3.5 left-3.5 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wider">
                             Fasilitas Sekolah
                         </span>

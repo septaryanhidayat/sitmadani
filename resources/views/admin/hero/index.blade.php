@@ -120,7 +120,7 @@
                                      src="{{ asset($slide['image'] ?? '/uploads/campus-sit-madani.webp') }}" 
                                      alt="Preview Banner Slide {{ $index + 1 }}" 
                                      class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500"
-                                     onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                     onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                                 
                                 {{-- Overlay preview badge & title --}}
                                 <div class="absolute inset-0 bg-slate-950/45 p-4 flex flex-col justify-end text-white pointer-events-none">

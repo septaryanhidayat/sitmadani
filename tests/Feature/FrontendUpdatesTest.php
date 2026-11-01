@@ -37,10 +37,10 @@ test('halaman home menampilkan kabar sekolah dan showcase e-library', function (
         $post->categories()->attach($category->id);
     }
 
-    $response = $this->get(route('home'));
+    $response = $this->get('/smp');
 
     $response->assertStatus(200);
-    $response->assertSee('E-Library & Modul Siswa');
+    $response->assertSee('E-Library');
     $response->assertSee(route('download.ebook'));
     $response->assertSee('gtranslate_wrapper');
     $response->assertSee('back-to-top');
@@ -101,8 +101,8 @@ test('dewan guru menampilkan ustadz fulan dan ustadzah fulanah dengan avatar abu
 
     $response->assertStatus(200);
     $response->assertSee('Ribang Imam Satria');
-    $response->assertSee('Ustadz Fulan');
-    $response->assertSee('Ustadzah Fulanah');
+    $response->assertSee('Helen Lestari');
+    $response->assertSee('Yushamdalah');
     $response->assertSee('avatar-default.svg');
 });
 
@@ -111,10 +111,10 @@ test('galeri video dan beranda menampilkan video resmi youtube smp it madani', f
     $responseVideo = $this->get(route('video.index'));
     $responseVideo->assertStatus(200);
     $responseVideo->assertSee('_ltiwpOmK1k');
-    $responseVideo->assertSee('Mengenal Lebih Dekat Profil dan Visi SMP IT Madani Kayuagung');
+    $responseVideo->assertSee('Profil dan Visi Misi SMPS IT Madani');
     $responseVideo->assertSee('https://www.youtube.com/@sitmadani');
 
-    $responseHome = $this->get(route('home'));
+    $responseHome = $this->get('/smp');
     $responseHome->assertStatus(200);
     $responseHome->assertSee('Galeri Video Resmi YouTube');
     $responseHome->assertSee('_ltiwpOmK1k');

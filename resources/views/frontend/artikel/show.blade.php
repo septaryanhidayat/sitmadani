@@ -71,7 +71,7 @@
             {{-- Featured Image --}}
             @if($post->featured_image)
                 <div class="mb-8 rounded-2xl overflow-hidden shadow-md bg-gray-100">
-                    <img src="{{ $post->featured_image }}" alt="{{ $post->title }}" class="w-full h-auto max-h-[500px] object-cover" onerror="this.style.display='none'">
+                    <img src="{{ $post->featured_image }}" alt="{{ $post->title }}" class="w-full h-auto max-h-[500px] object-cover" onerror="this.onerror=null; this.style.display='none'">
                 </div>
             @endif
 
@@ -128,7 +128,7 @@
                             <a href="{{ route('artikel.show', $rPost->slug) }}" class="group block">
                                 <div class="h-36 rounded-xl overflow-hidden bg-gray-100 mb-3 shadow-sm">
                                     @if($rPost->featured_image)
-                                        <img src="{{ $rPost->featured_image }}" alt="{{ $rPost->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                        <img src="{{ $rPost->featured_image }}" alt="{{ $rPost->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                                     @else
                                         <img src="/uploads/campus-sit-madani.webp" alt="{{ $rPost->title }}" class="w-full h-full object-cover">
                                     @endif
@@ -186,7 +186,7 @@
                         <div class="flex items-start space-x-3 group">
                             <a href="{{ route('artikel.show', $rPost->slug) }}" class="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
                                 @if($rPost->featured_image)
-                                    <img src="{{ $rPost->featured_image }}" alt="{{ $rPost->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                                    <img src="{{ $rPost->featured_image }}" alt="{{ $rPost->title }}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                                 @else
                                     <img src="/uploads/campus-sit-madani.webp" alt="{{ $rPost->title }}" class="w-full h-full object-cover">
                                 @endif

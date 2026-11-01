@@ -44,7 +44,7 @@
 
                     <div class="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center p-2 shadow-xs group-hover:scale-105 transition">
                         @if($qm->is_image)
-                            <img src="{{ $qm->icon }}" alt="{{ $qm->name }}" class="max-h-full max-w-full object-contain" onerror="this.src='/uploads/logo-madani-square.webp'">
+                            <img src="{{ $qm->icon }}" alt="{{ $qm->name }}" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='/uploads/logo-madani-square.webp'">
                         @else
                             <i class="{{ $qm->icon }} text-2xl text-[#da251c]"></i>
                         @endif

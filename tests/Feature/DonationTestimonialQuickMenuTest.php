@@ -163,7 +163,7 @@ test('admin can update bidang icon and it displays on public page', function () 
 });
 
 test('home page renders at most 8 quick menu items in responsive grid', function () {
-    $response = $this->get('/');
+    $response = $this->get('/smp');
     $response->assertStatus(200);
     $response->assertSee('grid grid-cols-4 md:grid-cols-8', false);
     $response->assertSee('Menu Utama Sekolah');

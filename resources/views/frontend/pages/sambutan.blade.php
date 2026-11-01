@@ -85,7 +85,7 @@
         {{-- PROFIL PIMPINAN HEADER --}}
         <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8 mb-8 pb-8 border-b border-gray-100 text-center md:text-left">
             <div class="w-44 h-52 sm:w-52 sm:h-60 rounded-2xl overflow-hidden shadow-lg border-4 border-white ring-4 ring-indigo-100 flex-shrink-0 bg-indigo-50 mx-auto md:mx-0">
-                <img src="{{ $cur['photo'] }}" alt="{{ $cur['name'] }} - {{ $cur['position'] }}" class="w-full h-full object-cover object-top" onerror="this.src='/uploads/logo-madani-square.webp'">
+                <img src="{{ $cur['photo'] }}" alt="{{ $cur['name'] }} - {{ $cur['position'] }}" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/uploads/logo-madani-square.webp'">
             </div>
             <div class="space-y-2 text-center md:text-left">
                 <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
@@ -101,6 +101,9 @@
 
         {{-- KONTEN PIDATO --}}
         <div class="prose-content text-gray-800 text-xs sm:text-sm md:text-base leading-relaxed space-y-5 text-left sm:text-justify max-w-4xl mx-auto">
+            @if($page && !empty($page->content))
+                {!! $page->content !!}
+            @else
             <p class="font-semibold text-gray-900 text-sm sm:text-lg">{{ $cur['salutation'] }}</p>
 
             <p>{{ $cur['content'] }}</p>
@@ -114,6 +117,7 @@
             </p>
 
             <p class="font-semibold text-gray-900 pt-2">Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+            @endif
 
             <div class="pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                 <div>

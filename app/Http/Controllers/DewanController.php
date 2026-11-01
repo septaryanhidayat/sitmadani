@@ -21,12 +21,18 @@ class DewanController extends Controller
 
         $dbDewan = AnggotaDewan::orderBy('order', 'asc')->get();
 
-        // Kumpulan data struktur GTK per unit dari SchoolUnitService
         $unitGurus = [
             'yayasan' => SchoolUnitService::getUnit('yayasan')['pengurus'] ?? [],
             'tk' => SchoolUnitService::getUnit('tk')['gurus'] ?? [],
             'sd' => SchoolUnitService::getUnit('sd')['gurus'] ?? [],
-            'smp' => SchoolUnitService::getUnit('smp')['gurus'] ?? [],
+            'smp' => $dbDewan->isNotEmpty()
+                ? $dbDewan->map(fn ($d) => [
+                    'name' => $d->name,
+                    'position' => $d->position,
+                    'photo' => $d->photo ?? '/uploads/dewan/avatar-default.svg',
+                    'fraction' => $d->fraction ?? 'Guru Bidang Studi',
+                ])->toArray()
+                : (SchoolUnitService::getUnit('smp')['gurus'] ?? []),
         ];
 
         return view('frontend.dewan.index', compact('dbDewan', 'unitGurus', 'units', 'currentUnitKey', 'currentUnit'));

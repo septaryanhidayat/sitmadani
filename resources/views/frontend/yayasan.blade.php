@@ -9,7 +9,7 @@
     {{-- ========================================================
          HERO SECTION: PORTAL UTAMA YAYASAN AGUNG MADANI
          ======================================================== --}}
-    <section class="relative bg-gradient-to-br from-[#0c1427] via-[#1e1b4b] to-[#172554] text-white py-16 sm:py-24 overflow-hidden border-b border-indigo-900/60 shadow-2xl">
+    <section class="relative bg-gradient-to-br from-[#0c1427] via-[#1e1b4b] to-[#172554] text-white py-16 sm:py-24 overflow-hidden border-b border-indigo-900/60 shadow-2xl" style="background: linear-gradient(135deg, #0c1427 0%, #1e1b4b 50%, #172554 100%) !important; color: #ffffff !important;">
         {{-- Background Ornament & Islamic Geometric Pattern --}}
         <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:24px_24px]"></div>
         <div class="absolute -top-32 -right-32 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -19,28 +19,28 @@
             <div class="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
                 
                 {{-- Badge Yayasan --}}
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-inner text-amber-300 text-xs sm:text-sm font-bold uppercase tracking-wider animate-fadeIn">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-inner text-amber-300 text-xs sm:text-sm font-bold uppercase tracking-wider animate-fadeIn" style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #fcd34d;">
                     <i class="fa-solid fa-landmark text-amber-400"></i>
                     <span>Yayasan Agung Madani Kayuagung • Kab. OKI</span>
                 </div>
 
                 {{-- Headline --}}
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase drop-shadow-md">
-                    Sekolah Islam Terpadu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-200">Madani</span>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase drop-shadow-md" style="color: #ffffff !important;">
+                    Sekolah Islam Terpadu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-200" style="-webkit-background-clip: text; color: #fbbf24; text-shadow: 0 0 25px rgba(251,191,36,0.35);">Madani</span>
                 </h1>
 
-                <p class="text-sm sm:text-lg text-indigo-100 font-medium leading-relaxed">
+                <p class="text-sm sm:text-lg text-indigo-100 font-medium leading-relaxed" style="color: #e0e7ff !important;">
                     Mewujudkan ekosistem pendidikan Islam terpadu satu atap yang membina generasi robbani berakhlak mulia, cerdas, berprestasi, dan mandiri berbekal Al-Qur'an, sains, dan teknologi.
                 </p>
 
                 {{-- Action Buttons --}}
                 <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                    <a href="#unit-sekolah" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <a href="#unit-sekolah" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2" style="background: linear-gradient(to right, #fbbf24, #eab308); color: #020617;">
                         <i class="fa-solid fa-layer-group"></i>
                         <span>Pilih Unit Sekolah</span>
                         <i class="fa-solid fa-arrow-down text-xs"></i>
                     </a>
-                    <a href="#struktur-yayasan" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm tracking-wide transition flex items-center gap-2">
+                    <a href="#struktur-yayasan" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm tracking-wide transition flex items-center gap-2" style="background-color: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); color: #ffffff;">
                         <i class="fa-solid fa-sitemap text-amber-300"></i>
                         <span>Struktur Yayasan</span>
                     </a>
@@ -48,21 +48,21 @@
 
                 {{-- Statistics Chips --}}
                 <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto text-center">
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                        <span class="block text-xl sm:text-2xl font-black text-amber-400">3 Unit</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">TK, SD & SMP</span>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
+                        <span class="block text-xl sm:text-2xl font-black text-amber-400" style="color: #fbbf24;">3 Unit</span>
+                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">TK, SD & SMP</span>
                     </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                        <span class="block text-xl sm:text-2xl font-black text-emerald-400">Terakreditasi</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">BAN-SM / PAUD</span>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
+                        <span class="block text-xl sm:text-2xl font-black text-emerald-400" style="color: #34d399;">Terakreditasi</span>
+                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">BAN-SM / PAUD</span>
                     </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                        <span class="block text-xl sm:text-2xl font-black text-cyan-400">JSIT</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Jaringan Nasional</span>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
+                        <span class="block text-xl sm:text-2xl font-black text-cyan-400" style="color: #22d3ee;">JSIT</span>
+                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">Jaringan Nasional</span>
                     </div>
-                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                        <span class="block text-xl sm:text-2xl font-black text-amber-400">Tahfidz</span>
-                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Mutqin Bersanad</span>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm" style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
+                        <span class="block text-xl sm:text-2xl font-black text-amber-400" style="color: #fbbf24;">Tahfidz</span>
+                        <span class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold" style="color: #cbd5e1;">Mutqin Bersanad</span>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                 {{-- 1. CARD TKS IT MADANI --}}
                 <div class="bg-white rounded-3xl border-2 border-amber-200 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
                     {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white relative">
+                    <div class="p-6 bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white relative" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: #ffffff;">
                         <div class="flex items-center justify-between mb-4">
                             <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
                                 PAUD / TK ISLAM TERPADU
@@ -117,7 +117,7 @@
                         <div>
                             {{-- Kepala Sekolah --}}
                             <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-amber-50/70 border border-amber-100">
-                                <img src="/uploads/dewan/bunda-ayu.webp" alt="Kepala TKS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-amber-400 shadow-sm shrink-0">
+                                <img src="/uploads/dewan/bunda-ayu.webp" alt="Kepala TKS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-amber-400 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                                 <div>
                                     <span class="text-[10px] uppercase font-bold text-amber-800 tracking-wider block">Kepala Sekolah</span>
                                     <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Ayu Rahmayani, S.Pd.Gr.</h4>
@@ -190,7 +190,7 @@
                     </div>
 
                     {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-800 text-white relative">
+                    <div class="p-6 bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-800 text-white relative" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #ffffff;">
                         <div class="flex items-center justify-between mb-4">
                             <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
                                 SEKOLAH DASAR ISLAM TERPADU
@@ -212,7 +212,7 @@
                         <div>
                             {{-- Kepala Sekolah & Komite --}}
                             <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100">
-                                <img src="/uploads/dewan/ust-andi.webp" alt="Pimpinan SDS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-emerald-500 shadow-sm shrink-0">
+                                <img src="/uploads/dewan/ust-andi.webp" alt="Pimpinan SDS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-emerald-500 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                                 <div>
                                     <span class="text-[10px] uppercase font-bold text-emerald-800 tracking-wider block">Pimpinan & Komite</span>
                                     <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Yudhi Arsyandi, S.Pd., Gr.</h4>
@@ -278,7 +278,7 @@
                 {{-- 3. CARD SMPS IT MADANI --}}
                 <div class="bg-white rounded-3xl border-2 border-indigo-300 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
                     {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-indigo-900 via-indigo-950 to-blue-950 text-white relative">
+                    <div class="p-6 bg-gradient-to-br from-indigo-900 via-indigo-950 to-blue-950 text-white relative" style="background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); color: #ffffff;">
                         <div class="flex items-center justify-between mb-4">
                             <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
                                 SMP IT & ASRAMA TAHFIDZ
@@ -300,7 +300,7 @@
                         <div>
                             {{-- Kepala Sekolah --}}
                             <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-indigo-50/70 border border-indigo-100">
-                                <img src="/uploads/dewan/kepala-sekolah.webp" alt="Kepala SMPS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-indigo-600 shadow-sm shrink-0">
+                                <img src="/uploads/dewan/kepala-sekolah.webp" alt="Kepala SMPS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-indigo-600 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                                 <div>
                                     <span class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider block">Kepala Sekolah</span>
                                     <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Ribang Imam Satria, S.Pi., Gr.</h4>
@@ -372,14 +372,14 @@
          ======================================================== --}}
     <section class="py-14 sm:py-20 bg-white border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-gradient-to-br from-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden">
+            <div class="bg-gradient-to-br from-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0c1427 100%) !important; color: #ffffff !important;">
                 <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     {{-- Foto Ketua Yayasan --}}
                     <div class="lg:col-span-4 flex flex-col items-center text-center">
                         <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-3xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-slate-800">
-                            <img src="/uploads/dewan/ust-legianto.webp" alt="Drs. H. Legianto, M.E.E. - Ketua Yayasan Agung Madani" class="w-full h-full object-cover">
+                            <img src="/uploads/dewan/ust-legianto.webp" alt="Drs. H. Legianto, M.E.E. - Ketua Yayasan Agung Madani" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
                         </div>
                         <div class="mt-4">
                             <h3 class="text-base sm:text-lg font-black text-amber-300">Drs. H. Legianto, M.E.E.</h3>
@@ -501,7 +501,7 @@
             </div>
 
             {{-- Direktorat Yayasan --}}
-            <div class="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e40af 100%) !important; color: #ffffff !important;">
                 <div class="text-center mb-6">
                     <span class="text-xs uppercase font-extrabold tracking-widest text-amber-300 block mb-1">Manajemen Operasional</span>
                     <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight">Direktorat Yayasan Agung Madani</h3>
@@ -628,7 +628,7 @@
                 <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl transition flex flex-col justify-between">
                     <div>
                         <div class="h-44 overflow-hidden bg-slate-100">
-                            <img src="{{ $post->featured_image ?? '/uploads/campus-sit-madani.webp' }}" alt="{{ $post->title }}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                            <img src="{{ $post->featured_image ?? '/uploads/campus-sit-madani.webp' }}" alt="{{ $post->title }}" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp';">
                         </div>
                         <div class="p-5">
                             <span class="text-[10px] uppercase font-bold text-amber-600 block mb-1">
@@ -659,7 +659,7 @@
     {{-- ========================================================
          SECTION: CTA PENERIMAAN MURID BARU (SPMB TERPADU)
          ======================================================== --}}
-    <section class="py-14 sm:py-20 bg-gradient-to-br from-indigo-950 via-indigo-900 to-blue-950 text-white relative overflow-hidden">
+    <section class="py-14 sm:py-20 bg-gradient-to-br from-indigo-950 via-indigo-900 to-blue-950 text-white relative overflow-hidden" style="background: linear-gradient(135deg, #0c1427 0%, #1e1b4b 50%, #172554 100%) !important; color: #ffffff !important;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
             <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/20">
                 Penerimaan Santri Baru TP 2026/2027
@@ -690,3 +690,4 @@
 
 </main>
 @endsection
+

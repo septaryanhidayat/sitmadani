@@ -62,7 +62,7 @@
             <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group reveal-fade-up">
                 <div class="relative h-56 overflow-hidden bg-gray-100">
                     <a href="{{ route('ekskul.show', $item->slug) }}" class="block w-full h-full">
-                        <img src="{{ $thumb }}" alt="{{ $item->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='/uploads/campus-sit-madani.webp'">
+                        <img src="{{ $thumb }}" alt="{{ $item->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/campus-sit-madani.webp'">
                     </a>
                     <span class="absolute top-3 left-3 bg-indigo-600/90 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md flex items-center space-x-1.5">
                         <i class="fa-solid fa-star text-amber-300 text-xs"></i>

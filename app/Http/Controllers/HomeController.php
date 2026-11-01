@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\AnggotaDewan;
+use App\Models\Download;
 use App\Models\Pengumuman;
 use App\Models\Post;
+use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Video;
 use App\Services\SchoolUnitService;
@@ -89,7 +92,19 @@ class HomeController extends Controller
         $currentUnit = SchoolUnitService::getUnit($unit);
 
         // 1. Hero slides unit
-        $heroSlides = $currentUnit['slides'] ?? [];
+        $heroSlides = [];
+        if ($unit === 'smp') {
+            $customSlides = Setting::get('hero_slides');
+            if ($customSlides) {
+                $decoded = json_decode($customSlides, true);
+                if (is_array($decoded) && ! empty($decoded)) {
+                    $heroSlides = array_values(array_filter($decoded, fn ($s) => ! isset($s['active']) || $s['active']));
+                }
+            }
+        }
+        if (empty($heroSlides)) {
+            $heroSlides = $currentUnit['slides'] ?? [];
+        }
         if (empty($heroSlides)) {
             $heroSlides = [
                 [
@@ -155,8 +170,39 @@ class HomeController extends Controller
 
         // 8. Dewan Guru & GTK Unit
         $dewanData = $currentUnit['gurus'] ?? [];
-        $dewan = collect($dewanData)->map(function ($g, $idx) {
-            return (object) [
+        if ($unit === 'smp') {
+            $dbDewan = AnggotaDewan::orderBy('order', 'asc')->take(8)->get();
+            if ($dbDewan->isNotEmpty()) {
+                $dewan = $dbDewan->map(function ($d) {
+                    return (object) [
+                        'id' => $d->id,
+                        'name' => $d->name,
+                        'slug' => $d->slug ?? str()->slug($d->name),
+                        'position' => $d->position,
+                        'fraction' => $d->fraction ?? 'Pendidik',
+                        'education' => $d->education ?? 'Sarjana Kependidikan',
+                        'photo' => $d->photo ?? '/uploads/dewan/avatar-default.svg',
+                        'photo_url' => $d->photo_url ?? ($d->photo ?? '/uploads/dewan/avatar-default.svg'),
+                        'profile_summary' => $d->profile_summary ?? 'Tenaga pendidik profesional dan berdedikasi.',
+                        'order' => $d->order,
+                    ];
+                });
+            } else {
+                $dewan = collect($dewanData)->map(fn ($g, $idx) => (object) [
+                    'id' => $idx + 1,
+                    'name' => $g['name'],
+                    'slug' => str()->slug($g['name']),
+                    'position' => $g['position'],
+                    'fraction' => $g['fraction'] ?? 'Pendidik',
+                    'education' => $g['education'] ?? 'Sarjana Kependidikan',
+                    'photo' => $g['photo'] ?? '/uploads/dewan/avatar-default.svg',
+                    'photo_url' => $g['photo'] ?? '/uploads/dewan/avatar-default.svg',
+                    'profile_summary' => 'Tenaga pendidik profesional dan berdedikasi.',
+                    'order' => $g['order'] ?? ($idx + 1),
+                ])->take(8);
+            }
+        } else {
+            $dewan = collect($dewanData)->map(fn ($g, $idx) => (object) [
                 'id' => $idx + 1,
                 'name' => $g['name'],
                 'slug' => str()->slug($g['name']),
@@ -167,8 +213,8 @@ class HomeController extends Controller
                 'photo_url' => $g['photo'] ?? '/uploads/dewan/avatar-default.svg',
                 'profile_summary' => 'Tenaga pendidik profesional dan berdedikasi.',
                 'order' => $g['order'] ?? ($idx + 1),
-            ];
-        })->take(8);
+            ])->take(8);
+        }
 
         // 9. Video
         $videos = Video::latest()->take(6)->get();
@@ -190,12 +236,40 @@ class HomeController extends Controller
             ['url' => '/uploads/campus-sit-madani.webp', 'title' => 'Lingkungan Asri & Ramah Anak'],
             ['url' => '/uploads/activities-sit-madani.webp', 'title' => 'Keceriaan Belajar Bersama'],
         ];
-        $galleryRow1 = $fallbackRow1;
-        $galleryRow2 = $fallbackRow2;
+
+        $dbGallery = Post::where('type', 'gallery')
+            ->where('status', 'publish')
+            ->latest()
+            ->take(16)
+            ->get()
+            ->map(fn ($g) => [
+                'url' => $g->featured_image ?? '/uploads/campus-sit-madani.webp',
+                'title' => $g->title,
+            ])->toArray();
+
+        if (! empty($dbGallery)) {
+            $half = (int) ceil(count($dbGallery) / 2);
+            $galleryRow1 = array_slice($dbGallery, 0, $half);
+            $galleryRow2 = array_slice($dbGallery, $half);
+        } else {
+            $galleryRow1 = $fallbackRow1;
+            $galleryRow2 = $fallbackRow2;
+        }
         $galleryPhotos = array_merge($galleryRow1, $galleryRow2);
 
         // 12. E-Books
-        $ebooks = [];
+        $ebookDownloads = Download::where('category_type', 'E-Book')->orderBy('id', 'asc')->get();
+        if ($ebookDownloads->isNotEmpty()) {
+            $ebooks = $ebookDownloads->map(fn ($dl) => [
+                'id' => $dl->id,
+                'title' => $dl->title,
+                'cover' => $dl->cover_image ?: '/uploads/covers/cover-tahfidz-mutqin.webp',
+                'pdf' => route('download.file', $dl->id, false),
+                'direct_file' => $dl->file_path,
+            ])->toArray();
+        } else {
+            $ebooks = [];
+        }
 
         // 13. Testimonials
         $testimonials = Testimonial::where('status', 'publish')->take(4)->get();
@@ -216,25 +290,25 @@ class HomeController extends Controller
 
         // 16. SPMB Banner khusus unit
         $spmbBanner = [
-            'badge' => 'PENERIMAAN PESERTA DIDIK BARU (SPMB ONLINE)',
-            'title' => 'SPMB '.$currentUnit['name'].' TP 2026/2027',
-            'year' => '2026/2027',
-            'description' => 'Mari bergabung bersama keluarga besar '.$currentUnit['name'].'. Memadukan kurikulum nasional terpadu dengan pembinaan adab Qur\'ani, hafalan Al-Qur\'an, serta penguasaan keterampilan masa depan.',
-            'card1_title' => 'PENDAFTARAN',
-            'card1_desc' => 'Gelombang 1 Dibuka',
-            'card1_color' => '#fde047',
-            'card2_title' => 'BEASISWA & CASHBACK',
-            'card2_desc' => 'Tersedia Potongan Spesial',
-            'card2_color' => '#fde047',
-            'card3_title' => 'KUOTA KELAS',
-            'card3_desc' => 'Terbatas & Selektif',
-            'card3_color' => '#fde047',
-            'flyer_image' => '/uploads/logo-madani-square.webp',
-            'flyer_label' => 'Brosur Resmi SPMB',
-            'btn_text' => 'Daftar SPMB '.$currentUnit['short_name'],
-            'btn_url' => route('unit.ppdb', $unit),
-            'contact_text' => 'Hotline: '.$currentUnit['phone'],
-            'contact_phone' => $currentUnit['phone'],
+            'badge' => Setting::get('spmb_banner_badge', 'PENERIMAAN PESERTA DIDIK BARU (SPMB ONLINE)'),
+            'title' => Setting::get('spmb_banner_title', 'SPMB '.$currentUnit['name'].' TP 2026/2027'),
+            'year' => Setting::get('spmb_banner_year', '2026/2027'),
+            'description' => Setting::get('spmb_banner_description', 'Mari bergabung bersama keluarga besar '.$currentUnit['name'].'. Memadukan kurikulum nasional terpadu dengan pembinaan adab Qur\'ani, hafalan Al-Qur\'an, serta penguasaan keterampilan masa depan.'),
+            'card1_title' => Setting::get('spmb_banner_card1_title', 'PENDAFTARAN'),
+            'card1_desc' => Setting::get('spmb_banner_card1_desc', 'Gelombang 1 Dibuka'),
+            'card1_color' => Setting::get('spmb_banner_card1_color', '#fde047'),
+            'card2_title' => Setting::get('spmb_banner_card2_title', 'BEASISWA & CASHBACK'),
+            'card2_desc' => Setting::get('spmb_banner_card2_desc', 'Tersedia Potongan Spesial'),
+            'card2_color' => Setting::get('spmb_banner_card2_color', '#fde047'),
+            'card3_title' => Setting::get('spmb_banner_card3_title', 'KUOTA KELAS'),
+            'card3_desc' => Setting::get('spmb_banner_card3_desc', 'Terbatas & Selektif'),
+            'card3_color' => Setting::get('spmb_banner_card3_color', '#fde047'),
+            'flyer_image' => Setting::get('spmb_banner_flyer_image', '/uploads/logo-madani-square.webp'),
+            'flyer_label' => Setting::get('spmb_banner_flyer_label', 'Brosur Resmi SPMB'),
+            'btn_text' => Setting::get('spmb_banner_btn_text', 'Daftar SPMB '.$currentUnit['short_name']),
+            'btn_url' => Setting::get('spmb_banner_btn_url', route('unit.ppdb', $unit)),
+            'contact_text' => Setting::get('spmb_banner_contact_text', 'Hotline: '.$currentUnit['phone']),
+            'contact_phone' => Setting::get('spmb_banner_contact_phone', $currentUnit['phone']),
         ];
 
         // 17. Ekskul

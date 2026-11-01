@@ -228,8 +228,8 @@ Route::get('/galeri-kegiatan', fn () => redirect()->route('galeri.index'));
 // SPMB & PPDB Online (Landing Page, Form Pendaftaran & Sukses)
 Route::get('/ppdb', [PpdbController::class, 'index'])->name('ppdb.index');
 Route::get('/spmb', fn () => redirect()->route('ppdb.index'));
-Route::get('/form-ppdb', [PpdbController::class, 'form'])->name('ppdb.form');
-Route::get('/form_ppdb', [PpdbController::class, 'form']);
+Route::get('/form_ppdb', [PpdbController::class, 'form'])->name('ppdb.form');
+Route::get('/form-ppdb', fn () => redirect()->route('ppdb.form'));
 Route::get('/ppdb/form', fn () => redirect()->route('ppdb.form'));
 Route::get('/formulir-spmb', fn () => redirect()->route('ppdb.form'));
 Route::get('/formulir_spmb', fn () => redirect()->route('ppdb.form'));

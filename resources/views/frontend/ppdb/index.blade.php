@@ -29,7 +29,7 @@
             {{-- Logo & Accreditation Pill --}}
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 p-2 bg-white/95 rounded-2xl shadow-lg flex items-center justify-center border border-white/20">
-                    <img src="/uploads/logo-madani-square.webp" alt="Logo SMPS IT Madani" class="max-h-full max-w-full object-contain" onerror="this.src='/uploads/logo.png'">
+                    <img src="/uploads/logo-madani-square.webp" alt="Logo SMPS IT Madani" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='/uploads/logo.png'">
                 </div>
                 <div class="inline-flex items-center space-x-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 px-3.5 py-1.5 rounded-full text-xs font-bold backdrop-blur-sm">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -603,7 +603,7 @@
                         <img src="{{ $settings['image_1'] }}" 
                              alt="Gedung Utama SMPS IT Madani" 
                              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                             onerror="this.src='/uploads/fasilitas/fasilitas-gedung-utama.webp'">
+                             onerror="this.onerror=null; this.src='/uploads/fasilitas/fasilitas-gedung-utama.webp'">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-2.5 left-3 right-3 text-white">
                             <span class="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">Gedung Sekolah</span>
@@ -617,7 +617,7 @@
                         <img src="{{ $settings['image_2'] }}" 
                              alt="Ruang Kelas SMPS IT Madani" 
                              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                             onerror="this.src='/uploads/fasilitas/fasilitas-ruang-kelas.webp'">
+                             onerror="this.onerror=null; this.src='/uploads/fasilitas/fasilitas-ruang-kelas.webp'">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-2.5 left-3 right-3 text-white">
                             <span class="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">Ruang Belajar</span>
@@ -631,7 +631,7 @@
                         <img src="{{ $settings['image_3'] }}" 
                              alt="Laboratorium SMPS IT Madani" 
                              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                             onerror="this.src='/uploads/fasilitas/fasilitas-lab-ipa.webp'">
+                             onerror="this.onerror=null; this.src='/uploads/fasilitas/fasilitas-lab-ipa.webp'">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-2.5 left-3 right-3 text-white">
                             <span class="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">Laboratorium</span>

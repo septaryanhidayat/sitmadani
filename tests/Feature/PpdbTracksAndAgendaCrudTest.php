@@ -126,7 +126,7 @@ test('spmb banner is fully customizable and visible on homepage with custom text
     Setting::set('spmb_banner_card2_desc', 'Khusus Pendaftar Hari Ini', 'spmb');
     Setting::set('spmb_banner_card2_color', '#ef4444', 'spmb');
 
-    $homeResponse = $this->get(route('home'));
+    $homeResponse = $this->get(route('unit.smp'));
     $homeResponse->assertStatus(200);
     $homeResponse->assertSee('SPMB Tahun Ini Dibuka Lebar');
     $homeResponse->assertSee('KUOTA SANGAT TERBATAS');
@@ -140,7 +140,7 @@ test('spmb banner is fully customizable and visible on homepage with custom text
 test('redesigned ppdb page renders cleanly with bsi account and parent-friendly layout', function () {
     $response = $this->get(route('ppdb.index'));
     $response->assertStatus(200);
-    $response->assertSee('SPMB SMPS IT MADANI');
+    $response->assertSee('SPMB TERPADU SIT MADANI');
     $response->assertSee('Info Rekening');
     $response->assertDontSee('Info Biaya & Rekening BSI');
     $response->assertSee('7011304251');
@@ -178,8 +178,8 @@ test('ekstrakurikuler is visible in navbar, homepage, index and show page', func
         'author_id' => $user->id,
     ]);
 
-    // 1. Visible in Navbar & Homepage
-    $homeResponse = $this->get(route('home'));
+    // 1. Visible in Navbar & Unit Homepage
+    $homeResponse = $this->get(route('unit.smp'));
     $homeResponse->assertStatus(200);
     $homeResponse->assertSee('Ekstrakurikuler');
     $homeResponse->assertSee(route('ekskul.index'));
@@ -268,9 +268,9 @@ test('admin can upload photo and file when creating and updating agenda and peng
     $pengumuman->refresh();
     expect($pengumuman->title)->toBe('Pengumuman Kelulusan SPMB Final');
 
-    // 5. Verify that agenda with status 'upcoming' appears on frontend /agenda and homepage
+    // 5. Verify that agenda with status 'upcoming' appears on frontend /agenda and unit homepage
     $this->get(route('agenda.index'))->assertOk()->assertSee('Munaqosah Tahfidz Akbar Revisi');
-    $this->get(route('home'))->assertOk()->assertSee('Munaqosah Tahfidz Akbar Revisi');
+    $this->get(route('unit.smp'))->assertOk()->assertSee('Munaqosah Tahfidz Akbar Revisi');
 
     // Clean up test generated files
     foreach ([$agenda->featured_image, $agenda->file_attachment, $pengumuman->featured_image, $pengumuman->file_attachment] as $f) {
