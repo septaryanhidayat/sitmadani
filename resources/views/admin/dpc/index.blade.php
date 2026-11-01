@@ -36,7 +36,7 @@
                             <h3 class="font-extrabold text-sm text-slate-900 leading-snug">{{ $d->name }}</h3>
                             
                             @if($d->head_name)
-                                <div class="text-xs text-[#da251c] font-semibold flex items-center">
+                                <div class="text-xs text-emerald-600 font-semibold flex items-center">
                                     <i class="fa-solid fa-user-check text-[10px] mr-1.5"></i>
                                     <span>{{ $d->head_name }}</span>
                                 </div>

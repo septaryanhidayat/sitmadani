@@ -24,7 +24,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
     
     <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">Karakter &amp; Keahlian Abad 21</span>
+        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block">Karakter &amp; Keahlian Abad 21</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
             Program Khusus Siswa Madani
         </h2>
@@ -50,7 +50,7 @@
                         </h3>
 
                         @if($dpc->head_name)
-                            <div class="text-xs text-[#da251c] font-semibold flex items-center">
+                            <div class="text-xs text-emerald-600 font-semibold flex items-center">
                                 <i class="fa-solid fa-user-check text-[10px] mr-1.5"></i>
                                 <span>{{ $dpc->head_name }}</span>
                             </div>

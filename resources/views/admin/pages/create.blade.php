@@ -20,14 +20,14 @@
             {{-- Judul Halaman --}}
             <div>
                 <label for="title" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Halaman *</label>
-                <input type="text" name="title" id="title" required value="{{ old('title') }}" placeholder="Contoh: Kurikulum dan Standar Mutu" class="w-full bg-slate-50 text-sm font-semibold text-slate-800 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] transition">
+                <input type="text" name="title" id="title" required value="{{ old('title') }}" placeholder="Contoh: Kurikulum dan Standar Mutu" class="w-full bg-slate-50 text-sm font-semibold text-slate-800 rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
                 @error('title') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
             </div>
 
             {{-- Custom Slug (Opsional) --}}
             <div>
                 <label for="slug" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Slug URL kustom (Opsional)</label>
-                <div class="flex items-center bg-slate-50 rounded-xl border border-slate-200 px-3 focus-within:ring-2 focus-within:ring-[#da251c]">
+                <div class="flex items-center bg-slate-50 rounded-xl border border-slate-200 px-3 focus-within:ring-2 focus-within:ring-[#059669]">
                     <span class="text-xs text-slate-400 font-mono">{{ url('/') }}/</span>
                     <input type="text" name="slug" id="slug" value="{{ old('slug') }}" placeholder="kurikulum-standar-mutu" class="w-full bg-transparent text-xs font-mono text-slate-800 py-3 px-1 border-0 focus:outline-none">
                 </div>
@@ -39,8 +39,8 @@
             <div>
                 <label for="featured_image" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Gambar Sampul / Banner Halaman (Opsional)</label>
                 <div class="bg-red-50/70 border border-dashed border-red-200 rounded-2xl p-5 text-center">
-                    <input type="file" name="featured_image" id="featured_image" accept="image/*" class="w-full text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#da251c] file:text-white hover:file:bg-[#d85c14]">
-                    <p class="text-[11px] text-[#da251c] font-medium mt-2 flex items-center justify-center">
+                    <input type="file" name="featured_image" id="featured_image" accept="image/*" class="w-full text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-[#d85c14]">
+                    <p class="text-[11px] text-emerald-600 font-medium mt-2 flex items-center justify-center">
                         <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>
                         Semua gambar yang diunggah akan otomatis dikonversi ke format <strong>WebP</strong> berukuran ringan dengan kualitas tajam.
                     </p>
@@ -51,7 +51,7 @@
             {{-- Ringkasan Pendek / Excerpt --}}
             <div>
                 <label for="excerpt" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ringkasan Pendek (Opsional)</label>
-                <textarea name="excerpt" id="excerpt" rows="2" placeholder="Ringkasan singkat mengenai halaman ini..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl p-4 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] transition">{{ old('excerpt') }}</textarea>
+                <textarea name="excerpt" id="excerpt" rows="2" placeholder="Ringkasan singkat mengenai halaman ini..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl p-4 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">{{ old('excerpt') }}</textarea>
                 @error('excerpt') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
             </div>
 
@@ -75,19 +75,19 @@
                 
                 <div>
                     <label for="meta_title" class="block text-xs font-semibold text-slate-600 mb-1">Meta Title</label>
-                    <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title') }}" placeholder="Judul pada mesin pencari Google..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">
+                    <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title') }}" placeholder="Judul pada mesin pencari Google..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
 
                 <div>
                     <label for="meta_description" class="block text-xs font-semibold text-slate-600 mb-1">Meta Description</label>
-                    <textarea name="meta_description" id="meta_description" rows="2" placeholder="Deskripsi singkat yang muncul di pencarian Google dan share medsos..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl p-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">{{ old('meta_description') }}</textarea>
+                    <textarea name="meta_description" id="meta_description" rows="2" placeholder="Deskripsi singkat yang muncul di pencarian Google dan share medsos..." class="w-full bg-slate-50 text-xs text-slate-800 rounded-xl p-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">{{ old('meta_description') }}</textarea>
                 </div>
             </div>
 
             {{-- Action Buttons --}}
             <div class="pt-6 border-t border-slate-100 flex items-center justify-end space-x-3">
                 <a href="{{ route('admin.pages.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition">Batal</a>
-                <button type="submit" class="bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md transition flex items-center space-x-2 cursor-pointer">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md transition flex items-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-floppy-disk"></i>
                     <span>Simpan Halaman Baru</span>
                 </button>

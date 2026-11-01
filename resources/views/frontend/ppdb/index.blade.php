@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'SPMB / PPDB Online ' . ($settings['year'] ?? '2026/2027') . ' - SMPS IT Madani Kayuagung')
-@section('meta_description', 'Penerimaan Peserta Didik Baru (PPDB/SPMB) SMPS IT Madani Kayuagung Tahun Pelajaran ' . ($settings['year'] ?? '2026/2027') . '. Informasi lengkap jalur pendaftaran, syarat berkas, alur, jadwal, biaya formulir, rekening resmi BSI, dan formulir pendaftaran online.')
+@section('title', 'SPMB / PPDB Online ' . ($settings['year'] ?? '2026/2027') . ' - SIT Madani Kayuagung')
+@section('meta_description', 'Penerimaan Peserta Didik Baru (PPDB/SPMB) SIT Madani Kayuagung (TK, SD, SMP) Tahun Pelajaran ' . ($settings['year'] ?? '2026/2027') . '. Informasi lengkap jalur pendaftaran, syarat berkas, alur, jadwal, biaya formulir, rekening resmi BSI, dan formulir pendaftaran online.')
 
 @section('content')
 @php
@@ -93,12 +93,12 @@
 
             {{-- Main Call To Action Buttons --}}
             <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 pt-2">
-                <a href="{{ route('ppdb.form') }}" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-[#da251c] to-red-600 hover:from-red-700 hover:to-rose-700 text-white px-7 py-3 rounded-2xl text-xs sm:text-sm font-black shadow-lg shadow-red-600/30 transition transform hover:scale-102">
+                <a href="{{ route('ppdb.form') }}" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-emerald-600/30 text-white px-7 py-3 rounded-2xl text-xs sm:text-sm font-black shadow-lg shadow-red-600/30 transition transform hover:scale-102">
                     <i class="fa-solid fa-file-signature text-base"></i>
                     <span>Isi Formulir Online Sekarang</span>
                 </a>
 
-                <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia PPDB SMPS IT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition transform hover:scale-102">
+                <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia SPMB SIT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition transform hover:scale-102">
                     <i class="fa-brands fa-whatsapp text-base"></i>
                     <span>Tanya Panitia via WhatsApp</span>
                 </a>
@@ -151,12 +151,12 @@
 
             {{-- Box 4: Layanan Hotline --}}
             <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-sm border border-slate-200/90 flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-rose-50 text-[#da251c] flex items-center justify-center shrink-0 text-base">
+                <div class="w-10 h-10 rounded-xl bg-rose-50 text-[#059669] flex items-center justify-center shrink-0 text-base">
                     <i class="fa-solid fa-headset"></i>
                 </div>
                 <div>
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Layanan Konsultasi</span>
-                    <a href="https://wa.me/{{ $cleanHotline }}" target="_blank" class="text-xs sm:text-sm font-black text-slate-900 hover:text-[#da251c] transition">
+                    <a href="https://wa.me/{{ $cleanHotline }}" target="_blank" class="text-xs sm:text-sm font-black text-slate-900 hover:text-[#059669] transition">
                         {{ $settings['hotline_phone'] ?? '0858-3817-3417' }}
                     </a>
                 </div>
@@ -173,7 +173,7 @@
         <section class="space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200/80 pb-3">
                 <div>
-                    <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#da251c] uppercase tracking-wider">
+                    <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#059669] uppercase tracking-wider">
                         <i class="fa-solid fa-route"></i>
                         <span>Pilihan Jalur Masuk</span>
                     </div>
@@ -486,7 +486,7 @@
                             <span>{{ $settings['operational_weekend'] ?? 'Sabtu: 08.00 – 12.00 WIB' }}</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot text-[#da251c] mt-0.5 shrink-0"></i>
+                            <i class="fa-solid fa-location-dot text-[#059669] mt-0.5 shrink-0"></i>
                             <span>{{ $settings['secretariat'] ?? 'Kompleks SMPS IT Madani, Jl. SMA Negeri 4, RT 02 LK III, Tanjung Rancing, Kayuagung, Kayuagung' }}</span>
                         </li>
                     </ul>
@@ -671,7 +671,7 @@
              ======================================================== --}}
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {{-- Tombol Daftar Online --}}
-            <a href="{{ route('ppdb.form') }}" class="group bg-gradient-to-br from-red-600 to-[#da251c] text-white p-5 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition flex flex-col justify-between">
+            <a href="{{ route('ppdb.form') }}" class="group bg-gradient-to-br from-red-600 to-[#059669] text-white p-5 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition flex flex-col justify-between">
                 <div class="space-y-2">
                     <div class="w-11 h-11 rounded-xl bg-white/20 text-white flex items-center justify-center text-xl">
                         <i class="fa-solid fa-clipboard-list"></i>
@@ -684,7 +684,7 @@
                     </p>
                 </div>
                 <div class="pt-4 mt-3 border-t border-white/20">
-                    <span class="inline-flex items-center gap-1.5 bg-white text-[#da251c] text-xs font-black px-5 py-2.5 rounded-xl shadow-xs">
+                    <span class="inline-flex items-center gap-1.5 bg-white text-[#059669] text-xs font-black px-5 py-2.5 rounded-xl shadow-xs">
                         <i class="fa-solid fa-file-pen"></i>
                         <span>Isi Formulir Sekarang</span>
                     </span>
@@ -692,7 +692,7 @@
             </a>
 
             {{-- Tombol Konsultasi WhatsApp --}}
-            <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Halo Panitia PPDB SMPS IT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="group bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-5 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition flex flex-col justify-between">
+            <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Halo Panitia SPMB SIT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="group bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-5 sm:p-7 rounded-2xl sm:rounded-3xl shadow-md hover:shadow-xl transition flex flex-col justify-between">
                 <div class="space-y-2">
                     <div class="w-11 h-11 rounded-xl bg-white/20 text-white flex items-center justify-center text-xl">
                         <i class="fa-brands fa-whatsapp"></i>
@@ -717,7 +717,7 @@
              9. UCAPAN TERIMA KASIH & PENUTUP RAMAH
              ======================================================== --}}
         <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xs border border-slate-200/80 text-center space-y-2">
-            <h3 class="text-base sm:text-lg font-black text-[#da251c]">
+            <h3 class="text-base sm:text-lg font-black text-[#059669]">
                 {{ $settings['closing_title'] ?? 'Terima Kasih Sudah Mendaftar di SMPS IT Madani Kayuagung' }}
             </h3>
             <p class="text-xs text-slate-600 max-w-xl mx-auto leading-relaxed">
@@ -734,11 +734,11 @@
          10. MOBILE BOTTOM STICKY ACTION BAR (Sangat Ramah Pengguna HP)
          ======================================================== --}}
     <div class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 px-4 flex items-center gap-2 shadow-2xl">
-        <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia PPDB SMPS IT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-600 text-white py-2.5 px-3 rounded-xl text-xs font-bold shadow-xs">
+        <a href="https://wa.me/{{ $cleanHotline }}?text={{ urlencode('Assalamu\'alaikum Panitia SPMB SIT Madani Kayuagung, saya ingin konsultasi pendaftaran siswa baru.') }}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-600 text-white py-2.5 px-3 rounded-xl text-xs font-bold shadow-xs">
             <i class="fa-brands fa-whatsapp text-sm"></i>
             <span>Tanya WA</span>
         </a>
-        <a href="{{ route('ppdb.form') }}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#da251c] text-white py-2.5 px-3 rounded-xl text-xs font-black shadow-xs">
+        <a href="{{ route('ppdb.form') }}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#059669] text-white py-2.5 px-3 rounded-xl text-xs font-black shadow-xs">
             <i class="fa-solid fa-file-pen text-xs"></i>
             <span>Daftar Sekarang</span>
         </a>

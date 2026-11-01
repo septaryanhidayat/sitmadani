@@ -29,7 +29,7 @@
             <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-left space-y-2 text-xs">
                 <div class="flex justify-between border-b border-slate-200 pb-2">
                     <span class="text-slate-500 font-medium">Nomor Pendaftaran</span>
-                    <span class="font-black text-[#da251c] font-mono text-sm">{{ $registration->registration_number }}</span>
+                    <span class="font-black text-emerald-600 font-mono text-sm">{{ $registration->registration_number }}</span>
                 </div>
                 <div class="flex justify-between border-b border-slate-200 pb-2">
                     <span class="text-slate-500 font-medium">Nama Calon Siswa</span>

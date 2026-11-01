@@ -91,7 +91,7 @@
 
             <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
                 <input type="text" name="content" placeholder="Keterangan tambahan atau catatan kegiatan (opsional)..." class="w-full sm:w-3/4 bg-white text-xs text-slate-800 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                <button type="submit" class="w-full sm:w-auto bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
+                <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-calendar-plus"></i>
                     <span>Tambah Agenda</span>
                 </button>

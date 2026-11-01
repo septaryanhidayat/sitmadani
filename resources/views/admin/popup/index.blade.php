@@ -11,8 +11,8 @@
             <h2 class="text-xl font-black text-slate-800 tracking-tight">Pengaturan Popup Banner Beranda</h2>
             <p class="text-xs text-slate-500 mt-0.5">Kelola banner promosi atau informasi penting yang muncul saat pengunjung pertama kali membuka halaman beranda.</p>
         </div>
-        <a href="{{ route('home') }}" target="_blank" class="text-xs font-bold text-slate-600 hover:text-[#da251c] bg-white border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-xl transition flex items-center space-x-1.5 shadow-xs">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-[#da251c]"></i>
+        <a href="{{ route('home') }}" target="_blank" class="text-xs font-bold text-slate-600 hover:text-emerald-600 bg-white border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-xl transition flex items-center space-x-1.5 shadow-xs">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-600"></i>
             <span>Pratinjau di Beranda</span>
         </a>
     </div>

@@ -26,7 +26,7 @@
             <div>
                 <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block">Status Pendaftaran</span>
                 <div class="flex items-center space-x-3 mt-1">
-                    <span class="font-mono font-black text-lg text-[#da251c]">{{ $ppdb->registration_number }}</span>
+                    <span class="font-mono font-black text-lg text-emerald-600">{{ $ppdb->registration_number }}</span>
                     <span class="px-3 py-1 rounded-full text-xs font-bold border {{ $ppdb->status_badge }}">
                         {{ $ppdb->status_label }}
                     </span>
@@ -50,7 +50,7 @@
             </div>
             <div>
                 <span class="text-slate-400 block text-[10px] font-bold uppercase">Program Pilihan</span>
-                <span class="font-black text-[#da251c]">{{ $ppdb->program_type ?: 'Boarding School' }}</span>
+                <span class="font-black text-emerald-600">{{ $ppdb->program_type ?: 'Boarding School' }}</span>
             </div>
         </div>
 

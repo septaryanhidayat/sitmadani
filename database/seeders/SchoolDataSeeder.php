@@ -295,16 +295,16 @@ class SchoolDataSeeder extends Seeder
             ],
             [
                 'name' => 'Madani Safar & Outing Class Edukatif',
-                'slug' => 'iu-safar-outing-class',
+                'slug' => 'madani-safar-outing-class',
                 'address' => 'Outdoor Learning & Wawasan',
-                'description' => 'Pembelajaran luar kelas berbasis observasi alam, studi kampus, renang, dan rekreasi edukatif untuk memperluas cakrawala siswa.',
+                'description' => 'Pembelajaran luar kelas berbasis observasi alam, rihlah edukatif, studi lingkungan, dan pengembangan wawasan santri SIT Madani di Kabupaten Ogan Komering Ilir.',
                 'order' => 5,
             ],
             [
-                'name' => 'Madani Berkhidmat (Bakti Sosial Masyarakat)',
-                'slug' => 'iu-berkhidmat-bakti-sosial',
+                'name' => 'Madani Peduli (Bakti Sosial Masyarakat)',
+                'slug' => 'madani-peduli-bakti-sosial',
                 'address' => 'Kepedulian Sosial & Dakwah',
-                'description' => 'Kiprah nyata siswa dalam melayani dan memberikan kontribusi positif bagi masyarakat di Kayuagung, Kab. OKI.',
+                'description' => 'Kiprah nyata santri SIT Madani dalam melayani, menebar kebaikan, dan memberikan kontribusi positif bagi masyarakat di Kayuagung, Kab. OKI.',
                 'order' => 6,
             ],
         ];
@@ -554,7 +554,7 @@ HTML,
                 'content' => <<<'HTML'
 <h3>Profil Singkat Sekolah</h3>
 <p><strong>SMPS IT Madani Kayuagung</strong> adalah lembaga pendidikan formal tingkat menengah pertama berbasis Islam Terpadu di Kabupaten Ogan Komering Ilir, Sumatera Selatan, di bawah naungan <strong>Yayasan Agung Madani Kayuagung</strong>.</p>
-<p>Berlokasi strategis di Jl. Sadewa No. 45 Kelurahan Karang Raja, sekolah ini memadukan kurikulum nasional Kementerian Pendidikan Dasar dan Menengah dengan kurikulum khas Sekolah Islam Terpadu (SIT). Dengan pendekatan holistik, siswa dibina kecerdasan spiritual (SQ), emosional (EQ), dan intelektualnya (IQ) secara seimbang.</p>
+<p>Berlokasi strategis di Jalan SMA Negeri 4, RT 02 LK III, Kelurahan Tanjung Rancing, Kecamatan Kayuagung, Kabupaten Ogan Komering Ilir, sekolah ini memadukan kurikulum nasional Kementerian Pendidikan Dasar dan Menengah dengan kurikulum khas Sekolah Islam Terpadu (SIT). Dengan pendekatan holistik, siswa dibina kecerdasan spiritual (SQ), emosional (EQ), dan intelektualnya (IQ) secara seimbang.</p>
 
 <h4 class="mt-6 font-bold text-gray-900">Identitas Sekolah</h4>
 <table class="w-full text-left border-collapse my-4 text-sm">
@@ -564,7 +564,7 @@ HTML,
     <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Status Sekolah</td><td class="py-2.5 text-gray-700">Swasta (Yayasan Agung Madani)</td></tr>
     <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Akreditasi</td><td class="py-2.5 text-gray-700"><span class="inline-block px-2.5 py-0.5 rounded-full bg-indigo-100 text-school-primary font-bold text-xs">TERAKREDITASI B</span></td></tr>
     <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Kepala Sekolah</td><td class="py-2.5 text-gray-700">Ribang Imam Satria, S.Pi., Gr.</td></tr>
-    <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Alamat Kampus</td><td class="py-2.5 text-gray-700">Jl. Sadewa No. 45 RT 01 RW 04, Kel. Karang Raja, Kec. Kayuagung, Kabupaten Ogan Komering Ilir, Sumatera Selatan 31113</td></tr>
+    <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Alamat Kampus</td><td class="py-2.5 text-gray-700">Jalan SMA Negeri 4, RT 02 LK III, Kelurahan Tanjung Rancing, Kecamatan Kayuagung, Kabupaten Ogan Komering Ilir, Sumatera Selatan 30618</td></tr>
     <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Telepon / WhatsApp</td><td class="py-2.5 text-gray-700">0858-3817-3417 / 0858-3817-3417</td></tr>
     <tr class="border-b"><td class="py-2.5 font-semibold text-gray-800">Email Resmi</td><td class="py-2.5 text-gray-700">smpsislamterpadumadani@gmail.com</td></tr>
 </table>

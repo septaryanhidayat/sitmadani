@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminPpdbController;
 use App\Http\Controllers\Admin\AdminQuickMenuController;
 use App\Http\Controllers\Admin\AdminSecurityController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminShowcaseController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ArticleController;
@@ -107,6 +108,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // Banner Hero Slider Beranda
     Route::get('/hero', [AdminHeroController::class, 'index'])->name('hero.index');
     Route::post('/hero', [AdminHeroController::class, 'update'])->name('hero.update');
+
+    // Showcase 3 Unit Sekolah Beranda Yayasan
+    Route::get('/showcase', [AdminShowcaseController::class, 'index'])->name('showcase.index');
+    Route::post('/showcase', [AdminShowcaseController::class, 'update'])->name('showcase.update');
 
     // Popup Banner Beranda
     Route::get('/popup', [AdminPopupController::class, 'index'])->name('popup.index');

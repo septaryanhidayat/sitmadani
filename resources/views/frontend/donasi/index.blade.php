@@ -26,7 +26,7 @@
 {{-- HERO HEADER ELEGAN --}}
 <div class="relative bg-gradient-to-br from-indigo-950 via-indigo-900 to-blue-950 text-white py-14 sm:py-20 overflow-hidden">
     {{-- Background Pattern --}}
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#da251c_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#059669_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
     <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-orange-500/20 blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-amber-500/15 blur-3xl pointer-events-none"></div>
 

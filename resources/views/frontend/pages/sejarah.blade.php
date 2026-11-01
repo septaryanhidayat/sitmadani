@@ -148,7 +148,7 @@
                     Daftarkan putra-putri tercinta sekarang dan jadilah bagian dari keluarga besar SMPS IT Madani Kayuagung.
                 </p>
                 <div class="pt-2">
-                    <a href="{{ route('ppdb.index') }}" class="block w-full bg-[#da251c] hover:bg-[#b91c1c] text-white py-3 rounded-xl font-bold text-xs shadow-lg transition">
+                    <a href="{{ route('ppdb.index') }}" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-xs shadow-lg transition">
                         Daftar PPDB Sekarang
                     </a>
                 </div>

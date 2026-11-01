@@ -24,7 +24,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
     
     <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">Standar Pendidikan Modern</span>
+        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block">Standar Pendidikan Modern</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
             Sarana &amp; Prasarana Sekolah
         </h2>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="px-6 sm:px-7 pb-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-                    <a href="{{ route('bidang.show', $b->slug) }}" class="inline-flex items-center font-bold text-indigo-600 hover:text-[#da251c] transition">
+                    <a href="{{ route('bidang.show', $b->slug) }}" class="inline-flex items-center font-bold text-indigo-600 hover:text-emerald-600 transition">
                         <span>Rincian Fasilitas</span>
                         <i class="fa-solid fa-arrow-right ml-1.5 text-[10px] group-hover:translate-x-1 transition"></i>
                     </a>

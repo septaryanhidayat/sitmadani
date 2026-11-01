@@ -78,7 +78,7 @@
                 </p>
             @else
                 <p class="text-[11px] text-slate-600 font-medium mt-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-file-pdf text-[#da251c]"></i>
+                    <i class="fa-solid fa-file-pdf text-emerald-600"></i>
                     <span>Format yang didukung: PDF, JPG, PNG, WebP (Maksimal 5 MB)</span>
                 </p>
             @endif

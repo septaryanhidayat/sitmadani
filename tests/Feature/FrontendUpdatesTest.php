@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\Download;
 use App\Models\Dpc;
 use App\Models\Post;
+use App\Models\Video;
 use Database\Seeders\DatabaseSeeder;
 
 test('halaman program unggulan / dpc menampilkan program sekolah', function () {
@@ -108,14 +109,29 @@ test('dewan guru menampilkan ustadz fulan dan ustadzah fulanah dengan avatar abu
 
 test('galeri video dan beranda menampilkan video resmi youtube smp it madani', function () {
     $this->seed(DatabaseSeeder::class);
+
+    // Fallback saat video baru dibersihkan
+    $responseEmpty = $this->get(route('video.index'));
+    $responseEmpty->assertStatus(200);
+    $responseEmpty->assertSee('https://www.youtube.com/@sitmadani');
+
+    // Buat data video resmi SIT Madani
+    Video::create([
+        'title' => 'Profil dan Visi Misi SIT Madani',
+        'slug' => 'profil-dan-visi-misi-sit-madani',
+        'youtube_url' => 'https://www.youtube.com/watch?v=madani12345',
+        'youtube_id' => 'madani12345',
+        'description' => 'Video dokumentasi resmi SIT Madani Kayuagung',
+    ]);
+
     $responseVideo = $this->get(route('video.index'));
     $responseVideo->assertStatus(200);
-    $responseVideo->assertSee('_ltiwpOmK1k');
-    $responseVideo->assertSee('Profil dan Visi Misi SMPS IT Madani');
+    $responseVideo->assertSee('madani12345');
+    $responseVideo->assertSee('Profil dan Visi Misi SIT Madani');
     $responseVideo->assertSee('https://www.youtube.com/@sitmadani');
 
     $responseHome = $this->get('/smp');
     $responseHome->assertStatus(200);
     $responseHome->assertSee('Galeri Video Resmi YouTube');
-    $responseHome->assertSee('_ltiwpOmK1k');
+    $responseHome->assertSee('madani12345');
 });

@@ -39,24 +39,24 @@
     {{-- TOP NAVIGATION TABS & ACTIONS (Rapi, Terstruktur & Responsif) --}}
     <div class="bg-white p-2 sm:p-2.5 rounded-2xl shadow-xs border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-2.5">
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <a href="{{ route('admin.ppdb.index') }}" class="px-3.5 py-2 rounded-xl font-bold text-xs transition whitespace-nowrap {{ request()->routeIs('admin.ppdb.index') ? 'bg-[#da251c] text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100' }}">
+            <a href="{{ route('admin.ppdb.index') }}" class="px-3.5 py-2 rounded-xl font-bold text-xs transition whitespace-nowrap {{ request()->routeIs('admin.ppdb.index') ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100' }}">
                 <i class="fa-solid fa-users mr-1.5"></i> Data Pendaftar
             </a>
-            <button type="button" @click="currentTab = 'jalur'" :class="currentTab === 'jalur' ? 'bg-[#da251c] text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
+            <button type="button" @click="currentTab = 'jalur'" :class="currentTab === 'jalur' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-route"></i>
                 <span>Jalur PPDB</span>
                 <span class="ml-1 px-1.5 py-0.2 rounded-full text-[10px] font-extrabold" :class="currentTab === 'jalur' ? 'bg-white/20 text-white' : 'bg-red-100 text-red-700'">{{ count($tracks) }}</span>
             </button>
-            <button type="button" @click="currentTab = 'banner'" :class="currentTab === 'banner' ? 'bg-[#da251c] text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
+            <button type="button" @click="currentTab = 'banner'" :class="currentTab === 'banner' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-bullhorn"></i>
                 <span>Banner SPMB</span>
             </button>
-            <button type="button" @click="currentTab = 'konten'" :class="currentTab === 'konten' ? 'bg-[#da251c] text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
+            <button type="button" @click="currentTab = 'konten'" :class="currentTab === 'konten' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-sliders"></i>
                 <span class="hidden sm:inline">Konten &amp; 10 Menu PPDB</span>
                 <span class="sm:hidden">Konten</span>
             </button>
-            <button type="button" @click="currentTab = 'formulir'" :class="currentTab === 'formulir' ? 'bg-[#da251c] text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
+            <button type="button" @click="currentTab = 'formulir'" :class="currentTab === 'formulir' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'" class="px-3.5 py-2 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-1.5 whitespace-nowrap">
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <span class="hidden sm:inline">Kustomisasi Formulir Online</span>
                 <span class="sm:hidden">Formulir</span>
@@ -79,7 +79,7 @@
         <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xs border border-slate-200/80 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
                 <div class="flex items-center space-x-3.5">
-                    <div class="w-11 h-11 rounded-2xl bg-red-100 text-[#da251c] flex items-center justify-center font-black text-xl shadow-xs">
+                    <div class="w-11 h-11 rounded-2xl bg-red-100 text-emerald-600 flex items-center justify-center font-black text-xl shadow-xs">
                         <i class="fa-solid fa-route"></i>
                     </div>
                     <div>
@@ -90,7 +90,7 @@
 
                 {{-- TOMBOL TAMBAH JALUR BARU --}}
                 <div class="flex items-center gap-2">
-                    <button type="button" @click="showAddTrackModal = true" class="bg-gradient-to-r from-[#da251c] to-rose-600 hover:from-red-700 hover:to-rose-700 text-white text-xs font-black px-5 py-3 rounded-2xl shadow-md shadow-red-500/25 transition transform hover:scale-102 flex items-center gap-2 cursor-pointer">
+                    <button type="button" @click="showAddTrackModal = true" class="bg-gradient-to-r from-[#059669] to-rose-600 hover:from-red-700 hover:to-rose-700 text-white text-xs font-black px-5 py-3 rounded-2xl shadow-md shadow-red-500/25 transition transform hover:scale-102 flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-plus text-sm"></i>
                         <span>Tambah Jalur Pendaftaran</span>
                     </button>
@@ -147,7 +147,7 @@
                                 </td>
                                 <td class="py-3.5 px-4 font-extrabold text-slate-900">
                                     <div class="flex items-center gap-2">
-                                        <div class="w-7 h-7 rounded-lg bg-red-50 text-[#da251c] flex items-center justify-center font-black text-xs shrink-0">
+                                        <div class="w-7 h-7 rounded-lg bg-red-50 text-emerald-600 flex items-center justify-center font-black text-xs shrink-0">
                                             <i class="fa-solid fa-award"></i>
                                         </div>
                                         <div>
@@ -1044,7 +1044,7 @@
             <div class="relative bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 space-y-6" @click.away="showAddTrackModal = false">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-100">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-2xl bg-red-100 text-[#da251c] flex items-center justify-center font-bold text-lg">
+                        <div class="w-10 h-10 rounded-2xl bg-red-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
                             <i class="fa-solid fa-plus"></i>
                         </div>
                         <div>
@@ -1062,29 +1062,29 @@
 
                     <div>
                         <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nama Jalur Pendaftaran <span class="text-red-500">*</span></label>
-                        <input type="text" name="name" required placeholder="Contoh: Jalur Mitra Kerjasama, Jalur Yatim/Dhuafa..." class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] text-xs font-semibold">
+                        <input type="text" name="name" required placeholder="Contoh: Jalur Mitra Kerjasama, Jalur Yatim/Dhuafa..." class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs font-semibold">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Persentase / Diskon</label>
-                            <input type="text" name="percentage" placeholder="Contoh: 15% atau 20%" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] text-xs font-semibold">
+                            <input type="text" name="percentage" placeholder="Contoh: 15% atau 20%" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs font-semibold">
                         </div>
 
                         <div>
                             <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kuota Siswa (Opsional)</label>
-                            <input type="text" name="quota" placeholder="Contoh: Hanya 15 Siswa" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] text-xs">
+                            <input type="text" name="quota" placeholder="Contoh: Hanya 15 Siswa" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs">
                         </div>
                     </div>
 
                     <div>
                         <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Info Cashback / Keringanan Biaya</label>
-                        <input type="text" name="cashback_info" placeholder="Contoh: Potongan Biaya Uang Pangkal Rp 500.000,-" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] text-xs">
+                        <input type="text" name="cashback_info" placeholder="Contoh: Potongan Biaya Uang Pangkal Rp 500.000,-" class="w-full bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs">
                     </div>
 
                     <div>
                         <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Deskripsi &amp; Syarat Khusus Jalur</label>
-                        <textarea name="description" rows="3" placeholder="Jelaskan ketentuan, syarat berkas khusus, atau tahapan tes untuk jalur ini..." class="w-full bg-slate-50 rounded-xl p-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c] text-xs leading-relaxed"></textarea>
+                        <textarea name="description" rows="3" placeholder="Jelaskan ketentuan, syarat berkas khusus, atau tahapan tes untuk jalur ini..." class="w-full bg-slate-50 rounded-xl p-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-xs leading-relaxed"></textarea>
                     </div>
 
                     <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
@@ -1092,14 +1092,14 @@
                             <span class="font-bold text-slate-800 block text-xs">Aktifkan Jalur Ini?</span>
                             <span class="text-[10px] text-slate-500">Jalur aktif akan muncul di halaman informasi dan dropdown pilihan formulir PPDB.</span>
                         </div>
-                        <input type="checkbox" name="is_active" value="1" checked class="w-5 h-5 rounded text-[#da251c] focus:ring-[#da251c] border-slate-300">
+                        <input type="checkbox" name="is_active" value="1" checked class="w-5 h-5 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300">
                     </div>
 
                     <div class="pt-4 flex items-center justify-end space-x-3 border-t border-slate-100">
                         <button type="button" @click="showAddTrackModal = false" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" class="bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md shadow-red-500/25 transition flex items-center space-x-2 cursor-pointer">
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md shadow-red-500/25 transition flex items-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-plus"></i>
                             <span>Simpan Jalur Baru</span>
                         </button>

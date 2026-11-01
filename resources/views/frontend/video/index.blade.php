@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Galeri Video & Dokumentasi - SMPS IT Madani Kayuagung')
-@section('meta_description', 'Kumpulan video profil sekolah, dokumentasi kegiatan siswa, pentas prestasi, dan liputan pembelajaran SMPS IT Madani Kayuagung.')
+@section('title', 'Galeri Video & Dokumentasi - SIT Madani Kayuagung')
+@section('meta_description', 'Kumpulan video profil sekolah, dokumentasi kegiatan siswa, pentas prestasi, dan liputan pembelajaran SIT Madani Kayuagung.')
 
 @section('content')
 {{-- HERO HEADER --}}
@@ -61,13 +61,24 @@
                     <span class="inline-flex items-center text-red-600 font-bold">
                         <i class="fa-brands fa-youtube mr-1.5 text-sm" aria-hidden="true"></i> YouTube
                     </span>
-                    <span>SMPS IT Madani Kayuagung</span>
+                    <span>SIT Madani Kayuagung</span>
                 </div>
             </div>
-        @empty
-            <div class="col-span-full text-center py-16 text-gray-500 bg-white rounded-3xl border border-gray-100">
-                <i class="fa-solid fa-video text-4xl text-gray-300 mb-3 block" aria-hidden="true"></i>
-                <span>Belum ada video dokumentasi yang tersedia.</span>
+                @empty
+            <div class="col-span-full text-center py-16 px-4 bg-white rounded-3xl border border-slate-100 shadow-sm max-w-xl mx-auto">
+                <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-800">Video Dokumentasi Sedang Diperbarui</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1.5 leading-relaxed">
+                    Liputan kegiatan terbaru santri SIT Madani dapat disaksikan langsung melalui channel YouTube resmi kami.
+                </p>
+                <div class="mt-5">
+                    <a href="https://www.youtube.com/@sitmadani" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md transition">
+                        <i class="fa-brands fa-youtube text-sm"></i>
+                        <span>Buka Channel YouTube SIT Madani</span>
+                    </a>
+                </div>
             </div>
         @endforelse
     </div>

@@ -77,7 +77,7 @@
                             <form action="{{ route('admin.media.photo.destroy', $photo) }}" method="POST" class="delete-photo-form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" onclick="confirmDeletePhoto(this)" class="w-8 h-8 rounded-lg bg-[#da251c] text-white flex items-center justify-center text-xs hover:bg-red-700 shadow transition cursor-pointer" title="Hapus Foto">
+                                <button type="button" onclick="confirmDeletePhoto(this)" class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs hover:bg-red-700 shadow transition cursor-pointer" title="Hapus Foto">
                                 <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
@@ -107,7 +107,7 @@
             <div>
                 <div class="flex items-center space-x-3">
                     <h2 class="text-xl font-black text-slate-900">Video YouTube Resmi</h2>
-                    <span class="px-3 py-1 rounded-full text-xs font-black bg-red-100 text-[#da251c] border border-red-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-black bg-red-100 text-emerald-600 border border-red-200">
                         {{ $videos->total() }} Video
                     </span>
                 </div>
@@ -128,7 +128,7 @@
                     <input type="text" name="youtube_url" x-model="newVideoUrl" @input="updateNewPreview()" @change="updateNewPreview()" required placeholder="https://www.youtube.com/watch?v=... atau youtu.be/..." class="w-full bg-white text-xs font-medium text-slate-900 rounded-xl px-4 py-2.5 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                 </div>
                 <div class="md:col-span-2 flex items-end pt-1 md:pt-6">
-                    <button type="submit" class="w-full bg-[#da251c] hover:bg-[#b91c1c] text-white font-extrabold text-xs py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
                         <i class="fa-brands fa-youtube text-sm"></i>
                         <span>Tambah Video</span>
                     </button>
@@ -351,7 +351,7 @@
                     <button type="button" @click="editVideoModalOpen = false" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50 transition cursor-pointer">
                         Batal
                     </button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#da251c] hover:bg-[#b91c1c] text-white text-xs font-extrabold shadow-md transition cursor-pointer">
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-md transition cursor-pointer">
                         Simpan Perubahan
                     </button>
                 </div>
@@ -391,7 +391,7 @@ function confirmDeletePhoto(btn) {
             text: 'Foto yang dihapus tidak dapat dipulihkan kembali.',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#da251c',
+            confirmButtonColor: '#059669',
             cancelButtonColor: '#64748b',
             confirmButtonText: 'Ya, Hapus Foto',
             cancelButtonText: 'Batal'
@@ -414,7 +414,7 @@ function confirmDeleteVideo(btn) {
             text: 'Video akan dihapus dari daftar tayangan galeri.',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#da251c',
+            confirmButtonColor: '#059669',
             cancelButtonColor: '#64748b',
             confirmButtonText: 'Ya, Hapus Video',
             cancelButtonText: 'Batal'

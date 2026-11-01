@@ -30,8 +30,8 @@
                     default => route('home'),
                 };
             @endphp
-            <a href="{{ $previewUrl }}" target="_blank" class="text-xs font-bold text-slate-700 hover:text-[#da251c] bg-slate-50 hover:bg-slate-100 border border-slate-200 px-4 py-2.5 rounded-xl transition flex items-center space-x-2 shadow-xs">
-                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-[#da251c]"></i>
+            <a href="{{ $previewUrl }}" target="_blank" class="text-xs font-bold text-slate-700 hover:text-emerald-600 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-4 py-2.5 rounded-xl transition flex items-center space-x-2 shadow-xs">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-600"></i>
                 <span>Lihat di Website ({{ strtoupper($selectedUnit ?? 'YAYASAN') }})</span>
             </a>
         </div>
@@ -140,7 +140,7 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                            <i class="fa-solid fa-image text-[#da251c]"></i>
+                            <i class="fa-solid fa-image text-emerald-600"></i>
                             Gambar Latar Belakang (Background Banner)
                         </label>
                         <span class="text-[11px] text-slate-500 font-medium">Rekomendasi rasio 16:9 (1920x1080 px atau 1376x768 px)</span>
@@ -178,7 +178,7 @@
 
                             <div class="p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl space-y-2 hover:border-indigo-400 transition">
                                 <label for="slide_img_file_{{ $index }}" class="block text-xs font-bold text-slate-800">
-                                    <i class="fa-solid fa-cloud-arrow-up text-[#da251c] mr-1.5"></i>
+                                    <i class="fa-solid fa-cloud-arrow-up text-emerald-600 mr-1.5"></i>
                                     Unggah File Gambar Baru (Otomatis WebP)
                                 </label>
                                 <input type="file" 
@@ -201,7 +201,7 @@
                                        id="slide_img_url_{{ $index }}" 
                                        value="{{ $slide['image'] ?? '' }}" 
                                        placeholder="/uploads/nama-file.webp atau https://..." 
-                                       class="w-full bg-white text-xs font-semibold rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">
+                                       class="w-full bg-white text-xs font-semibold rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                 {{-- KONTEN TEKS (BADGE, JUDUL, SUBJUDUL) --}}
                 <div class="space-y-4 pt-6 border-t border-slate-100">
                     <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-heading text-[#da251c]"></i>
+                        <i class="fa-solid fa-heading text-emerald-600"></i>
                         Teks &amp; Judul Slide
                     </h4>
 
@@ -225,7 +225,7 @@
                                    id="slide_badge_{{ $index }}" 
                                    value="{{ old('slides.'.$index.'.badge', $slide['badge'] ?? 'SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B') }}" 
                                    placeholder="Contoh: SMPS IT Unggulan Kayuagung, Kab. OKI • Terakreditasi B" 
-                                   class="w-full bg-slate-50 text-xs font-semibold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">
+                                   class="w-full bg-slate-50 text-xs font-semibold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
 
                         {{-- Judul Besar --}}
@@ -239,7 +239,7 @@
                                    required 
                                    value="{{ old('slides.'.$index.'.title', $slide['title'] ?? '') }}" 
                                    placeholder="Contoh: Selamat Datang di Website Resmi" 
-                                   class="w-full bg-slate-50 text-sm font-bold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">
+                                   class="w-full bg-slate-50 text-sm font-bold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
 
                         {{-- Subjudul / Deskripsi --}}
@@ -251,7 +251,7 @@
                                       id="slide_subtitle_{{ $index }}" 
                                       rows="2" 
                                       placeholder="Contoh: SMPS IT Madani Kayuagung atau deskripsi singkat keunggulan..." 
-                                      class="w-full bg-slate-50 text-xs font-medium rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#da251c]">{{ old('slides.'.$index.'.subtitle', $slide['subtitle'] ?? '') }}</textarea>
+                                      class="w-full bg-slate-50 text-xs font-medium rounded-xl px-4 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">{{ old('slides.'.$index.'.subtitle', $slide['subtitle'] ?? '') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                 {{-- PENGATURAN TOMBOL AKSI 1 & 2 --}}
                 <div class="space-y-4 pt-6 border-t border-slate-100">
                     <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-square-arrow-up-right text-[#da251c]"></i>
+                        <i class="fa-solid fa-square-arrow-up-right text-emerald-600"></i>
                         Tombol Aksi Banner (Button Call-to-Action)
                     </h4>
 
@@ -368,14 +368,80 @@
             </div>
         @endforeach
 
+        @if(($selectedUnit ?? 'yayasan') === 'yayasan')
+        {{-- ========================================================
+             4 KARTU STATISTIK / CHIPS HERO YAYASAN (DINAMIS)
+             ======================================================== --}}
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">
+                            4 Kartu Statistik / Chips Hero (Portal Yayasan)
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Atur 4 kartu kecil yang melayang di bawah tombol hero utama pada halaman beranda yayasan.
+                        </p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800">
+                    Khusus Portal Yayasan
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach($chips ?? [] as $chipIdx => $chip)
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase text-slate-500">Kartu #{{ $chipIdx + 1 }}</span>
+                        <span class="w-3 h-3 rounded-full {{ str_replace('text-', 'bg-', $chip['color'] ?? 'bg-amber-400') }}"></span>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul / Angka Utama</label>
+                        <input type="text" 
+                               name="chips[{{ $chipIdx }}][value]" 
+                               value="{{ old('chips.'.$chipIdx.'.value', $chip['value'] ?? $chip['title'] ?? '') }}" 
+                               class="w-full bg-white text-xs font-black rounded-lg px-3 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500" 
+                               placeholder="Contoh: 3 Unit / Terakreditasi" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Subjudul / Keterangan</label>
+                        <input type="text" 
+                               name="chips[{{ $chipIdx }}][label]" 
+                               value="{{ old('chips.'.$chipIdx.'.label', $chip['label'] ?? $chip['subtitle'] ?? '') }}" 
+                               class="w-full bg-white text-xs font-semibold rounded-lg px-3 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500" 
+                               placeholder="Contoh: TK, SD & SMP / BAN-SM" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Warna Teks Utama</label>
+                        <select name="chips[{{ $chipIdx }}][color]" class="w-full bg-white text-xs font-semibold rounded-lg px-3 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="text-amber-400" {{ ($chip['color'] ?? '') === 'text-amber-400' ? 'selected' : '' }}>Kuning Emas (text-amber-400)</option>
+                            <option value="text-emerald-400" {{ ($chip['color'] ?? '') === 'text-emerald-400' ? 'selected' : '' }}>Hijau Emerald (text-emerald-400)</option>
+                            <option value="text-cyan-400" {{ ($chip['color'] ?? '') === 'text-cyan-400' ? 'selected' : '' }}>Biru Langit (text-cyan-400)</option>
+                            <option value="text-amber-300" {{ ($chip['color'] ?? '') === 'text-amber-300' ? 'selected' : '' }}>Kuning Muda (text-amber-300)</option>
+                            <option value="text-indigo-400" {{ ($chip['color'] ?? '') === 'text-indigo-400' ? 'selected' : '' }}>Indigo Modern (text-indigo-400)</option>
+                        </select>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
         {{-- TOMBOL SIMPAN CLEAN & ELEGAN --}}
         <div class="bg-white p-5 rounded-2xl shadow-xs border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-xs text-slate-600 font-medium flex items-center space-x-2">
                 <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
-                <span>Perubahan pada seluruh slide akan langsung tersimpan ke halaman beranda.</span>
+                <span>Perubahan pada seluruh slide dan kartu akan langsung tersimpan ke halaman beranda.</span>
             </div>
 
-            <button type="submit" class="w-full sm:w-auto bg-[#da251c] hover:bg-[#b91c1c] text-white px-8 py-3.5 rounded-xl font-extrabold text-xs shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
+            <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3.5 rounded-xl font-extrabold text-xs shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-floppy-disk text-sm"></i>
                 <span>Simpan Semua Perubahan Banner Hero</span>
             </button>

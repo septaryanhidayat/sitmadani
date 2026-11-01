@@ -35,7 +35,7 @@
         <h2 class="text-3xl sm:text-4xl font-black text-indigo-600 tracking-tight uppercase">
             LAYANAN TERPADU
         </h2>
-        <p class="text-base sm:text-lg font-bold text-[#da251c] mt-1">
+        <p class="text-base sm:text-lg font-bold text-emerald-600 mt-1">
             SMPS IT Madani Kayuagung
         </p>
         <div class="w-20 h-1 bg-indigo-600 mx-auto rounded-full mt-3"></div>
@@ -73,13 +73,13 @@
                 </svg>
             </div>
             
-            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-[#da251c] transition leading-snug mb-3">
+            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-emerald-600 transition leading-snug mb-3">
                 Permohonan Izin Kunjungan ke Sekolah
             </h3>
             <p class="text-xs text-gray-500 leading-relaxed font-light mb-6">
                 Layanan pengajuan izin resmi untuk kegiatan studi banding, observasi edukatif, riset, atau kunjungan instansi kedinasan.
             </p>
-            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-[#da251c] transition">
+            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-emerald-600 transition">
                 <span>Buka Formulir</span>
                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
             </span>
@@ -110,13 +110,13 @@
                 </svg>
             </div>
             
-            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-[#da251c] transition leading-snug mb-3">
+            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-emerald-600 transition leading-snug mb-3">
                 Permohonan Kerja Sama
             </h3>
             <p class="text-xs text-gray-500 leading-relaxed font-light mb-6">
                 Kemitraan strategis dunia industri, perguruan tinggi, lembaga dakwah, sponsorship, program beasiswa, dan instansi formal.
             </p>
-            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-[#da251c] transition">
+            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-emerald-600 transition">
                 <span>Buka Formulir</span>
                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
             </span>
@@ -153,13 +153,13 @@
                 </svg>
             </div>
             
-            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-[#da251c] transition leading-snug mb-3">
+            <h3 class="font-extrabold text-indigo-600 text-lg group-hover:text-emerald-600 transition leading-snug mb-3">
                 Permohonan Sewa Menyewa Barang Sekolah
             </h3>
             <p class="text-xs text-gray-500 leading-relaxed font-light mb-6">
                 Fasilitas Hall Serbaguna Madani, laboratorium komputer, lapangan olahraga, audio sound system, dan tenda kegiatan sekolah.
             </p>
-            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-[#da251c] transition">
+            <span class="mt-auto inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 group-hover:text-emerald-600 transition">
                 <span>Buka Formulir</span>
                 <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
             </span>

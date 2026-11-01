@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\AdminHeroController;
+use App\Http\Controllers\Admin\AdminShowcaseController;
 use App\Models\Agenda;
 use App\Models\AnggotaDewan;
 use App\Models\Download;
@@ -114,6 +116,24 @@ class HomeController extends Controller
             'content_html' => $sambutanPost ? $sambutanPost->content : null,
         ];
 
+        // 4 Kartu Statistik & Keunggulan Hero Yayasan
+        $heroChips = AdminHeroController::getHeroChips();
+
+        // 3 Kartu Showcase Unit Sekolah
+        $unitShowcaseCards = AdminShowcaseController::getShowcaseCards();
+
+        // Popup SPMB Settings
+        $popupSettings = [
+            'active' => Setting::get('popup_active', '1'),
+            'image' => Setting::get('popup_image', '/uploads/flyer-spmb-sit-madani.webp'),
+            'title' => Setting::get('popup_title', 'Telah Dibuka SPMB SIT Madani (TP 2026/2027)'),
+            'subtitle' => Setting::get('popup_subtitle', 'Sistem Penerimaan Murid Baru SIT Madani Kayuagung (TK • SD • SMP)'),
+            'link' => Setting::get('popup_link', '/ppdb'),
+            'target' => Setting::get('popup_target', '_self'),
+            'button_text' => Setting::get('popup_button_text', 'Info & Daftar SPMB Online'),
+            'version' => md5(Setting::get('popup_image', '').Setting::get('popup_title', '')),
+        ];
+
         return view('frontend.yayasan', compact(
             'units',
             'yayasan',
@@ -125,7 +145,10 @@ class HomeController extends Controller
             'videos',
             'testimonials',
             'sambutanYayasan',
-            'heroSlides'
+            'heroSlides',
+            'heroChips',
+            'unitShowcaseCards',
+            'popupSettings'
         ));
     }
 
@@ -337,15 +360,16 @@ class HomeController extends Controller
         // 14. Visitor hits
         $visitorHits = view()->shared('visitorHits') ?? '0';
 
-        // 15. Popup Settings
+        // 15. Popup Settings (Dinamis dari Setting Admin)
         $popupSettings = [
-            'active' => '1',
-            'image' => '/uploads/logo-madani-square.webp',
-            'title' => 'SPMB '.$currentUnit['short_name'].' Telah Dibuka',
-            'subtitle' => 'Tahun Pelajaran 2026/2027 • Segera Daftarkan Putra-Putri Anda',
+            'active' => Setting::get('popup_active', '1'),
+            'image' => Setting::get('popup_image', '/uploads/flyer-spmb-sit-madani.webp'),
+            'title' => Setting::get('popup_title', 'SPMB '.$currentUnit['short_name'].' Telah Dibuka'),
+            'subtitle' => Setting::get('popup_subtitle', 'Tahun Pelajaran 2026/2027 • Segera Daftarkan Putra-Putri Anda'),
             'link' => route('unit.ppdb', $unit),
-            'target' => '_self',
-            'button_text' => 'Daftar SPMB Online',
+            'target' => Setting::get('popup_target', '_self'),
+            'button_text' => Setting::get('popup_button_text', 'Daftar SPMB Online'),
+            'version' => md5(Setting::get('popup_image', '').Setting::get('popup_title', '')),
         ];
 
         // 16. SPMB Banner khusus unit

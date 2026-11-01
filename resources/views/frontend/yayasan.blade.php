@@ -123,25 +123,21 @@
                         @endif
                     </div>
 
-                    {{-- Statistics Chips (Satu Atap SIT Madani) --}}
-                    <div class="pt-4 sm:pt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-2xl mx-auto text-center">
-                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
-                            <span class="block text-lg sm:text-2xl font-black text-amber-400">3 Unit</span>
-                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">TK, SD & SMP</span>
+                    {{-- Statistics Chips (Satu Atap SIT Madani - Dinamis & Responsif) --}}
+                    @if(!empty($heroChips) && is_array($heroChips))
+                    <div class="pt-4 sm:pt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3.5 max-w-3xl mx-auto text-center">
+                        @foreach($heroChips as $chip)
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md flex flex-col justify-center min-h-[72px] sm:min-h-[82px] shadow-sm">
+                            <span class="block text-base sm:text-lg md:text-xl font-black tracking-tight leading-snug {{ $chip['color'] ?? 'text-emerald-400' }} break-normal whitespace-normal">
+                                {{ $chip['title'] ?? $chip['value'] ?? '' }}
+                            </span>
+                            <span class="text-[10px] sm:text-[11px] text-slate-200 uppercase tracking-wider font-semibold mt-0.5 leading-tight">
+                                {{ $chip['subtitle'] ?? $chip['label'] ?? '' }}
+                            </span>
                         </div>
-                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
-                            <span class="block text-lg sm:text-2xl font-black text-emerald-400">Terakreditasi</span>
-                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">BAN-SM / PAUD</span>
-                        </div>
-                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
-                            <span class="block text-lg sm:text-2xl font-black text-cyan-400">JSIT</span>
-                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Jaringan Nasional</span>
-                        </div>
-                        <div class="bg-white/10 border border-white/15 rounded-xl p-2.5 sm:p-3 backdrop-blur-md">
-                            <span class="block text-lg sm:text-2xl font-black text-amber-400">Tahfidz</span>
-                            <span class="text-[10px] sm:text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Mutqin Bersanad</span>
-                        </div>
+                        @endforeach
                     </div>
+                    @endif
 
                 </div>
 
@@ -197,278 +193,145 @@
                 </p>
             </div>
 
-            {{-- 3 CARDS GRID --}}
+            {{-- 3 CARDS GRID (100% Simetris & Dinamis dari Admin) --}}
+            @php
+            $unitThemes = [
+                'tk' => [
+                    'border' => 'border-amber-200 hover:border-amber-400',
+                    'header_bg' => 'linear-gradient(135deg, #d97706 0%, #b45309 100%)',
+                    'badge_bg' => 'bg-amber-400 text-slate-950',
+                    'sub_color' => 'text-amber-100',
+                    'leader_box' => 'bg-amber-50/80 border-amber-200',
+                    'leader_label' => 'text-amber-800',
+                    'photo_border' => 'border-amber-400',
+                    'icon_color' => 'text-amber-500',
+                    'btn_primary' => 'bg-amber-500 hover:bg-amber-600 text-white',
+                    'btn_sec' => 'bg-white hover:bg-amber-50 border-amber-300 text-amber-700',
+                ],
+                'sd' => [
+                    'border' => 'border-emerald-200 hover:border-emerald-400',
+                    'header_bg' => 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                    'badge_bg' => 'bg-yellow-400 text-slate-950',
+                    'sub_color' => 'text-emerald-100',
+                    'leader_box' => 'bg-emerald-50/80 border-emerald-200',
+                    'leader_label' => 'text-emerald-800',
+                    'photo_border' => 'border-emerald-500',
+                    'icon_color' => 'text-emerald-600',
+                    'btn_primary' => 'bg-emerald-600 hover:bg-emerald-700 text-white',
+                    'btn_sec' => 'bg-white hover:bg-emerald-50 border-emerald-300 text-emerald-700',
+                ],
+                'smp' => [
+                    'border' => 'border-indigo-200 hover:border-indigo-400',
+                    'header_bg' => 'linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)',
+                    'badge_bg' => 'bg-amber-400 text-slate-950',
+                    'sub_color' => 'text-indigo-200',
+                    'leader_box' => 'bg-indigo-50/80 border-indigo-200',
+                    'leader_label' => 'text-indigo-800',
+                    'photo_border' => 'border-indigo-600',
+                    'icon_color' => 'text-indigo-600',
+                    'btn_primary' => 'bg-indigo-900 hover:bg-indigo-950 text-white',
+                    'btn_sec' => 'bg-white hover:bg-indigo-50 border-indigo-300 text-indigo-800',
+                ],
+            ];
+            @endphp
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-                
-                {{-- 1. CARD TKS IT MADANI --}}
-                <div class="bg-white rounded-3xl border-2 border-amber-200 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+                @foreach(['tk', 'sd', 'smp'] as $unitKey)
+                @php
+                    $card = $unitShowcaseCards[$unitKey] ?? [];
+                    $t = $unitThemes[$unitKey] ?? $unitThemes['smp'];
+                @endphp
+                <div class="bg-white rounded-3xl border-2 {{ $t['border'] }} shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
                     {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white relative" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: #ffffff;">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
-                                PAUD / TK ISLAM TERPADU
+                    <div class="p-6 text-white relative" style="background: {{ $t['header_bg'] }}; color: #ffffff;">
+                        <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+                            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-white">
+                                {{ $card['level_badge'] ?? strtoupper($unitKey) }}
                             </span>
-                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase">
-                                AKREDITASI B
-                            </span>
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                @if(!empty($card['info_badge']))
+                                <span class="px-2.5 py-1 rounded-full bg-black/25 text-white/90 text-[10px] font-bold backdrop-blur-sm">
+                                    {{ $card['info_badge'] }}
+                                </span>
+                                @endif
+                                @if(!empty($card['accreditation']))
+                                <span class="px-2.5 py-1 rounded-full {{ $t['badge_bg'] }} text-[10px] font-black uppercase">
+                                    {{ $card['accreditation'] }}
+                                </span>
+                                @endif
+                            </div>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-black tracking-tight leading-snug">
-                            TKS Islam Terpadu Madani
+                            {{ $card['title'] ?? '' }}
                         </h3>
-                        <p class="text-xs text-amber-100 font-medium mt-1">
-                            Kayuagung, Kabupaten Ogan Komering Ilir
+                        <p class="text-xs {{ $t['sub_color'] }} font-medium mt-1">
+                            {{ $card['subtitle'] ?? '' }}
                         </p>
                     </div>
 
                     {{-- Card Body --}}
                     <div class="p-6 space-y-5 flex-1 flex flex-col justify-between">
                         <div>
-                            {{-- Kepala Sekolah --}}
-                            <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-amber-50/70 border border-amber-100">
-                                <img src="/uploads/dewan/bunda-ayu.webp" alt="Kepala TKS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-amber-400 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
-                                <div>
-                                    <span class="text-[10px] uppercase font-bold text-amber-800 tracking-wider block">Kepala Sekolah</span>
-                                    <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Ayu Rahmayani, S.Pd.Gr.</h4>
-                                    <span class="text-[11px] text-slate-500 block">Bunda Ayu • NIY: 01012021 02063</span>
+                            {{-- Kepala Sekolah / Pimpinan --}}
+                            <div class="flex items-center space-x-3.5 p-3 rounded-2xl {{ $t['leader_box'] }} border">
+                                <img src="{{ $card['leader_photo'] ?? '/uploads/dewan/avatar-default.svg' }}" 
+                                     alt="{{ $card['leader_name'] ?? 'Pimpinan' }}" 
+                                     class="w-14 h-14 rounded-xl object-cover border-2 {{ $t['photo_border'] }} shadow-sm shrink-0" 
+                                     onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
+                                <div class="min-w-0">
+                                    <span class="text-[10px] uppercase font-bold {{ $t['leader_label'] }} tracking-wider block">
+                                        {{ $card['leader_title'] ?? 'Kepala Sekolah' }}
+                                    </span>
+                                    <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight truncate">
+                                        {{ $card['leader_name'] ?? '' }}
+                                    </h4>
+                                    <span class="text-[11px] text-slate-500 block truncate">
+                                        {{ $card['leader_sub'] ?? '' }}
+                                    </span>
                                 </div>
                             </div>
 
                             {{-- Slogan & Visi --}}
                             <div class="mt-4">
                                 <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block mb-1">Visi & Slogan</span>
-                                <p class="text-xs sm:text-sm font-bold text-slate-800 italic bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                    "Membentuk Generasi Rabbani yang Kreatif, Cerdas, dan Mandiri."
+                                <p class="text-xs sm:text-sm font-bold text-slate-800 italic bg-slate-50 p-3 rounded-xl border border-slate-100 min-h-[58px] flex items-center">
+                                    "{{ $card['slogan'] ?? '' }}"
                                 </p>
                             </div>
 
-                            {{-- Highlight Keunggulan --}}
-                            <ul class="mt-4 space-y-2 text-xs font-semibold text-slate-700">
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-amber-500"></i>
-                                    <span>Sentra Ibadah, Sholat Dhuha & Tahfidz Cilik Juz 30</span>
+                            {{-- Highlight Keunggulan (5 Poin) --}}
+                            <ul class="mt-4 space-y-2 text-xs font-semibold text-slate-700 min-h-[160px]">
+                                @foreach($card['features'] ?? [] as $feat)
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check-circle {{ $t['icon_color'] }} mt-0.5 shrink-0"></i>
+                                    <span>{{ $feat }}</span>
                                 </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-amber-500"></i>
-                                    <span>Sentra Seni, Kreativitas & Jurnal Gambar</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-amber-500"></i>
-                                    <span>Market Day & Entrepreneurship Cilik</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-amber-500"></i>
-                                    <span>Manasik Haji Cilik, Outbound & Fun Swimming</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-amber-500"></i>
-                                    <span>Deep Learning (Berkesadaran & Menggembirakan)</span>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
 
                         {{-- Metadata Chips --}}
                         <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-                            <span><i class="fa-solid fa-id-card text-amber-500 mr-1"></i> NPSN: 69915461</span>
-                            <span><i class="fa-solid fa-calendar text-amber-500 mr-1"></i> Berdiri 2014</span>
+                            <span><i class="fa-solid fa-id-card {{ $t['icon_color'] }} mr-1"></i> {{ $card['meta_left'] ?? '' }}</span>
+                            <span><i class="fa-solid fa-award {{ $t['icon_color'] }} mr-1"></i> {{ $card['meta_right'] ?? '' }}</span>
                         </div>
                     </div>
 
                     {{-- Card Footer / Action Buttons --}}
                     <div class="p-6 bg-slate-50 border-t border-slate-100 space-y-2.5">
-                        <a href="{{ route('unit.home', 'tk') }}" class="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+                        <a href="{{ $card['btn_site_url'] ?? route('unit.home', $unitKey) }}" class="w-full py-3 px-4 rounded-xl {{ $t['btn_primary'] }} font-black text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 group-hover:scale-[1.02]">
                             <i class="fa-solid fa-globe"></i>
-                            <span>Kunjungi Website TKS IT Madani</span>
+                            <span>{{ $card['btn_site_text'] ?? ('Kunjungi Website ' . ($card['title'] ?? '')) }}</span>
                             <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
                         </a>
-                        <a href="{{ route('unit.ppdb', 'tk') }}" class="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-amber-50 border border-amber-300 text-amber-700 font-bold text-xs uppercase tracking-wider text-center transition flex items-center justify-center gap-2">
+                        <a href="{{ $card['btn_spmb_url'] ?? route('unit.ppdb', $unitKey) }}" class="w-full py-2.5 px-4 rounded-xl {{ $t['btn_sec'] }} border font-bold text-xs uppercase tracking-wider text-center transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-graduation-cap"></i>
-                            <span>SPMB TKS IT Online</span>
+                            <span>{{ $card['btn_spmb_text'] ?? 'SPMB Online' }}</span>
                         </a>
                     </div>
                 </div>
-
-
-                {{-- 2. CARD SDS IT MADANI --}}
-                <div class="bg-white rounded-3xl border-2 border-emerald-300 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 relative">
-                    {{-- Badge Unggulan --}}
-                    <div class="absolute top-0 right-0 z-10">
-                        <span class="bg-emerald-600 text-white text-[10px] font-black uppercase px-4 py-1 rounded-bl-xl shadow-md">
-                            13 Rombel • 293 Siswa
-                        </span>
-                    </div>
-
-                    {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-800 text-white relative" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #ffffff;">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
-                                SEKOLAH DASAR ISLAM TERPADU
-                            </span>
-                            <span class="px-2.5 py-1 rounded-full bg-yellow-400 text-slate-950 text-[10px] font-black uppercase mr-16">
-                                AKREDITASI B
-                            </span>
-                        </div>
-                        <h3 class="text-xl sm:text-2xl font-black tracking-tight leading-snug">
-                            SDS Islam Terpadu Madani
-                        </h3>
-                        <p class="text-xs text-emerald-100 font-medium mt-1">
-                            Kayuagung, Kabupaten Ogan Komering Ilir
-                        </p>
-                    </div>
-
-                    {{-- Card Body --}}
-                    <div class="p-6 space-y-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            {{-- Kepala Sekolah & Komite --}}
-                            <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100">
-                                <img src="/uploads/dewan/ust-andi.webp" alt="Pimpinan SDS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-emerald-500 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
-                                <div>
-                                    <span class="text-[10px] uppercase font-bold text-emerald-800 tracking-wider block">Pimpinan & Komite</span>
-                                    <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Yudhi Arsyandi, S.Pd., Gr.</h4>
-                                    <span class="text-[11px] text-slate-500 block">Ketua Komite: Andi Kumaini, M.Pd.</span>
-                                </div>
-                            </div>
-
-                            {{-- Slogan & Visi --}}
-                            <div class="mt-4">
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block mb-1">Visi & Slogan</span>
-                                <p class="text-xs sm:text-sm font-bold text-slate-800 italic bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                    "Membentuk Generasi Rabbani yang Berprestasi, Sholeh, Inovatif dan Mandiri."
-                                </p>
-                            </div>
-
-                            {{-- Highlight Keunggulan --}}
-                            <ul class="mt-4 space-y-2 text-xs font-semibold text-slate-700">
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                    <span>Target Hafalan 2 Juz Al-Qur'an (Juz 30 & 29 Mutqin)</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                    <span>Hafalan 30 Hadits Harian & Pembiasaan Adab</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                    <span>Laboratorium Komputer Modern & Pembekalan ANBK</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                    <span>Bilingual Dasar: Bahasa Arab & Bahasa Inggris</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                    <span>37 Tenaga Pendidik & Karyawan Berdedikasi</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {{-- Metadata Chips --}}
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-                            <span><i class="fa-solid fa-id-card text-emerald-600 mr-1"></i> NPSN: 69881529</span>
-                            <span><i class="fa-solid fa-users text-emerald-600 mr-1"></i> 293 Murid Aktif</span>
-                        </div>
-                    </div>
-
-                    {{-- Card Footer / Action Buttons --}}
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 space-y-2.5">
-                        <a href="{{ route('unit.home', 'sd') }}" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 group-hover:scale-[1.02]">
-                            <i class="fa-solid fa-globe"></i>
-                            <span>Kunjungi Website SDS IT Madani</span>
-                            <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                        </a>
-                        <a href="{{ route('unit.ppdb', 'sd') }}" class="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-emerald-50 border border-emerald-300 text-emerald-700 font-bold text-xs uppercase tracking-wider text-center transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                            <span>SPMB SDS IT Online</span>
-                        </a>
-                    </div>
-                </div>
-
-
-                {{-- 3. CARD SMPS IT MADANI --}}
-                <div class="bg-white rounded-3xl border-2 border-indigo-300 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
-                    {{-- Card Header --}}
-                    <div class="p-6 bg-gradient-to-br from-indigo-900 via-indigo-950 to-blue-950 text-white relative" style="background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); color: #ffffff;">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-black uppercase tracking-wider">
-                                SMP IT & ASRAMA TAHFIDZ
-                            </span>
-                            <span class="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase">
-                                AKREDITASI B
-                            </span>
-                        </div>
-                        <h3 class="text-xl sm:text-2xl font-black tracking-tight leading-snug">
-                            SMPS Islam Terpadu Madani
-                        </h3>
-                        <p class="text-xs text-indigo-200 font-medium mt-1">
-                            Kayuagung, Kabupaten Ogan Komering Ilir
-                        </p>
-                    </div>
-
-                    {{-- Card Body --}}
-                    <div class="p-6 space-y-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            {{-- Kepala Sekolah --}}
-                            <div class="flex items-center space-x-3.5 p-3 rounded-2xl bg-indigo-50/70 border border-indigo-100">
-                                <img src="/uploads/dewan/kepala-sekolah.webp" alt="Kepala SMPS IT Madani" class="w-14 h-14 rounded-xl object-cover border-2 border-indigo-600 shadow-sm shrink-0" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg';">
-                                <div>
-                                    <span class="text-[10px] uppercase font-bold text-indigo-800 tracking-wider block">Kepala Sekolah</span>
-                                    <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-tight">Ribang Imam Satria, S.Pi., Gr.</h4>
-                                    <span class="text-[11px] text-slate-500 block">Ust. Ribang • Gr (Profesi Guru)</span>
-                                </div>
-                            </div>
-
-                            {{-- Slogan & Visi --}}
-                            <div class="mt-4">
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block mb-1">Visi & Slogan</span>
-                                <p class="text-xs sm:text-sm font-bold text-slate-800 italic bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                    "Terbentuknya Generasi Qur'ani, Mandiri, Inovatif, Visioner, dan Moderat."
-                                </p>
-                            </div>
-
-                            {{-- Highlight Keunggulan --}}
-                            <ul class="mt-4 space-y-2 text-xs font-semibold text-slate-700">
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-indigo-600"></i>
-                                    <span>Program Asrama Tahfidz (Boarding School) & Full Day</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-indigo-600"></i>
-                                    <span>Talaqqi & Tasmi' Al-Qur'an 30 Juz Bersanad</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-indigo-600"></i>
-                                    <span>Integrasi Kurikulum Merdeka & Kurikulum Khas JSIT</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-indigo-600"></i>
-                                    <span>Bina Pribadi Islami (BPI) & Islamic Student Camp</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fa-solid fa-check-circle text-indigo-600"></i>
-                                    <span>Laboratorium Komputer, Riset Sains & Bahasa Asing</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {{-- Metadata Chips --}}
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-                            <span><i class="fa-solid fa-id-card text-indigo-600 mr-1"></i> NPSN: 70034917</span>
-                            <span><i class="fa-solid fa-certificate text-indigo-600 mr-1"></i> NSS: 202110234917</span>
-                        </div>
-                    </div>
-
-                    {{-- Card Footer / Action Buttons --}}
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 space-y-2.5">
-                        <a href="{{ route('unit.home', 'smp') }}" class="w-full py-3 px-4 rounded-xl bg-indigo-900 hover:bg-indigo-950 text-white font-black text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 group-hover:scale-[1.02]">
-                            <i class="fa-solid fa-globe"></i>
-                            <span>Kunjungi Website SMPS IT Madani</span>
-                            <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                        </a>
-                        <a href="{{ route('unit.ppdb', 'smp') }}" class="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-300 text-indigo-800 font-bold text-xs uppercase tracking-wider text-center transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                            <span>SPMB SMPS IT Online</span>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
+            </div>
 
             </div>
         </div>
@@ -797,5 +660,9 @@
     </section>
 
 </main>
+
+{{-- Reusable Popup Promo SPMB SIT Madani --}}
+@include('partials.popup-spmb')
+
 @endsection
 

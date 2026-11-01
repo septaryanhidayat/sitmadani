@@ -150,7 +150,32 @@ class AdminHeroController extends Controller
             $slides = $this->getDefaultSlides($selectedUnit);
         }
 
-        return view('admin.hero.index', compact('slides', 'selectedUnit'));
+        $chips = self::getHeroChips();
+
+        return view('admin.hero.index', compact('slides', 'selectedUnit', 'chips'));
+    }
+
+    public static function getDefaultHeroChips(): array
+    {
+        return [
+            ['title' => '3 Unit', 'value' => '3 Unit', 'subtitle' => 'TK, SD & SMP', 'label' => 'TK, SD & SMP', 'color' => 'text-amber-400'],
+            ['title' => 'Terakreditasi', 'value' => 'Terakreditasi', 'subtitle' => 'BAN-SM / PAUD', 'label' => 'BAN-SM / PAUD', 'color' => 'text-emerald-400'],
+            ['title' => 'JSIT', 'value' => 'JSIT', 'subtitle' => 'Jaringan Nasional', 'label' => 'Jaringan Nasional', 'color' => 'text-cyan-400'],
+            ['title' => 'Tahfidz', 'value' => 'Tahfidz', 'subtitle' => 'Mutqin Bersanad', 'label' => 'Mutqin Bersanad', 'color' => 'text-amber-300'],
+        ];
+    }
+
+    public static function getHeroChips(): array
+    {
+        $raw = Setting::get('hero_stats_chips_yayasan');
+        if ($raw) {
+            $decoded = json_decode($raw, true);
+            if (is_array($decoded) && count($decoded) === 4) {
+                return $decoded;
+            }
+        }
+
+        return self::getDefaultHeroChips();
     }
 
     /**
@@ -229,6 +254,32 @@ class AdminHeroController extends Controller
                 json_encode($cleanSlides, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'hero'
             );
+        }
+
+        // Simpan 4 Kartu Statistik / Keunggulan Hero Yayasan jika ada input
+        if ($selectedUnit === 'yayasan' && $request->has('chips')) {
+            $inputChips = $request->input('chips', []);
+            $cleanChips = [];
+            foreach ($inputChips as $c) {
+                $val = trim($c['title'] ?? $c['value'] ?? '');
+                $sub = trim($c['subtitle'] ?? $c['label'] ?? '');
+                if (! empty($val) || ! empty($sub)) {
+                    $cleanChips[] = [
+                        'title' => $val,
+                        'value' => $val,
+                        'subtitle' => $sub,
+                        'label' => $sub,
+                        'color' => trim($c['color'] ?? 'text-amber-400'),
+                    ];
+                }
+            }
+            if (count($cleanChips) === 4) {
+                Setting::set(
+                    'hero_stats_chips_yayasan',
+                    json_encode($cleanChips, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                    'hero'
+                );
+            }
         }
 
         ActivityLog::create([

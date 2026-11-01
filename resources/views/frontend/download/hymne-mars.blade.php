@@ -35,13 +35,13 @@
     <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-gray-100 space-y-8 reveal-fade-up">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-gray-100">
             <div>
-                <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">Lagu Resmi Sekolah Islam Terpadu</span>
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block">Lagu Resmi Sekolah Islam Terpadu</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">MARS JSIT INDONESIA</h2>
                 <p class="text-xs sm:text-sm text-gray-600 mt-1">
                     Pedoman semangat siswa & pendidik Jaringan Sekolah Islam Terpadu (JSIT) se-Indonesia
                 </p>
             </div>
-            <a href="https://www.youtube.com/watch?v=ijDo1wLvZ6w" target="_blank" class="inline-flex items-center bg-[#da251c] hover:bg-[#b91c1c] text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition flex-shrink-0">
+            <a href="https://www.youtube.com/watch?v=ijDo1wLvZ6w" target="_blank" class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition flex-shrink-0">
                 <i class="fa-brands fa-youtube mr-2 text-sm"></i> Tonton di YouTube
             </a>
         </div>
@@ -78,7 +78,7 @@
             </p>
 
             <div class="py-3">
-                <span class="inline-block text-xs font-bold text-white bg-[#da251c] px-4 py-1 rounded-full uppercase tracking-wider mb-3 font-sans shadow-sm">Reff</span>
+                <span class="inline-block text-xs font-bold text-white bg-emerald-600 px-4 py-1 rounded-full uppercase tracking-wider mb-3 font-sans shadow-sm">Reff</span>
                 <p class="font-bold text-gray-900 text-base sm:text-lg">
                     Kami Jaringan Sekolah Islam Terpadu<br>
                     Sambut masa depan wajah Indonesia baru<br>

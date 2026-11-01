@@ -11,7 +11,7 @@
                 <h2 class="text-lg font-black text-slate-800">Daftar Halaman Profil & Informasi</h2>
                 <p class="text-xs text-slate-500 mt-0.5">Kelola seluruh konten halaman profil sekolah (visi misi, sambutan, sejarah, struktur, profil), kebijakan privasi, serta halaman informasi lainnya.</p>
             </div>
-            <a href="{{ route('admin.pages.create') }}" class="inline-flex items-center space-x-2 bg-[#da251c] hover:bg-[#b91c1c] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm transition">
+            <a href="{{ route('admin.pages.create') }}" class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm transition">
                 <i class="fa-solid fa-plus"></i>
                 <span>Tambah Halaman Baru</span>
             </a>
@@ -35,7 +35,7 @@
                         <tr class="hover:bg-slate-50/80 transition">
                             <td class="py-4 px-4 font-bold text-slate-900 text-sm">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-lg bg-red-100 text-[#da251c] flex items-center justify-center text-xs shrink-0">
+                                    <div class="w-8 h-8 rounded-lg bg-red-100 text-emerald-600 flex items-center justify-center text-xs shrink-0">
                                         <i class="fa-solid fa-file-lines"></i>
                                     </div>
                                     <div>
@@ -60,7 +60,7 @@
                                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                         <span class="hidden md:inline">Lihat</span>
                                     </a>
-                                    <a href="{{ route('admin.pages.edit', $page) }}" title="Edit Konten" class="inline-flex items-center space-x-1.5 bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold px-3 py-1.5 rounded-xl shadow-xs transition text-xs">
+                                    <a href="{{ route('admin.pages.edit', $page) }}" title="Edit Konten" class="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-xl shadow-xs transition text-xs">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         <span>Edit</span>
                                     </a>

@@ -56,7 +56,7 @@
                             <a href="{{ route('pengumuman.show', $item->slug) }}">{{ $item->title }}</a>
                         </h3>
 
-                        <div class="text-xs text-[#da251c] font-semibold flex items-center">
+                        <div class="text-xs text-emerald-600 font-semibold flex items-center">
                             <i class="fa-solid fa-certificate text-[10px] mr-1.5"></i>
                             <span>Publikasi Resmi SMPS IT Madani</span>
                         </div>

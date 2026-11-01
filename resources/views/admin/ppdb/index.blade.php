@@ -9,7 +9,7 @@
     {{-- TOP NAVIGATION TABS & ACTIONS (Rapi, Terstruktur & Responsif) --}}
     <div class="bg-white p-2 sm:p-2.5 rounded-2xl shadow-xs border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-2.5">
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <a href="{{ route('admin.ppdb.index') }}" class="px-3.5 py-2 rounded-xl font-bold text-xs bg-[#da251c] text-white shadow-xs transition whitespace-nowrap">
+            <a href="{{ route('admin.ppdb.index') }}" class="px-3.5 py-2 rounded-xl font-bold text-xs bg-emerald-600 text-white shadow-xs transition whitespace-nowrap">
                 <i class="fa-solid fa-users mr-1.5"></i> Data Pendaftar
             </a>
             <a href="{{ route('admin.ppdb.content', ['tab' => 'jalur']) }}" class="px-3.5 py-2 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200/60 transition whitespace-nowrap flex items-center space-x-1.5">
@@ -102,7 +102,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($registrations as $reg)
                         <tr class="hover:bg-slate-50 transition">
-                            <td class="py-3.5 px-4 font-mono font-bold text-[#da251c]">{{ $reg->registration_number }}</td>
+                            <td class="py-3.5 px-4 font-mono font-bold text-emerald-600">{{ $reg->registration_number }}</td>
                             <td class="py-3.5 px-4">
                                 <span class="font-bold text-slate-900 block">{{ $reg->full_name }}</span>
                                 <span class="text-[11px] text-slate-400">{{ $reg->gender }} &bull; {{ $reg->birth_place }}</span>

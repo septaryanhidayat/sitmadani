@@ -9,7 +9,7 @@
     
     {{-- 1. WELCOME HERO CARD --}}
     <div class="bg-gradient-to-r from-[#0b1120] via-slate-900 to-[#1e293b] rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-slate-800">
-        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-[#da251c]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div class="space-y-2">
                 <div class="inline-flex items-center space-x-2 bg-slate-800/80 border border-slate-700/80 px-3 py-1 rounded-full text-xs text-amber-400 font-semibold">
@@ -25,7 +25,7 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('admin.posts.create') }}" class="inline-flex items-center space-x-2 bg-gradient-to-r from-[#da251c] to-[#ef4444] hover:from-[#b91c1c] hover:to-[#e05500] text-white text-xs font-bold px-5 py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                <a href="{{ route('admin.posts.create') }}" class="inline-flex items-center space-x-2 bg-gradient-to-r from-[#059669] to-[#ef4444] hover:from-[#b91c1c] hover:to-[#e05500] text-white text-xs font-bold px-5 py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-pen-nib"></i>
                     <span>Tulis Berita Baru</span>
                 </a>
@@ -62,7 +62,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
         {{-- Card 1: Berita & Views (Oranye Madani Luminous) --}}
-        <div class="bg-gradient-to-br from-[#da251c] via-[#da251c] to-[#b91c1c] text-white rounded-3xl p-6 shadow-lg shadow-red-500/20 border border-red-300/30 relative overflow-hidden group hover:scale-[1.02] transition duration-300">
+        <div class="bg-gradient-to-br from-[#059669] via-[#059669] to-[#b91c1c] text-white rounded-3xl p-6 shadow-lg shadow-red-500/20 border border-red-300/30 relative overflow-hidden group hover:scale-[1.02] transition duration-300">
             <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
             <div class="flex items-center justify-between mb-4 relative z-10">
                 <span class="text-xs font-bold text-red-100 uppercase tracking-wider">Artikel Berita</span>
@@ -146,7 +146,7 @@
                 <h3 class="font-black text-slate-900 text-lg">Ringkasan Analitik Pengunjung & Tren Hari Ini</h3>
                 <p class="text-xs text-slate-400">Data riil pengunjung unik, sumber asal lalu lintas, dan artikel yang sedang ramai dibaca.</p>
             </div>
-            <a href="{{ route('admin.analytics.index') }}" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-[#da251c] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm">
+            <a href="{{ route('admin.analytics.index') }}" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm">
                 <span>Lihat Analitik Lengkap</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
@@ -218,10 +218,10 @@
                     <div class="space-y-2">
                         @forelse($topTodayPages as $tp)
                             <div class="flex items-center justify-between text-xs">
-                                <a href="{{ $tp->path }}" target="_blank" class="font-medium text-slate-700 hover:text-[#da251c] truncate max-w-[150px]" title="{{ $tp->title ?: $tp->path }}">
+                                <a href="{{ $tp->path }}" target="_blank" class="font-medium text-slate-700 hover:text-emerald-600 truncate max-w-[150px]" title="{{ $tp->title ?: $tp->path }}">
                                     {{ $tp->title ?: $tp->path }}
                                 </a>
-                                <span class="font-bold text-[#da251c] bg-red-50 px-2 py-0.5 rounded-md border border-red-100">{{ number_format($tp->views) }}x</span>
+                                <span class="font-bold text-emerald-600 bg-red-50 px-2 py-0.5 rounded-md border border-red-100">{{ number_format($tp->views) }}x</span>
                             </div>
                         @empty
                             <p class="text-xs text-slate-400 italic py-2">Belum ada kunjungan halaman hari ini.</p>
@@ -235,7 +235,7 @@
     {{-- 4. QUICK ACTION MENU --}}
     <div class="bg-white p-6 rounded-3xl shadow-xs border border-slate-200/80 space-y-4">
         <h3 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider flex items-center space-x-2">
-            <i class="fa-solid fa-bolt text-[#da251c]"></i>
+            <i class="fa-solid fa-bolt text-emerald-600"></i>
             <span>Pusat Aksi Cepat</span>
         </h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 text-center">
@@ -245,32 +245,32 @@
                 <span class="text-xs font-bold block">Banner Hero</span>
             </a>
 
-            <a href="{{ route('admin.posts.create') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
-                <i class="fa-solid fa-file-pen text-xl mb-2 text-[#da251c] group-hover:scale-110 transition block"></i>
+            <a href="{{ route('admin.posts.create') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
+                <i class="fa-solid fa-file-pen text-xl mb-2 text-emerald-600 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Tulis Berita</span>
             </a>
 
-            <a href="{{ route('admin.pages.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
+            <a href="{{ route('admin.pages.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
                 <i class="fa-solid fa-file-signature text-xl mb-2 text-indigo-500 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Edit Profil</span>
             </a>
 
-            <a href="{{ route('admin.dewan.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
+            <a href="{{ route('admin.dewan.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
                 <i class="fa-solid fa-chalkboard-user text-xl mb-2 text-purple-500 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Dewan Guru</span>
             </a>
 
-            <a href="{{ route('admin.media.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
+            <a href="{{ route('admin.media.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
                 <i class="fa-solid fa-photo-film text-xl mb-2 text-pink-500 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Galeri Foto</span>
             </a>
 
-            <a href="{{ route('admin.settings.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
+            <a href="{{ route('admin.settings.index') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
                 <i class="fa-solid fa-sliders text-xl mb-2 text-emerald-500 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Setting & SEO</span>
             </a>
 
-            <a href="{{ route('admin.backup.download') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-[#da251c] transition group">
+            <a href="{{ route('admin.backup.download') }}" class="p-4 rounded-2xl bg-slate-50 hover:bg-red-50 border border-slate-200/70 hover:border-red-200 text-slate-700 hover:text-emerald-600 transition group">
                 <i class="fa-solid fa-download text-xl mb-2 text-amber-500 group-hover:scale-110 transition block"></i>
                 <span class="text-xs font-bold block">Backup Database</span>
             </a>
@@ -285,10 +285,10 @@
         <div class="lg:col-span-7 bg-white p-6 sm:p-7 rounded-3xl shadow-xs border border-slate-200/80 space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-newspaper text-[#da251c]"></i>
+                    <i class="fa-solid fa-newspaper text-emerald-600"></i>
                     <h3 class="font-extrabold text-sm text-slate-800">Artikel & Berita Terbaru</h3>
                 </div>
-                <a href="{{ route('admin.posts.index') }}" class="text-xs font-bold text-[#da251c] hover:underline">
+                <a href="{{ route('admin.posts.index') }}" class="text-xs font-bold text-emerald-600 hover:underline">
                     Lihat Semua &rarr;
                 </a>
             </div>
@@ -311,7 +311,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('admin.posts.edit', $post) }}" class="p-2 text-slate-400 hover:text-[#da251c] hover:bg-red-50 rounded-lg transition" title="Edit Artikel">
+                        <a href="{{ route('admin.posts.edit', $post) }}" class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-red-50 rounded-lg transition" title="Edit Artikel">
                             <i class="fa-solid fa-pen-to-square text-xs"></i>
                         </a>
                     </div>
@@ -328,7 +328,7 @@
                     <i class="fa-solid fa-shield-halved text-emerald-500"></i>
                     <h3 class="font-extrabold text-sm text-slate-800">Log Aktivitas & Audit Keamanan</h3>
                 </div>
-                <a href="{{ route('admin.security.index') }}" class="text-xs font-bold text-[#da251c] hover:underline">
+                <a href="{{ route('admin.security.index') }}" class="text-xs font-bold text-emerald-600 hover:underline">
                     Semua Log &rarr;
                 </a>
             </div>

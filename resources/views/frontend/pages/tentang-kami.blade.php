@@ -31,7 +31,7 @@
             <h2 class="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
                 {{ $page?->title ?? 'Profil SMPS IT Madani Kayuagung' }}
             </h2>
-            <div class="w-16 h-1 bg-[#da251c] rounded-full mt-3"></div>
+            <div class="w-16 h-1 bg-emerald-600 rounded-full mt-3"></div>
         </div>
 
         <div class="prose-content text-gray-700 text-sm sm:text-base leading-relaxed space-y-6">
@@ -88,8 +88,8 @@
                 <h2 class="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
                     Sejarah Berdirinya SMPS IT Madani Kayuagung
                 </h2>
-                <span class="block text-xs sm:text-sm font-semibold text-[#da251c]">Komitmen Membangun Pendidikan Berkualitas</span>
-                <div class="w-16 h-1 bg-[#da251c] rounded-full mx-auto lg:mx-0"></div>
+                <span class="block text-xs sm:text-sm font-semibold text-emerald-600">Komitmen Membangun Pendidikan Berkualitas</span>
+                <div class="w-16 h-1 bg-emerald-600 rounded-full mx-auto lg:mx-0"></div>
                 <p class="text-gray-600 text-xs sm:text-base leading-relaxed text-left sm:text-justify">
                     SMPS IT Madani Kayuagung didirikan di Kabupaten Kayuagung atas inisiatif para tokoh pendidikan dan alim ulama yang mendambakan hadirnya institusi pendidikan menengah atas Islam terpadu yang bermutu tinggi, berwawasan global, namun tetap berakar kuat pada nilai-nilai tradisi keislaman.
                 </p>
@@ -126,7 +126,7 @@
                 </p>
             </div>
             <div class="pt-4 border-t border-gray-100">
-                <a href="{{ route('bidang.index') }}" class="inline-flex items-center text-xs font-bold text-indigo-600 hover:text-[#da251c]">
+                <a href="{{ route('bidang.index') }}" class="inline-flex items-center text-xs font-bold text-indigo-600 hover:text-emerald-600">
                     <span>Lihat Semua Fasilitas</span>
                     <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i>
                 </a>
@@ -136,17 +136,17 @@
         {{-- Card 2: Agenda --}}
         <div class="bg-white rounded-3xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col justify-between space-y-6 reveal-fade-up delay-1">
             <div class="space-y-4">
-                <div class="w-16 h-16 rounded-2xl bg-orange-100 text-[#da251c] flex items-center justify-center text-2xl shadow-inner">
+                <div class="w-16 h-16 rounded-2xl bg-orange-100 text-emerald-600 flex items-center justify-center text-2xl shadow-inner">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
-                <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">Kalender Pendidikan</span>
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block">Kalender Pendidikan</span>
                 <h3 class="text-xl font-extrabold text-gray-900">Agenda Akademik</h3>
                 <p class="text-xs text-gray-500 leading-relaxed">
                     Jadwal ujian, masa pendaftaran PPDB, wisuda tahfidz, kemah pramuka SIT, workshop sains, dan kegiatan kesiswaan.
                 </p>
             </div>
             <div class="pt-4 border-t border-gray-100">
-                <a href="{{ route('agenda.index') }}" class="inline-flex items-center text-xs font-bold text-[#da251c] hover:text-[#b91c1c]">
+                <a href="{{ route('agenda.index') }}" class="inline-flex items-center text-xs font-bold text-emerald-600 hover:text-[#b91c1c]">
                     <span>Lihat Semua Agenda</span>
                     <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i>
                 </a>
@@ -181,7 +181,7 @@
             <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
                 Visi dan Misi SMPS IT Madani Kayuagung
             </h2>
-            <div class="w-16 h-1 bg-[#da251c] mx-auto rounded-full mt-3"></div>
+            <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-3"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -241,7 +241,7 @@
                 Komentar Alumni &amp; Orang Tua
             </h2>
             <p class="text-xs sm:text-sm text-gray-500 font-semibold mt-1">Pengalaman berharga belajar dan bertumbuh di SMPS IT Madani Kayuagung</p>
-            <div class="w-16 h-1 bg-[#da251c] mx-auto rounded-full mt-3"></div>
+            <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-3"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

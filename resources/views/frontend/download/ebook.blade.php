@@ -25,7 +25,7 @@
     
     {{-- HEADER KONTEN --}}
     <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs font-bold text-[#da251c] uppercase tracking-wider block">SUMBER BELAJAR DIGITAL RESMI</span>
+        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block">SUMBER BELAJAR DIGITAL RESMI</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-1">
             {{ $page?->title ?? 'Modul Pembelajaran & Literasi Siswa' }}
         </h2>

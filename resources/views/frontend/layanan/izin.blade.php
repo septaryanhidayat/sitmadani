@@ -35,7 +35,7 @@
         <h2 class="text-2xl sm:text-3xl font-extrabold text-indigo-600 tracking-tight uppercase">
             PERMOHONAN IZIN KUNJUNGAN KE SEKOLAH
         </h2>
-        <p class="text-sm sm:text-base font-bold text-[#da251c] mt-1">
+        <p class="text-sm sm:text-base font-bold text-emerald-600 mt-1">
             SMPS IT Madani Kayuagung
         </p>
         <div class="w-16 h-1 bg-indigo-600 mx-auto rounded-full mt-3"></div>

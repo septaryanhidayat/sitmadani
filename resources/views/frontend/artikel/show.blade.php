@@ -206,10 +206,10 @@
 
             {{-- Banner PPDB --}}
             <div class="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-indigo-900 to-blue-900 p-6 text-white text-center space-y-3">
-                <span class="inline-block bg-[#da251c] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full text-white">PPDB Online</span>
+                <span class="inline-block bg-emerald-600 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full text-white">PPDB Online</span>
                 <h4 class="text-lg font-extrabold text-white">Penerimaan Siswa Baru</h4>
                 <p class="text-xs text-indigo-100">Jadilah bagian dari generasi Qur'ani dan saintis berprestasi di SMPS IT Madani Kayuagung.</p>
-                <a href="{{ route('ppdb.index') }}" class="inline-block w-full bg-[#da251c] hover:bg-[#b91c1c] text-white font-bold py-2.5 rounded-xl text-xs transition shadow">
+                <a href="{{ route('ppdb.index') }}" class="inline-block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition shadow">
                     Daftar Sekarang
                 </a>
             </div>

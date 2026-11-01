@@ -47,7 +47,7 @@
             margin: 3px 0;
             font-size: 14px;
             font-weight: bold;
-            color: #da251c;
+            color: #059669;
         }
         .header-text p {
             margin: 2px 0;
@@ -143,7 +143,7 @@
         <div style="background: #fff8f8; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <span style="color: #666; font-size: 11px;">Nomor Pendaftaran:</span>
-                <strong style="color: #da251c; font-size: 15px; margin-left: 5px;">{{ $ppdb->registration_number }}</strong>
+                <strong style="color: #059669; font-size: 15px; margin-left: 5px;">{{ $ppdb->registration_number }}</strong>
             </div>
             <div>
                 <span style="color: #666; font-size: 11px;">Tanggal Daftar:</span>
@@ -158,7 +158,7 @@
         <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 8px 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; font-size: 11px;">
             <div><span style="color: #555;">Gelombang:</span> <strong style="color: #00913e;">{{ $ppdb->wave ?: 'Gelombang 1' }}</strong></div>
             <div><span style="color: #555;">Jalur Pendaftaran:</span> <strong>{{ $ppdb->track ?: 'Reguler' }}</strong></div>
-            <div><span style="color: #555;">Program Pilihan:</span> <strong style="color: #da251c;">{{ $ppdb->program_type ?: 'Boarding School' }}</strong></div>
+            <div><span style="color: #555;">Program Pilihan:</span> <strong style="color: #059669;">{{ $ppdb->program_type ?: 'Boarding School' }}</strong></div>
         </div>
 
         <div class="section-title">A. Data Calon Siswa</div>

@@ -212,7 +212,7 @@
                                 @if($activeUnit === 'smp')
                                 <div class="border-t border-gray-100 my-1"></div>
                                 <a href="{{ route('dpc.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                    <i class="fa-solid fa-star-and-crescent w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Program Unggulan
+                                    <i class="fa-solid fa-award w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Program Unggulan
                                 </a>
                                 <a href="{{ route('ekskul.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
                                     <i class="fa-solid fa-people-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Ekstrakurikuler

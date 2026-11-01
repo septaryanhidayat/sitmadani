@@ -123,7 +123,7 @@
 
                 {{-- Oranye Sekunder --}}
                 <div class="p-4 rounded-2xl bg-orange-50 border border-orange-200 flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-[#da251c] shadow-md flex-shrink-0"></div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600 shadow-md flex-shrink-0"></div>
                     <div>
                         <span class="font-extrabold text-gray-900 block text-sm">Oranye Dinamis (Sekunder)</span>
                         <code class="text-xs text-orange-600 font-mono font-bold">HEX: #F97316</code>

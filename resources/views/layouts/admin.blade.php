@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel') - SMPS IT Madani Kayuagung</title>
+    <title>@yield('title', 'Admin Panel') - SIT Madani Kayuagung</title>
     <link rel="icon" type="image/svg+xml" href="/uploads/logo-madani-square.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,17 +201,17 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block py-0.5">Navigasi</span>
                     <div class="sidebar-section-divider hidden"></div>
                     
-                    <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Dashboard">
+                    <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Dashboard">
                         <i class="fa-solid fa-gauge-high text-xs w-4 text-center"></i>
                         <span class="sidebar-label">Dashboard</span>
                     </a>
 
-                    <a href="{{ route('admin.analytics.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.analytics*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Analitik">
+                    <a href="{{ route('admin.analytics.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.analytics*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Analitik">
                         <i class="fa-solid fa-chart-line text-xs w-4 text-center text-cyan-400"></i>
                         <span class="sidebar-label">Analitik</span>
                     </a>
 
-                    <a href="{{ route('admin.quick-menus.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.quick-menus*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Menu Beranda">
+                    <a href="{{ route('admin.quick-menus.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.quick-menus*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Menu Beranda">
                         <i class="fa-solid fa-compass text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Menu Beranda</span>
                     </a>
@@ -222,7 +222,7 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-amber-400 uppercase block py-0.5">SPMB &amp; PPDB</span>
                     <div class="sidebar-section-divider hidden"></div>
 
-                    <a href="{{ route('admin.ppdb.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.index') || request()->routeIs('admin.ppdb.show') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pendaftar SPMB">
+                    <a href="{{ route('admin.ppdb.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.index') || request()->routeIs('admin.ppdb.show') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pendaftar SPMB">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-graduation-cap text-xs w-4 text-center text-amber-300"></i>
                             <span class="sidebar-label font-bold">Pendaftar SPMB</span>
@@ -235,7 +235,7 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('admin.ppdb.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.content*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Konten & Jalur PPDB">
+                    <a href="{{ route('admin.ppdb.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.ppdb.content*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Konten & Jalur PPDB">
                         <i class="fa-solid fa-sliders text-xs w-4 text-center text-indigo-400"></i>
                         <span class="sidebar-label">Konten &amp; Jalur</span>
                     </a>
@@ -246,42 +246,50 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block py-0.5">Publikasi</span>
                     <div class="sidebar-section-divider hidden"></div>
 
-                    <a href="{{ route('admin.posts.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.posts*') && !request('type') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Berita & Artikel">
+                    <a href="{{ route('admin.posts.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.posts*') && !request('type') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Berita & Artikel">
                         <i class="fa-solid fa-newspaper text-xs w-4 text-center text-rose-400"></i>
                         <span class="sidebar-label">Berita &amp; Artikel</span>
                     </a>
 
-                    <a href="{{ route('admin.agenda.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.agenda*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Agenda & Info">
+                    <a href="{{ route('admin.agenda.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.agenda*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Agenda & Info">
                         <i class="fa-solid fa-calendar-days text-xs w-4 text-center text-indigo-400"></i>
                         <span class="sidebar-label">Agenda &amp; Info</span>
                     </a>
 
-                    <a href="{{ route('admin.posts.index', ['type' => 'prestasi']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'prestasi' ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Prestasi">
+                    <a href="{{ route('admin.posts.index', ['type' => 'prestasi']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'prestasi' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Prestasi">
                         <i class="fa-solid fa-trophy text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Prestasi</span>
                     </a>
 
-                    <a href="{{ route('admin.posts.index', ['type' => 'ekskul']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'ekskul' ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Ekstrakurikuler">
+                    <a href="{{ route('admin.posts.index', ['type' => 'ekskul']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'ekskul' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Ekstrakurikuler">
                         <i class="fa-solid fa-people-group text-xs w-4 text-center text-emerald-400"></i>
                         <span class="sidebar-label">Ekstrakurikuler</span>
                     </a>
 
-                    <a href="{{ route('admin.media.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.media*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Galeri Media">
+                    <a href="{{ route('admin.media.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.media*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Galeri Media">
                         <i class="fa-solid fa-photo-film text-xs w-4 text-center text-purple-400"></i>
                         <span class="sidebar-label">Galeri Media</span>
                     </a>
 
-                    <a href="{{ route('admin.downloads.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.downloads*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Download">
+                    <a href="{{ route('admin.downloads.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.downloads*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Download">
                         <i class="fa-solid fa-download text-xs w-4 text-center text-sky-400"></i>
                         <span class="sidebar-label">Download</span>
                     </a>
 
-                    <a href="{{ route('admin.hero.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.hero*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Banner Hero Slider">
+                    <a href="{{ route('admin.hero.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.hero*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Banner Hero Slider">
                         <i class="fa-solid fa-images text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Banner Hero</span>
                     </a>
+                    <a href="{{ route('admin.showcase.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.showcase*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Showcase 3 Unit">
+                        <i class="fa-solid fa-shapes text-xs w-4 text-center text-emerald-400"></i>
+                        <span class="sidebar-label">Showcase Unit</span>
+                    </a>
+                    <a href="{{ route('admin.media.index') }}#video-section" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.media*') && request('tab') === 'video' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Video YouTube">
+                        <i class="fa-brands fa-youtube text-xs w-4 text-center text-red-500"></i>
+                        <span class="sidebar-label">Video YouTube</span>
+                    </a>
 
-                    <a href="{{ route('admin.popup.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.popup*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Popup Promo">
+                    <a href="{{ route('admin.popup.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.popup*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Popup Promo">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-bullhorn text-xs w-4 text-center text-amber-300"></i>
                             <span class="sidebar-label">Popup Promo</span>
@@ -297,27 +305,27 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block py-0.5">Profil</span>
                     <div class="sidebar-section-divider hidden"></div>
                     
-                    <a href="{{ route('admin.pages.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.pages*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Profil Sekolah">
+                    <a href="{{ route('admin.pages.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.pages*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Profil Sekolah">
                         <i class="fa-solid fa-file-lines text-xs w-4 text-center text-blue-400"></i>
                         <span class="sidebar-label">Profil Sekolah</span>
                     </a>
 
-                    <a href="{{ route('admin.dewan.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dewan*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Guru & GTK">
+                    <a href="{{ route('admin.dewan.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dewan*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Guru & GTK">
                         <i class="fa-solid fa-chalkboard-user text-xs w-4 text-center text-emerald-400"></i>
                         <span class="sidebar-label">Guru &amp; GTK</span>
                     </a>
 
-                    <a href="{{ route('admin.bidang.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.bidang*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Fasilitas">
+                    <a href="{{ route('admin.bidang.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.bidang*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Fasilitas">
                         <i class="fa-solid fa-layer-group text-xs w-4 text-center text-teal-400"></i>
                         <span class="sidebar-label">Fasilitas</span>
                     </a>
 
-                    <a href="{{ route('admin.dpc.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dpc*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Program Unggulan">
-                        <i class="fa-solid fa-star-and-crescent text-xs w-4 text-center text-amber-400"></i>
+                    <a href="{{ route('admin.dpc.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.dpc*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Program Unggulan">
+                        <i class="fa-solid fa-award text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Program Unggulan</span>
                     </a>
 
-                    <a href="{{ route('admin.posts.index', ['type' => 'alumni']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'alumni' ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Alumni">
+                    <a href="{{ route('admin.posts.index', ['type' => 'alumni']) }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request('type') === 'alumni' ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Alumni">
                         <i class="fa-solid fa-user-graduate text-xs w-4 text-center text-cyan-400"></i>
                         <span class="sidebar-label">Alumni</span>
                     </a>
@@ -328,7 +336,7 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block py-0.5">Layanan</span>
                     <div class="sidebar-section-divider hidden"></div>
 
-                    <a href="{{ route('admin.layanan.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.layanan.index') || request()->routeIs('admin.layanan.show') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Layanan Terpadu">
+                    <a href="{{ route('admin.layanan.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.layanan.index') || request()->routeIs('admin.layanan.show') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Layanan Terpadu">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-handshake-angle text-xs w-4 text-center text-teal-300"></i>
                             <span class="sidebar-label font-bold">Layanan Terpadu</span>
@@ -341,12 +349,12 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('admin.layanan.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.layanan.content*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Info Layanan">
+                    <a href="{{ route('admin.layanan.content') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.layanan.content*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Info Layanan">
                         <i class="fa-solid fa-file-shield text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Info Layanan</span>
                     </a>
 
-                    <a href="{{ route('admin.feedbacks.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.feedbacks*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Kotak Aspirasi">
+                    <a href="{{ route('admin.feedbacks.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.feedbacks*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Kotak Aspirasi">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-inbox text-xs w-4 text-center text-indigo-400"></i>
                             <span class="sidebar-label">Aspirasi</span>
@@ -359,7 +367,7 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('admin.testimonials.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.testimonials*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Testimoni">
+                    <a href="{{ route('admin.testimonials.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.testimonials*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Testimoni">
                         <i class="fa-solid fa-comments text-xs w-4 text-center text-pink-400"></i>
                         <span class="sidebar-label">Testimoni</span>
                     </a>
@@ -370,17 +378,17 @@
                     <span class="sidebar-section-title px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase block py-0.5">Sistem</span>
                     <div class="sidebar-section-divider hidden"></div>
                     
-                    <a href="{{ route('admin.settings.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.settings*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pengaturan Web">
+                    <a href="{{ route('admin.settings.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.settings*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pengaturan Web">
                         <i class="fa-solid fa-gear text-xs w-4 text-center text-slate-400"></i>
                         <span class="sidebar-label">Pengaturan Web</span>
                     </a>
 
-                    <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.users*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pengguna & Role">
+                    <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.users*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Pengguna & Role">
                         <i class="fa-solid fa-users-gear text-xs w-4 text-center text-slate-400"></i>
                         <span class="sidebar-label">Pengguna &amp; Role</span>
                     </a>
 
-                    <a href="{{ route('admin.security.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.security*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Log Sistem">
+                    <a href="{{ route('admin.security.index') }}" class="sidebar-item flex items-center justify-between px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.security*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Log Sistem">
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-shield-halved text-xs w-4 text-center text-red-400"></i>
                             <span class="sidebar-label">Log Sistem</span>
@@ -393,7 +401,7 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('admin.backup.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.backup*') ? 'bg-gradient-to-r from-[#da251c] to-[#ef4444] text-white font-bold shadow-md shadow-red-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Backup DB">
+                    <a href="{{ route('admin.backup.index') }}" class="sidebar-item flex items-center space-x-3 px-3 py-1.5 rounded-lg transition {{ request()->routeIs('admin.backup*') ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-500/20' : 'hover:bg-slate-800/70 text-slate-300 hover:text-white' }}" title="Backup DB">
                         <i class="fa-solid fa-database text-xs w-4 text-center text-amber-400"></i>
                         <span class="sidebar-label">Backup DB</span>
                     </a>
@@ -405,7 +413,7 @@
             <div class="sidebar-user-card mt-3 pt-3 border-t border-slate-800/80 bg-[#070b14]/70 rounded-xl p-2.5">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#da251c] to-rose-600 text-white flex items-center justify-center font-bold text-xs shadow flex-shrink-0" title="{{ auth()->user()->name ?? 'Administrator' }}">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-600 to-teal-600 text-white flex items-center justify-center font-bold text-xs shadow flex-shrink-0" title="{{ auth()->user()->name ?? 'Administrator' }}">
                             {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                         </div>
                         <div class="sidebar-user-text min-w-0">
@@ -435,7 +443,7 @@
                 <button id="mobile-toggle" class="md:hidden text-slate-600 hover:text-slate-900 p-2 text-lg shrink-0">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <button id="desktop-sidebar-toggle" class="hidden md:inline-flex items-center justify-center text-slate-500 hover:text-[#da251c] p-2 rounded-xl hover:bg-slate-100 transition cursor-pointer shrink-0" title="Perkecil / Perbesar Sidebar">
+                <button id="desktop-sidebar-toggle" class="hidden md:inline-flex items-center justify-center text-slate-500 hover:text-emerald-600 p-2 rounded-xl hover:bg-slate-100 transition cursor-pointer shrink-0" title="Perkecil / Perbesar Sidebar">
                     <i class="fa-solid fa-bars-staggered text-base"></i>
                 </button>
                 <div class="min-w-0">
@@ -445,7 +453,7 @@
             </div>
 
             <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
-                <a href="{{ route('admin.posts.create') }}" class="hidden md:inline-flex items-center space-x-1.5 bg-[#da251c] hover:bg-[#b91c1c] text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-md transition">
+                <a href="{{ route('admin.posts.create') }}" class="hidden md:inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-md transition">
                     <i class="fa-solid fa-pen-nib text-xs"></i>
                     <span>Tulis Berita</span>
                 </a>
@@ -455,8 +463,8 @@
                     <span>Backup</span>
                 </a>
 
-                <a href="{{ route('home') }}" target="_blank" class="text-xs text-slate-600 hover:text-[#da251c] bg-slate-100 hover:bg-red-50 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl transition flex items-center space-x-1.5 font-medium border border-slate-200" title="Lihat Web Publik">
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-[#da251c]"></i>
+                <a href="{{ route('home') }}" target="_blank" class="text-xs text-slate-600 hover:text-emerald-600 bg-slate-100 hover:bg-red-50 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl transition flex items-center space-x-1.5 font-medium border border-slate-200" title="Lihat Web Publik">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-600"></i>
                     <span class="hidden sm:inline">Web Publik</span>
                 </a>
             </div>
@@ -495,7 +503,7 @@
         {{-- Admin Footer & Watermark --}}
         <footer class="px-6 sm:px-8 py-4 border-t border-slate-200/80 bg-white/70 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
             <div>
-                &copy; {{ date('Y') }} SMPS IT Madani Kayuagung &bull; Panel Administrasi
+                &copy; {{ date('Y') }} SIT Madani Kayuagung &bull; Panel Administrasi
             </div>
             <div class="text-[11px] text-slate-400">
                 Developed by <a href="https://berandadigital.net" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-800 hover:underline font-medium">Beranda Teknologi Digital</a>
@@ -689,7 +697,7 @@
                     html: `Apakah Anda yakin ingin menghapus <strong class="text-red-600">${itemName}</strong>?<br><span class="text-xs text-slate-500">Tindakan ini permanen dan tidak dapat dibatalkan.</span>`,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#da251c',
+                    confirmButtonColor: '#e11d48',
                     cancelButtonColor: '#64748b',
                     confirmButtonText: '<i class="fa-solid fa-trash-can mr-1.5"></i> Ya, Hapus Sekarang!',
                     cancelButtonText: 'Batal',
@@ -722,7 +730,7 @@
                     text: 'Data yang dihapus tidak dapat dipulihkan kembali!',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#da251c',
+                    confirmButtonColor: '#e11d48',
                     cancelButtonColor: '#64748b',
                     confirmButtonText: '<i class="fa-solid fa-trash-can mr-1.5"></i> Ya, Hapus!',
                     cancelButtonText: 'Batal',
