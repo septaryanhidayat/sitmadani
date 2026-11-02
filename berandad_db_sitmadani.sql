@@ -8,6 +8,7 @@
 -- PHP Version: 8.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -686,7 +687,7 @@ CREATE TABLE `ppdb_registrations` (
 -- Table structure for table `ppdb_tracks`
 DROP TABLE IF EXISTS `ppdb_tracks`;
 CREATE TABLE `ppdb_tracks` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `percentage` varchar(30) NOT NULL DEFAULT '0%',
@@ -696,9 +697,7 @@ CREATE TABLE `ppdb_tracks` (
   `order` int(11) NOT NULL DEFAULT 0,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `ppdb_tracks_slug_unique` (`slug`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table `ppdb_tracks`
@@ -982,7 +981,7 @@ INSERT INTO `testimonials` (`id`, `name`, `profession`, `content`, `photo`, `sta
 -- Table structure for table `users`
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -992,9 +991,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` varchar(20) NOT NULL DEFAULT 'admin',
   `avatar` varchar(255) DEFAULT NULL,
-  `unit` varchar(30) DEFAULT 'yayasan',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
+  `unit` varchar(30) DEFAULT 'yayasan'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table `users`
@@ -1082,10 +1079,434 @@ INSERT INTO `visitor_logs` (`id`, `ip_address`, `session_id`, `user_agent`, `dev
 (14, '127.0.0.1', 'WzT1Jg36tDGbafJHkze4oMWoDHSEVODP1g6Ut1ud', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/hymne-mars', '/hymne-mars', 'Hymne & Mars JSIT', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 00:39:48', '2026-11-02 00:39:48'),
 (15, '127.0.0.1', 'YIrkLP1sluBiBtn93KtSXReVOVhvNydEZNOfsh6X', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/e-book', '/e-book', 'Download Modul & E-Book', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 00:39:48', '2026-11-02 00:39:48'),
 (16, '127.0.0.1', 'w4Km8xJcCVpGAINSKJWsV3cXx2uruMAsPX5LoICn', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/logo', '/logo', 'Logo', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 00:40:48', '2026-11-02 00:40:48'),
-(17, '127.0.0.1', '2TyMrAPEfgahrugerBKhyepVyMReJ75g3eAsxEIk', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/ppdb', '/ppdb', 'Ppdb', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 00:41:48', '2026-11-02 00:41:48');
+(17, '127.0.0.1', '2TyMrAPEfgahrugerBKhyepVyMReJ75g3eAsxEIk', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/ppdb', '/ppdb', 'Ppdb', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 00:41:48', '2026-11-02 00:41:48'),
+(18, '127.0.0.1', 'wGAsSffBfGGJNfnEFUcJFCthjk8wAP6vHls2Ch6C', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/sambutan-kepala-sekolah?unit=yayasan', '/sambutan-kepala-sekolah', 'Sambutan Kepala Sekolah', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:36:13', '2026-11-02 01:36:13'),
+(19, '127.0.0.1', 'ZRdkrRHKKoPPe8KaByK2NYK96HE3I1JblwJ9Mz8F', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/smp/sambutan-kepala-sekolah', '/smp/sambutan-kepala-sekolah', 'Smp/Sambutan Kepala Sekolah', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:36:13', '2026-11-02 01:36:13'),
+(20, '127.0.0.1', 'Avug2E64nTo33WmzWrOVlaIgqxDM9Mk4Q68SxA3t', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/hubungi', '/hubungi', 'Konsultasi & Informasi SPMB', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:40:15', '2026-11-02 01:40:15'),
+(21, '127.0.0.1', 'XB1tlrjixlC9nzMdwZlFX48kNBBS1g3sud70evIE', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/layanan-terpadu', '/layanan-terpadu', 'Layanan Terpadu', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:41:16', '2026-11-02 01:41:16'),
+(22, '127.0.0.1', 'FHkjwv80amgduhwRXBVakZVBrN8s1qQ1K4IWissG', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/testimonial', '/testimonial', 'Testimonial', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:41:16', '2026-11-02 01:41:16'),
+(23, '127.0.0.1', 'wI6X7FB1Ka1WoLhJhCI63dEwHJd9WZBoxvtiWmx0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/fasilitas', '/tk/fasilitas', 'Tk/Fasilitas', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:43:17', '2026-11-02 01:43:17'),
+(24, '127.0.0.1', 'FgMdM2XIJKXWWbmyxpAdRrbYxTerBJFRDnef36MS', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/spmb', '/tk/spmb', 'Tk/Spmb', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:44:17', '2026-11-02 01:44:17'),
+(25, '127.0.0.1', '7BtdKfw5ZgohH69cPRodmHOXLGGHOIy53Fg0rrY9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk', '/tk', 'Tk', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:44:17', '2026-11-02 01:44:17');
 
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `activity_logs`
+--
+ALTER TABLE `activity_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `activity_logs_user_id_foreign` (`user_id`),
+  ADD KEY `activity_logs_action_index` (`action`),
+  ADD KEY `activity_logs_status_index` (`status`),
+  ADD KEY `activity_logs_created_at_index` (`created_at`);
+
+--
+-- Indexes for table `agendas`
+--
+ALTER TABLE `agendas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `agendas_slug_unique` (`slug`);
+
+--
+-- Indexes for table `anggota_dewans`
+--
+ALTER TABLE `anggota_dewans`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `anggota_dewans_slug_unique` (`slug`);
+
+--
+-- Indexes for table `bidangs`
+--
+ALTER TABLE `bidangs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `bidangs_slug_unique` (`slug`);
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_locks_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `categories_slug_unique` (`slug`),
+  ADD KEY `categories_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `downloads`
+--
+ALTER TABLE `downloads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dpcs`
+--
+ALTER TABLE `dpcs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `dpcs_slug_unique` (`slug`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`),
+  ADD KEY `failed_jobs_connection_queue_failed_at_index` (`connection`,`queue`,`failed_at`);
+
+--
+-- Indexes for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `job_batches`
+--
+ALTER TABLE `job_batches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pages_slug_unique` (`slug`),
+  ADD KEY `pages_slug_index` (`slug`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `pengumumen`
+--
+ALTER TABLE `pengumumen`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pengumumen_slug_unique` (`slug`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `posts_slug_unique` (`slug`),
+  ADD KEY `posts_author_id_foreign` (`author_id`);
+
+--
+-- Indexes for table `post_category`
+--
+ALTER TABLE `post_category`
+  ADD PRIMARY KEY (`post_id`,`category_id`),
+  ADD KEY `post_category_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD PRIMARY KEY (`post_id`,`tag_id`),
+  ADD KEY `post_tag_tag_id_foreign` (`tag_id`);
+
+--
+-- Indexes for table `ppdb_registrations`
+--
+ALTER TABLE `ppdb_registrations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ppdb_registrations_registration_number_unique` (`registration_number`);
+
+--
+-- Indexes for table `ppdb_tracks`
+--
+ALTER TABLE `ppdb_tracks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ppdb_tracks_slug_unique` (`slug`);
+
+--
+-- Indexes for table `quick_menus`
+--
+ALTER TABLE `quick_menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `service_submissions`
+--
+ALTER TABLE `service_submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `service_submissions_service_type_index` (`service_type`),
+  ADD KEY `service_submissions_status_index` (`status`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `settings_key_unique` (`key`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tags_slug_unique` (`slug`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `videos`
+--
+ALTER TABLE `videos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `videos_slug_unique` (`slug`);
+
+--
+-- Indexes for table `visitor_logs`
+--
+ALTER TABLE `visitor_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `visitor_logs_created_at_is_bot_index` (`created_at`,`is_bot`),
+  ADD KEY `visitor_logs_ip_address_index` (`ip_address`),
+  ADD KEY `visitor_logs_session_id_index` (`session_id`),
+  ADD KEY `visitor_logs_device_type_index` (`device_type`),
+  ADD KEY `visitor_logs_referer_source_index` (`referer_source`),
+  ADD KEY `visitor_logs_path_index` (`path`),
+  ADD KEY `visitor_logs_country_index` (`country`),
+  ADD KEY `visitor_logs_city_index` (`city`),
+  ADD KEY `visitor_logs_is_bot_index` (`is_bot`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `activity_logs`
+--
+ALTER TABLE `activity_logs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `agendas`
+--
+ALTER TABLE `agendas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `anggota_dewans`
+--
+ALTER TABLE `anggota_dewans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bidangs`
+--
+ALTER TABLE `bidangs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `downloads`
+--
+ALTER TABLE `downloads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `dpcs`
+--
+ALTER TABLE `dpcs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pengumumen`
+--
+ALTER TABLE `pengumumen`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ppdb_registrations`
+--
+ALTER TABLE `ppdb_registrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ppdb_tracks`
+--
+ALTER TABLE `ppdb_tracks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `quick_menus`
+--
+ALTER TABLE `quick_menus`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `service_submissions`
+--
+ALTER TABLE `service_submissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `videos`
+--
+ALTER TABLE `videos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `visitor_logs`
+--
+ALTER TABLE `visitor_logs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `activity_logs`
+--
+ALTER TABLE `activity_logs`
+  ADD CONSTRAINT `activity_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `post_category`
+--
+ALTER TABLE `post_category`
+  ADD CONSTRAINT `post_category_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_category_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD CONSTRAINT `post_tag_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+SET FOREIGN_KEY_CHECKS = 1;
+COMMIT;
