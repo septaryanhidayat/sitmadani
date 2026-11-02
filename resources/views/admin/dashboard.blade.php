@@ -12,15 +12,30 @@
         <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div class="space-y-2">
-                <div class="inline-flex items-center space-x-2 bg-slate-800/80 border border-slate-700/80 px-3 py-1 rounded-full text-xs text-amber-400 font-semibold">
-                    <i class="fa-solid fa-circle-check text-amber-400 text-[10px]"></i>
-                    <span>Sistem Aktif & Terlindungi</span>
+                @php
+                    $userUnit = auth()->user()->unit ?? 'yayasan';
+                    $unitData = \App\Services\SchoolUnitService::getUnit($userUnit);
+                    $unitName = $unitData['name'] ?? 'Yayasan Agung Madani';
+                    $unitRoleLabel = match($userUnit) {
+                        'tk' => 'Dashboard Administrasi TKS IT Madani (PAUD / TK)',
+                        'sd' => 'Dashboard Administrasi SDS IT Madani (Sekolah Dasar)',
+                        'smp' => 'Dashboard Administrasi SMPS IT Madani (Sekolah Menengah Pertama)',
+                        default => 'Dashboard Terpadu Yayasan Agung Madani (Menaungi TK, SD & SMP)',
+                    };
+                @endphp
+                <div class="inline-flex items-center space-x-2 {{ $userUnit === 'tk' ? 'bg-amber-950/80 border-amber-600/80 text-amber-300' : ($userUnit === 'sd' ? 'bg-emerald-950/80 border-emerald-600/80 text-emerald-300' : ($userUnit === 'smp' ? 'bg-blue-950/80 border-blue-600/80 text-blue-300' : 'bg-slate-800/80 border-slate-700/80 text-amber-400')) }} px-3 py-1 rounded-full text-xs font-bold border">
+                    <i class="fa-solid fa-shield-halved text-[10px]"></i>
+                    <span>{{ $unitRoleLabel }}</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
                     Selamat Datang, {{ auth()->user()->name }}! 👋
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-300 max-w-xl font-light leading-relaxed">
-                    Panel kendali resmi SMPS IT Madani Kayuagung. Anda dapat mengelola seluruh konten, memantau aktivitas sistem, mengedit informasi sekolah, serta mengamankan website secara terpusat.
+                    @if($userUnit !== 'yayasan')
+                        Panel kendali khusus <strong>{{ $unitName }}</strong>. Anda dapat mengelola hero banner, informasi, dewan guru, dan memantau pendaftaran SPMB online khusus unit Anda.
+                    @else
+                        Pusat kendali terpadu Yayasan Agung Madani Kayuagung. Anda memiliki hak akses penuh untuk mengelola portal yayasan serta memantau dan mengonfigurasi seluruh unit pendidikan (TKS IT, SDS IT, SMPS IT).
+                    @endif
                 </p>
             </div>
 

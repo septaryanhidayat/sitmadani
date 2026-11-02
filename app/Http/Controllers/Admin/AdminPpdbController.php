@@ -17,7 +17,36 @@ class AdminPpdbController extends Controller
 {
     public function index(Request $request)
     {
+        $user = Auth::user();
+        $userUnit = $user?->unit ?? 'yayasan';
+        $selectedUnit = in_array($userUnit, ['tk', 'sd', 'smp']) ? $userUnit : $request->query('unit', 'all');
+
         $query = PpdbRegistration::latest();
+
+        // Scope by School Unit
+        if ($selectedUnit !== 'all') {
+            if ($selectedUnit === 'tk') {
+                $query->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%TKS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"tk"%');
+                });
+            } elseif ($selectedUnit === 'sd') {
+                $query->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%SDS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"sd"%');
+                });
+            } elseif ($selectedUnit === 'smp') {
+                $query->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%SMPS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"smp"%')
+                        ->orWhereNull('extra_fields')
+                        ->orWhere(function ($sub) {
+                            $sub->where('extra_fields', 'not like', '%TKS IT Madani%')
+                                ->where('extra_fields', 'not like', '%SDS IT Madani%');
+                        });
+                });
+            }
+        }
 
         if ($status = $request->input('status')) {
             $query->where('status', $status);
@@ -34,15 +63,41 @@ class AdminPpdbController extends Controller
 
         $registrations = $query->paginate(15)->withQueryString();
 
+        // Base query for stats matching unit scope
+        $statsBase = PpdbRegistration::query();
+        if ($selectedUnit !== 'all') {
+            if ($selectedUnit === 'tk') {
+                $statsBase->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%TKS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"tk"%');
+                });
+            } elseif ($selectedUnit === 'sd') {
+                $statsBase->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%SDS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"sd"%');
+                });
+            } elseif ($selectedUnit === 'smp') {
+                $statsBase->where(function ($q) {
+                    $q->where('extra_fields', 'like', '%SMPS IT Madani%')
+                        ->orWhere('extra_fields', 'like', '%"unit_school"%"smp"%')
+                        ->orWhereNull('extra_fields')
+                        ->orWhere(function ($sub) {
+                            $sub->where('extra_fields', 'not like', '%TKS IT Madani%')
+                                ->where('extra_fields', 'not like', '%SDS IT Madani%');
+                        });
+                });
+            }
+        }
+
         $stats = [
-            'total' => PpdbRegistration::count(),
-            'pending' => PpdbRegistration::where('status', 'pending')->count(),
-            'verified' => PpdbRegistration::where('status', 'verified')->count(),
-            'accepted' => PpdbRegistration::where('status', 'accepted')->count(),
-            'rejected' => PpdbRegistration::where('status', 'rejected')->count(),
+            'total' => (clone $statsBase)->count(),
+            'pending' => (clone $statsBase)->where('status', 'pending')->count(),
+            'verified' => (clone $statsBase)->where('status', 'verified')->count(),
+            'accepted' => (clone $statsBase)->where('status', 'accepted')->count(),
+            'rejected' => (clone $statsBase)->where('status', 'rejected')->count(),
         ];
 
-        return view('admin.ppdb.index', compact('registrations', 'stats'));
+        return view('admin.ppdb.index', compact('registrations', 'stats', 'selectedUnit', 'userUnit'));
     }
 
     public function show(PpdbRegistration $ppdb)

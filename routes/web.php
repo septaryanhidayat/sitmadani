@@ -195,6 +195,13 @@ Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
     Route::get('/visi-misi', [PageController::class, 'visiMisi']);
     Route::get('/struktur-organisasi', [PageController::class, 'struktur'])->name('unit.struktur');
     Route::get('/struktur', [PageController::class, 'struktur']);
+    Route::get('/artikel', [ArticleController::class, 'index'])->name('unit.artikel');
+    Route::get('/berita', [ArticleController::class, 'index']);
+    Route::get('/prestasi', [InformationController::class, 'prestasi'])->name('unit.prestasi');
+    Route::get('/galeri', [InformationController::class, 'galeri'])->name('unit.galeri');
+    Route::get('/video', [InformationController::class, 'video'])->name('unit.video');
+    Route::get('/hubungi', [ContactController::class, 'hubungi'])->name('unit.hubungi');
+    Route::get('/kontak', [ContactController::class, 'hubungi']);
     Route::get('/page/{slug}', [PageController::class, 'showUnitPage'])->name('unit.page');
 });
 

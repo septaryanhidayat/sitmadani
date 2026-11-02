@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use App\Models\Post;
+use App\Services\SchoolUnitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 
 class ContactController extends Controller
 {
-    public function hubungi()
+    public function hubungi(Request $request, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $page = Post::pages()->where('slug', 'hubungi')->first();
 
-        return view('frontend.hubungi.index', compact('page'));
+        return view('frontend.hubungi.index', compact('page', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
     public function submitFeedback(Request $request)

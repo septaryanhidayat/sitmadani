@@ -47,6 +47,49 @@
     </div>
 
 
+    {{-- UNIT FILTER / SCOPE INDICATOR --}}
+    @if(($userUnit ?? 'yayasan') === 'yayasan')
+        <div class="bg-slate-900 text-white p-3 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-md border border-slate-800">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-filter text-amber-400 text-xs"></i>
+                <span class="text-xs font-bold text-slate-200">Filter Unit Sekolah:</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <a href="{{ route('admin.ppdb.index', ['unit' => 'all']) }}" class="px-3 py-1.5 rounded-xl font-bold transition {{ ($selectedUnit ?? 'all') === 'all' ? 'bg-indigo-600 text-white shadow ring-1 ring-indigo-400' : 'bg-slate-800 text-slate-300 hover:bg-slate-700' }}">
+                    <i class="fa-solid fa-layer-group mr-1 text-[10px]"></i> Semua Unit
+                </a>
+                <a href="{{ route('admin.ppdb.index', ['unit' => 'tk']) }}" class="px-3 py-1.5 rounded-xl font-bold transition {{ ($selectedUnit ?? '') === 'tk' ? 'bg-amber-500 text-slate-950 font-black shadow ring-1 ring-amber-300' : 'bg-slate-800 text-slate-300 hover:bg-slate-700' }}">
+                    <i class="fa-solid fa-shapes mr-1 text-[10px]"></i> TKS IT Madani
+                </a>
+                <a href="{{ route('admin.ppdb.index', ['unit' => 'sd']) }}" class="px-3 py-1.5 rounded-xl font-bold transition {{ ($selectedUnit ?? '') === 'sd' ? 'bg-emerald-600 text-white font-black shadow ring-1 ring-emerald-300' : 'bg-slate-800 text-slate-300 hover:bg-slate-700' }}">
+                    <i class="fa-solid fa-book-open-reader mr-1 text-[10px]"></i> SDS IT Madani
+                </a>
+                <a href="{{ route('admin.ppdb.index', ['unit' => 'smp']) }}" class="px-3 py-1.5 rounded-xl font-bold transition {{ ($selectedUnit ?? '') === 'smp' ? 'bg-blue-600 text-white font-black shadow ring-1 ring-blue-300' : 'bg-slate-800 text-slate-300 hover:bg-slate-700' }}">
+                    <i class="fa-solid fa-graduation-cap mr-1 text-[10px]"></i> SMPS IT Madani
+                </a>
+            </div>
+        </div>
+    @else
+        @php
+            $myUnit = \App\Services\SchoolUnitService::getUnit($userUnit);
+        @endphp
+        <div class="bg-gradient-to-r {{ $userUnit === 'tk' ? 'from-amber-900/60 to-slate-900 border-amber-500/40' : ($userUnit === 'sd' ? 'from-emerald-900/60 to-slate-900 border-emerald-500/40' : 'from-blue-900/60 to-slate-900 border-blue-500/40') }} text-white p-3.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-md border">
+            <div class="flex items-center space-x-2.5">
+                <span class="w-8 h-8 rounded-xl {{ $userUnit === 'tk' ? 'bg-amber-500 text-slate-950' : ($userUnit === 'sd' ? 'bg-emerald-500 text-white' : 'bg-blue-500 text-white') }} flex items-center justify-center text-xs font-black">
+                    <i class="{{ $myUnit['icon'] ?? 'fa-solid fa-school' }}"></i>
+                </span>
+                <div>
+                    <h3 class="text-xs font-black uppercase tracking-wide text-white">Data SPMB Khusus: {{ $myUnit['name'] ?? strtoupper($userUnit) }}</h3>
+                    <p class="text-[10px] text-slate-300">Pendaftar otomatis tersaring hanya untuk jenjang unit sekolah Anda.</p>
+                </div>
+            </div>
+            <a href="{{ route('unit.ppdb', $userUnit) }}" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition flex items-center space-x-1">
+                <span>Lihat Formulir Unit</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+        </div>
+    @endif
+
     {{-- STATS CARDS --}}
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <a href="{{ route('admin.ppdb.index') }}" class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-indigo-600 transition">

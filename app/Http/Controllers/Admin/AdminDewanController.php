@@ -19,11 +19,34 @@ class AdminDewanController extends Controller
         $this->webpService = $webpService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $dewan = AnggotaDewan::orderBy('order', 'asc')->get();
+        $userUnit = auth()->user()->unit ?? 'yayasan';
+        $selectedUnit = in_array($userUnit, ['tk', 'sd', 'smp']) ? $userUnit : $request->query('unit', 'all');
 
-        return view('admin.dewan.index', compact('dewan'));
+        $query = AnggotaDewan::orderBy('order', 'asc');
+
+        if ($selectedUnit !== 'all') {
+            if ($selectedUnit === 'tk') {
+                $query->where('fraction', 'like', '%TK%');
+            } elseif ($selectedUnit === 'sd') {
+                $query->where('fraction', 'like', '%SD%');
+            } elseif ($selectedUnit === 'smp') {
+                $query->where(function ($q) {
+                    $q->where('fraction', 'like', '%SMP%')
+                        ->orWhere('fraction', 'like', '%Pendidik%')
+                        ->orWhere('fraction', 'like', '%Pimpinan%')
+                        ->orWhere(function ($sub) {
+                            $sub->where('fraction', 'not like', '%TK%')
+                                ->where('fraction', 'not like', '%SD%');
+                        });
+                });
+            }
+        }
+
+        $dewan = $query->get();
+
+        return view('admin.dewan.index', compact('dewan', 'selectedUnit', 'userUnit'));
     }
 
     public function create()

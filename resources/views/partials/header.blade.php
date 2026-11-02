@@ -97,31 +97,31 @@
         <div class="flex justify-between items-center h-16 sm:h-20 w-full max-w-full">
             
             {{-- LOGO RESMI SEKOLAH ISLAM TERPADU MADANI --}}
-            <a href="{{ $curBrand['home'] }}" class="flex items-center space-x-2.5 sm:space-x-3.5 group min-w-0 flex-1 sm:flex-initial mr-2 max-w-[76%] sm:max-w-none" aria-label="Beranda {{ $curBrand['title'] }}">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-13 md:h-13 shrink-0 flex items-center justify-center overflow-hidden" style="width: clamp(40px, 4.5vw, 54px); height: clamp(40px, 4.5vw, 54px); max-width: 54px; max-height: 54px; min-width: 40px; min-height: 40px;">
-                    <img src="/uploads/logo-madani-square.webp" alt="Logo SIT Madani Kayuagung" width="54" height="54" fetchpriority="high" decoding="async" class="w-full h-full object-contain pointer-events-none select-none transition duration-300 group-hover:scale-105" style="max-width: 54px; max-height: 54px; width: 100%; height: 100%; object-fit: contain; display: block;" onerror="this.onerror=null; this.src='/uploads/logo-madani.png'">
+            <a href="{{ $curBrand['home'] }}" class="flex items-center space-x-2 sm:space-x-3 group shrink-0 flex-shrink-0 mr-2 lg:mr-3 select-none whitespace-nowrap" aria-label="Beranda {{ $curBrand['title'] }}">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center overflow-hidden">
+                    <img src="/uploads/logo-madani-square.webp" alt="Logo SIT Madani Kayuagung" width="48" height="48" fetchpriority="high" decoding="async" class="w-full h-full object-contain pointer-events-none select-none transition duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='/uploads/logo-madani.png'">
                 </div>
-                <div class="flex flex-col min-w-0 justify-center leading-none space-y-0.5 select-none">
-                    <span class="text-[8px] sm:text-[10px] md:text-[11.5px] font-extrabold uppercase tracking-wide text-amber-400 truncate leading-tight">{{ $curBrand['subtitle'] }}</span>
-                    <span class="text-[13px] sm:text-[16px] md:text-[20px] font-black uppercase text-white tracking-tight leading-none truncate group-hover:text-amber-300 transition">{{ $curBrand['title'] }}</span>
-                    <span class="text-[7.5px] sm:text-[9px] md:text-[10.5px] font-bold uppercase tracking-wider text-amber-400 truncate leading-tight">{{ $curBrand['badge'] }}</span>
+                <div class="flex flex-col shrink-0 justify-center leading-none space-y-0.5 whitespace-nowrap">
+                    <span class="text-[9px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-wider text-amber-400 leading-tight block">{{ $curBrand['subtitle'] }}</span>
+                    <span class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[19px] font-black uppercase text-white tracking-tight leading-none block group-hover:text-amber-300 transition">{{ $curBrand['title'] }}</span>
+                    <span class="text-[8px] sm:text-[9px] md:text-[9.5px] font-bold uppercase tracking-wider text-amber-300/90 leading-tight block">{{ $curBrand['badge'] }}</span>
                 </div>
             </a>
 
             {{-- DESKTOP NAVIGATION --}}
-            <nav class="hidden lg:flex items-center space-x-1 xl:space-x-1.5 font-bold text-xs xl:text-sm text-white" aria-label="Navigasi Utama">
+            <nav class="hidden lg:flex items-center space-x-0.5 xl:space-x-1 font-bold text-xs xl:text-sm text-white" aria-label="Navigasi Utama">
                 
                 {{-- 1. Beranda --}}
-                <a href="{{ $curBrand['home'] }}" class="px-3 py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->url() === $curBrand['home'] ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                <a href="{{ $curBrand['home'] }}" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->url() === $curBrand['home'] ? 'bg-white/20 text-white shadow-inner' : '' }}">
                     Beranda
                 </a>
 
                 {{-- 2. Profil Dropdown --}}
                 @if($activeUnit === 'yayasan')
                     <div class="relative group py-2" id="nav-dropdown-profil">
-                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Yayasan" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('yayasan*', '*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Yayasan" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('yayasan*', '*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
                             <span>Profil Yayasan</span>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
                         </button>
                         <div class="absolute left-0 top-full pt-1 w-56 hidden group-hover:block transition-all duration-150 z-50">
                             <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
@@ -146,10 +146,10 @@
 
                     {{-- Dropdown Unit Pendidikan SIT Madani --}}
                     <div class="relative group py-2" id="nav-dropdown-unit">
-                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Unit Sekolah" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('tk*', 'sd*', 'smp*', 'unit*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                            <i class="fa-solid fa-layer-group text-amber-400 text-xs mr-1.5"></i>
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Unit Sekolah" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('tk*', 'sd*', 'smp*', 'unit*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <i class="fa-solid fa-layer-group text-amber-400 text-xs mr-1"></i>
                             <span>Unit Sekolah</span>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
                         </button>
                         <div class="absolute left-0 top-full pt-1 w-60 hidden group-hover:block transition-all duration-150 z-50">
                             <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
@@ -183,11 +183,79 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- 3. Warta & Kabar Dropdown Yayasan --}}
+                    <div class="relative group py-2" id="nav-dropdown-kabar">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Kabar" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('artikel*', 'prestasi*', 'agenda*', 'pengumuman*', 'galeri*', 'video*', 'testimonial*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <span>Warta</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('artikel.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-newspaper w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Berita &amp; Artikel
+                                </a>
+                                <a href="{{ route('prestasi.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-trophy w-4 text-amber-500 mr-2 text-xs" aria-hidden="true"></i> Prestasi Siswa
+                                </a>
+                                <a href="{{ route('galeri.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-images w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Galeri Foto
+                                </a>
+                                <a href="{{ route('video.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-brands fa-youtube w-4 text-red-600 mr-2 text-xs" aria-hidden="true"></i> Video Kegiatan
+                                </a>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <a href="{{ route('agenda.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-calendar-days w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Agenda
+                                </a>
+                                <a href="{{ route('pengumuman.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-bullhorn w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Pengumuman
+                                </a>
+                                <a href="{{ route('testimonial.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-comment-dots w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Testimoni
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- 4. Layanan & Unduhan Dropdown Yayasan --}}
+                    <div class="relative group py-2" id="nav-dropdown-layanan">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Layanan & Unduhan" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('layanan*', 'download*', 'e-book*', 'hymne*', 'logo*') ? 'bg-white/20 text-white font-bold shadow-inner' : '' }}">
+                            <span>Layanan</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('layanan.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-handshake-angle w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Portal Layanan Terpadu
+                                </a>
+                                <a href="{{ route('layanan.izin') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-id-card-clip w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Izin Kunjungan Sekolah
+                                </a>
+                                <a href="{{ route('layanan.kerjasama') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-handshake w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Permohonan Kerja Sama
+                                </a>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <a href="{{ route('download.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-download w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Pusat Unduhan Berkas
+                                </a>
+                                <a href="{{ route('download.ebook') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-book-open w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> E-Book &amp; Modul Pembelajaran
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- 5. Kontak Yayasan --}}
+                    <a href="{{ route('hubungi') }}" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->routeIs('hubungi') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                        Kontak
+                    </a>
                 @else
+                    {{-- UNIT NAVIGATION: TKS IT, SDS IT, SMPS IT (TERPISAH KHUSUS UNIT) --}}
                     <div class="relative group py-2" id="nav-dropdown-profil">
-                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Sekolah" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*', '*fasilitas*', '*dpc*', '*dewan*', '*guru*', '*ekskul*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Profil Sekolah" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('*sambutan*', '*tentang*', '*visi*', '*sejarah*', '*struktur*', '*fasilitas*', '*dpc*', '*dewan*', '*guru*', '*ekskul*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
                             <span>Profil Sekolah</span>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
                         </button>
                         <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
                             <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
@@ -200,14 +268,11 @@
                                 <a href="{{ route('unit.visi-misi', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
                                     <i class="fa-solid fa-compass w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Visi &amp; Misi
                                 </a>
-                                <a href="{{ route('unit.dewan', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                    <i class="fa-solid fa-chalkboard-user w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Dewan Guru &amp; GTK
-                                </a>
                                 <a href="{{ route('unit.struktur', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
                                     <i class="fa-solid fa-sitemap w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Struktur Organisasi
                                 </a>
                                 <a href="{{ route('unit.fasilitas', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                    <i class="fa-solid fa-layer-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Fasilitas
+                                    <i class="fa-solid fa-layer-group w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Fasilitas Unit
                                 </a>
                                 @if($activeUnit === 'smp')
                                 <div class="border-t border-gray-100 my-1"></div>
@@ -221,95 +286,47 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Dewan Guru Khusus Unit --}}
+                    <a href="{{ route('unit.dewan', $activeUnit) }}" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->is('*dewan-guru*', '*guru*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                        Dewan Guru
+                    </a>
+
+                    {{-- Kabar & Prestasi Khusus Unit --}}
+                    <div class="relative group py-2" id="nav-dropdown-kabar-unit">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Kabar Unit" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('*artikel*', '*berita*', '*prestasi*', '*galeri*', '*video*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <span>Kabar &amp; Prestasi</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
+                            <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
+                                <a href="{{ route('unit.artikel', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-newspaper w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Berita {{ $curBrand['title'] }}
+                                </a>
+                                <a href="{{ route('unit.prestasi', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-trophy w-4 text-amber-500 mr-2 text-xs" aria-hidden="true"></i> Prestasi Santri
+                                </a>
+                                <a href="{{ route('unit.galeri', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-solid fa-images w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Galeri Foto
+                                </a>
+                                <a href="{{ route('unit.video', $activeUnit) }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
+                                    <i class="fa-brands fa-youtube w-4 text-red-600 mr-2 text-xs" aria-hidden="true"></i> Video Kegiatan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Kontak Khusus Unit --}}
+                    <a href="{{ route('unit.hubungi', $activeUnit) }}" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->is('*hubungi*', '*kontak*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                        Kontak
+                    </a>
+
+                    {{-- Tombol Kembali ke Portal Yayasan --}}
+                    <a href="{{ route('home') }}" class="px-2.5 py-1 rounded-full bg-slate-900/90 hover:bg-indigo-900 text-amber-300 hover:text-white border border-amber-400/40 text-[11px] font-bold transition flex items-center space-x-1 whitespace-nowrap shadow-xs ml-1" title="Kembali ke Portal Yayasan Agung Madani">
+                        <i class="fa-solid fa-arrow-left text-[9px]"></i>
+                        <span>Yayasan</span>
+                    </a>
                 @endif
-
-                {{-- 3. Kabar Dropdown --}}
-                <div class="relative group py-2" id="nav-dropdown-kabar">
-                    <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Kabar" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('artikel*', 'prestasi*', 'agenda*', 'pengumuman*', 'galeri*', 'video*', 'testimonial*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                        <span>Kabar</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
-                    </button>
-                    <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
-                        <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
-                            <a href="{{ route('artikel.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-newspaper w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Berita &amp; Artikel
-                            </a>
-                            <a href="{{ route('prestasi.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-trophy w-4 text-amber-500 mr-2 text-xs" aria-hidden="true"></i> Prestasi Siswa
-                            </a>
-                            <a href="{{ route('galeri.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-images w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Galeri Foto
-                            </a>
-                            <a href="{{ route('video.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-brands fa-youtube w-4 text-red-600 mr-2 text-xs" aria-hidden="true"></i> Video Kegiatan
-                            </a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="{{ route('agenda.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-calendar-days w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Agenda
-                            </a>
-                            <a href="{{ route('pengumuman.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-bullhorn w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Pengumuman
-                            </a>
-                            <a href="{{ route('testimonial.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-comment-dots w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Testimoni
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- 4. Download Dropdown --}}
-                <div class="relative group py-2" id="nav-dropdown-download">
-                    <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Download" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('download*', 'e-book*', 'hymne*', 'logo*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                        <span>Download</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
-                    </button>
-                    <div class="absolute left-0 top-full pt-1 w-48 hidden group-hover:block transition-all duration-150 z-50">
-                        <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
-                            <a href="{{ route('download.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-folder-open w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Semua Berkas
-                            </a>
-                            <a href="{{ route('download.ebook') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-book-open w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> E-Book &amp; Modul
-                            </a>
-                            <a href="{{ route('download.hymne-mars') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-music w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Mars JSIT
-                            </a>
-                            <a href="{{ route('download.logo') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-image w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Logo Sekolah
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- 5. Layanan Dropdown --}}
-                <div class="relative group py-2" id="nav-dropdown-layanan">
-                    <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Layanan" class="px-3 py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('layanan*', 'izin-sekolah*', 'permohonan-kerja-sama*', 'sewa-barang*') ? 'bg-white/20 text-white font-bold shadow-inner' : '' }}">
-                        <span>Layanan</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] ml-1.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
-                    </button>
-                    <div class="absolute left-0 top-full pt-1 w-48 hidden group-hover:block transition-all duration-150 z-50">
-                        <div class="bg-white rounded-2xl shadow-2xl border border-indigo-100 py-2 text-gray-800 animate-fadeIn">
-                            <a href="{{ route('layanan.index') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-handshake-angle w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Portal Layanan
-                            </a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="{{ route('layanan.izin') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-id-card-clip w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Izin Kunjungan
-                            </a>
-                            <a href="{{ route('layanan.kerjasama') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-handshake w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Kerja Sama
-                            </a>
-                            <a href="{{ route('layanan.sewa') }}" class="block px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center whitespace-nowrap">
-                                <i class="fa-solid fa-building-user w-4 text-indigo-600 mr-2 text-xs" aria-hidden="true"></i> Sewa Barang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- 6. Kontak --}}
-                <a href="{{ route('hubungi') }}" class="px-3 py-2 rounded-xl whitespace-nowrap hover:bg-white/15 transition {{ request()->routeIs('hubungi') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                    Kontak
-                </a>
             </nav>
 
             {{-- TOMBOL AKSI: DAFTAR SPMB & LOGIN --}}
@@ -413,49 +430,70 @@
         @endif
 
         {{-- Mobile Kabar Submenu --}}
-        <div class="border-t border-gray-100 pt-2">
-            <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
-                <i class="fa-solid fa-newspaper mr-2 text-amber-500"></i> Kabar Sekolah
+        @if($activeUnit === 'yayasan')
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-newspaper mr-2 text-amber-500"></i> Warta &amp; Kabar Yayasan
+                </div>
+                <a href="{{ route('artikel.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Berita &amp; Artikel</a>
+                <a href="{{ route('prestasi.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Prestasi Siswa</a>
+                <a href="{{ route('galeri.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Galeri Foto</a>
+                <a href="{{ route('video.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Video Kegiatan</a>
+                <a href="{{ route('agenda.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Agenda</a>
+                <a href="{{ route('pengumuman.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Pengumuman</a>
+                <a href="{{ route('testimonial.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Testimoni</a>
             </div>
-            <a href="{{ route('artikel.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Berita &amp; Artikel</a>
-            <a href="{{ route('prestasi.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Prestasi Siswa</a>
-            <a href="{{ route('galeri.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Galeri Foto</a>
-            <a href="{{ route('video.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Video Kegiatan</a>
-            <a href="{{ route('agenda.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Agenda</a>
-            <a href="{{ route('pengumuman.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Pengumuman</a>
-            <a href="{{ route('testimonial.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Testimoni</a>
-        </div>
 
-        {{-- Mobile Download Submenu --}}
-        <div class="border-t border-gray-100 pt-2">
-            <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
-                <i class="fa-solid fa-download mr-2 text-amber-500"></i> Download Berkas
+            {{-- Mobile Download Submenu --}}
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-download mr-2 text-amber-500"></i> Download Berkas
+                </div>
+                <a href="{{ route('download.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Semua Berkas</a>
+                <a href="{{ route('download.ebook') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">E-Book &amp; Modul</a>
+                <a href="{{ route('download.hymne-mars') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Mars JSIT</a>
+                <a href="{{ route('download.logo') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Logo Sekolah</a>
             </div>
-            <a href="{{ route('download.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Semua Berkas</a>
-            <a href="{{ route('download.ebook') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">E-Book &amp; Modul</a>
-            <a href="{{ route('download.hymne-mars') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Mars JSIT</a>
-            <a href="{{ route('download.logo') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Logo Sekolah</a>
-        </div>
 
-        {{-- Mobile Layanan Submenu --}}
-        <div class="border-t border-gray-100 pt-2">
-            <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
-                <i class="fa-solid fa-handshake-angle mr-2 text-amber-500"></i> Layanan
+            {{-- Mobile Layanan Submenu --}}
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-handshake-angle mr-2 text-amber-500"></i> Layanan
+                </div>
+                <a href="{{ route('layanan.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Portal Layanan</a>
+                <a href="{{ route('layanan.izin') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Izin Kunjungan</a>
+                <a href="{{ route('layanan.kerjasama') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Kerja Sama</a>
+                <a href="{{ route('layanan.sewa') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sewa Barang</a>
             </div>
-            <a href="{{ route('layanan.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Portal Layanan</a>
-            <a href="{{ route('layanan.izin') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Izin Kunjungan</a>
-            <a href="{{ route('layanan.kerjasama') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Kerja Sama</a>
-            <a href="{{ route('layanan.sewa') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Sewa Barang</a>
-        </div>
 
-        <div class="border-t border-gray-100 pt-2 space-y-1">
-            <a href="{{ route('hubungi') }}" class="block px-3 py-2 rounded-lg font-bold text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition">
-                <i class="fa-solid fa-phone mr-2 text-indigo-600"></i> Hubungi Kami
-            </a>
-            <a href="{{ route('donasi') }}" class="block px-3 py-2 rounded-lg font-extrabold text-indigo-700 hover:bg-indigo-50">
-                <i class="fa-solid fa-hand-holding-heart mr-2 text-amber-500"></i> Infaq Madani
-            </a>
-        </div>
+            <div class="border-t border-gray-100 pt-2 space-y-1">
+                <a href="{{ route('hubungi') }}" class="block px-3 py-2 rounded-lg font-bold text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition">
+                    <i class="fa-solid fa-phone mr-2 text-indigo-600"></i> Hubungi Yayasan
+                </a>
+                <a href="{{ route('donasi') }}" class="block px-3 py-2 rounded-lg font-extrabold text-indigo-700 hover:bg-indigo-50">
+                    <i class="fa-solid fa-hand-holding-heart mr-2 text-amber-500"></i> Infaq Madani
+                </a>
+            </div>
+        @else
+            <div class="border-t border-gray-100 pt-2">
+                <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
+                    <i class="fa-solid fa-newspaper mr-2 text-amber-500"></i> Kabar &amp; Dokumentasi {{ $curBrand['title'] }}
+                </div>
+                <a href="{{ route('unit.artikel', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Berita {{ $curBrand['title'] }}</a>
+                <a href="{{ route('unit.prestasi', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Prestasi Siswa</a>
+                <a href="{{ route('unit.galeri', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Galeri Foto</a>
+                <a href="{{ route('unit.video', $activeUnit) }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Video Kegiatan</a>
+            </div>
+
+            <div class="border-t border-gray-100 pt-2 space-y-1">
+                <a href="{{ route('unit.hubungi', $activeUnit) }}" class="block px-3 py-2 rounded-lg font-bold text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition">
+                    <i class="fa-solid fa-phone mr-2 text-indigo-600"></i> Kontak {{ $curBrand['title'] }}
+                </a>
+                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg font-extrabold text-amber-600 hover:bg-amber-50">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Portal Utama Yayasan
+                </a>
+            </div>
+        @endif
 
         <div class="pt-3 space-y-2">
             <a href="{{ $curBrand['spmb'] }}" class="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 py-3 rounded-xl text-xs font-black shadow-md transition">

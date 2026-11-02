@@ -177,14 +177,24 @@
     <aside id="sidebar" class="w-64 bg-[#0b1120] text-slate-300 flex flex-col flex-shrink-0 border-r border-slate-800 z-30 hidden md:flex sticky top-0 h-screen">
         
         {{-- Brand Logo Header with Minimize Toggle --}}
+        @php
+            $adminUser = auth()->user();
+            $adminUnit = $adminUser?->unit ?? 'yayasan';
+            $adminUnitBrand = match($adminUnit) {
+                'tk' => ['title' => 'ADMIN TKS IT MADANI', 'sub' => 'PAUD / TK Islam Terpadu', 'color' => 'text-amber-400', 'badge' => 'bg-amber-500/20 text-amber-300'],
+                'sd' => ['title' => 'ADMIN SDS IT MADANI', 'sub' => 'SD Islam Terpadu', 'color' => 'text-emerald-400', 'badge' => 'bg-emerald-500/20 text-emerald-300'],
+                'smp' => ['title' => 'ADMIN SMPS IT MADANI', 'sub' => 'SMP Islam Terpadu', 'color' => 'text-blue-400', 'badge' => 'bg-blue-500/20 text-blue-300'],
+                default => ['title' => 'YAYASAN AGUNG MADANI', 'sub' => 'Super Admin Terpadu', 'color' => 'text-amber-400', 'badge' => 'bg-indigo-500/20 text-amber-300'],
+            };
+        @endphp
         <div class="sidebar-header h-16 flex items-center justify-between px-4 border-b border-slate-800/80 bg-[#070b14]/50 flex-shrink-0">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2.5 group min-w-0" title="Admin Madani Control Center">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2.5 group min-w-0" title="Admin Control Center">
                 <div class="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition flex-shrink-0">
                     <img src="/uploads/logo-madani-square.webp" alt="Logo Madani" class="h-8 w-auto object-contain">
                 </div>
                 <div class="sidebar-brand-text min-w-0">
-                    <span class="font-black text-white text-sm tracking-tight block truncate">ADMIN SIT MADANI</span>
-                    <span class="text-[9px] text-amber-400 font-semibold tracking-wider uppercase block">Control Center</span>
+                    <span class="font-black text-white text-xs tracking-tight block truncate">{{ $adminUnitBrand['title'] }}</span>
+                    <span class="text-[8.5px] {{ $adminUnitBrand['color'] }} font-bold tracking-wider uppercase block truncate">{{ $adminUnitBrand['sub'] }}</span>
                 </div>
             </a>
             <button id="sidebar-collapse-btn" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition cursor-pointer flex-shrink-0" title="Perkecil / Perbesar Sidebar">
@@ -448,8 +458,28 @@
                 </button>
                 <div class="min-w-0">
                     <h1 class="font-extrabold text-sm sm:text-lg text-slate-800 tracking-tight truncate max-w-[190px] xs:max-w-[280px] sm:max-w-none">@yield('header_title', 'Panel Kontrol')</h1>
-                    <p class="text-[10px] sm:text-[11px] text-slate-400 truncate hidden xs:block">SIT Madani Kayuagung</p>
+                    <p class="text-[10px] sm:text-[11px] text-slate-400 truncate hidden xs:block">{{ $adminUnitBrand['title'] }} &bull; SIT Madani</p>
                 </div>
+            </div>
+
+            {{-- Unit Context Quick Links / Switcher --}}
+            <div class="hidden xl:flex items-center space-x-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                @if($adminUnit === 'yayasan')
+                    <span class="text-[10px] uppercase font-bold text-slate-400 px-2">Kelola Unit:</span>
+                    <a href="{{ route('admin.hero.index', ['unit' => 'yayasan']) }}" class="px-2.5 py-1 rounded-lg {{ request('unit') === 'yayasan' ? 'bg-indigo-600 text-white font-bold shadow-xs' : 'text-slate-600 hover:bg-white' }}" title="Kelola Yayasan">Yayasan</a>
+                    <a href="{{ route('admin.hero.index', ['unit' => 'tk']) }}" class="px-2.5 py-1 rounded-lg {{ request('unit') === 'tk' ? 'bg-amber-500 text-slate-950 font-bold shadow-xs' : 'text-slate-600 hover:bg-white' }}" title="Kelola TKS IT">TKS IT</a>
+                    <a href="{{ route('admin.hero.index', ['unit' => 'sd']) }}" class="px-2.5 py-1 rounded-lg {{ request('unit') === 'sd' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'text-slate-600 hover:bg-white' }}" title="Kelola SDS IT">SDS IT</a>
+                    <a href="{{ route('admin.hero.index', ['unit' => 'smp']) }}" class="px-2.5 py-1 rounded-lg {{ request('unit') === 'smp' ? 'bg-blue-600 text-white font-bold shadow-xs' : 'text-slate-600 hover:bg-white' }}" title="Kelola SMPS IT">SMPS IT</a>
+                @else
+                    <span class="px-2.5 py-1 rounded-lg {{ $adminUnitBrand['badge'] }} font-bold text-xs flex items-center space-x-1.5">
+                        <i class="fa-solid fa-school text-[10px]"></i>
+                        <span>Panel Khusus: {{ strtoupper($adminUnit) }} IT Madani</span>
+                    </span>
+                    <a href="{{ route('unit.home', $adminUnit) }}" target="_blank" class="px-2.5 py-1 rounded-lg bg-white text-indigo-700 hover:bg-indigo-50 border border-slate-200 font-bold text-xs flex items-center space-x-1 transition" title="Lihat Website Resmi Unit">
+                        <span>Lihat Web {{ strtoupper($adminUnit) }}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                @endif
             </div>
 
             <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
@@ -463,7 +493,7 @@
                     <span>Backup</span>
                 </a>
 
-                <a href="{{ route('home') }}" target="_blank" class="text-xs text-slate-600 hover:text-emerald-600 bg-slate-100 hover:bg-red-50 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl transition flex items-center space-x-1.5 font-medium border border-slate-200" title="Lihat Web Publik">
+                <a href="{{ $adminUnit === 'yayasan' ? route('home') : route('unit.home', $adminUnit) }}" target="_blank" class="text-xs text-slate-600 hover:text-emerald-600 bg-slate-100 hover:bg-emerald-50 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl transition flex items-center space-x-1.5 font-medium border border-slate-200" title="Lihat Web Publik">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-600"></i>
                     <span class="hidden sm:inline">Web Publik</span>
                 </a>

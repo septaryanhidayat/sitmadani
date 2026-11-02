@@ -11,6 +11,7 @@ use App\Models\ServiceSubmission;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Video;
+use App\Services\SchoolUnitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -68,15 +69,25 @@ class InformationController extends Controller
         return view('frontend.testimonial.index', compact('testimonials'));
     }
 
-    public function video()
+    public function video(Request $request, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $videos = Video::latest()->paginate(9);
 
-        return view('frontend.video.index', compact('videos'));
+        return view('frontend.video.index', compact('videos', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
-    public function galeri()
+    public function galeri(Request $request, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $page = Post::pages()->where('slug', 'galeri')->first();
 
         // Ambil semua foto galeri yang diunggah dan foto berita
@@ -88,22 +99,32 @@ class InformationController extends Controller
             ->latest('created_at')
             ->paginate(24);
 
-        return view('frontend.galeri.index', compact('page', 'galleryImages'));
+        return view('frontend.galeri.index', compact('page', 'galleryImages', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
-    public function prestasi()
+    public function prestasi(Request $request, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $prestasi = Post::where('type', 'prestasi')
             ->where('status', 'publish')
             ->latest('published_at')
             ->latest('id')
             ->paginate(9);
 
-        return view('frontend.prestasi.index', compact('prestasi'));
+        return view('frontend.prestasi.index', compact('prestasi', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
-    public function prestasiShow(string $slug)
+    public function prestasiShow(Request $request, string $slug, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $item = Post::where('type', 'prestasi')
             ->where('status', 'publish')
             ->where('slug', $slug)
@@ -117,7 +138,7 @@ class InformationController extends Controller
             ->take(4)
             ->get();
 
-        return view('frontend.prestasi.show', compact('item', 'related'));
+        return view('frontend.prestasi.show', compact('item', 'related', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
     public function ekskul()

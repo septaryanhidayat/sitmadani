@@ -130,20 +130,83 @@
         </div>
 
         @php
-            $dbQuickMenus = \App\Models\QuickMenu::active()->orderBy('order', 'asc')->take(8)->get();
-            if ($dbQuickMenus->isEmpty()) {
+            if (!empty($currentUnitKey) && in_array($currentUnitKey, ['tk', 'sd', 'smp'])) {
+                $uKey = $currentUnitKey;
+                $uShort = $currentUnit['short_name'] ?? strtoupper($uKey);
                 $quickMenus = collect([
-                    (object)['name' => 'SPMB Online', 'icon' => 'fa-solid fa-graduation-cap', 'url' => route('ppdb.index'), 'is_image' => false],
-                    (object)['name' => 'Profil Sekolah', 'icon' => 'fa-solid fa-school', 'url' => url('/tentang-kami'), 'is_image' => false],
-                    (object)['name' => 'Dewan Guru', 'icon' => 'fa-solid fa-chalkboard-user', 'url' => route('dewan.index'), 'is_image' => false],
-                    (object)['name' => 'Fasilitas', 'icon' => 'fa-solid fa-layer-group', 'url' => route('bidang.index'), 'is_image' => false],
-                    (object)['name' => 'Unggulan', 'icon' => 'fa-solid fa-award', 'url' => route('dpc.index'), 'is_image' => false],
-                    (object)['name' => 'Prestasi', 'icon' => 'fa-solid fa-trophy', 'url' => url('/prestasi'), 'is_image' => false],
-                    (object)['name' => 'Ekskul', 'icon' => 'fa-solid fa-people-group', 'url' => url('/ekstrakurikuler'), 'is_image' => false],
-                    (object)['name' => 'Kabar Sekolah', 'icon' => 'fa-solid fa-newspaper', 'url' => route('artikel.index'), 'is_image' => false],
+                    (object)[
+                        'name' => 'SPMB ' . $uShort,
+                        'icon' => 'fa-solid fa-graduation-cap',
+                        'url' => route('unit.spmb', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-amber-50 text-amber-600 border-amber-200 group-hover:bg-amber-500'
+                    ],
+                    (object)[
+                        'name' => 'Profil ' . $uShort,
+                        'icon' => 'fa-solid fa-school',
+                        'url' => route('unit.tentang-kami', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-600'
+                    ],
+                    (object)[
+                        'name' => 'Guru & GTK',
+                        'icon' => 'fa-solid fa-chalkboard-user',
+                        'url' => route('unit.dewan', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-emerald-50 text-emerald-600 border-emerald-200 group-hover:bg-emerald-600'
+                    ],
+                    (object)[
+                        'name' => 'Visi & Misi',
+                        'icon' => 'fa-solid fa-compass',
+                        'url' => route('unit.visi-misi', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-indigo-50 text-indigo-600 border-indigo-200 group-hover:bg-indigo-600'
+                    ],
+                    (object)[
+                        'name' => 'Fasilitas Unit',
+                        'icon' => 'fa-solid fa-layer-group',
+                        'url' => route('unit.fasilitas', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-cyan-50 text-cyan-600 border-cyan-200 group-hover:bg-cyan-600'
+                    ],
+                    (object)[
+                        'name' => 'Prestasi Santri',
+                        'icon' => 'fa-solid fa-trophy',
+                        'url' => route('unit.prestasi', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-amber-50 text-amber-600 border-amber-200 group-hover:bg-amber-600'
+                    ],
+                    (object)[
+                        'name' => 'Galeri Foto',
+                        'icon' => 'fa-solid fa-images',
+                        'url' => route('unit.galeri', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-rose-50 text-rose-600 border-rose-200 group-hover:bg-rose-600'
+                    ],
+                    (object)[
+                        'name' => 'Kabar & Berita',
+                        'icon' => 'fa-solid fa-newspaper',
+                        'url' => route('unit.artikel', $uKey),
+                        'is_image' => false,
+                        'color_class' => 'bg-teal-50 text-teal-600 border-teal-200 group-hover:bg-teal-600'
+                    ],
                 ]);
             } else {
-                $quickMenus = $dbQuickMenus;
+                $dbQuickMenus = \App\Models\QuickMenu::active()->orderBy('order', 'asc')->take(8)->get();
+                if ($dbQuickMenus->isEmpty()) {
+                    $quickMenus = collect([
+                        (object)['name' => 'SPMB Online', 'icon' => 'fa-solid fa-graduation-cap', 'url' => route('spmb.index'), 'is_image' => false, 'color_class' => 'bg-amber-50 text-amber-600 border-amber-200 group-hover:bg-amber-500'],
+                        (object)['name' => 'Profil Yayasan', 'icon' => 'fa-solid fa-landmark', 'url' => route('page.tentang.yayasan'), 'is_image' => false, 'color_class' => 'bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-600'],
+                        (object)['name' => 'Struktur Yayasan', 'icon' => 'fa-solid fa-sitemap', 'url' => route('page.struktur.yayasan'), 'is_image' => false, 'color_class' => 'bg-emerald-50 text-emerald-600 border-emerald-200 group-hover:bg-emerald-600'],
+                        (object)['name' => 'Visi & Misi', 'icon' => 'fa-solid fa-compass', 'url' => route('page.visi-misi.yayasan'), 'is_image' => false, 'color_class' => 'bg-purple-50 text-purple-600 border-purple-200 group-hover:bg-purple-600'],
+                        (object)['name' => 'Pilih Unit', 'icon' => 'fa-solid fa-layer-group', 'url' => '#unit-sekolah', 'is_image' => false, 'color_class' => 'bg-cyan-50 text-cyan-600 border-cyan-200 group-hover:bg-cyan-600'],
+                        (object)['name' => 'Warta Madani', 'icon' => 'fa-solid fa-newspaper', 'url' => route('artikel.index'), 'is_image' => false, 'color_class' => 'bg-indigo-50 text-indigo-600 border-indigo-200 group-hover:bg-indigo-600'],
+                        (object)['name' => 'Galeri Kampus', 'icon' => 'fa-solid fa-images', 'url' => route('galeri.index'), 'is_image' => false, 'color_class' => 'bg-rose-50 text-rose-600 border-rose-200 group-hover:bg-rose-600'],
+                        (object)['name' => 'Hubungi Kami', 'icon' => 'fa-solid fa-phone', 'url' => route('hubungi'), 'is_image' => false, 'color_class' => 'bg-teal-50 text-teal-600 border-teal-200 group-hover:bg-teal-600'],
+                    ]);
+                } else {
+                    $quickMenus = $dbQuickMenus;
+                }
             }
         @endphp
 
@@ -153,7 +216,7 @@
             <a href="{{ $qm->url }}" 
                class="group w-full flex flex-col items-center justify-between text-center p-2 sm:p-2.5 md:py-3.5 md:px-1 rounded-2xl border border-slate-100 hover:border-indigo-300 bg-white hover:bg-indigo-50/50 shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 min-h-[88px] sm:min-h-[98px] md:min-h-[105px]" 
                aria-label="Menu {{ $qm->name }}">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl bg-indigo-50 text-indigo-700 flex items-center justify-center mx-auto mb-1.5 sm:mb-2 shadow-xs border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl {{ $qm->color_class ?? 'bg-indigo-50 text-indigo-700 border-indigo-100 group-hover:bg-indigo-600' }} flex items-center justify-center mx-auto mb-1.5 sm:mb-2 shadow-xs border group-hover:text-white group-hover:scale-110 transition-all duration-300">
                     @if(!empty($qm->is_image) && $qm->is_image)
                         <img src="{{ $qm->icon }}" alt="Ikon {{ $qm->name }}" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 object-contain group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/uploads/logo-madani-square.webp'">
                     @else

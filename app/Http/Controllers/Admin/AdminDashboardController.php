@@ -12,6 +12,7 @@ use App\Models\Dpc;
 use App\Models\Feedback;
 use App\Models\Pengumuman;
 use App\Models\Post;
+use App\Models\PpdbRegistration;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\VisitorLog;
@@ -66,7 +67,18 @@ class AdminDashboardController extends Controller
             $hasVisitorLogs = false;
         }
 
+        $user = auth()->user();
+        $userUnit = $user?->unit ?? 'yayasan';
+
+        $spmbCount = match ($userUnit) {
+            'tk' => PpdbRegistration::where('extra_fields', 'like', '%TKS IT Madani%')->count(),
+            'sd' => PpdbRegistration::where('extra_fields', 'like', '%SDS IT Madani%')->count(),
+            'smp' => PpdbRegistration::where('extra_fields', 'like', '%SMPS IT Madani%')->orWhereNull('extra_fields')->count(),
+            default => PpdbRegistration::count(),
+        };
+
         $stats = [
+            'total_spmb' => $spmbCount,
             'total_posts' => Post::where('type', 'post')->count(),
             'total_views' => Post::where('type', 'post')->sum('views_count'),
             'visitor_hits' => (int) (@file_get_contents(storage_path('app/visitor_hits.txt')) ?: 0),

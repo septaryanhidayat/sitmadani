@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Services\SchoolUnitService;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, ?string $unit = null)
     {
+        $unitKey = $unit ?? $request->route('unit') ?? $request->query('unit');
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
+        $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
+
         $query = Post::posts()->published()->with(['categories', 'author']);
 
         // Search filter
@@ -55,7 +61,10 @@ class ArticleController extends Controller
             'recentPosts',
             'tags',
             'activeCategory',
-            'activeTag'
+            'activeTag',
+            'units',
+            'currentUnitKey',
+            'currentUnit'
         ));
     }
 

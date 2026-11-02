@@ -17,6 +17,35 @@
             </a>
         </div>
 
+        {{-- UNIT TABS / INDICATOR --}}
+        @if(($userUnit ?? 'yayasan') === 'yayasan')
+            <div class="flex flex-wrap items-center gap-1.5 mt-5 p-2 bg-slate-100 rounded-2xl text-xs font-bold">
+                <span class="text-[10px] uppercase tracking-wider text-slate-500 px-2 font-black">Filter Unit:</span>
+                <a href="{{ route('admin.dewan.index', ['unit' => 'all']) }}" class="px-3 py-1.5 rounded-xl transition {{ ($selectedUnit ?? 'all') === 'all' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-200' }}">
+                    Semua Tenaga Pendidik
+                </a>
+                <a href="{{ route('admin.dewan.index', ['unit' => 'tk']) }}" class="px-3 py-1.5 rounded-xl transition {{ ($selectedUnit ?? '') === 'tk' ? 'bg-amber-500 text-slate-950 shadow-xs' : 'bg-white text-slate-700 hover:bg-amber-50' }}">
+                    TKS IT Madani
+                </a>
+                <a href="{{ route('admin.dewan.index', ['unit' => 'sd']) }}" class="px-3 py-1.5 rounded-xl transition {{ ($selectedUnit ?? '') === 'sd' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-emerald-50' }}">
+                    SDS IT Madani
+                </a>
+                <a href="{{ route('admin.dewan.index', ['unit' => 'smp']) }}" class="px-3 py-1.5 rounded-xl transition {{ ($selectedUnit ?? '') === 'smp' ? 'bg-blue-600 text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-blue-50' }}">
+                    SMPS IT Madani
+                </a>
+            </div>
+        @else
+            @php
+                $myUnit = \App\Services\SchoolUnitService::getUnit($userUnit);
+            @endphp
+            <div class="mt-4 p-3 bg-gradient-to-r {{ $userUnit === 'tk' ? 'from-amber-900/60 to-slate-900 border-amber-500/40 text-amber-200' : ($userUnit === 'sd' ? 'from-emerald-900/60 to-slate-900 border-emerald-500/40 text-emerald-200' : 'from-blue-900/60 to-slate-900 border-blue-500/40 text-blue-200') }} rounded-2xl border text-xs font-bold flex items-center justify-between">
+                <span>Dewan Guru Khusus Unit: {{ $myUnit['name'] ?? strtoupper($userUnit) }}</span>
+                <a href="{{ route('unit.dewan', $userUnit) }}" target="_blank" class="px-2.5 py-1 rounded-xl bg-white/20 hover:bg-white/30 text-white text-[11px] transition">
+                    Lihat di Web &rarr;
+                </a>
+            </div>
+        @endif
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             @forelse($dewan as $d)
                 <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 flex flex-col justify-between space-y-4 hover:shadow-md transition">
