@@ -19,6 +19,28 @@ class ArticleController extends Controller
 
         $query = Post::posts()->published()->with(['categories', 'author']);
 
+        // Unit Scoping Isolation
+        if ($currentUnitKey === 'tk') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-tk'))
+                    ->orWhere('title', 'like', '%TKS IT%')
+                    ->orWhere('title', 'like', '%TK IT%')
+                    ->orWhere('title', 'like', '%PAUD%');
+            });
+        } elseif ($currentUnitKey === 'sd') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-sd'))
+                    ->orWhere('title', 'like', '%SDS IT%')
+                    ->orWhere('title', 'like', '%SD IT%');
+            });
+        } elseif ($currentUnitKey === 'smp') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-smp'))
+                    ->orWhere('title', 'like', '%SMPS IT%')
+                    ->orWhere('title', 'like', '%SMP IT%');
+            });
+        }
+
         // Search filter
         if ($search = $request->input('q')) {
             $query->where(function ($q) use ($search) {
@@ -52,7 +74,31 @@ class ArticleController extends Controller
 
         $posts = $query->orderBy('published_at', 'desc')->orderBy('id', 'desc')->paginate(9)->withQueryString();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->get();
-        $recentPosts = Post::posts()->published()->orderBy('published_at', 'desc')->orderBy('id', 'desc')->take(5)->get();
+
+        if ($currentUnitKey === 'tk') {
+            $recentPosts = Post::posts()->published()
+                ->where(function ($q) {
+                    $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-tk'))
+                        ->orWhere('title', 'like', '%TKS IT%');
+                })
+                ->orderBy('published_at', 'desc')->take(5)->get();
+        } elseif ($currentUnitKey === 'sd') {
+            $recentPosts = Post::posts()->published()
+                ->where(function ($q) {
+                    $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-sd'))
+                        ->orWhere('title', 'like', '%SDS IT%');
+                })
+                ->orderBy('published_at', 'desc')->take(5)->get();
+        } elseif ($currentUnitKey === 'smp') {
+            $recentPosts = Post::posts()->published()
+                ->where(function ($q) {
+                    $q->whereHas('categories', fn ($c) => $c->where('slug', 'berita-smp'))
+                        ->orWhere('title', 'like', '%SMPS IT%');
+                })
+                ->orderBy('published_at', 'desc')->take(5)->get();
+        } else {
+            $recentPosts = Post::posts()->published()->orderBy('published_at', 'desc')->orderBy('id', 'desc')->take(5)->get();
+        }
         $tags = Tag::all();
 
         return view('frontend.artikel.index', compact(

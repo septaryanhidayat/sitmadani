@@ -109,11 +109,30 @@ class InformationController extends Controller
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : null;
         $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
 
-        $prestasi = Post::where('type', 'prestasi')
-            ->where('status', 'publish')
-            ->latest('published_at')
-            ->latest('id')
-            ->paginate(9);
+        $query = Post::where('type', 'prestasi')->where('status', 'publish');
+
+        if ($currentUnitKey === 'tk') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'prestasi-tk'))
+                    ->orWhere('title', 'like', '%TKS IT%')
+                    ->orWhere('title', 'like', '%TK%')
+                    ->orWhere('title', 'like', '%PAUD%');
+            });
+        } elseif ($currentUnitKey === 'sd') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'prestasi-sd'))
+                    ->orWhere('title', 'like', '%SDS IT%')
+                    ->orWhere('title', 'like', '%SD%');
+            });
+        } elseif ($currentUnitKey === 'smp') {
+            $query->where(function ($q) {
+                $q->whereHas('categories', fn ($c) => $c->where('slug', 'prestasi-smp'))
+                    ->orWhere('title', 'like', '%SMPS IT%')
+                    ->orWhere('title', 'like', '%SMP%');
+            });
+        }
+
+        $prestasi = $query->latest('published_at')->latest('id')->paginate(9);
 
         return view('frontend.prestasi.index', compact('prestasi', 'units', 'currentUnitKey', 'currentUnit'));
     }

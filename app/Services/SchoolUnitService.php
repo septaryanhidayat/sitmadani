@@ -102,11 +102,11 @@ class SchoolUnitService
                 'address' => 'Jalan SMA Negeri 4, RT 02 LK III, Tanjung Rancing, Kayuagung, Kab. OKI 30618',
                 'phone' => '0858-3817-3417',
                 'email' => 'smpsislamterpadumadani@gmail.com',
-                'badge' => 'SMP IT & ASRAMA TAHFIDZ',
+                'badge' => 'SEKOLAH MENENGAH PERTAMA IT',
                 'stats' => [
                     ['label' => 'NPSN', 'val' => '70034917'],
                     ['label' => 'Akreditasi', 'val' => 'B (BAN-SM)'],
-                    ['label' => 'Program', 'val' => 'Boarding & Full Day'],
+                    ['label' => 'Program', 'val' => 'Full Day School'],
                     ['label' => 'Target Tahfidz', 'val' => 'Tahfidz Mutqin Bersanad'],
                 ],
             ],
@@ -271,17 +271,17 @@ class SchoolUnitService
                 ['name' => 'Ewin Prima Sari, S.Pd.', 'position' => 'Guru Seni Rupa & Prakarya', 'fraction' => 'Guru Seni Budaya', 'photo' => '/uploads/dewan/avatar-default.svg', 'education' => 'S1 Kependidikan', 'order' => 13],
             ];
             $data['programs'] = [
-                ['name' => 'Asrama Tahfidz (Boarding School) & Full Day', 'desc' => 'Program asrama berpendampingan musyrif 24 jam dengan fokus ibadah yaumiyah dan tahfidz Al-Qur\'an.', 'icon' => 'fa-solid fa-hotel'],
-                ['name' => 'Talaqqi & Tasmi\' Al-Qur\'an Mutqin Bersanad', 'desc' => 'Metode hafalan mutqin bersanad dengan target hafalan bertahap hingga wisuda akbar.', 'icon' => 'fa-solid fa-quran'],
+                ['name' => 'Tahfidz Al-Qur\'an Full Day & Talaqqi Bersanad', 'desc' => 'Program hafalan Al-Qur\'an intensif dengan target mutqin dibimbing dewan asatidz bersanad.', 'icon' => 'fa-solid fa-quran'],
+                ['name' => 'Talaqqi & Tasmi\' Al-Qur\'an Mutqin', 'desc' => 'Metode talaqqi tartil bertahap hingga wisuda akbar khotmil Qur\'an.', 'icon' => 'fa-solid fa-book-quran'],
                 ['name' => 'Bina Pribadi Islami (BPI) & Mentoring', 'desc' => 'Pembinaan adab, kepribadian islam, serta kepekaan sosial dalam kelompok kecil (halaqah).', 'icon' => 'fa-solid fa-user-group'],
                 ['name' => 'Laboratorium Komputer & Digital Literacy', 'desc' => 'Pembelajaran coding dasar, aplikasi produktivitas kantor, desain grafis, dan pemanfaatan AI positif.', 'icon' => 'fa-solid fa-laptop-code'],
                 ['name' => 'Islamic Student Camp & Leadership Safari', 'desc' => 'Perkemahan kepemimpinan pemuda islam untuk melatih ketangguhan mental dan fisik.', 'icon' => 'fa-solid fa-mountain'],
                 ['name' => 'Bilingual Environment (Arabic & English)', 'desc' => 'Hari bahasa terpadu untuk membangun rasa percaya diri berkomunikasi global.', 'icon' => 'fa-solid fa-comments'],
             ];
             $data['facilities'] = [
-                ['name' => 'Gedung Asrama Tahfidz Putra & Putri', 'desc' => 'Asrama representatif, bersih, sehat, berhawa sejuk dengan pengawasan musyrif/musyrifah.', 'icon' => 'fa-solid fa-building'],
+                ['name' => 'Laboratorium IPA & Riset Terpadu', 'desc' => 'Fasilitas laboratorium sains modern dan alat eksperimen ilmiah untuk praktikum fisika, biologi, dan kimia.', 'icon' => 'fa-solid fa-flask'],
                 ['name' => 'Ruang Kelas Multimedia Ber-AC', 'desc' => 'Dilengkapi proyektor LCD dan audio-visual interaktif berkonsep joyful learning.', 'icon' => 'fa-solid fa-chalkboard-user'],
-                ['name' => 'Laboratorium Komputer Terpadu', 'desc' => 'Komputer PC modern terhubung jaringan internet stabil untuk riset dan ujian nasional.', 'icon' => 'fa-solid fa-desktop'],
+                ['name' => 'Laboratorium Komputer & ANBK', 'desc' => 'Komputer PC modern terhubung jaringan internet stabil untuk riset, literasi digital, dan asesmen nasional.', 'icon' => 'fa-solid fa-desktop'],
                 ['name' => 'Perpustakaan & Pojok Diskusi Ilmiah', 'desc' => 'Koleksi buku ensiklopedia, referensi agama, dan literasi modern remaja.', 'icon' => 'fa-solid fa-book-bookmark'],
                 ['name' => 'Lapangan Olahraga Multifungsi', 'desc' => 'Sarana futsal, basket, voli, bulutangkis, dan arena latihan kepramukaan.', 'icon' => 'fa-solid fa-basketball'],
                 ['name' => 'Kebun Edukatif & Taman Refleksi', 'desc' => 'Sarana proyek lingkungan hidup dan ruang diskusi terbuka siswa di alam asri.', 'icon' => 'fa-solid fa-tree'],
@@ -290,7 +290,7 @@ class SchoolUnitService
                 [
                     'badge' => 'SMPS IT MADANI KAYUAGUNG • TERAKREDITASI B',
                     'title' => 'Membina Generasi Qur\'ani, Cerdas & Berakhlak Mulia',
-                    'subtitle' => 'Sekolah Menengah Pertama Islam Terpadu & Asrama Tahfidz di Kayuagung, Kab. OKI dengan Kurikulum Nasional Terintegrasi JSIT.',
+                    'subtitle' => 'Sekolah Menengah Pertama Islam Terpadu di Kayuagung, Kab. OKI dengan Kurikulum Nasional Terintegrasi JSIT dan Program Full Day School.',
                     'image' => '/uploads/campus-sit-madani.webp',
                     'btn_text' => 'Profil SMPS IT Madani',
                     'btn_link' => route('unit.page', ['unit' => 'smp', 'slug' => 'tentang-kami']),

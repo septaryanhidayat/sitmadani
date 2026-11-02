@@ -263,7 +263,7 @@
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-black text-gray-900">
-                    Pusat Unduhan SMPS IT Madani Kayuagung
+                    Pusat Unduhan {{ $currentUnit['name'] ?? 'SIT Madani Kayuagung' }}
                 </h3>
                 <p class="text-xs sm:text-sm text-gray-500 mt-1">
                     Silakan unduh brosur SPMB, formulir pendaftaran, modul siswa, dan pedoman resmi
@@ -423,21 +423,21 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
-            {{-- Foto Kepala Sekolah --}}
+            {{-- Foto Kepala Sekolah / Pimpinan Unit --}}
             <div class="lg:col-span-5 reveal-fade-up delay-1">
                 <div class="max-w-sm mx-auto">
                     <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-indigo-50 bg-gradient-to-b from-indigo-50 to-blue-100 aspect-[4/5] relative">
-                        <img src="/uploads/dewan/kepala-sekolah.webp" alt="Kepala SMPS IT Madani Kayuagung, Ribang Imam Satria, S.Pi., Gr." width="400" height="500" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition duration-500">
+                        <img src="{{ $sambutan->featured_image ?? ($currentUnit['leader_photo'] ?? '/uploads/dewan/kepala-sekolah.webp') }}" alt="{{ $sambutan->author_name ?? ($currentUnit['leader_name'] ?? 'Pimpinan') }}" width="400" height="500" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top transform hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='/uploads/dewan/avatar-default.svg'">
                         <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/80 via-transparent to-transparent flex items-end p-5">
                             <div class="text-white text-center w-full">
-                                <span class="bg-amber-400 text-slate-950 font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Kepala Sekolah</span>
+                                <span class="bg-amber-400 text-slate-950 font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">{{ $currentUnit['leader_title'] ?? 'Kepala Sekolah' }}</span>
                             </div>
                         </div>
                     </div>
                     <p class="font-black text-gray-900 text-lg sm:text-xl text-center mt-4 tracking-tight">
-                        Ribang Imam Satria, S.Pi., Gr.
+                        {{ $sambutan->author_name ?? ($currentUnit['leader_name'] ?? 'Kepala Sekolah') }}
                     </p>
-                    <p class="text-xs text-indigo-600 font-bold text-center">Kepala SMPS IT Madani Kayuagung</p>
+                    <p class="text-xs text-indigo-600 font-bold text-center">{{ $currentUnit['leader_title'] ?? 'Kepala Sekolah' }} {{ $currentUnit['short_name'] ?? '' }}</p>
                 </div>
             </div>
 
@@ -448,24 +448,21 @@
                 </div>
                 
                 <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
-                    Sambutan Kepala Sekolah
+                    {{ $sambutan->title ?? ('Sambutan Kepala ' . ($currentUnit['short_name'] ?? 'Sekolah')) }}
                 </h2>
 
-                <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal">
-                    Assalamu'alaikum Warahmatullahi Wabarakatuh. Segala puji bagi Allah SWT yang senantiasa melimpahkan rahmat dan karunia-Nya kepada kita semua. Selamat datang di website resmi <strong>SMPS IT Madani Kayuagung</strong>. 
-                </p>
-                <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal">
-                    Sebagai sekolah Islam terpadu yang bernaung di bawah <strong>Yayasan Agung Madani Kayuagung</strong>, kami berkomitmen menyelenggarakan pendidikan bermutu tinggi yang memadukan keunggulan kurikulum nasional, penguatan karakter akhlakul karimah, target tahfidz Qur'an 2 juz mutqin, serta penguasaan sains dan bahasa global. Mari bersama mendidik generasi penerus yang sholih, cerdas, dan siap memimpin masa depan.
-                </p>
+                <div class="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal space-y-3">
+                    {!! $sambutan->content ?? ('<p>' . e($sambutan->excerpt ?? '') . '</p>') !!}
+                </div>
 
                 <div class="w-24 h-1 bg-indigo-600 mx-auto lg:mx-0 my-4 rounded-full"></div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2 w-full">
-                    <a href="{{ route('page.sambutan') }}" class="w-full sm:w-auto inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition space-x-2">
+                    <a href="{{ route('unit.sambutan', $currentUnitKey) }}" class="w-full sm:w-auto inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition space-x-2">
                         <i class="fa-solid fa-book-open"></i>
                         <span>Sambutan Lengkap</span>
                     </a>
-                    <a href="{{ route('page.visi-misi') }}" class="w-full sm:w-auto inline-flex items-center justify-center bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition space-x-2">
+                    <a href="{{ route('unit.visi-misi', $currentUnitKey) }}" class="w-full sm:w-auto inline-flex items-center justify-center bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition space-x-2">
                         <span>Visi &amp; Misi</span>
                         <i class="fa-regular fa-circle-dot"></i>
                     </a>
@@ -523,7 +520,7 @@
                             </p>
                         </div>
                         <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-xs font-semibold text-indigo-600">SMPS IT Madani</span>
+                            <span class="text-xs font-semibold text-indigo-600">{{ $currentUnit['short_name'] ?? 'SIT Madani' }}</span>
                             <a href="{{ route('artikel.show', $featuredPost->slug) }}" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center">
                                 Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
                             </a>
@@ -571,7 +568,7 @@
                 Prestasi Siswa
             </h2>
             <p class="text-xs sm:text-sm text-gray-700 mt-1 font-medium">
-                Capaian membanggakan siswa SMPS IT Madani Kayuagung di bidang tahfidz, sains, bahasa, dan keolahragaan
+                Capaian membanggakan siswa {{ $currentUnit['name'] ?? 'SIT Madani Kayuagung' }} di bidang tahfidz, sains, bahasa, dan keolahragaan
             </p>
             <div class="w-16 h-1 bg-amber-400 mx-auto mt-2.5 rounded-full"></div>
         </div>
@@ -605,7 +602,7 @@
         </div>
 
         <div class="text-center mt-8 reveal-fade-up">
-            <a href="{{ route('prestasi.index') }}" aria-label="Lihat Semua Prestasi Siswa" class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm px-7 py-2.5 rounded-full shadow-md transition">
+            <a href="{{ route('unit.prestasi', $currentUnitKey) }}" aria-label="Lihat Semua Prestasi Siswa" class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm px-7 py-2.5 rounded-full shadow-md transition">
                 Lihat Semua Prestasi <i class="fa-solid fa-arrow-right ml-2 text-xs" aria-hidden="true"></i>
             </a>
         </div>
@@ -949,7 +946,7 @@
                 Galeri Video Resmi YouTube
             </h2>
             <p class="text-xs sm:text-sm text-amber-400 mt-1 font-semibold">
-                Dokumentasi Audio Visual Pembinaan &amp; Aktivitas Sekolah SMPS IT Madani Kayuagung
+                Dokumentasi Audio Visual Pembinaan &amp; Aktivitas Sekolah {{ $currentUnit['name'] ?? 'SIT Madani Kayuagung' }}
             </p>
             <div class="w-16 h-1 bg-amber-400 mx-auto mt-3 rounded-full"></div>
         </div>
@@ -1103,7 +1100,7 @@
                 Galeri Foto Siswa
             </h2>
             <p class="text-xs sm:text-sm text-amber-400 font-bold tracking-wide mt-2">
-                Dokumentasi Pembiasaan Karakter, Praktikum &amp; Aktivitas Sekolah SMPS IT Madani
+                Dokumentasi Pembiasaan Karakter, Praktikum &amp; Aktivitas Sekolah {{ $currentUnit['short_name'] ?? ($currentUnit['name'] ?? 'SIT Madani Kayuagung') }}
             </p>
             <div class="w-12 h-1 bg-amber-400 mx-auto mt-2.5 rounded-full"></div>
         </div>
@@ -1340,7 +1337,7 @@
                 </button>
 
                 <div class="pt-6 flex justify-center">
-                    <a href="{{ route('download.ebook') }}" aria-label="Akses Perpustakaan Digital SMPS IT Madani Kayuagung" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center space-x-2 transform hover:scale-105 min-h-[44px]">
+                    <a href="{{ route('download.ebook') }}" aria-label="Akses Perpustakaan Digital {{ $currentUnit['short_name'] ?? 'SIT Madani' }} Kayuagung" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-6 sm:px-8 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center space-x-2 transform hover:scale-105 min-h-[44px]">
                         <i class="fa-solid fa-download" aria-hidden="true"></i>
                         <span>Akses Semua Modul &amp; E-Book</span>
                     </a>

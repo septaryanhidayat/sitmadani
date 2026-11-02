@@ -36,7 +36,7 @@ class PpdbController extends Controller
             'wave' => Setting::get('ppdb_wave', 'Gelombang 1 (Aktif)'),
             'promo' => Setting::get('ppdb_promo', 'Potongan Biaya Masuk Up to 50% OFF (*S&K berlaku)'),
             'tagline' => Setting::get('ppdb_tagline', "Mendidik Sepenuh Cinta. Mewujudkan generasi Qur'ani berkarakter tangguh, cerdas sains, mandiri, dan berwawasan global di bawah naungan JSIT Indonesia."),
-            'youtube_id' => Setting::get('ppdb_youtube_id', 'IrPVG8CYjRc'),
+            'youtube_id' => Setting::get('ppdb_youtube_id', 'ULMekhqxvqU'),
             'video_title' => Setting::get('ppdb_video_title', 'Video Profil & Dokumentasi SMPS IT Madani'),
             'video_desc' => Setting::get('ppdb_video_desc', 'Saksikan video profil dan aktivitas pembelajaran siswa kami secara visual.'),
             'operational_weekday' => Setting::get('ppdb_operational_weekday', "Senin – Jum'at: Pukul 08.00 – 15.00 WIB"),
@@ -59,9 +59,9 @@ class PpdbController extends Controller
             'mandiri' => Setting::get('ppdb_mandiri', "Jalur seleksi reguler melalui tahapan:\nTes Potensi Akademik (Matematika, Bahasa Indonesia, PAI).\nTes Kemampuan Membaca Al-Qur'an (Tahsin & Tajwid).\nWawancara Komitmen Orang Tua & Siswa."),
             'jadwal_gelombang' => Setting::get('ppdb_jadwal_gelombang', "Gelombang 1: Oktober s/d Desember (Diskon Biaya Masuk s/d 50%)\nGelombang 2: Januari s/d April\nGelombang 3: Mei s/d Juli (Khusus sisa kuota)\n* Pendaftaran akan ditutup otomatis apabila kuota per kelas telah terpenuhi."),
             'biaya' => Setting::get('ppdb_biaya', "Biaya Formulir Pendaftaran: Ditransfer ke rekening BSI sekolah 7011304251.\nPaket Seragam Sekolah (4 stel seragam lengkap + atribut dan jilbab/peci).\nBiaya Orientasi Siswa (MPLS) & Baitul Maqdis Leadership Camp.\nUntuk rincian lengkap uang pangkal dan SPP bulanan, hubungi langsung panitia PPDB."),
-            'boarding' => Setting::get('ppdb_boarding', "Program Boarding (Asrama): Fasilitas asrama bersih, ber-AC/ventilasi sehat, makan 3x sehari, pendampingan tahfidz 24 jam bersama musyrif.\nProgram Full Day School: Pembelajaran terpadu hingga sore hari, shalat berjamaah, makan siang sehat, dan ekstrakurikuler."),
+            'boarding' => Setting::get('ppdb_boarding', 'Program Full Day School: Pembelajaran terpadu hingga sore hari yang memadukan kurikulum nasional dan kekhasan JSIT, shalat berjamaah, makan siang sehat, tahfidz bersanad, dan ekstrakurikuler.'),
             'kelulusan' => Setting::get('ppdb_kelulusan', 'Hasil seleksi diumumkan melalui website resmi dan notifikasi WhatsApp kepada orang tua calon siswa. Calon Siswa yang dinyatakan lulus wajib melakukan daftar ulang sesuai jadwal yang ditentukan panitia.'),
-            'closing_title' => Setting::get('ppdb_closing_title', 'Terima Kasih Sudah Mendaftar di SMPS IT Madani Kayuagung'),
+            'closing_title' => Setting::get('ppdb_closing_title', 'Terima Kasih Sudah Mendaftar di SIT Madani Kayuagung'),
             'closing_desc' => Setting::get('ppdb_closing_desc', 'Semoga Ananda kelak bisa menjadi anak yang cerdas, sholeh/ah, berbakti kepada orang tua dan menjadi kebanggaan bagi agama, bangsa dan negara. Aamiin'),
             'image_1' => (! empty(Setting::get('ppdb_image_1')) && file_exists(public_path(ltrim(Setting::get('ppdb_image_1'), '/')))) ? Setting::get('ppdb_image_1') : '/uploads/fasilitas/fasilitas-gedung-utama.webp',
             'image_2' => (! empty(Setting::get('ppdb_image_2')) && file_exists(public_path(ltrim(Setting::get('ppdb_image_2'), '/')))) ? Setting::get('ppdb_image_2') : '/uploads/fasilitas/fasilitas-ruang-kelas.webp',
@@ -90,7 +90,7 @@ class PpdbController extends Controller
         $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp']) ? $unitKey : null;
         $currentUnit = $currentUnitKey ? SchoolUnitService::getUnit($currentUnitKey) : null;
         $rawWaves = Setting::get('ppdb_form_waves', "Gelombang 1 (Early Bird)\nGelombang 2 (Reguler)\nGelombang 3 (Prestasi)");
-        $rawPrograms = Setting::get('ppdb_form_programs', "Boarding School (Asrama Siswa)\nFull Day School (Sekolah Terpadu)");
+        $rawPrograms = Setting::get('ppdb_form_programs', "Full Day School (Sekolah Terpadu)\nReguler");
 
         $activeTracks = collect();
         try {
@@ -260,7 +260,7 @@ class PpdbController extends Controller
                         'registration_number' => $regNumber,
                         'wave' => $validated['wave'] ?? Setting::get('ppdb_wave', 'Gelombang 1'),
                         'track' => $validated['track'] ?? 'Reguler',
-                        'program_type' => $validated['program_type'] ?? 'Boarding School',
+                        'program_type' => $validated['program_type'] ?? 'Full Day School',
                         'full_name' => $validated['full_name'] ?? 'Calon Siswa',
                         'birth_place' => $validated['birth_place'] ?? '-',
                         'birth_date' => $validated['birth_date'] ?? '2008-01-01',
@@ -390,7 +390,7 @@ class PpdbController extends Controller
         $text .= '📅 *Tanggal Daftar:* '.$createdAtStr." WIB\n";
         $text .= '🌊 *Gelombang:* '.($registration->wave ?: 'Gelombang 1')."\n";
         $text .= '🎯 *Jalur Pendaftaran:* '.($registration->track ?: 'Reguler')."\n";
-        $text .= '🏫 *Program Pilihan:* '.($registration->program_type ?: 'Boarding School')."\n\n";
+        $text .= '🏫 *Program Pilihan:* '.($registration->program_type ?: 'Full Day School')."\n\n";
 
         $text .= "👤 *1. DATA CALON SISWA*\n";
         $text .= '• *Nama Lengkap:* '.$registration->full_name."\n";

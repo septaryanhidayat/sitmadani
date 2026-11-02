@@ -44,7 +44,7 @@
                     'all' => ['title' => 'SPMB TERPADU SIT MADANI', 'sub' => 'TK • SD • SMP ISLAM TERPADU KAYUAGUNG'],
                     'tk' => ['title' => 'SPMB TKS IT MADANI', 'sub' => 'PAUD / TK ISLAM TERPADU KAYUAGUNG (NPSN 69915461)'],
                     'sd' => ['title' => 'SPMB SDS IT MADANI', 'sub' => 'SEKOLAH DASAR ISLAM TERPADU KAYUAGUNG (NPSN 69881529)'],
-                    'smp' => ['title' => 'SPMB SMPS IT MADANI', 'sub' => 'SMP IT & ASRAMA TAHFIDZ KAYUAGUNG (NPSN 70034917)'],
+                    'smp' => ['title' => 'SPMB SMPS IT MADANI', 'sub' => 'SEKOLAH MENENGAH PERTAMA IT KAYUAGUNG (NPSN 70034917)'],
                 ];
                 $activePpdbInfo = $unitTitles[$ppdbUnit] ?? $unitTitles['all'];
             @endphp
@@ -130,11 +130,11 @@
             {{-- Box 2: Program --}}
             <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-sm border border-slate-200/90 flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-hotel"></i>
+                    <i class="fa-solid fa-school"></i>
                 </div>
                 <div>
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Sistem Belajar</span>
-                    <span class="text-xs sm:text-sm font-black text-slate-900">Boarding & Full Day</span>
+                    <span class="text-xs sm:text-sm font-black text-slate-900">Full Day School Terpadu</span>
                 </div>
             </div>
 
@@ -335,7 +335,7 @@
                         <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
                             <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">4</div>
                             <div class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                                <strong>Pengumuman & Daftar Ulang:</strong> Hasil seleksi diumumkan via WhatsApp dan calon siswa melakukan registrasi ulang seragam & asrama.
+                                <strong>Pengumuman & Daftar Ulang:</strong> Hasil seleksi diumumkan via WhatsApp dan calon siswa melakukan registrasi ulang perlengkapan seragam & administrasi.
                             </div>
                         </div>
                     @endif
@@ -506,81 +506,108 @@
         </section>
 
         {{-- ========================================================
-             6. PILIHAN SISTEM BELAJAR: BOARDING (ASRAMA) VS FULL DAY
+             6. SISTEM PEMBELAJARAN FULL DAY SCHOOL SIT MADANI
              ======================================================== --}}
-        <section class="space-y-4">
+        <section class="space-y-6">
             <div class="text-center max-w-2xl mx-auto">
                 <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
-                    Sistem Pembelajaran
+                    Sistem Pembelajaran Terpadu
                 </span>
                 <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">
-                    Pilihan Program Belajar
+                    Jenjang Satuan Pendidikan SIT Madani
                 </h2>
                 <p class="text-xs text-slate-500">
-                    Dua pilihan kurikulum terpadu untuk membentuk karakter siswa yang beriman, berilmu, dan berakhlak mulia.
+                    Seluruh unit sekolah SIT Madani menerapkan sistem Full Day School yang memadukan kurikulum nasional dan kekhasan JSIT Indonesia.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                {{-- Card Boarding (Asrama) --}}
-                <div class="bg-gradient-to-br from-indigo-950 via-indigo-900 to-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-md border border-indigo-400/20 flex flex-col justify-between space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                {{-- Card 1: TKS IT Madani --}}
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs border-2 border-amber-200 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[10px] font-black bg-amber-400 text-slate-950">
-                                Program Unggulan
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-400 text-slate-950">
+                                PAUD / TK ISLAM TERPADU
                             </span>
-                            <i class="fa-solid fa-hotel text-xl text-amber-400"></i>
+                            <i class="fa-solid fa-shapes text-xl text-amber-500"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-black text-white">
-                            Program Boarding (Asrama Siswa)
+                        <h3 class="text-base sm:text-lg font-black text-slate-900">
+                            TKS IT Madani Kayuagung
                         </h3>
-                        <p class="text-xs text-indigo-100 font-normal leading-relaxed">
-                            Pembinaan karakter intensif 24 jam dengan bimbingan dewan asatidz/musyrif mukim.
+                        <p class="text-xs text-slate-600 font-normal leading-relaxed">
+                            Pendekatan Deep Learning yang bermakna dan menggembirakan di sentra bermain terpadu.
                         </p>
-                        <div class="bg-white/10 rounded-xl p-3 text-xs space-y-1.5">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-300 text-[11px]"></i> Target hafalan Al-Qur'an intensif & Tahsin bersanad</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-300 text-[11px]"></i> Kamar siswa ber-AC, bersih, dan ventilasi sehat</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-300 text-[11px]"></i> Pembiasaan shalat berjamaah 5 waktu, tahajjud & dhuha</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-300 text-[11px]"></i> Makan bergizi 3x sehari & belajar malam terarah</div>
+                        <div class="bg-amber-50/80 rounded-xl p-3 text-xs space-y-1.5 text-slate-700">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Sentra Ibadah, Sholat Dhuha & Doa Harian</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Tahfidz Cilik Juz 30 & Hadits Adab</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Sentra Seni, Kreativitas & Jurnal Gambar</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Market Day & Kemandirian Anak Usia Dini</div>
                         </div>
                     </div>
-                    <div class="pt-3 border-t border-white/10 text-[11px] text-amber-300 font-semibold flex items-center gap-1.5">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>Lingkungan asrama islami yang aman & terpantau CCTV</span>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span class="text-amber-700 font-bold"><i class="fa-solid fa-certificate mr-1"></i> Akreditasi B</span>
+                        <a href="{{ route('unit.ppdb.form', 'tk') }}" class="font-black text-amber-600 hover:text-amber-800">Daftar TK &rarr;</a>
                     </div>
                 </div>
 
-                {{-- Card Full Day School --}}
-                <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/80 flex flex-col justify-between space-y-4">
+                {{-- Card 2: SDS IT Madani --}}
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs border-2 border-emerald-200 hover:border-emerald-400 transition flex flex-col justify-between space-y-4">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[10px] font-black bg-indigo-50 text-indigo-700 border border-indigo-100">
-                                Program Reguler
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-yellow-400 text-slate-950">
+                                SEKOLAH DASAR IT
                             </span>
-                            <i class="fa-solid fa-school text-xl text-indigo-600"></i>
+                            <i class="fa-solid fa-book-open-reader text-xl text-emerald-600"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-black text-slate-900">
-                            Program Full Day School
+                        <h3 class="text-base sm:text-lg font-black text-slate-900">
+                            SDS IT Madani Kayuagung
                         </h3>
                         <p class="text-xs text-slate-600 font-normal leading-relaxed">
-                            Pembelajaran kurikulum terpadu nasional & kekhasan SIT dari pagi hingga sore hari.
+                            Full Day School dengan kurikulum nasional terintegrasi nilai-nilai Al-Qur'an dan Sunnah.
                         </p>
-                        <div class="bg-slate-50 rounded-xl p-3 text-xs space-y-1.5 text-slate-700">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Jam belajar terpadu 07.15 s/d 15.30 WIB</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Shalat Zhuhur & Ashar berjamaah di masjid sekolah</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Kegiatan ekstrakurikuler lengkap (Panahan, Futsal, Pramuka, dll)</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Tetap tinggal dan berkumpul bersama keluarga di rumah</div>
+                        <div class="bg-emerald-50/80 rounded-xl p-3 text-xs space-y-1.5 text-slate-700">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Target Hafalan 2 Juz Mutqin (Juz 30 & 29)</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Hafalan 30 Hadits Adab & Karakter JSIT</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Lab Komputer Siswa & Pembekalan ANBK</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Shalat Berjamaah & Makan Siang Bersama</div>
                         </div>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 text-[11px] text-indigo-600 font-semibold flex items-center gap-1.5">
-                        <i class="fa-solid fa-house-chimney-user"></i>
-                        <span>Kombinasi ideal antara sekolah berkualitas & kedekatan keluarga</span>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span class="text-emerald-700 font-bold"><i class="fa-solid fa-users mr-1"></i> 13 Rombel &bull; 293 Siswa</span>
+                        <a href="{{ route('unit.ppdb.form', 'sd') }}" class="font-black text-emerald-600 hover:text-emerald-800">Daftar SD &rarr;</a>
+                    </div>
+                </div>
+
+                {{-- Card 3: SMPS IT Madani --}}
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs border-2 border-indigo-200 hover:border-indigo-400 transition flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-indigo-900 text-white">
+                                SEKOLAH MENENGAH PERTAMA IT
+                            </span>
+                            <i class="fa-solid fa-graduation-cap text-xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-black text-slate-900">
+                            SMPS IT Madani Kayuagung
+                        </h3>
+                        <p class="text-xs text-slate-600 font-normal leading-relaxed">
+                            Full Day School jenjang menengah pertama yang memadukan imtak, sains modern, dan bahasa asing.
+                        </p>
+                        <div class="bg-indigo-50/80 rounded-xl p-3 text-xs space-y-1.5 text-slate-700">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600 text-[11px]"></i> Talaqqi & Tasmi' Al-Qur'an Bersanad</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600 text-[11px]"></i> Pembinaan Adab Bina Pribadi Islami (BPI)</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600 text-[11px]"></i> Lab IPA Sains & Laboratorium Komputer Modern</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600 text-[11px]"></i> Pembiasaan Dwibahasa (Arab & Inggris)</div>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span class="text-indigo-700 font-bold"><i class="fa-solid fa-school mr-1"></i> Full Day School</span>
+                        <a href="{{ route('unit.ppdb.form', 'smp') }}" class="font-black text-indigo-600 hover:text-indigo-800">Daftar SMP &rarr;</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        {{-- ========================================================
              7. FASILITAS SEKOLAH & VIDEO PROFIL RESMI (NO BLACK VOID)
              ======================================================== --}}
         <section class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/80 space-y-5">
@@ -701,7 +728,7 @@
                         Konsultasi & Konfirmasi WhatsApp
                     </h3>
                     <p class="text-xs text-emerald-100 leading-relaxed font-normal">
-                        Hubungi panitia penerimaan siswa baru untuk informasi syarat, program asrama, atau pengiriman bukti transfer: <strong>{{ $settings['hotline_phone'] ?? '0858-3817-3417' }}</strong>
+                        Hubungi panitia penerimaan siswa baru untuk informasi syarat pendaftaran, program sekolah, atau pengiriman bukti transfer: <strong>{{ $settings['hotline_phone'] ?? '0858-3817-3417' }}</strong>
                     </p>
                 </div>
                 <div class="pt-4 mt-3 border-t border-white/20">

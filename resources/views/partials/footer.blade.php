@@ -85,7 +85,7 @@
                     <li>
                         <a href="{{ route('unit.smp') }}" class="hover:text-amber-300 transition flex items-center justify-center md:justify-start space-x-2">
                             <i class="fa-solid fa-graduation-cap text-blue-400 text-xs"></i>
-                            <span class="font-semibold">SMPS IT Madani (SMP/Asrama)</span>
+                            <span class="font-semibold">SMPS IT Madani (SMP)</span>
                         </a>
                     </li>
                     <li class="pt-1 border-t border-slate-800">

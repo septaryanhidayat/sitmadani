@@ -171,11 +171,13 @@ Route::prefix('yayasan')->group(function () {
     Route::get('/tentang-kami', [PageController::class, 'tentangKami'])->defaults('unit', 'yayasan')->name('page.tentang.yayasan');
     Route::get('/visi-misi', [PageController::class, 'visiMisi'])->defaults('unit', 'yayasan')->name('page.visi-misi.yayasan');
     Route::get('/struktur', [PageController::class, 'struktur'])->defaults('unit', 'yayasan')->name('page.struktur.yayasan');
+    Route::get('/sejarah', [PageController::class, 'sejarah'])->defaults('unit', 'yayasan')->name('page.sejarah.yayasan');
 });
 Route::get('/sambutan-ketua-yayasan', [PageController::class, 'sambutan'])->defaults('unit', 'yayasan');
 Route::get('/visi-misi-yayasan', [PageController::class, 'visiMisi'])->defaults('unit', 'yayasan');
 Route::get('/profil-yayasan', [PageController::class, 'tentangKami'])->defaults('unit', 'yayasan');
 Route::get('/struktur-yayasan', [PageController::class, 'struktur'])->defaults('unit', 'yayasan');
+Route::get('/sejarah-yayasan', [PageController::class, 'sejarah'])->defaults('unit', 'yayasan');
 
 // Unit Scoped Routes (/tk/..., /sd/..., /smp/...)
 Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
@@ -193,6 +195,7 @@ Route::prefix('{unit}')->where(['unit' => 'tk|sd|smp'])->group(function () {
     Route::get('/tentang-kami', [PageController::class, 'tentangKami'])->name('unit.tentang-kami');
     Route::get('/visi-dan-misi', [PageController::class, 'visiMisi'])->name('unit.visi-misi');
     Route::get('/visi-misi', [PageController::class, 'visiMisi']);
+    Route::get('/sejarah', [PageController::class, 'sejarah'])->name('unit.sejarah');
     Route::get('/struktur-organisasi', [PageController::class, 'struktur'])->name('unit.struktur');
     Route::get('/struktur', [PageController::class, 'struktur']);
     Route::get('/artikel', [ArticleController::class, 'index'])->name('unit.artikel');

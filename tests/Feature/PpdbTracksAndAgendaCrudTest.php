@@ -148,8 +148,8 @@ test('redesigned ppdb page renders cleanly with bsi account and parent-friendly 
     $response->assertSee('padding-top: 56.25%', false);
     $response->assertSee('Alur Pendaftaran');
     $response->assertSee('Syarat Pendaftaran');
-    $response->assertSee('Program Boarding');
-    $response->assertSee('Program Full Day School');
+    $response->assertSee('Jenjang Satuan Pendidikan SIT Madani');
+    $response->assertSee('Full Day School');
 });
 
 test('ppdb form automatically pre-selects chosen track from ppdb info page', function () {

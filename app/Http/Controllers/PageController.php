@@ -85,13 +85,27 @@ class PageController extends Controller
         return view('frontend.pages.visi-misi', compact('page', 'latestPosts', 'latestAgendas', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
-    public function sejarah()
+    public function sejarah(Request $request, ?string $unit = null)
     {
-        $page = Post::pages()->where('slug', 'sejarah')->first();
+        $unitKey = $unit ?? $request->query('unit', ($request->is('yayasan*') ? 'yayasan' : 'yayasan'));
+        $units = SchoolUnitService::getUnits();
+        $currentUnitKey = in_array($unitKey, ['tk', 'sd', 'smp', 'yayasan']) ? $unitKey : 'yayasan';
+        $currentUnit = SchoolUnitService::getUnit($currentUnitKey);
+
+        $slug = match ($currentUnitKey) {
+            'yayasan' => 'sejarah-yayasan',
+            'tk' => 'sejarah-tks-it',
+            'sd' => 'sejarah-sds-it',
+            'smp' => 'sejarah',
+            default => 'sejarah',
+        };
+
+        $page = Post::pages()->where('slug', $slug)->first()
+            ?? Post::pages()->where('slug', 'sejarah')->first();
         $latestPosts = Post::articles()->published()->latest('published_at')->take(5)->get();
         $latestAgendas = Agenda::where('status', '!=', 'draft')->orderBy('event_date', 'desc')->take(5)->get();
 
-        return view('frontend.pages.sejarah', compact('page', 'latestPosts', 'latestAgendas'));
+        return view('frontend.pages.sejarah', compact('page', 'latestPosts', 'latestAgendas', 'units', 'currentUnitKey', 'currentUnit'));
     }
 
     public function struktur(Request $request, ?string $unit = null)
@@ -156,6 +170,10 @@ class PageController extends Controller
 
         if ($slug === 'struktur-organisasi' || $slug === 'struktur') {
             return $this->struktur(request(), $unit);
+        }
+
+        if ($slug === 'sejarah') {
+            return $this->sejarah(request(), $unit);
         }
 
         return $this->show($slug);

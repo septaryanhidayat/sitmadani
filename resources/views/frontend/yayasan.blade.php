@@ -538,7 +538,7 @@
                     </div>
                     <h3 class="text-base font-black text-slate-900 mb-2">Tahfidz Al-Qur'an Bertahap</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Mulai dari hafalan surat pendek di TK, target 2 juz mutqin di SD, hingga program asrama tahfidz bersanad di jenjang SMP.
+                        Mulai dari hafalan surat pendek di TK, target 2 juz mutqin di SD, hingga program tahfidz bersanad di jenjang SMP.
                     </p>
                 </div>
 

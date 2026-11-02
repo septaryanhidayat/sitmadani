@@ -33,7 +33,7 @@
             'photo' => '/uploads/dewan/kepala-sekolah.webp',
             'tagline' => 'Terbentuknya Generasi Qur\'ani, Mandiri, Inovatif, Visioner, dan Moderat',
             'salutation' => 'Assalamu\'alaikum Warahmatullahi Wabarakatuh,',
-            'content' => 'Selamat datang di portal resmi SMPS IT Madani Kayuagung. Menjawab tantangan global dan era digital, kami menyajikan program Asrama Tahfidz (Boarding School) dan Full Day School yang memadukan hafalan Al-Qur\'an bersanad, pembinaan adab melalui Bina Pribadi Islam (BPI), sains modern, serta dwibahasa (Arab dan Inggris). Setiap siswa dipersiapkan menjadi pemimpin masa depan yang berwawasan luas dan berakhlakul karimah.',
+            'content' => 'Selamat datang di portal resmi SMPS IT Madani Kayuagung. Menjawab tantangan global dan era digital, kami menyajikan program Full Day School berkualitas yang memadukan hafalan Al-Qur\'an bersanad, pembinaan adab melalui Bina Pribadi Islam (BPI), sains modern, serta dwibahasa (Arab dan Inggris). Setiap siswa dipersiapkan menjadi pemimpin masa depan yang berwawasan luas dan berakhlakul karimah.',
         ],
     ];
 

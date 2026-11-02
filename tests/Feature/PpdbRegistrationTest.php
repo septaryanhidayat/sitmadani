@@ -178,7 +178,7 @@ test('admin can manage ppdb content and form flexibility settings', function () 
         'ppdb_wave' => 'Gelombang 1 Unggulan',
         'ppdb_promo' => 'Diskon 50% Khusus Pendaftar Awal',
         'ppdb_tagline' => 'Sekolah Islam Terpadu Pilihan Utama.',
-        'ppdb_youtube_id' => 'IrPVG8CYjRc',
+        'ppdb_youtube_id' => 'ULMekhqxvqU',
         'ppdb_video_title' => 'Video Profil Kampus SMPS IT Madani',
         'ppdb_operational_weekday' => 'Senin - Jumat: 08.00 - 15.00 WIB',
         'ppdb_operational_weekend' => 'Sabtu: 08.00 - 12.00 WIB',

@@ -489,7 +489,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">YouTube Video ID atau URL Lengkap <span class="text-red-500">*</span></label>
-                        <input type="text" name="ppdb_youtube_id" required value="{{ old('ppdb_youtube_id', $settings['youtube_id']) }}" placeholder="Contoh: IrPVG8CYjRc atau https://www.youtube.com/watch?v=IrPVG8CYjRc" class="w-full bg-slate-50 text-xs font-semibold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                        <input type="text" name="ppdb_youtube_id" required value="{{ old('ppdb_youtube_id', $settings['youtube_id']) }}" placeholder="Contoh: ULMekhqxvqU atau https://www.youtube.com/watch?v=ULMekhqxvqU" class="w-full bg-slate-50 text-xs font-semibold rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
 
                     <div>
@@ -701,7 +701,7 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">9. Pilihan Program: Boarding (Asrama) &amp; Full Day</label>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">9. Informasi Program Pendidikan: Full Day School Terpadu</label>
                             <textarea name="ppdb_boarding" rows="5" class="w-full bg-slate-50 text-xs rounded-xl p-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 leading-relaxed">{{ old('ppdb_boarding', $settings['boarding']) }}</textarea>
                         </div>
 

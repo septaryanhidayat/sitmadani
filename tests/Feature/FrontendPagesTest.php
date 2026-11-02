@@ -294,7 +294,7 @@ test('ppdb page renders redesigned layout with youtube video and bsi account', f
     $response = $this->get(route('ppdb.index'));
 
     $response->assertStatus(200);
-    $response->assertSee('IrPVG8CYjRc');
+    $response->assertSee('ULMekhqxvqU');
     $response->assertSee('7011304251');
     $response->assertSee('YL. Fatmawati');
     $response->assertSee(route('ppdb.form'));

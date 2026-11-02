@@ -79,7 +79,7 @@ class HomeController extends Controller
                     'active' => true,
                     'badge' => 'TAHFIDZ QUR\'AN MUTQIN & ADAB NABAWI',
                     'title' => 'Pembinaan Karakter & Hafalan Al-Qur\'an Berkesinambungan',
-                    'subtitle' => 'Mulai dari tahfidz cilik PAUD/TKS IT, target 2 juz mutqin di SDS IT, hingga program Asrama Tahfidz di SMPS IT Madani.',
+                    'subtitle' => 'Mulai dari tahfidz cilik PAUD/TKS IT, target 2 juz mutqin di SDS IT, hingga penguatan karakter & tahfidz bersanad di SMPS IT Madani.',
                     'image' => '/uploads/hero-slide-yayasan-2.webp',
                     'btn_text' => 'Profil Singkat Yayasan',
                     'btn_link' => route('page.tentang.yayasan'),

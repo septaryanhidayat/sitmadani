@@ -139,7 +139,7 @@
                             <input type="radio" name="unit_school" value="SMPS IT Madani" class="text-blue-600 focus:ring-blue-500" {{ (old('unit_school') === 'SMPS IT Madani' || ($currentUnitKey === 'smp' || empty($currentUnitKey))) ? 'checked' : '' }} required>
                             <div class="text-xs">
                                 <span class="font-bold text-slate-900 block">SMPS IT Madani</span>
-                                <span class="text-[10px] text-slate-500">SMP &amp; Asrama Tahfidz</span>
+                                <span class="text-[10px] text-slate-500">SMP Islam Terpadu (Full Day)</span>
                             </div>
                         </label>
                     </div>

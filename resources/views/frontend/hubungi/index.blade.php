@@ -14,7 +14,7 @@
         </nav>
         <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">{{ $page?->title ?? 'Hubungi SMPS IT Madani Kayuagung' }}</h1>
         <p class="text-xs sm:text-sm text-indigo-100 mt-2 font-light max-w-2xl mx-auto sm:mx-0">
-            {{ $page?->excerpt ?: 'Kami siap melayani pertanyaan seputar PPDB, kurikulum tahfidz & sains, program asrama, maupun kunjungan ke sekolah.' }}
+            {{ $page?->excerpt ?: 'Kami siap melayani pertanyaan seputar PPDB, kurikulum tahfidz & sains, program unggulan, maupun kunjungan ke sekolah.' }}
         </p>
     </div>
 </div>

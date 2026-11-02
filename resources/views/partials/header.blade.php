@@ -184,10 +184,10 @@
                         </div>
                     </div>
 
-                    {{-- 3. Warta & Kabar Dropdown Yayasan --}}
+                    {{-- 3. Berita & Informasi Dropdown Yayasan --}}
                     <div class="relative group py-2" id="nav-dropdown-kabar">
-                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Kabar" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('artikel*', 'prestasi*', 'agenda*', 'pengumuman*', 'galeri*', 'video*', 'testimonial*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
-                            <span>Warta</span>
+                        <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Buka Menu Berita" class="px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl whitespace-nowrap inline-flex items-center hover:bg-white/15 transition {{ request()->is('artikel*', 'prestasi*', 'agenda*', 'pengumuman*', 'galeri*', 'video*', 'testimonial*') ? 'bg-white/20 text-white shadow-inner' : '' }}">
+                            <span>Berita</span>
                             <i class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true"></i>
                         </button>
                         <div class="absolute left-0 top-full pt-1 w-52 hidden group-hover:block transition-all duration-150 z-50">
@@ -433,7 +433,7 @@
         @if($activeUnit === 'yayasan')
             <div class="border-t border-gray-100 pt-2">
                 <div class="font-extrabold text-xs text-indigo-900 uppercase tracking-wider px-3 mb-1 flex items-center">
-                    <i class="fa-solid fa-newspaper mr-2 text-amber-500"></i> Warta &amp; Kabar Yayasan
+                    <i class="fa-solid fa-newspaper mr-2 text-amber-500"></i> Berita &amp; Informasi Yayasan
                 </div>
                 <a href="{{ route('artikel.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Berita &amp; Artikel</a>
                 <a href="{{ route('prestasi.index') }}" class="block px-4 py-1.5 text-xs text-gray-700 hover:text-indigo-700">Prestasi Siswa</a>

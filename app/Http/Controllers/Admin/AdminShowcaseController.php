@@ -66,9 +66,9 @@ class AdminShowcaseController extends Controller
                 'btn_spmb_url' => '/sd/ppdb',
             ],
             'smp' => [
-                'level_badge' => 'SMP IT & ASRAMA TAHFIDZ',
+                'level_badge' => 'SEKOLAH MENENGAH PERTAMA IT',
                 'accreditation' => 'AKREDITASI B',
-                'info_badge' => 'Boarding & Full Day',
+                'info_badge' => 'Full Day School • 3 Rombel',
                 'title' => 'SMPS Islam Terpadu Madani',
                 'subtitle' => 'Kayuagung, Kabupaten Ogan Komering Ilir',
                 'leader_title' => 'Kepala Sekolah',
@@ -77,7 +77,7 @@ class AdminShowcaseController extends Controller
                 'leader_photo' => '/uploads/dewan/kepala-sekolah.webp',
                 'slogan' => 'Terbentuknya Generasi Qur\'ani, Mandiri, Inovatif, Visioner, dan Moderat.',
                 'features' => [
-                    'Program Asrama Tahfidz (Boarding School) & Full Day',
+                    'Program Pembinaan Karakter & Tahfidz Al-Qur\'an (Full Day)',
                     'Talaqqi & Tasmi\' Al-Qur\'an 30 Juz Bersanad',
                     'Integrasi Kurikulum Merdeka & Kurikulum Khas JSIT',
                     'Bina Pribadi Islami (BPI) & Islamic Student Camp',

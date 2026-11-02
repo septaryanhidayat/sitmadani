@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('title', ($page?->meta_title ?: ($page?->title ?: 'Infaq Pembangunan & Beasiswa Pendidikan')) . ' - ' . ($siteSettings['site_name'] ?? 'SMPS IT Madani Kayuagung'))
-@section('meta_description', $page?->meta_description ?: ($page?->excerpt ?: 'Salurkan infaq pembangunan sarana laboratorium sains, asrama siswa, dan beasiswa pendidikan dhuafa berprestasi melalui rekening resmi SMPS IT Madani Kayuagung.'))
+@section('meta_description', $page?->meta_description ?: ($page?->excerpt ?: 'Salurkan infaq pembangunan sarana laboratorium sains, ruang belajar modern, dan beasiswa pendidikan dhuafa berprestasi melalui rekening resmi SMPS IT Madani Kayuagung.'))
 
 @section('content')
 @php
@@ -44,7 +44,7 @@
                 {{ $page?->title ?? 'Infaq Pembangunan & Beasiswa Madani' }}
             </h1>
             <p class="text-sm sm:text-base text-indigo-100 mt-4 leading-relaxed font-light">
-                {{ $page?->excerpt ?: 'Mari bergotong royong membangun sarana laboratorium riset modern, masjid sekolah, fasilitas asrama tahfidz, dan program beasiswa bagi siswa berprestasi di SMPS IT Madani Kayuagung.' }}
+                {{ $page?->excerpt ?: 'Mari bergotong royong membangun sarana laboratorium riset modern, masjid sekolah, fasilitas ruang kelas terpadu, dan program beasiswa bagi siswa berprestasi di SMPS IT Madani Kayuagung.' }}
             </p>
         </div>
     </div>
