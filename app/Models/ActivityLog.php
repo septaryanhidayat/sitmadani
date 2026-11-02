@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ActivityLog extends Model
 {
     protected $fillable = [
+        'id',
         'user_id',
         'user_name',
         'action',
@@ -15,6 +16,16 @@ class ActivityLog extends Model
         'user_agent',
         'status',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            if (empty($model->id)) {
+                $maxId = static::max('id') ?? 0;
+                $model->id = $maxId + 1;
+            }
+        });
+    }
 
     public function user()
     {

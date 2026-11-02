@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
@@ -42,30 +43,38 @@ class AuthController extends Controller
             RateLimiter::clear($throttleKey);
             $request->session()->regenerate();
 
-            ActivityLog::create([
-                'user_id' => Auth::id(),
-                'user_name' => Auth::user()->name,
-                'action' => 'login_success',
-                'description' => 'Login berhasil ke panel administrator',
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-                'status' => 'info',
-            ]);
+            try {
+                ActivityLog::create([
+                    'user_id' => Auth::id(),
+                    'user_name' => Auth::user()?->name ?? 'Administrator',
+                    'action' => 'login_success',
+                    'description' => 'Login berhasil ke panel administrator',
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                    'status' => 'info',
+                ]);
+            } catch (\Throwable $e) {
+                Log::warning('ActivityLog login error: '.$e->getMessage());
+            }
 
             return redirect()->intended(route('admin.dashboard'));
         }
 
         RateLimiter::hit($throttleKey, 60);
 
-        ActivityLog::create([
-            'user_id' => null,
-            'user_name' => 'Tamu / Percobaan',
-            'action' => 'login_failed',
-            'description' => 'Percobaan login gagal untuk email: '.$request->input('email'),
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-            'status' => 'warning',
-        ]);
+        try {
+            ActivityLog::create([
+                'user_id' => null,
+                'user_name' => 'Tamu / Percobaan',
+                'action' => 'login_failed',
+                'description' => 'Percobaan login gagal untuk email: '.$request->input('email'),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'status' => 'warning',
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('ActivityLog failed error: '.$e->getMessage());
+        }
 
         return back()->withErrors([
             'email' => 'Email atau password yang Anda masukkan tidak sesuai.',
@@ -75,15 +84,19 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         if ($user = Auth::user()) {
-            ActivityLog::create([
-                'user_id' => $user->id,
-                'user_name' => $user->name,
-                'action' => 'logout',
-                'description' => 'Keluar dari sesi administrator',
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-                'status' => 'info',
-            ]);
+            try {
+                ActivityLog::create([
+                    'user_id' => $user->id,
+                    'user_name' => $user->name,
+                    'action' => 'logout',
+                    'description' => 'Keluar dari sesi administrator',
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                    'status' => 'info',
+                ]);
+            } catch (\Throwable $e) {
+                Log::warning('ActivityLog logout error: '.$e->getMessage());
+            }
         }
 
         Auth::logout();

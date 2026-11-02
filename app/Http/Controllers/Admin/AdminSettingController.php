@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Services\WebpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminSettingController extends Controller
 {
@@ -29,12 +30,16 @@ class AdminSettingController extends Controller
     {
         $data = $request->except(['_token', 'og_image_file', 'site_logo_file']);
 
-        // Handle OG Image file upload
+        // Handle OG Image file upload (JPEG/PNG required for WhatsApp and social media preview)
         if ($request->hasFile('og_image_file')) {
-            $converted = $this->webpService->processUploadedFile($request->file('og_image_file'), 'settings', 90, 1200);
-            if ($converted['success']) {
-                $data['og_image'] = $converted['url'];
+            $file = $request->file('og_image_file');
+            $ext = strtolower($file->getClientOriginalExtension());
+            if (! in_array($ext, ['jpg', 'jpeg', 'png'])) {
+                $ext = 'jpg';
             }
+            $filename = 'og-image-'.time().'.'.$ext;
+            $file->move(public_path('uploads'), $filename);
+            $data['og_image'] = '/uploads/'.$filename;
         }
 
         // Handle Site Logo file upload
@@ -56,15 +61,19 @@ class AdminSettingController extends Controller
             @file_put_contents(storage_path('app/visitor_hits.txt'), (string) (int) $data['analytics_base_hits']);
         }
 
-        ActivityLog::create([
-            'user_id' => Auth::id(),
-            'user_name' => Auth::user()->name,
-            'action' => 'settings_update',
-            'description' => 'Memperbarui konfigurasi website dan pengaturan SEO & OpenGraph',
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-            'status' => 'info',
-        ]);
+        try {
+            ActivityLog::create([
+                'user_id' => Auth::id(),
+                'user_name' => Auth::user()?->name ?? 'Administrator',
+                'action' => 'settings_update',
+                'description' => 'Memperbarui konfigurasi website dan pengaturan SEO & OpenGraph',
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'status' => 'info',
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('ActivityLog failed: '.$e->getMessage());
+        }
 
         return back()->with('success', 'Pengaturan website dan SEO berhasil disimpan!');
     }

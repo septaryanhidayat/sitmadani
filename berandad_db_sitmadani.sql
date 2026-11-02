@@ -801,7 +801,7 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `key`, `value`, `group`, `created_at`, `updated_at`) VALUES
 (1, 'site_name', 'Yayasan Agung Madani Kayuagung', 'general', '2026-09-18 15:40:23', '2026-11-01 12:42:35'),
 (2, 'site_tagline', 'Membina Generasi Qur\'ani, Cerdas, Berakhlak Mulia & Berprestasi Global', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
-(3, 'site_description', 'Official Website Yayasan Agung Madani Kayuagung (SIT Madani). Menaungi TKS IT Madani, SDS IT Madani, dan SMPS IT Madani di Kabupaten Ogan Komering Ilir, Sumatera Selatan.', 'general', '2026-09-18 15:40:23', '2026-11-01 12:42:35'),
+(3, 'site_description', 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP). Pendidikan Islam Terpadu Satu Atap di Kayuagung, Kab. OKI.', 'general', '2026-09-18 15:40:23', '2026-11-01 12:42:35'),
 (4, 'contact_email', 'admin@sitmadani.sch.id', 'general', '2026-09-18 15:40:23', '2026-11-01 12:42:35'),
 (5, 'contact_phone', '0852-6990-8696', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
 (6, 'contact_whatsapp', '0852-6990-8696', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
@@ -816,9 +816,9 @@ INSERT INTO `settings` (`id`, `key`, `value`, `group`, `created_at`, `updated_at
 (15, 'banner_donasi_url', '/donasi', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
 (16, 'site_logo', '/uploads/logo-madani.png', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
 (17, 'site_logo_square', '/uploads/logo-madani-square.png', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
-(18, 'og_title', 'Yayasan Agung Madani - SIT Madani Kayuagung', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
+(18, 'og_title', 'Yayasan Agung Madani - Sekolah Islam Terpadu Madani (TK • SD • SMP)', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
 (19, 'og_description', 'Portal Resmi Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP): SPMB, Profil, Prestasi, Berita, dan Program Tahfidz.', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
-(20, 'og_image', '/uploads/logo-madani-square.png', 'general', '2026-09-18 15:40:23', '2026-09-18 19:28:59'),
+(20, 'og_image', '/uploads/og-sitmadani.jpg', 'general', '2026-09-18 15:40:23', '2026-09-18 19:28:59'),
 (21, 'meta_keywords', 'yayasan agung madani kayuagung, sit madani, tks it madani, sds it madani, smps it madani, spmb madani, tahfidz kayuagung, oki', 'general', '2026-09-18 15:40:23', '2026-11-01 12:42:35'),
 (22, 'npsn', '69787455', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
 (23, 'akreditasi', 'B (Terakreditasi BAN-SM)', 'general', '2026-09-18 15:40:23', '2026-09-18 15:40:23'),
@@ -863,7 +863,7 @@ INSERT INTO `settings` (`id`, `key`, `value`, `group`, `created_at`, `updated_at
 (61, 'ppdb_image_2', '/uploads/madani/fasilitas_ppdb_2_1793574079.jpg', 'ppdb', '2026-09-19 21:27:08', '2026-11-01 23:01:19'),
 (62, 'ppdb_image_3', '/uploads/madani/fasilitas_ppdb_3_1793574079.jpg', 'ppdb', '2026-09-19 21:27:08', '2026-11-01 23:01:19'),
 (63, 'ppdb_form_tracks', 'Jalur First Brive (10%)\r\nJalur Mutasi Kerja (5%)\r\nJalur Tahfidz (5%)\r\nJalur Alumni (25%)\r\nJalur Prestasi (30%)\r\nJalur Reguler (25%)', 'ppdb', '2026-09-19 21:27:09', '2026-11-01 22:58:54'),
-(64, 'site_domain', 'smpitmadanipbm.sch.id', 'general', NULL, '2026-09-19 23:06:50'),
+(64, 'site_domain', 'sitmadani.sch.id', 'general', NULL, '2026-09-19 23:06:50'),
 (65, 'popup_active', '1', 'popup', NULL, '2026-09-19 23:06:50'),
 (66, 'popup_image', '/uploads/popup/spmb2-1793573718-eWs6y.webp', 'popup', NULL, '2026-11-01 22:55:18'),
 (67, 'popup_title', 'Telah Dibuka SPMB 3T (TP 2027/2028)', 'popup', NULL, '2026-09-19 23:06:50'),
@@ -924,7 +924,8 @@ INSERT INTO `settings` (`id`, `key`, `value`, `group`, `created_at`, `updated_at
 (121, 'social_twitter', 'https://x.com/sitmadani', 'general', '2026-11-02 01:15:52', '2026-11-02 01:15:52'),
 (122, 'analytics_enabled', '1', 'general', '2026-11-02 01:15:52', '2026-11-02 01:15:52'),
 (123, 'analytics_ignore_admin', '1', 'general', '2026-11-02 01:15:52', '2026-11-02 01:15:52'),
-(124, 'analytics_ip_lookup', '1', 'general', '2026-11-02 01:15:52', '2026-11-02 01:15:52');
+(124, 'analytics_ip_lookup', '1', 'general', '2026-11-02 01:15:52', '2026-11-02 01:15:52'),
+(125, 'site_favicon', '/uploads/logo-madani-share.png', 'general', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1087,7 +1088,10 @@ INSERT INTO `visitor_logs` (`id`, `ip_address`, `session_id`, `user_agent`, `dev
 (22, '127.0.0.1', 'FHkjwv80amgduhwRXBVakZVBrN8s1qQ1K4IWissG', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/testimonial', '/testimonial', 'Testimonial', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:41:16', '2026-11-02 01:41:16'),
 (23, '127.0.0.1', 'wI6X7FB1Ka1WoLhJhCI63dEwHJd9WZBoxvtiWmx0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/fasilitas', '/tk/fasilitas', 'Tk/Fasilitas', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:43:17', '2026-11-02 01:43:17'),
 (24, '127.0.0.1', 'FgMdM2XIJKXWWbmyxpAdRrbYxTerBJFRDnef36MS', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/spmb', '/tk/spmb', 'Tk/Spmb', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:44:17', '2026-11-02 01:44:17'),
-(25, '127.0.0.1', '7BtdKfw5ZgohH69cPRodmHOXLGGHOIy53Fg0rrY9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk', '/tk', 'Tk', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:44:17', '2026-11-02 01:44:17');
+(25, '127.0.0.1', '7BtdKfw5ZgohH69cPRodmHOXLGGHOIy53Fg0rrY9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk', '/tk', 'Tk', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:44:17', '2026-11-02 01:44:17'),
+(26, '127.0.0.1', 'q59ia2g7DayEzeqWnDGb5Gr7lstQ7b7LhPm0yR0k', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/struktur-organisasi', '/tk/struktur-organisasi', 'Tk/Struktur Organisasi', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:45:17', '2026-11-02 01:45:17'),
+(27, '127.0.0.1', 'Q2f9mnmVctYtF7vR40HlLVM3QLpkFFz98LISIiuG', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/tentang-kami', '/tk/tentang-kami', 'Tk/Tentang Kami', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:46:18', '2026-11-02 01:46:18'),
+(28, '127.0.0.1', '3vUh4N9mDfbsnflhjTC68s7w9zmpSFQlEHNbaFw9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36', 'Desktop', 'Chrome', 'Windows 10/11', '', 'Direct / Langsung', 'http://sitmadani.test/tk/visi-dan-misi', '/tk/visi-dan-misi', 'Tk/Visi Dan Misi', 'Indonesia', 'ID', 'Lokal / Server', 'Sumatera Selatan', 0, '2026-11-02 01:47:18', '2026-11-02 01:47:18');
 
 -- Indexes for dumped tables
 --

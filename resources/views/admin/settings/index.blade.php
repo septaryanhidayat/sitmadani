@@ -50,17 +50,17 @@
                     <div class="max-w-md bg-slate-50 rounded-2xl border border-gray-200 p-3.5 shadow-sm">
                         <div class="rounded-xl overflow-hidden border border-gray-200 bg-white">
                             <div class="h-40 bg-gray-100 flex items-center justify-center overflow-hidden relative">
-                                <img id="ogPreviewImg" src="{{ asset($settings['og_image'] ?? '/uploads/logo-madani.png') }}" 
+                                <img id="ogPreviewImg" src="{{ asset($settings['og_image'] ?? '/uploads/og-sitmadani.jpg') }}" 
                                      alt="Preview OG" class="max-h-full max-w-full object-contain p-2">
                                 <span class="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded">OG Preview</span>
                             </div>
                             <div class="p-3 bg-white">
-                                <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">madani.sch.id</p>
+                                <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">sitmadani.sch.id</p>
                                 <h4 id="ogPreviewTitle" class="text-xs font-bold text-gray-900 line-clamp-1 mt-0.5">
-                                    {{ $settings['og_title'] ?? 'SMPS IT Madani Kayuagung - Generasi Qur\'ani & Unggul Sains' }}
+                                    {{ $settings['og_title'] ?? 'Yayasan Agung Madani - Sekolah Islam Terpadu Madani (TK • SD • SMP)' }}
                                 </h4>
                                 <p id="ogPreviewDesc" class="text-[11px] text-gray-500 line-clamp-2 mt-1">
-                                    {{ $settings['og_description'] ?? 'Website Resmi SMPS IT Madani Kayuagung. Menyajikan informasi akademik, pembinaan karakter & tahfidz, kegiatan siswa, dan SPMB Online.' }}
+                                    {{ $settings['og_description'] ?? 'Portal Resmi Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP): SPMB, Profil, Prestasi, Berita, dan Program Tahfidz.' }}
                                 </p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             Judul OpenGraph (OG Title) <span class="text-red-500">*</span>
                         </label>
                         <input type="text" name="og_title" id="ogTitleInput" 
-                               value="{{ $settings['og_title'] ?? 'SMPS IT Madani Kayuagung - Generasi Qur\'ani & Unggul Sains' }}" 
+                               value="{{ $settings['og_title'] ?? 'Yayasan Agung Madani - Sekolah Islam Terpadu Madani (TK • SD • SMP)' }}" 
                                class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 font-medium"
                                placeholder="Judul website saat dibagikan ke medsos" required>
                         <p class="text-[11px] text-gray-400 mt-1">Direkomendasikan antara 40 - 60 karakter agar tidak terpotong di WhatsApp.</p>
@@ -85,7 +85,7 @@
                         </label>
                         <textarea name="og_description" id="ogDescInput" rows="2" 
                                   class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl p-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 leading-relaxed"
-                                  placeholder="Deskripsi ringkas yang tampil di bawah judul medsos" required>{{ $settings['og_description'] ?? 'Website Resmi SMPS IT Madani Kayuagung. Menyajikan informasi akademik, program tahfidz, sains & teknologi, dan penerimaan siswa baru.' }}</textarea>
+                                  placeholder="Deskripsi ringkas yang tampil di bawah judul medsos" required>{{ $settings['og_description'] ?? 'Portal Resmi Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP): SPMB, Profil, Prestasi, Berita, dan Program Tahfidz.' }}</textarea>
                     </div>
 
                     <div>
@@ -101,7 +101,7 @@
                         <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                             Path / URL Logo OG Saat Ini
                         </label>
-                        <input type="text" name="og_image" value="{{ $settings['og_image'] ?? '/uploads/logo-madani.png' }}" 
+                        <input type="text" name="og_image" value="{{ $settings['og_image'] ?? '/uploads/og-sitmadani.jpg' }}" 
                                class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 font-mono">
                     </div>
 
@@ -128,7 +128,7 @@
                         <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                             Meta Keywords (Kata Kunci SEO)
                         </label>
-                        <input type="text" name="meta_keywords" value="{{ $settings['meta_keywords'] ?? 'smps it madani kayuagung, smp it madani, sekolah islam terpadu, tahfidz quran, smp terbaik kayuagung, spmb smp it madani' }}" 
+                        <input type="text" name="meta_keywords" value="{{ $settings['meta_keywords'] ?? 'sit madani, yayasan agung madani, tks it madani, sds it madani, smps it madani kayuagung, sekolah islam terpadu oki, tahfidz quran, spmb sit madani' }}" 
                                class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                         <p class="text-[11px] text-gray-400 mt-1">Pisahkan tiap kata kunci dengan tanda koma.</p>
                     </div>
@@ -152,7 +152,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Nama Website / Sekolah</label>
-                        <input type="text" name="site_name" value="{{ $settings['site_name'] ?? 'SMPS IT Madani Kayuagung' }}" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                        <input type="text" name="site_name" value="{{ $settings['site_name'] ?? 'Yayasan Agung Madani Kayuagung' }}" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Tagline / Slogan</label>
@@ -162,7 +162,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Deskripsi Default Website (SEO)</label>
-                    <textarea name="site_description" rows="2" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl p-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">{{ $settings['site_description'] ?? 'Official Website SMPS IT Madani Kayuagung. Pusat keunggulan pendidikan Islam terpadu, tahfidzul Qur\'an, sains modern, dan teknologi.' }}</textarea>
+                    <textarea name="site_description" rows="2" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl p-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">{{ $settings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung (TK, SD, SMP). Pendidikan Islam Terpadu Satu Atap di Kayuagung, Kab. OKI.' }}</textarea>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
@@ -346,11 +346,11 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Pesan Template WhatsApp Konfirmasi</label>
-                        <input type="text" name="donation_confirm_text" value="{{ $settings['donation_confirm_text'] ?? 'Assalamu\'alaikum Bendahara SMPS IT Madani Kayuagung, saya telah menyalurkan infaq beasiswa/pembangunan.' }}" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                        <input type="text" name="donation_confirm_text" value="{{ $settings['donation_confirm_text'] ?? 'Assalamu\'alaikum Bendahara Yayasan Agung Madani / SIT Madani, saya telah menyalurkan infaq beasiswa/pembangunan.' }}" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl px-4 py-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Deskripsi / Ajakan Singkat Infaq</label>
-                        <textarea name="donation_intro_text" rows="2" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl p-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">{{ $settings['donation_intro_text'] ?? 'Mari dukung generasi penghafal Al-Qur\'an dan calon cendekiawan muslim masa depan melalui program beasiswa dan pengembangan fasilitas SMPS IT Madani Kayuagung.' }}</textarea>
+                        <textarea name="donation_intro_text" rows="2" class="w-full bg-gray-50 text-xs text-gray-800 rounded-xl p-3 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600">{{ $settings['donation_intro_text'] ?? 'Mari dukung generasi penghafal Al-Qur\'an dan calon cendekiawan muslim masa depan melalui program beasiswa dan pengembangan fasilitas SIT Madani (TK • SD • SMP).' }}</textarea>
                     </div>
                 </div>
             </div>

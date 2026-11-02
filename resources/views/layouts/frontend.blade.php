@@ -22,17 +22,31 @@
     <meta property="og:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'Yayasan Agung Madani') . ' - Sekolah Islam Terpadu Madani Kayuagung'))">
     <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung.'))">
     @php
-        $ogImageUrl = View::hasSection('og_image') ? View::yieldContent('og_image') : asset($siteSettings['og_image'] ?? '/uploads/logo-madani-square.webp');
+        $rawOgImage = View::hasSection('og_image') 
+            ? View::yieldContent('og_image') 
+            : ($siteSettings['og_image'] ?? '/uploads/og-sitmadani.jpg');
+        
+        // WhatsApp & social media require JPG/PNG (WebP is rejected by WhatsApp crawler)
+        if (str_ends_with(strtolower($rawOgImage), '.webp') || empty($rawOgImage)) {
+            $rawOgImage = '/uploads/og-sitmadani.jpg';
+        }
+        
+        $ogImageUrl = str_starts_with($rawOgImage, 'http') ? $rawOgImage : url($rawOgImage);
+        $isPng = str_ends_with(strtolower($rawOgImage), '.png');
+        $ogMime = $isPng ? 'image/png' : 'image/jpeg';
+        $ogWidth = $isPng ? '600' : '1200';
+        $ogHeight = $isPng ? '600' : '630';
     @endphp
     <meta property="og:image" content="{{ $ogImageUrl }}">
     <meta property="og:image:secure_url" content="{{ $ogImageUrl }}">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:type" content="{{ $ogMime }}">
+    <meta property="og:image:width" content="{{ $ogWidth }}">
+    <meta property="og:image:height" content="{{ $ogHeight }}">
     <meta property="og:image:alt" content="{{ $siteSettings['site_name'] ?? 'Yayasan Agung Madani Kayuagung' }}">
+    <link rel="image_src" href="{{ $ogImageUrl }}">
 
     {{-- Twitter / X Cards --}}
-    <meta name="twitter:card" content="{{ $siteSettings['twitter_card'] ?? 'summary' }}">
+    <meta name="twitter:card" content="{{ $siteSettings['twitter_card'] ?? 'summary_large_image' }}">
     <meta name="twitter:site" content="@sitmadani">
     <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', ($siteSettings['og_title'] ?? 'Yayasan Agung Madani') . ' - Sekolah Islam Terpadu Madani Kayuagung'))">
     <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', $siteSettings['og_description'] ?? $siteSettings['site_description'] ?? 'Official Website Yayasan Agung Madani & Sekolah Islam Terpadu Madani Kayuagung'))">
